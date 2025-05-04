@@ -8,14 +8,13 @@ public class CursoPosgrado {
 	private ArrayList<String> objetivos;
 	private int cantCreditos;
 	private ArrayList<Docente> participantes;
+	private Docente profesor;
 	
 	
 	
 	//Implementar
-	public NotaCurso emitirNota(Docente particpante){
+	public void emitirNota(Docente evaluador, Docente participante, int nota){
 		
-		NotaCurso Nota = null;
 		
-		return Nota;
 	}
 }
