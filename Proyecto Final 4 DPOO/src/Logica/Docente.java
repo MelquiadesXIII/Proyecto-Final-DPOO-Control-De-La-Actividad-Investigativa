@@ -29,8 +29,6 @@ public class Docente extends Investigador{
 	
 	//Getters
 	public String getNombre() {
-		
-		
 		return nombre;
 	}
 
@@ -57,11 +55,29 @@ public class Docente extends Investigador{
 	}
 
 	public void setCatCientifica(CategoriaCientifica catCientifica) {
-		this.catCientifica = catCientifica;
+		
+		if(catCientifica != null){
+
+			this.catCientifica = catCientifica;
+			
+		}else{
+			
+			throw new NullPointerException("La categoria cientifica no puede ser null");
+			
+		}
 	}
 
 	public void setCatDocente(CategoriaDocente catDocente) {
-		this.catDocente = catDocente;
+	
+		if(catDocente != null){
+
+			this.catDocente = catDocente;
+			
+		}else{
+			
+			throw new NullPointerException("La categoria docente no puede ser null");
+			
+		}
 	}
 	
 	
