@@ -9,78 +9,76 @@ public class Docente extends Investigador{
 	private CategoriaDocente catDocente;
 	private ArrayList<CursoPosgrado> cursosImpartidos;
 	private ArrayList<CursoRecibido> cursosRecibidos;
-	
-	
-	
+
+
+
 	//Constructor
 	public Docente(String nombre, CategoriaCientifica catCientifica, CategoriaDocente catDocente, ArrayList<CursoPosgrado> cursosImpartidos, ArrayList<CursoRecibido> cursosRecibidos) {
-		
+
 		super();
-		
+
 		setNombre(nombre);
 		setCatCientifica(catCientifica);
 		setCatDocente(catDocente);
-		
+
 		cursosImpartidos = new ArrayList<CursoPosgrado>();
 		cursosRecibidos = new ArrayList<CursoRecibido>();
-		
+
 	}
-		
-	
+
+
 	//Getters
-	public String getNombre() {
+	public String getNombre() 
+	{
 		return nombre;
 	}
 
-	public CategoriaCientifica getCatCientifica() {
+	public CategoriaCientifica getCatCientifica() 
+	{
 		return catCientifica;
 	}
 
-	public CategoriaDocente getCatDocente() {
+	public CategoriaDocente getCatDocente() 
+	{
 		return catDocente;
 	}
 
-	public ArrayList<CursoPosgrado> getCursosImpartidos() {
+	public ArrayList<CursoPosgrado> getCursosImpartidos() 
+	{
 		return cursosImpartidos;
 	}
 
-	public ArrayList<CursoRecibido> getCursosRecibidos() {
+	public ArrayList<CursoRecibido> getCursosRecibidos() 
+	{
 		return cursosRecibidos;
 	}
 
-	
+
 	//Setters
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) 
+	{
+		if(nombre != null)
+			this.nombre = nombre;
+
+		else
+			throw new NullPointerException("El nombre no puede ser null");
 	}
 
-	public void setCatCientifica(CategoriaCientifica catCientifica) {
-		
-		if(catCientifica != null){
-
+	public void setCatCientifica(CategoriaCientifica catCientifica) 
+	{
+		if(catCientifica != null)
 			this.catCientifica = catCientifica;
-			
-		}else{
-			
+
+		else
 			throw new NullPointerException("La categoria cientifica no puede ser null");
-			
-		}
 	}
 
-	public void setCatDocente(CategoriaDocente catDocente) {
-	
-		if(catDocente != null){
-
+	public void setCatDocente(CategoriaDocente catDocente) 
+	{
+		if(catDocente != null)
 			this.catDocente = catDocente;
-			
-		}else{
-			
+
+		else
 			throw new NullPointerException("La categoria docente no puede ser null");
-			
-		}
 	}
-	
-	
-	
-	
 }
