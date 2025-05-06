@@ -65,9 +65,9 @@ public class CursoPosgrado {
 	public void setObjetivos(ArrayList<String> objetivos) 
 	{
 		if(objetivos != null){
-			
+
 			for(String o: objetivos){
-				
+
 				this.objetivos.add(o);
 			}
 
@@ -87,9 +87,9 @@ public class CursoPosgrado {
 	public void setParticipantes(ArrayList<Docente> participantes) 
 	{
 		if(participantes != null){
-			
+
 			for(Docente p: participantes){
-				
+
 				this.participantes.add(p);
 			}
 
@@ -100,10 +100,10 @@ public class CursoPosgrado {
 	public void setProfesor(Docente profesor) 
 	{
 		if(profesor != null){
-			
+
 			if(profesor.getCatCientifica() == CategoriaCientifica.Doctor)
 				this.profesor = profesor;
-			
+
 			else
 				throw new IllegalArgumentException("El profesor que imparte el curso debe tener la categoria cientifica Doctor");
 
