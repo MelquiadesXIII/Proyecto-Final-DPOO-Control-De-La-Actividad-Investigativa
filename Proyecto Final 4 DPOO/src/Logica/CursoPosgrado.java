@@ -12,14 +12,18 @@ public class CursoPosgrado {
 
 
 
-
-	public CursoPosgrado(String tema, ArrayList<String> objetivos, int cantCreditos, ArrayList<Docente> participantes, Docente profesor) 
+    //Constructor
+	public CursoPosgrado(String tema, ArrayList<String> objetivos, int cantCreditos, Docente profesor) 
 	{
+		participantes = new ArrayList<Docente>();
+		objetivos = new ArrayList<String>();
+		
 		setTema(tema);
 		setObjetivos(objetivos);
 		setCantCreditos(cantCreditos);
-		setParticipantes(participantes);
 		setProfesor(profesor);
+		
+		
 	}
 
 
@@ -84,19 +88,6 @@ public class CursoPosgrado {
 			throw new IllegalArgumentException("La cantidad de creditos proporcionados por un curso debe ser una cantidad positiva");
 	}
 
-	public void setParticipantes(ArrayList<Docente> participantes) 
-	{
-		if(participantes != null){
-
-			for(Docente p: participantes){
-
-				this.participantes.add(p);
-			}
-
-		}else
-			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
-	}
-
 	public void setProfesor(Docente profesor) 
 	{
 		if(profesor != null){
@@ -110,7 +101,19 @@ public class CursoPosgrado {
 		}else
 			throw new NullPointerException("El profesor no puede tener valor null");
 	}
+	
+	
+	
+	//Metodos
+	public void agregarParticipante(Docente d) 
+	{
+		if(d != null){
 
+			participantes.add(d);
+
+		}else
+			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
+	}
 
 	//Implementar
 	public void emitirNota(Docente evaluador, Docente participante, int nota)

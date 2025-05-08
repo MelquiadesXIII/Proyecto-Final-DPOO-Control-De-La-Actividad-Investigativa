@@ -16,17 +16,17 @@ public class Docente extends Investigador{
 	public Docente(String nombre, CategoriaCientifica catCientifica, CategoriaDocente catDocente, ArrayList<CursoPosgrado> cursosImpartidos, ArrayList<CursoRecibido> cursosRecibidos) {
 
 		super();
-
+ 
+		cursosImpartidos = new ArrayList<CursoPosgrado>();
+		cursosRecibidos = new ArrayList<CursoRecibido>();
+		
 		setNombre(nombre);
 		setCatCientifica(catCientifica);
 		setCatDocente(catDocente);
-
-		cursosImpartidos = new ArrayList<CursoPosgrado>();
-		cursosRecibidos = new ArrayList<CursoRecibido>();
-
 	}
 
 
+	
 	//Getters
 	public String getNombre() 
 	{
@@ -54,6 +54,7 @@ public class Docente extends Investigador{
 	}
 
 
+	
 	//Setters
 	public void setNombre(String nombre) 
 	{
