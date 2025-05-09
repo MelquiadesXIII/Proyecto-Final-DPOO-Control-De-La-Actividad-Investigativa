@@ -22,8 +22,6 @@ public class CursoPosgrado {
 		setObjetivos(objetivos);
 		setCantCreditos(cantCreditos);
 		setProfesor(profesor);
-		
-		
 	}
 
 

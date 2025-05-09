@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Docente extends Investigador{
 
 	private String nombre;
+	private String apellidos;
 	private CategoriaCientifica catCientifica;
 	private CategoriaDocente catDocente;
 	private ArrayList<CursoPosgrado> cursosImpartidos;
@@ -13,20 +14,35 @@ public class Docente extends Investigador{
 
 
 	//Constructor
-	public Docente(String nombre, CategoriaCientifica catCientifica, CategoriaDocente catDocente, ArrayList<CursoPosgrado> cursosImpartidos, ArrayList<CursoRecibido> cursosRecibidos) {
+	public Docente(String nombre, String apellidos, CategoriaCientifica catCientifica, CategoriaDocente catDocente, ArrayList<CursoPosgrado> cursosImpartidos, ArrayList<CursoRecibido> cursosRecibidos) {
 
 		super();
- 
+
 		cursosImpartidos = new ArrayList<CursoPosgrado>();
 		cursosRecibidos = new ArrayList<CursoRecibido>();
-		
+
 		setNombre(nombre);
+		setApellidos(apellidos);
 		setCatCientifica(catCientifica);
 		setCatDocente(catDocente);
 	}
 
 
-	
+
+	public void setApellidos(String apellidos) 
+	{
+		if(apellidos != null){
+
+
+
+
+		}else
+			throw new NullPointerException("El apellido no puede ser null");
+
+	}
+
+
+
 	//Getters
 	public String getNombre() 
 	{
@@ -54,14 +70,17 @@ public class Docente extends Investigador{
 	}
 
 
-	
+
 	//Setters
 	public void setNombre(String nombre) 
 	{
-		if(nombre != null)
-			this.nombre = nombre;
+		if(nombre != null){
 
-		else
+			char[] nombreAux = new char[nombre.length()];
+
+
+
+		}else
 			throw new NullPointerException("El nombre no puede ser null");
 	}
 
