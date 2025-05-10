@@ -14,7 +14,7 @@ public class Docente extends Investigador{
 
 
 	//Constructor
-	public Docente(String nombre, String apellidos, CategoriaCientifica catCientifica, CategoriaDocente catDocente, ArrayList<CursoPosgrado> cursosImpartidos, ArrayList<CursoRecibido> cursosRecibidos) {
+	public Docente(String nombre, String apellidos, CategoriaCientifica catCientifica, CategoriaDocente catDocente) {
 
 		super();
 
@@ -101,4 +101,9 @@ public class Docente extends Investigador{
 		else
 			throw new NullPointerException("La categoria docente no puede ser null");
 	}
+	
+	
+	
+	//Metodos
+	void agregarCursoImpartido()
 }

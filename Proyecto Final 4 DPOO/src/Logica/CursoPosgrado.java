@@ -90,10 +90,12 @@ public class CursoPosgrado {
 	{
 		if(profesor != null){
 
-			if(profesor.getCatCientifica() == CategoriaCientifica.Doctor)
+			if(profesor.getCatCientifica() == CategoriaCientifica.Doctor){
 				this.profesor = profesor;
+				profesor.
+			
 
-			else
+			}else
 				throw new IllegalArgumentException("El profesor que imparte el curso debe tener la categoria cientifica Doctor");
 
 		}else
