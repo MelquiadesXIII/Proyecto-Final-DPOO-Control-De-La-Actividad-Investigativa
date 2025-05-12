@@ -29,20 +29,6 @@ public class Docente extends Investigador{
 
 
 
-	public void setApellidos(String apellidos) 
-	{
-		if(apellidos != null){
-
-
-
-
-		}else
-			throw new NullPointerException("El apellido no puede ser null");
-
-	}
-
-
-
 	//Getters
 	public String getNombre() 
 	{
@@ -74,36 +60,54 @@ public class Docente extends Investigador{
 	//Setters
 	public void setNombre(String nombre) 
 	{
-		if(nombre != null){
-
-			char[] nombreAux = new char[nombre.length()];
-
-
-
-		}else
+		if(nombre == null)
 			throw new NullPointerException("El nombre no puede ser null");
+
+		char[] nombreAux = new char[nombre.length()];
+
 	}
 
 	public void setCatCientifica(CategoriaCientifica catCientifica) 
 	{
-		if(catCientifica != null)
-			this.catCientifica = catCientifica;
-
-		else
+		if(catCientifica == null)
 			throw new NullPointerException("La categoria cientifica no puede ser null");
+			
+		this.catCientifica = catCientifica;
 	}
 
 	public void setCatDocente(CategoriaDocente catDocente) 
 	{
-		if(catDocente != null)
-			this.catDocente = catDocente;
-
-		else
+		if(catDocente == null)
 			throw new NullPointerException("La categoria docente no puede ser null");
+
+		this.catDocente = catDocente;
 	}
 	
-	
-	
+	public void setApellidos(String apellidos) 
+	{
+		if(apellidos == null)
+			throw new NullPointerException("El apellido no puede ser null");
+
+		this.apellidos = apellidos;
+	}
+
+
+
 	//Metodos
-	void agregarCursoImpartido()
+	void agregarCursoImpartido(CursoPosgrado curso)
+	{
+		if(cursosImpartidos.contains(curso)){
+			throw new IllegalArgumentException("No se puede duplicar el curso");
+		}
+		
+		cursosImpartidos.add(curso);
+	}
+	
+	void removerCursoImpartido(CursoPosgrado curso)
+	{
+		if(curso == null)
+			throw new NullPointerException("No puede remover un null de la lista de cursos impartidos");
+		
+		cursosImpartidos.remove(curso);
+	}
 }
