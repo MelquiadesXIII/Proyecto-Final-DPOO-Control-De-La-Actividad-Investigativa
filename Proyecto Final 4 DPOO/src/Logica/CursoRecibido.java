@@ -19,15 +19,18 @@ public class CursoRecibido {
 
 
 	//Getters
-	public int getNota() {
+	public int getNota() 
+	{
 		return nota;
 	}
 
-	public int getCreditosRecibidos() {
+	public int getCreditosRecibidos() 
+	{
 		return creditosRecibidos;
 	}
 
-	public CursoPosgrado getCurso() {
+	public CursoPosgrado getCurso() 
+	{
 		return curso;
 	}
 	

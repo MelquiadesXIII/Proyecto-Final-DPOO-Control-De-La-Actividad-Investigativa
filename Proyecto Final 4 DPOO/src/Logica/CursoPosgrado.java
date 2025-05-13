@@ -72,8 +72,6 @@ public class CursoPosgrado {
 
 		for(String o: objetivos)
 			this.objetivos.add(o);
-
-
 	}
 
 	public void setCantCreditos(int cantCreditos) 
@@ -110,14 +108,24 @@ public class CursoPosgrado {
 	{
 		if(d == null)
 			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
-
+		
 		participantes.add(d);
 	}
 
 	//Implementar
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
-
+		CursoRecibido c;
+		
+		if(evaluador.equals(profesor)){
+			
+			if(nota >= 2 && nota <= 5){
+				
+				c = nota >= 3 ? new CursoRecibido(nota, cantCreditos, this) : new CursoRecibido(nota, 0, this);
+				
+				participante.getCursosRecibidos().add(c);
+			}
+		}
 
 	}
 
