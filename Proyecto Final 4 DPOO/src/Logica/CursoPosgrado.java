@@ -120,7 +120,7 @@ public class CursoPosgrado {
 			throw new IllegalArgumentException("El profesor que imparte el curso no puede ser un docente participante");
 		}
 		
-		if(participantes.contains(d)){
+		if(DocenteUtils.listaContieneDocente(participantes, d)){
 			ErroresCursoPosgrado.participanteDuplicado();
 			throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
 		}
@@ -131,7 +131,7 @@ public class CursoPosgrado {
 	//Implementar mensajes de error
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
-		if(Comparar.igualdadDocente(evaluador, profesor)){
+		if(DocenteUtils.iguales(evaluador, profesor)){
 
 			if(nota >= 2 && nota <= 5){
 
