@@ -3,7 +3,6 @@ package Logica;
 import java.util.ArrayList;
 
 import Complementos.DocenteUtils;
-import Errores.ErroresCursoPosgrado;
 import Excepciones.CadenaNoValidaException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
@@ -94,8 +93,6 @@ public class CursoPosgrado {
 
 	public void setProfesor(Docente profesor) 
 	{
-		if(!DocenteUtils.iguales(this.profesor, profesor)){
-
 			if(profesor == null)
 				throw new NullPointerException("El profesor no puede tener valor null");
 
@@ -108,7 +105,6 @@ public class CursoPosgrado {
 			this.profesor = profesor;
 
 			this.profesor.agregarCursoImpartido(this);
-		}
 	}
 
 
