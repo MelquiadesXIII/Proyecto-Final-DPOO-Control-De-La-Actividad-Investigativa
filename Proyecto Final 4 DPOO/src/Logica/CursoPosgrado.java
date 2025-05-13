@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Complementos.DocenteUtils;
 import Errores.ErroresCursoPosgrado;
+import Excepciones.CadenaNoValidaException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
 
@@ -66,7 +67,7 @@ public class CursoPosgrado {
 			throw new NullPointerException("El tema no puede tener valor null");
 
 		if(!tema.matches("^[^0-9]*$"))
-			throw new Exception();
+			throw new CadenaNoValidaException("El tema del curso no puede tener caracteres no validos");
 
 
 		this.tema = tema;	
