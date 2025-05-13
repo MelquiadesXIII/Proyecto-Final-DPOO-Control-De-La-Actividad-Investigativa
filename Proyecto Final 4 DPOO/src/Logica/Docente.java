@@ -34,6 +34,11 @@ public class Docente extends Investigador{
 	{
 		return nombre;
 	}
+	
+	public String getApellidos()
+	{
+		return apellidos;
+	}
 
 	public CategoriaCientifica getCatCientifica() 
 	{
@@ -94,7 +99,7 @@ public class Docente extends Investigador{
 
 
 	//Metodos
-	void agregarCursoImpartido(CursoPosgrado curso)
+	public void agregarCursoImpartido(CursoPosgrado curso)
 	{
 		if(cursosImpartidos.contains(curso)){
 			throw new IllegalArgumentException("No se puede duplicar el curso");
@@ -103,11 +108,26 @@ public class Docente extends Investigador{
 		cursosImpartidos.add(curso);
 	}
 	
-	void removerCursoImpartido(CursoPosgrado curso)
+	public void removerCursoImpartido(CursoPosgrado curso)
 	{
 		if(curso == null)
 			throw new NullPointerException("No puede remover un null de la lista de cursos impartidos");
 		
 		cursosImpartidos.remove(curso);
+	}
+	
+	public void agregarCursoRecibido(CursoRecibido c)
+	{
+		if(c == null)
+			throw new NullPointerException("No puede agregar un null a la lista de cursos recibidos");
+		
+		if(cursosRecibidos.contains(c))
+			throw new IllegalArgumentException("No puede duplicar el curso");
+			
+		cursosRecibidos.add(c);
+	}
+	
+	public boolean contieneCursoRecibido(CursoRecibido curso) {
+	    return cursosRecibidos.contains(curso);
 	}
 }

@@ -2,6 +2,8 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Errores.ErroresCursoPosgrado;
+
 public class CursoPosgrado {
 
 	private String tema;
@@ -76,8 +78,10 @@ public class CursoPosgrado {
 
 	public void setCantCreditos(int cantCreditos) 
 	{
-		if(cantCreditos <= 0)
+		if(cantCreditos <= 0){
+			ErroresCursoPosgrado.cantCreditosNoPositiva();
 			throw new IllegalArgumentException("La cantidad de creditos proporcionados por un curso debe ser una cantidad positiva");
+		}
 
 		this.cantCreditos = cantCreditos;
 	}
@@ -109,25 +113,35 @@ public class CursoPosgrado {
 		if(d == null)
 			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
 		
+		if(profesor.equals(d)){
+			ErroresCursoPosgrado.profesorImpartidorComoParticipante();
+			throw new IllegalArgumentException("El profesor que imparte el curso no puede ser un docente participante");
+		}
+		
+		if(participantes.contains(d)){
+			ErroresCursoPosgrado.participanteDuplicado();
+			throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
+		}
+		
 		participantes.add(d);
 	}
 
 	//Implementar mensajes de error
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
-		CursoRecibido c;
-		
 		if(evaluador.equals(profesor)){
-			
+
 			if(nota >= 2 && nota <= 5){
+
+				int creditos = nota >= 3 ? cantCreditos : 0; 
 				
-				c = nota >= 3 ? new CursoRecibido(nota, cantCreditos, this) : new CursoRecibido(nota, 0, this);
-				
-				participante.getCursosRecibidos().add(c);
+				participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
 			}
 		}
 
 	}
+	
+	
 
 
 
