@@ -57,6 +57,14 @@ public class Maestria {
 		}
 
 	}
+	
+	public void agregarCursoPosgrado(CursoPosgrado c)
+	{
+		if(cursos.contains(c))
+			throw new IllegalArgumentException("Intento duplicar el curso");
+			
+		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));	
+	}
 
 	//Implementar
 	public boolean recibirVistoBueno(Docente d){
@@ -66,6 +74,8 @@ public class Maestria {
 
 	//Implementar
 	public int creditosObtenidosCursosRecibidos(Docente d){
+		
+		
 
 		return 0;
 	}

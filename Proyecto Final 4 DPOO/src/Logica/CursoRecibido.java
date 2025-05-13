@@ -1,13 +1,13 @@
 package Logica;
 
 public class CursoRecibido {
-	
+
 	private int nota;
 	private int creditosRecibidos;
 	private CursoPosgrado curso;
-	
-	
-	
+
+
+
 	//Constructor
 	public CursoRecibido(int nota, int creditosRecibidos, CursoPosgrado curso)
 	{
@@ -33,5 +33,5 @@ public class CursoRecibido {
 	{
 		return curso;
 	}
-	
+
 }

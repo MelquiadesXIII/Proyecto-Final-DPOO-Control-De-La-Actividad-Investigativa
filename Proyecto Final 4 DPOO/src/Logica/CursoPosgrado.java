@@ -112,7 +112,7 @@ public class CursoPosgrado {
 		participantes.add(d);
 	}
 
-	//Implementar
+	//Implementar mensajes de error
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
 		CursoRecibido c;
