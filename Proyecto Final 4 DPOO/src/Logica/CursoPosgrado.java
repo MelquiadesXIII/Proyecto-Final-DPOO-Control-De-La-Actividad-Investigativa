@@ -62,10 +62,10 @@ public class CursoPosgrado {
 	{
 		if(tema == null)
 			throw new NullPointerException("El tema no puede tener valor null");
-		
-		if(!tema.matches("^[^0-9]*$)")
+
+		if(!tema.matches("^[^0-9]*$"))
 				throw new Exception();
-				
+
 
 		this.tema = tema;	
 	}
@@ -119,31 +119,31 @@ public class CursoPosgrado {
 		if(DocenteUtils.iguales(profesor, d)){
 			throw new IllegalArgumentException("El profesor que imparte el curso no puede ser un docente participante");
 
-		if(DocenteUtils.listaContieneDocente(participantes, d))
-			throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
+			if(DocenteUtils.listaContieneDocente(participantes, d))
+				throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
 
-		participantes.add(d);
-	}
-
-	//Implementar mensajes de error
-	public void emitirNota(Docente evaluador, Docente participante, int nota)
-	{
-		if(DocenteUtils.iguales(evaluador, profesor)){
-
-			if(nota >= 2 && nota <= 5){
-
-				int creditos = nota >= 3 ? cantCreditos : 0; 
-
-				participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
-			}
+			participantes.add(d);
 		}
 
+		//Implementar mensajes de error
+		public void emitirNota(Docente evaluador, Docente participante, int nota)
+		{
+			if(DocenteUtils.iguales(evaluador, profesor)){
+
+				if(nota >= 2 && nota <= 5){
+
+					int creditos = nota >= 3 ? cantCreditos : 0; 
+
+					participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
+				}
+			}
+
+		}
+
+
+
+
+
+
+
 	}
-
-
-
-
-
-
-
-}
