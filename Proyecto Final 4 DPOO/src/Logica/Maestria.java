@@ -57,34 +57,39 @@ public class Maestria {
 		}
 
 	}
-	
+
 	public void agregarCursoPosgrado(CursoPosgrado c)
 	{
 		if(cursos.contains(c))
 			throw new IllegalArgumentException("Intento duplicar el curso");
-			
+
 		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));	
 	}
 
-	//Implementar
 	public boolean recibirVistoBueno(Docente d){
 
-		return true;
+		return creditosObtenidosCursosRecibidos(d) == creditosTotalesCursos();
 	}
 
-	//Implementar
 	public int creditosObtenidosCursosRecibidos(Docente d){
-		
-		
 
-		return 0;
+		int suma = 0;
+		ArrayList<CursoRecibido> cursosR = d.getCursosRecibidos();
+
+		for(CursoRecibido c: cursosR)
+			suma += c.getCreditosRecibidos();
+
+		return suma;
 	}
 
+	private int creditosTotalesCursos(){
 
+		int total = 0;
 
+		for(CursoPosgrado c: cursos)
+			total += c.getCantCreditos();
 
-
-
-
+		return total;
+	}
 
 }
