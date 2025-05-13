@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Complementos.DocenteUtils;
 import Errores.ErroresCursoPosgrado;
+import Excepciones.ListaVaciaException;
+import Excepciones.NoExistenciaException;
 
 public class CursoPosgrado {
 
@@ -64,7 +66,7 @@ public class CursoPosgrado {
 			throw new NullPointerException("El tema no puede tener valor null");
 
 		if(!tema.matches("^[^0-9]*$"))
-				throw new Exception();
+			throw new Exception();
 
 
 		this.tema = tema;	
@@ -116,34 +118,47 @@ public class CursoPosgrado {
 		if(d == null)
 			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
 
-		if(DocenteUtils.iguales(profesor, d)){
+		if(DocenteUtils.iguales(profesor, d))
 			throw new IllegalArgumentException("El profesor que imparte el curso no puede ser un docente participante");
 
-			if(DocenteUtils.listaContieneDocente(participantes, d))
-				throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
+		if(DocenteUtils.listaContieneDocente(participantes, d))
+			throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
 
-			participantes.add(d);
-		}
+		participantes.add(d);
+	}
+	
+	public void removerParticipante(Docente d){
+		
+		if(participantes.size() == 0)
+			throw new ListaVaciaException("La lista del que desea remover al docente esta vacia");
+		
+		if(!DocenteUtils.listaContieneDocente(participantes, d))
+			throw new NoExistenciaException("El docente que desea remover no se encuentra entre los participantes del curso");
+		
+		participantes.remove(d);
+	}
 
-		//Implementar mensajes de error
-		public void emitirNota(Docente evaluador, Docente participante, int nota)
-		{
-			if(DocenteUtils.iguales(evaluador, profesor)){
 
-				if(nota >= 2 && nota <= 5){
 
-					int creditos = nota >= 3 ? cantCreditos : 0; 
+	//Implementar mensajes de error
+	public void emitirNota(Docente evaluador, Docente participante, int nota)
+	{
+		if(DocenteUtils.iguales(evaluador, profesor)){
 
-					participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
-				}
+			if(nota >= 2 && nota <= 5){
+
+				int creditos = nota >= 3 ? cantCreditos : 0; 
+
+				participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
 			}
-
 		}
-
-
-
-
-
-
 
 	}
+
+
+
+
+
+
+
+}

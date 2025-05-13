@@ -2,6 +2,10 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Complementos.CursoUtils;
+import Complementos.DocenteUtils;
+import Excepciones.DuplicacionException;
+
 public class Maestria {
 
 	private ArrayList<CursoPosgrado> cursos;
@@ -45,23 +49,22 @@ public class Maestria {
 		if(matriculado == null)
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
-		if(!matriculados.contains(matriculado))
+		if(!DocenteUtils.listaContieneDocente(matriculados, matriculado))
 			throw new IllegalArgumentException("La lista de matriculados no contiene al docente");
 
 		matriculados.remove(matriculado);
 
 		for(CursoPosgrado c: cursos){
-
-			if(c.getParticipantes().contains(matriculado))
-				c.getParticipantes().remove(matriculado);
+			
+				c.removerParticipante(matriculado);
 		}
 
 	}
 
 	public void agregarCursoPosgrado(CursoPosgrado c)
 	{
-		if(cursos.contains(c))
-			throw new IllegalArgumentException("No se puede duplicar el curso");
+		if(CursoUtils.listaContieneCurso(cursos, c))
+			throw new DuplicacionException("El curso que intenta agregar ya se encuentra en la lista, no lo puede duplicar");
 
 		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));	
 	}

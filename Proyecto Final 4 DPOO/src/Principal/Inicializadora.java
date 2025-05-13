@@ -19,8 +19,10 @@ public class Inicializadora {
 		obj.add("Programar");
 		obj.add("Hacer dinero");
 		
+		try{
 		Docente d1 = new Docente("Manuel", "Alfonso", CategoriaCientifica.Master, CategoriaDocente.ProfesorTitular);
 		Docente d2 = new Docente("Ryan", "Negrete", CategoriaCientifica.Master, CategoriaDocente.ProfesorTitular);
+		}
 		
 		CursoPosgrado c = new CursoPosgrado("Mujeres", obj, 5, d1);
 		c.agregarParticipante(d2);
