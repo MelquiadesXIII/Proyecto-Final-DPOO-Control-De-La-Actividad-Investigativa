@@ -2,6 +2,8 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Complementos.Comparar;
+import Complementos.DocenteUtils;
 import Errores.ErroresCursoPosgrado;
 
 public class CursoPosgrado {
@@ -113,7 +115,7 @@ public class CursoPosgrado {
 		if(d == null)
 			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
 		
-		if(profesor.equals(d)){
+		if(DocenteUtils.iguales(profesor, d)){
 			ErroresCursoPosgrado.profesorImpartidorComoParticipante();
 			throw new IllegalArgumentException("El profesor que imparte el curso no puede ser un docente participante");
 		}
@@ -129,7 +131,7 @@ public class CursoPosgrado {
 	//Implementar mensajes de error
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
-		if(evaluador.equals(profesor)){
+		if(Comparar.igualdadDocente(evaluador, profesor)){
 
 			if(nota >= 2 && nota <= 5){
 
