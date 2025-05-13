@@ -25,7 +25,7 @@ public class DocenteUtils {
 			int i = 0;
 			while(i < lista.size() && !contenido){
 				
-				if(igualdadDocente(lista.get(i), d))
+				if(iguales(lista.get(i), d))
 					contenido = true;
 				
 				else

@@ -1,0 +1,7 @@
+if(cadena.matches("^\\d+$");  verifica que la cadena contiene solo dígitos del 0 al 9, los números negativos no son permitidos.
+if(cadena.matches("^-\\d+$"); verifica que la cadena contiene solo dígitos del 0 al 9, los números negativos son permitidos.
+if(cadena.matches("^-?\\d*\\.\\d+$"); verifica que la cadena contiene solo números decimales tanto positivos como negativos.
+if(cadena.matches("^[a-zA-Z]+$"); verifica que la cadena contiene solo letras minúsculas y mayúsculas sin espacios ni números.
+if(cadena.matches("^[a-zA-Z0-9]+$"); verifica que la cadena contiene solo letras y números sin espacios ni caracteres especiales.
+if(cadena.matches("^[a-zA-Z\\s]+$"); verifica que la cadena contiene solo letras y espacios, útil para nombres completos.
+if(cadena.matches("^[^a-zA-Z0-9]+$"); verifica que la cadena contiene solo caracteres especiales.

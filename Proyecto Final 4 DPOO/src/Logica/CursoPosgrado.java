@@ -2,7 +2,6 @@ package Logica;
 
 import java.util.ArrayList;
 
-import Complementos.Comparar;
 import Complementos.DocenteUtils;
 import Errores.ErroresCursoPosgrado;
 
@@ -63,6 +62,10 @@ public class CursoPosgrado {
 	{
 		if(tema == null)
 			throw new NullPointerException("El tema no puede tener valor null");
+		
+		if(!tema.matches("^[^0-9]*$)")
+				throw new Exception();
+				
 
 		this.tema = tema;	
 	}
@@ -80,17 +83,15 @@ public class CursoPosgrado {
 
 	public void setCantCreditos(int cantCreditos) 
 	{
-		if(cantCreditos <= 0){
-			ErroresCursoPosgrado.cantCreditosNoPositiva();
+		if(cantCreditos <= 0)
 			throw new IllegalArgumentException("La cantidad de creditos proporcionados por un curso debe ser una cantidad positiva");
-		}
 
 		this.cantCreditos = cantCreditos;
 	}
 
 	public void setProfesor(Docente profesor) 
 	{
-		if(this.profesor != profesor){
+		if(!DocenteUtils.iguales(this.profesor, profesor)){
 
 			if(profesor == null)
 				throw new NullPointerException("El profesor no puede tener valor null");
@@ -103,7 +104,7 @@ public class CursoPosgrado {
 
 			this.profesor = profesor;
 
-			profesor.agregarCursoImpartido(this);
+			this.profesor.agregarCursoImpartido(this);
 		}
 	}
 
@@ -114,17 +115,13 @@ public class CursoPosgrado {
 	{
 		if(d == null)
 			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
-		
+
 		if(DocenteUtils.iguales(profesor, d)){
-			ErroresCursoPosgrado.profesorImpartidorComoParticipante();
 			throw new IllegalArgumentException("El profesor que imparte el curso no puede ser un docente participante");
-		}
-		
-		if(DocenteUtils.listaContieneDocente(participantes, d)){
-			ErroresCursoPosgrado.participanteDuplicado();
+
+		if(DocenteUtils.listaContieneDocente(participantes, d))
 			throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
-		}
-		
+
 		participantes.add(d);
 	}
 
@@ -136,14 +133,14 @@ public class CursoPosgrado {
 			if(nota >= 2 && nota <= 5){
 
 				int creditos = nota >= 3 ? cantCreditos : 0; 
-				
+
 				participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
 			}
 		}
 
 	}
-	
-	
+
+
 
 
 
