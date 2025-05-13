@@ -65,10 +65,12 @@ public class Docente extends Investigador{
 	//Setters
 	public void setNombre(String nombre) 
 	{
-		if(nombre == null)
+		
+		this.nombre = nombre;
+		/*if(nombre == null)
 			throw new NullPointerException("El nombre no puede ser null");
 
-		char[] nombreAux = new char[nombre.length()];
+		char[] nombreAux = new char[nombre.length()];*/
 
 	}
 
