@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import Complementos.DocenteUtils;
 import Excepciones.CadenaNoValidaException;
 import Excepciones.DuplicacionException;
+import Excepciones.InstanciaNoValidaException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
+import Excepciones.RangoNoValidoException;
 
 public class CursoPosgrado {
 
@@ -153,15 +155,20 @@ public class CursoPosgrado {
 	{
 		if(DocenteUtils.iguales(evaluador, profesor)){
 
-			if(nota >= 2 && nota <= 5){
+			if(DocenteUtils.listaContieneDocente(this.participantes, participante)){
+
+				if(nota >= 2 && nota <= 5){
 
 				int creditos = nota >= 3 ? cantCreditos : 0; 
 
 				participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
+
+				}else{
+				throw new RangoNoValidoException("La nota no esta entre el rango requerido de 2 a 5");
+				}
 			}
-
 		}else{
-
+			throw new InstanciaNoValidaException("El profesor que esta emitiendo la nota no es el evaluador");
 			
 		}
 
