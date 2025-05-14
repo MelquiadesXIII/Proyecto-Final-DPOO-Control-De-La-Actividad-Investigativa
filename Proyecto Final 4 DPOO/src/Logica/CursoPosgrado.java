@@ -76,7 +76,7 @@ public class CursoPosgrado {
 		if(!tema.matches("^[^0-9]*$"))
 			throw new CadenaNoValidaException("El tema del curso no puede tener numeros");
 
-		if(!tema.matches("^[\\\\p{L}\\\\s]+$"))
+		if(!tema.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El tema del curso no puede tener caracteres especiales o simbolos");	
 
 		this.tema = tema;	
@@ -99,7 +99,7 @@ public class CursoPosgrado {
 			if(!o.matches("^[^0-9]*$"))
 				throw new CadenaNoValidaException("Un objetivo del curso no puede tener numeros");
 
-			if(!o.matches("^[\\\\p{L}\\\\s]+$"))
+			if(!o.matches("^[\\p{L}\\s]+$"))
 				throw new CadenaNoValidaException("Un objetivo del curso no puede tener caracteres especiales o simbolos");			
 		}
 
