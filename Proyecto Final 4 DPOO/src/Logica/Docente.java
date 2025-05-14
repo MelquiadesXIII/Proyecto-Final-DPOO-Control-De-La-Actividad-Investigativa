@@ -2,7 +2,11 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Complementos.CursoPosgradoUtils;
 import Excepciones.CadenaNoValidaException;
+import Excepciones.DuplicacionException;
+import Excepciones.ListaVaciaException;
+import Excepciones.NoExistenciaException;
 
 public class Docente extends Investigador{
 
@@ -114,8 +118,8 @@ public class Docente extends Investigador{
 	//Metodos
 	public void agregarCursoImpartido(CursoPosgrado curso)
 	{
-		if(cursosImpartidos.contains(curso)){
-			throw new IllegalArgumentException("No se puede duplicar el curso");
+		if(CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso)){
+			throw new DuplicacionException("El curso que esta intentando agregar ya esta registrado en el docente");
 		}
 		
 		cursosImpartidos.add(curso);
@@ -125,6 +129,12 @@ public class Docente extends Investigador{
 	{
 		if(curso == null)
 			throw new NullPointerException("No puede remover un null de la lista de cursos impartidos");
+
+		if(cursosImpartidos.size() == 0)
+			throw new ListaVaciaException("La lista de la que desea remover al curso esta vacia");
+
+		if(!CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso))
+			throw new NoExistenciaException("El curso que desea remover no se encuentra entre los registros de cursos impartidos");
 		
 		cursosImpartidos.remove(curso);
 	}

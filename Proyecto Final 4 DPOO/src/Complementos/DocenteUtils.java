@@ -16,6 +16,7 @@ public class DocenteUtils {
 								docente1.getCatDocente() == docente2.getCatDocente()));
 	}
 
+
 	public static boolean listaContieneDocente(ArrayList<Docente> lista, Docente d){
 
 		return indiceDe(lista, d) >= 0;

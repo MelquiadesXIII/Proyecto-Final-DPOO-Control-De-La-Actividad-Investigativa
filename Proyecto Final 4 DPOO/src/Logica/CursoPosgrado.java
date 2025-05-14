@@ -151,7 +151,7 @@ public class CursoPosgrado {
 	public void removerParticipante(Docente d){
 
 		if(participantes.size() == 0)
-			throw new ListaVaciaException("La lista del que desea remover al docente esta vacia");
+			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacia");
 
 		if(!DocenteUtils.listaContieneDocente(participantes, d))
 			throw new NoExistenciaException("El docente que desea remover no se encuentra entre los participantes del curso");
@@ -168,7 +168,7 @@ public class CursoPosgrado {
 			throw new NoExistenciaException("El docente que va a recibir la nota no esta registrado en el curso");
 
 		if(nota < 2 || nota > 5)
-			throw new RangoNoValidoException("La nota no esta entre el rango requerido de 2 a 5");
+			throw new RangoNoValidoException("La nota no esta entre el rango requerido de 2 a 5, su valor es " +nota);
 
 		int creditos = nota >= 3 ? cantCreditos : 0; 
 
