@@ -150,7 +150,4 @@ public class Docente extends Investigador{
 		cursosRecibidos.add(c);
 	}
 	
-	public boolean contieneCursoRecibido(CursoRecibido curso) {
-	    return cursosRecibidos.contains(curso);
-	}
 }
