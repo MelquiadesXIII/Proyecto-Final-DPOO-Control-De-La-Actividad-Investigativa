@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Complementos.CursoUtils;
 import Complementos.DocenteUtils;
 import Excepciones.DuplicacionException;
+import Excepciones.NoExistenciaException;
 
 public class Maestria {
 
@@ -41,6 +42,9 @@ public class Maestria {
 		if(matriculado == null)
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
+		if(DocenteUtils.listaContieneDocente(participantes, d))
+			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestria");
+
 		matriculados.add(matriculado);
 	}
 
@@ -50,7 +54,7 @@ public class Maestria {
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
 		if(!DocenteUtils.listaContieneDocente(matriculados, matriculado))
-			throw new IllegalArgumentException("La lista de matriculados no contiene al docente");
+			throw new NoExistenciaException("La lista de matriculados no contiene al docente");
 
 		matriculados.remove(matriculado);
 
@@ -64,9 +68,16 @@ public class Maestria {
 	public void agregarCursoPosgrado(CursoPosgrado c)
 	{
 		if(CursoUtils.listaContieneCurso(cursos, c))
-			throw new DuplicacionException("El curso que intenta agregar ya se encuentra en la lista, no lo puede duplicar");
+			throw new DuplicacionException("El curso que intenta agregar ya esta registrado");
 
-		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));	
+		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));
+
+		int indice = cursos.size() - 1;
+
+		for(Docente d: c.getParticipantes()){
+
+			cursos.get(indice).agregarParticipante(d);
+		}
 	}
 
 	public boolean recibirVistoBueno(Docente d){
