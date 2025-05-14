@@ -153,31 +153,19 @@ public class CursoPosgrado {
 	//Implementar mensajes de error
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
-		if(DocenteUtils.iguales(evaluador, profesor)){
+		if(!DocenteUtils.iguales(evaluador, profesor))
+			throw new InstanciaNoValidaException("Solo el profesor que imparte el curso es el que puede emitir notas");
 
-			if(DocenteUtils.listaContieneDocente(this.participantes, participante)){
+		if(!DocenteUtils.listaContieneDocente(this.participantes, participante))
+			throw new NoExistenciaException("El docente que va a recibir la nota no esta registrado en el curso");
 
-				if(nota >= 2 && nota <= 5){
+		if(nota < 2 || nota > 5)
+			throw new RangoNoValidoException("La nota no esta entre el rango requerido de 2 a 5");
 
-				int creditos = nota >= 3 ? cantCreditos : 0; 
+		int creditos = nota >= 3 ? cantCreditos : 0; 
 
-				participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
-
-				}else{
-				throw new RangoNoValidoException("La nota no esta entre el rango requerido de 2 a 5");
-				}
-			}
-		}else{
-			throw new InstanciaNoValidaException("El profesor que esta emitiendo la nota no es el evaluador");
-			
-		}
+		participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
 
 	}
-
-
-
-
-
-
 
 }
