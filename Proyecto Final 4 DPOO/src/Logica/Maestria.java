@@ -72,11 +72,11 @@ public class Maestria {
 
 		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));
 
-		int indice = cursos.size() - 1;
+		int indiceCursoAgregado = cursos.size() - 1;
 
 		for(Docente d: c.getParticipantes()){
 
-			cursos.get(indice).agregarParticipante(d);
+			cursos.get(indiceCursoAgregado).agregarParticipante(d);
 		}
 	}
 
