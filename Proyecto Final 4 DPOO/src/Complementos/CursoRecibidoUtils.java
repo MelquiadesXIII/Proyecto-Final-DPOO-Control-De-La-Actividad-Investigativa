@@ -1,8 +1,6 @@
 package Complementos;
 
 import java.util.ArrayList;
-
-import Logica.CursoPosgrado;
 import Logica.CursoRecibido;
 
 public class CursoRecibidoUtils {
