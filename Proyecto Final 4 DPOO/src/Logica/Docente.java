@@ -3,7 +3,9 @@ package Logica;
 import java.util.ArrayList;
 
 import Complementos.CursoPosgradoUtils;
+import Complementos.CursoRecibidoUtils;
 import Excepciones.CadenaNoValidaException;
+import Excepciones.CategoriaCientificaNoValidaException;
 import Excepciones.DuplicacionException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
@@ -118,6 +120,9 @@ public class Docente extends Investigador{
 	//Metodos
 	public void agregarCursoImpartido(CursoPosgrado curso)
 	{
+		if(catCientifica != CategoriaCientifica.Doctor)
+			throw new CategoriaCientificaNoValidaException("El docente debe tener categoria cientifica Doctor para poder impartir un curso");
+
 		if(CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso)){
 			throw new DuplicacionException("El curso que esta intentando agregar ya esta registrado en el docente");
 		}
@@ -144,8 +149,8 @@ public class Docente extends Investigador{
 		if(c == null)
 			throw new NullPointerException("No puede agregar un null a la lista de cursos recibidos");
 		
-		if(cursosRecibidos.contains(c))
-			throw new IllegalArgumentException("No puede duplicar el curso");
+		if(CursoRecibidoUtils.listaContieneCurso(cursosRecibidos, c))
+			throw new IllegalArgumentException("El curso que intenta agregar ya se encuentra presente en el registro");
 			
 		cursosRecibidos.add(c);
 	}
