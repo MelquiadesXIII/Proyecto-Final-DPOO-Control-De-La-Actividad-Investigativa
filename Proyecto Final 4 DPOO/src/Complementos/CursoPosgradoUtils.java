@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Logica.CursoPosgrado;
 
-public class CursoUtils {
+public class CursoPosgradoUtils {
 
 	public static boolean iguales(CursoPosgrado c1, CursoPosgrado c2){
 

@@ -2,6 +2,8 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Excepciones.CadenaNoValidaException;
+
 public class Docente extends Investigador{
 
 	private String nombre;
@@ -65,13 +67,30 @@ public class Docente extends Investigador{
 	//Setters
 	public void setNombre(String nombre) 
 	{
-		
+		if(nombre.trim().isEmpty())
+			throw new CadenaNoValidaException("El nombre del docente no puede estar vacio");
+
+		if(!nombre.matches("^[^0-9]*$"))
+			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
+
+		if(!nombre.matches("^[\\\\p{L}\\\\s]+$"))
+			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o simbolos");	
+
 		this.nombre = nombre;
-		/*if(nombre == null)
-			throw new NullPointerException("El nombre no puede ser null");
+	}
 
-		char[] nombreAux = new char[nombre.length()];*/
+	public void setApellidos(String apellidos) 
+	{
+		if(apellidos.trim().isEmpty())
+			throw new CadenaNoValidaException("El nombre del docente no puede estar vacio");
 
+		if(!apellidos.matches("^[^0-9]*$"))
+			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
+
+		if(!apellidos.matches("^[\\\\p{L}\\\\s]+$"))
+			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o simbolos");	
+
+		this.apellidos = apellidos;
 	}
 
 	public void setCatCientifica(CategoriaCientifica catCientifica) 
@@ -88,14 +107,6 @@ public class Docente extends Investigador{
 			throw new NullPointerException("La categoria docente no puede ser null");
 
 		this.catDocente = catDocente;
-	}
-	
-	public void setApellidos(String apellidos) 
-	{
-		if(apellidos == null)
-			throw new NullPointerException("El apellido no puede ser null");
-
-		this.apellidos = apellidos;
 	}
 
 
