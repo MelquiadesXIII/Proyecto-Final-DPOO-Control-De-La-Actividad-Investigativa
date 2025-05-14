@@ -15,27 +15,30 @@ public class DocenteUtils {
 								docente1.getCatCientifica() == docente2.getCatCientifica() && 
 								docente1.getCatDocente() == docente2.getCatDocente()));
 	}
-	
+
 	public static boolean listaContieneDocente(ArrayList<Docente> lista, Docente d){
-		
-		boolean contenido = false;
-		
+
+		return indiceDe(lista, d) >= 0;
+	}
+
+	public static int indiceDe(ArrayList<Docente> lista, Docente d){
+
+		boolean encontrado = false;
+		int indice = -1;
+
 		if(d != null && lista != null && lista.size() > 0){
-			
+
 			int i = 0;
-			while(i < lista.size() && !contenido){
-				
-				if(iguales(lista.get(i), d))
-					contenido = true;
-				
-				else
+			while(i < lista.size() && !encontrado){
+
+				if(iguales(lista.get(i), d)){
+					encontrado = true;
+					indice = i;
+
+				}else
 					i++;
 			}
-			
-		}else
-			contenido = false;
-		
-		
-		return contenido;
+		}
+		return indice;
 	}
 }

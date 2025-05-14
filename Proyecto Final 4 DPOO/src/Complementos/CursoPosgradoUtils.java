@@ -18,25 +18,28 @@ public class CursoPosgradoUtils {
 
 	public static boolean listaContieneCurso(ArrayList<CursoPosgrado> lista, CursoPosgrado c){
 
-		boolean contenido = false;
+		return indiceDe(lista, c) >= 0;
+	}
+	
+	public static int indiceDe(ArrayList<CursoPosgrado> lista, CursoPosgrado c){
+		
+		boolean encontrado = false;
+		int indice = -1;
 
 		if(c != null && lista != null && lista.size() > 0){
 
 			int i = 0;
-			while(i < lista.size() && !contenido){
+			while(i < lista.size() && !encontrado){
 
-				if(iguales(lista.get(i), c))
-					contenido = true;
+				if(iguales(lista.get(i), c)){
+					encontrado = true;
+					indice = i;
 
-				else
+				}else
 					i++;
 			}
-
-		}else
-			contenido = false;
-
-
-		return contenido;
+		}
+		return indice;
 	}
 
 }
