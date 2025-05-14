@@ -159,9 +159,6 @@ public class CursoPosgrado {
 		participantes.remove(d);
 	}
 
-
-
-	//Implementar mensajes de error
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
 		if(!DocenteUtils.iguales(evaluador, profesor))
