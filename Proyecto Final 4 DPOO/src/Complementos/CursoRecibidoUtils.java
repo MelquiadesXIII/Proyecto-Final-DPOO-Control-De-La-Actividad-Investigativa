@@ -16,7 +16,7 @@ public class CursoRecibidoUtils {
 				CursoPosgradoUtils.iguales(c1.getCurso(), c2.getCurso()));
 	}
 
-	public static boolean listaContieneCurso(ArrayList<CursoPosgrado> lista, CursoPosgrado c){
+	public static boolean listaContieneCurso(ArrayList<CursoRecibido> lista, CursoRecibido c){
 
 		return indiceDe(lista, c) >= 0;
 	}

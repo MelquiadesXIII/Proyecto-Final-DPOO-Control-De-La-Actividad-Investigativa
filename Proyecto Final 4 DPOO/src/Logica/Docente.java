@@ -134,7 +134,7 @@ public class Docente extends Investigador{
 			throw new ListaVaciaException("La lista de la que desea remover al curso esta vacia");
 
 		if(!CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso))
-			throw new NoExistenciaException("El curso que desea remover no se encuentra entre los registros de cursos impartidos");
+			throw new NoExistenciaException("El curso que desea remover no se encuentra entre los registros de cursos");
 		
 		cursosImpartidos.remove(curso);
 	}
