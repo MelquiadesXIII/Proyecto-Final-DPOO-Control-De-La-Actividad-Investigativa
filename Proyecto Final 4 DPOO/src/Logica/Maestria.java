@@ -3,7 +3,6 @@ package Logica;
 import java.util.ArrayList;
 
 import Complementos.CursoPosgradoUtils;
-import Complementos.CursoUtils;
 import Complementos.DocenteUtils;
 import Excepciones.DuplicacionException;
 import Excepciones.NoExistenciaException;
@@ -43,7 +42,7 @@ public class Maestria {
 		if(matriculado == null)
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
-		if(DocenteUtils.listaContieneDocente(participantes, d))
+		if(DocenteUtils.listaContieneDocente(matriculados, matriculado))
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestria");
 
 		matriculados.add(matriculado);
