@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import Complementos.DocenteUtils;
 import Excepciones.CadenaNoValidaException;
+import Excepciones.CategoriaCientificaNoValidaException;
 import Excepciones.DuplicacionException;
 import Excepciones.InstanciaNoValidaException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
 import Excepciones.RangoNoValidoException;
+import Excepciones.ValorNoValidoException;
 
 public class CursoPosgrado {
 
@@ -74,6 +76,9 @@ public class CursoPosgrado {
 		if(!tema.matches("^[^0-9]*$"))
 			throw new CadenaNoValidaException("El tema del curso no puede tener numeros");
 
+		if(!tema.matches("^[\\\\p{L}\\\\s]+$"))
+			throw new CadenaNoValidaException("El tema del curso no puede tener caracteres especiales o simbolos");	
+
 		this.tema = tema;	
 	}
 
@@ -82,7 +87,9 @@ public class CursoPosgrado {
 		if(objetivos == null)
 			throw new NullPointerException("Los objetivos no pueden tener valor null");
 
-		this.objetivos.clear();
+		if(objetivos.size() == 0){
+			throw new ListaVaciaException("La lista de objetivos a añadir no puede estar vacio");
+		}
 
 		for(String o: objetivos){
 
@@ -92,14 +99,18 @@ public class CursoPosgrado {
 			if(!o.matches("^[^0-9]*$"))
 				throw new CadenaNoValidaException("Un objetivo del curso no puede tener numeros");
 
-			this.objetivos.add(o);	
+			if(!o.matches("^[\\\\p{L}\\\\s]+$"))
+				throw new CadenaNoValidaException("Un objetivo del curso no puede tener caracteres especiales o simbolos");			
 		}
+
+		this.objetivos.clear();
+		this.objetivos.addAll(objetivos);
 	}
 
 	public void setCantCreditos(int cantCreditos) 
 	{
 		if(cantCreditos <= 0)
-			throw new IllegalArgumentException("La cantidad de creditos proporcionados por un curso debe ser una cantidad positiva");
+			throw new ValorNoValidoException("La cantidad de creditos proporcionados por un curso debe ser una cantidad positiva");
 
 		this.cantCreditos = cantCreditos;
 	}
@@ -110,7 +121,7 @@ public class CursoPosgrado {
 			throw new NullPointerException("El profesor no puede tener valor null");
 
 		if(profesor.getCatCientifica() != CategoriaCientifica.Doctor)
-			throw new IllegalArgumentException("El profesor que imparte el curso debe tener la categoria cientifica Doctor");
+			throw new CategoriaCientificaNoValidaException("El profesor que imparte el curso debe tener la categoria cientifica Doctor");
 
 		if(this.profesor != null)
 			this.profesor.removerCursoImpartido(this);
