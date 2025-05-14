@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Complementos.DocenteUtils;
 import Excepciones.CadenaNoValidaException;
+import Excepciones.DuplicacionException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
 
@@ -65,9 +66,11 @@ public class CursoPosgrado {
 		if(tema == null)
 			throw new NullPointerException("El tema no puede tener valor null");
 
-		if(!tema.matches("^[^0-9]*$"))
-			throw new CadenaNoValidaException("El tema del curso no puede tener caracteres no validos");
+		if(tema.trim().isEmpty())
+			throw new CadenaNoValidaException("El tema no puede estar vacio");
 
+		if(!tema.matches("^[^0-9]*$"))
+			throw new CadenaNoValidaException("El tema del curso no puede tener numeros");
 
 		this.tema = tema;	
 	}
@@ -79,8 +82,16 @@ public class CursoPosgrado {
 
 		this.objetivos.clear();
 
-		for(String o: objetivos)
-			this.objetivos.add(o);
+		for(String o: objetivos){
+
+			if(o.trim().isEmpty())
+				throw new CadenaNoValidaException("Un objetivo del curso no puede estar vacio");
+
+			if(!o.matches("^[^0-9]*$"))
+				throw new CadenaNoValidaException("Un objetivo del curso no puede tener numeros");
+
+			this.objetivos.add(o);	
+		}
 	}
 
 	public void setCantCreditos(int cantCreditos) 
@@ -93,18 +104,18 @@ public class CursoPosgrado {
 
 	public void setProfesor(Docente profesor) 
 	{
-			if(profesor == null)
-				throw new NullPointerException("El profesor no puede tener valor null");
+		if(profesor == null)
+			throw new NullPointerException("El profesor no puede tener valor null");
 
-			if(profesor.getCatCientifica() != CategoriaCientifica.Doctor)
-				throw new IllegalArgumentException("El profesor que imparte el curso debe tener la categoria cientifica Doctor");
+		if(profesor.getCatCientifica() != CategoriaCientifica.Doctor)
+			throw new IllegalArgumentException("El profesor que imparte el curso debe tener la categoria cientifica Doctor");
 
-			if(this.profesor != null)
-				this.profesor.removerCursoImpartido(this);
+		if(this.profesor != null)
+			this.profesor.removerCursoImpartido(this);
 
-			this.profesor = profesor;
+		this.profesor = profesor;
 
-			this.profesor.agregarCursoImpartido(this);
+		this.profesor.agregarCursoImpartido(this);
 	}
 
 
@@ -116,22 +127,22 @@ public class CursoPosgrado {
 			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
 
 		if(DocenteUtils.iguales(profesor, d))
-			throw new IllegalArgumentException("El profesor que imparte el curso no puede ser un docente participante");
+			throw new DuplicacionException("El profesor que imparte el curso no puede ser un docente participante");
 
 		if(DocenteUtils.listaContieneDocente(participantes, d))
-			throw new IllegalArgumentException("El profesor no se puede agregar porque ya se encuentra en el curso");
+			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra en el curso");
 
 		participantes.add(d);
 	}
-	
+
 	public void removerParticipante(Docente d){
-		
+
 		if(participantes.size() == 0)
 			throw new ListaVaciaException("La lista del que desea remover al docente esta vacia");
-		
+
 		if(!DocenteUtils.listaContieneDocente(participantes, d))
 			throw new NoExistenciaException("El docente que desea remover no se encuentra entre los participantes del curso");
-		
+
 		participantes.remove(d);
 	}
 
@@ -148,6 +159,10 @@ public class CursoPosgrado {
 
 				participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
 			}
+
+		}else{
+
+			
 		}
 
 	}
