@@ -2,6 +2,7 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Complementos.CursoPosgradoUtils;
 import Complementos.CursoUtils;
 import Complementos.DocenteUtils;
 import Excepciones.DuplicacionException;
@@ -67,7 +68,7 @@ public class Maestria {
 
 	public void agregarCursoPosgrado(CursoPosgrado c)
 	{
-		if(CursoUtils.listaContieneCurso(cursos, c))
+		if(CursoPosgradoUtils.listaContieneCurso(cursos, c))
 			throw new DuplicacionException("El curso que intenta agregar ya esta registrado");
 
 		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));
