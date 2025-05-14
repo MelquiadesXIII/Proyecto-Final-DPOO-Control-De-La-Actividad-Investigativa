@@ -150,7 +150,7 @@ public class Docente extends Investigador{
 			throw new NullPointerException("No puede agregar un null a la lista de cursos recibidos");
 		
 		if(CursoRecibidoUtils.listaContieneCurso(cursosRecibidos, c))
-			throw new IllegalArgumentException("El curso que intenta agregar ya se encuentra presente en el registro");
+			throw new DuplicacionException("El curso que intenta agregar ya se encuentra presente en el registro");
 			
 		cursosRecibidos.add(c);
 	}
