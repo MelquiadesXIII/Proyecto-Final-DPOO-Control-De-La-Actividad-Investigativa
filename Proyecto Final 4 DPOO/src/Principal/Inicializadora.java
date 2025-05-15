@@ -30,7 +30,7 @@ public class Inicializadora {
 		
 		
 		
-		if(DocenteUtils.iguales(d1, d3)) //UBICATE AQUI Y MIRA LAS INSTANCIAS QUE SE ESTAN COMPARANDO
+		if(DocenteUtils.iguales(d1, d3)) 
 			System.out.println("ñ");
 		
 		System.out.println(d1.getCatCientifica());
