@@ -2,8 +2,8 @@ package Logica;
 
 public enum CategoriaDocente {
 
-	Instructor,
-	Asistente,
-	ProfesorAuxiliar,
-	ProfesorTitular;
+	INSTRUCTOR,
+	ASISTENTE,
+	PROFESOR_AUXILIAR,
+	PROFESOR_TITULAR;
 }

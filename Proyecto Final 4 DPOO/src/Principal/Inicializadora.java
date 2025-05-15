@@ -19,9 +19,9 @@ public class Inicializadora {
 		obj.add("Programar");
 		obj.add("Ir a Varadero");
 		
-		Docente d1 = new Docente("Manuel", "Alfonso", CategoriaCientifica.Doctor, CategoriaDocente.ProfesorTitular);
-		Docente d2 = new Docente("Ryan", "Negrete", CategoriaCientifica.Master, CategoriaDocente.ProfesorTitular);
-		Docente d3 = new Docente("Manuel", "Alfonso", CategoriaCientifica.Doctor, CategoriaDocente.ProfesorTitular);
+		Docente d1 = new Docente("Manuel", "Alfonso", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
+		Docente d2 = new Docente("Ryan", "Negrete", CategoriaCientifica.MASTER, CategoriaDocente.PROFESOR_AUXILIAR);
+		Docente d3 = new Docente("Manuel", "Alfonso", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
 
 		
 		CursoPosgrado c = new CursoPosgrado("Mujeres", obj, 5, d1);
@@ -32,6 +32,8 @@ public class Inicializadora {
 		
 		if(DocenteUtils.iguales(d1, d3)) //UBICATE AQUI Y MIRA LAS INSTANCIAS QUE SE ESTAN COMPARANDO
 			System.out.println("ñ");
+		
+		System.out.println(d1.getCatCientifica());
 	}
 
 }

@@ -120,7 +120,7 @@ public class Docente extends Investigador{
 	//Metodos
 	public void agregarCursoImpartido(CursoPosgrado curso)
 	{
-		if(catCientifica != CategoriaCientifica.Doctor)
+		if(catCientifica != CategoriaCientifica.DOCTOR)
 			throw new CategoriaCientificaNoValidaException("El docente debe tener categoria cientifica Doctor para poder impartir un curso");
 
 		if(CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso)){
