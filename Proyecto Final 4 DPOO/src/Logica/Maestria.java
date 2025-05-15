@@ -57,6 +57,16 @@ public class Maestria {
 	{
 		return campoEstudio;
 	}
+	
+	private int getCreditosTotalesCursos(){
+
+		int total = 0;
+
+		for(CursoPosgrado c: cursos)
+			total += c.getCantCreditos();
+
+		return total;
+	}
 
 
 	
@@ -78,7 +88,7 @@ public class Maestria {
 	public void setDuracionMeses(int duracionMeses) {
 		
 		if(duracionMeses <= 0)
-			throw new ValorNoValidoException("La cantidad de creditos proporcionados por un curso debe ser una cantidad positiva");
+			throw new ValorNoValidoException("La duracion por meses de una maestria debe ser una cantidad positiva");
 		
 		this.duracionMeses = duracionMeses;
 	}
@@ -159,13 +169,5 @@ public class Maestria {
 		return suma;
 	}
 
-	private int getCreditosTotalesCursos(){
-
-		int total = 0;
-
-		for(CursoPosgrado c: cursos)
-			total += c.getCantCreditos();
-
-		return total;
-	}
+	
 }

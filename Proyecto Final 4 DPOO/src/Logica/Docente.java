@@ -79,7 +79,7 @@ public class Docente extends Investigador{
 		if(!nombre.matches("^[^0-9]*$"))
 			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
 
-		if(!nombre.matches("^[\\\\p{L}\\\\s]+$"))
+		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o simbolos");	
 
 		this.nombre = nombre;
@@ -93,7 +93,7 @@ public class Docente extends Investigador{
 		if(!apellidos.matches("^[^0-9]*$"))
 			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
 
-		if(!apellidos.matches("^[\\\\p{L}\\\\s]+$"))
+		if(!apellidos.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o simbolos");	
 
 		this.apellidos = apellidos;

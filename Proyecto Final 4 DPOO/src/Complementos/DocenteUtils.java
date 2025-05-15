@@ -9,7 +9,7 @@ public class DocenteUtils {
 	public static boolean iguales(Docente docente1, Docente docente2){
 
 		return (docente1 != null && docente2 != null) && 
-				((docente1 == docente2) || 
+				(docente1 == docente2 || 
 						(docente1.getNombre().equals(docente2.getNombre()) && 
 								docente1.getApellidos().equals(docente2.getApellidos()) && 
 								docente1.getCatCientifica() == docente2.getCatCientifica() && 
