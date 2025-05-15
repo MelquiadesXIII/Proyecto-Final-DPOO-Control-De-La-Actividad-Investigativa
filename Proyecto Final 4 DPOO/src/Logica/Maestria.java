@@ -4,19 +4,28 @@ import java.util.ArrayList;
 
 import Complementos.CursoPosgradoUtils;
 import Complementos.DocenteUtils;
+import Excepciones.CadenaNoValidaException;
 import Excepciones.DuplicacionException;
 import Excepciones.NoExistenciaException;
+import Excepciones.ValorNoValidoException;
 
 public class Maestria {
 
+	private String nombre;
+	private int duracionMeses;
+	private String campoEstudio;
 	private ArrayList<CursoPosgrado> cursos;
 	private ArrayList<Docente> matriculados;
 
 
 
 	//Constructor
-	public Maestria() 
-	{
+	public Maestria(String nombre, int duracionMeses, String campoEstudio) 
+	{		
+		setNombre(nombre);
+		setCampoEstudio(campoEstudio);
+		setDuracionMeses(duracionMeses);
+		
 		cursos = new ArrayList<CursoPosgrado>();
 		matriculados = new ArrayList<Docente>();
 	}
@@ -33,9 +42,63 @@ public class Maestria {
 	{
 		return matriculados;
 	}
+	
+	public String getNombre() 
+	{
+		return nombre;
+	}
+	
+	public int getDuracionMeses() 
+	{
+		return duracionMeses;
+	}
+
+	public String getCampoEstudio() 
+	{
+		return campoEstudio;
+	}
 
 
+	
+	//Setters
+	public void setNombre(String nombre) {
+		
+		if(nombre.trim().isEmpty())
+			throw new CadenaNoValidaException("El nombre no puede estar vacio");
 
+		if(!nombre.matches("^[^0-9]*$"))
+			throw new CadenaNoValidaException("El nombre no puede tener numeros");
+
+		if(!nombre.matches("^[\\p{L}\\s]+$"))
+			throw new CadenaNoValidaException("El nombre no puede tener caracteres especiales o simbolos");	
+		
+		this.nombre = nombre;
+	}
+
+	public void setDuracionMeses(int duracionMeses) {
+		
+		if(duracionMeses <= 0)
+			throw new ValorNoValidoException("La cantidad de creditos proporcionados por un curso debe ser una cantidad positiva");
+		
+		this.duracionMeses = duracionMeses;
+	}
+
+	public void setCampoEstudio(String campoEstudio) {
+		
+		if(campoEstudio.trim().isEmpty())
+			throw new CadenaNoValidaException("El nombre no puede estar vacio");
+
+		if(!campoEstudio.matches("^[^0-9]*$"))
+			throw new CadenaNoValidaException("El nombre no puede tener numeros");
+
+		if(!campoEstudio.matches("^[\\p{L}\\s]+$"))
+			throw new CadenaNoValidaException("El nombre no puede tener caracteres especiales o simbolos");	
+		
+		this.campoEstudio = campoEstudio;
+	}
+	
+	
+	
 	//Metodos
 	public void agregarMatriculado(Docente matriculado)
 	{
@@ -105,5 +168,4 @@ public class Maestria {
 
 		return total;
 	}
-
 }

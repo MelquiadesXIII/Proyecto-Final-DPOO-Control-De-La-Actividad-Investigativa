@@ -2,6 +2,9 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Complementos.DocenteUtils;
+import Excepciones.DuplicacionException;
+
 public class Vicedecanato {
 
 	private ArrayList<Docente> docentes;
@@ -41,8 +44,8 @@ public class Vicedecanato {
 	//Metodos
 	public void agregarDocente(Docente d)
 	{
-		if(docentes.contains(d))
-			throw new IllegalArgumentException("El docente ya se encuentra en el vicedecanato");
+		if(DocenteUtils.listaContieneDocente(docentes, d))
+			throw new DuplicacionException("El docente ya se encuentra en el vicedecanato");
 		
 		docentes.add(new Docente(d.getNombre(), d.getApellidos(), d.getCatCientifica(), d.getCatDocente()));
 		
