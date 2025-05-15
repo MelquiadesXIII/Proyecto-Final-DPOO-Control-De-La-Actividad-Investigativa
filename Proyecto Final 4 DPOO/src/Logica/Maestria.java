@@ -82,7 +82,7 @@ public class Maestria {
 
 	public boolean recibirVistoBueno(Docente d){
 
-		return creditosObtenidosCursosRecibidos(d) == creditosTotalesCursos();
+		return creditosObtenidosCursosRecibidos(d) == getCreditosTotalesCursos();
 	}
 
 	public int creditosObtenidosCursosRecibidos(Docente d){
@@ -96,7 +96,7 @@ public class Maestria {
 		return suma;
 	}
 
-	private int creditosTotalesCursos(){
+	private int getCreditosTotalesCursos(){
 
 		int total = 0;
 
