@@ -26,13 +26,13 @@ public class Docente extends Investigador{
 
 		super();
 
+		cursosImpartidos = new ArrayList<CursoPosgrado>();
+		cursosRecibidos = new ArrayList<CursoRecibido>();
+		
 		setNombre(nombre);
 		setApellidos(apellidos);
 		setCatCientifica(catCientifica);
 		setCatDocente(catDocente);
-		
-		cursosImpartidos = new ArrayList<CursoPosgrado>();
-		cursosRecibidos = new ArrayList<CursoRecibido>();
 	}
 
 

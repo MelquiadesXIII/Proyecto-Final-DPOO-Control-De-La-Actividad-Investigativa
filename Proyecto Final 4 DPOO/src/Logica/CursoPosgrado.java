@@ -25,13 +25,13 @@ public class CursoPosgrado {
 	//Constructor
 	public CursoPosgrado(String tema, ArrayList<String> objetivos, int cantCreditos, Docente profesor) 
 	{
-		setTema(tema);
+		participantes = new ArrayList<Docente>();
 		this.objetivos = new ArrayList<String>();
+		
+		setTema(tema);
 		setObjetivos(objetivos);
 		setCantCreditos(cantCreditos);
 		setProfesor(profesor);
-		
-		participantes = new ArrayList<Docente>();
 	}
 
 
