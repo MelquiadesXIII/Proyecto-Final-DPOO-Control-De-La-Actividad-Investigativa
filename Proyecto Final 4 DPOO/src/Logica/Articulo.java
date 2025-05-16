@@ -8,11 +8,12 @@ public class Articulo extends ResultadoInvestigativo{
 	private String anioPublicacion;
 	private int paginas;
 	private GrupoImpacto grupo;
+	private static int puntos = 1;
 	
 	
 	@Override
 	public int calcularPuntaje(){
-		
-		return 0;
+
+		return grupo.getPuntos();
 	}
 }

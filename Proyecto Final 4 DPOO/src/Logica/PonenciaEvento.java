@@ -7,11 +7,12 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 	private String fecha;
 	private String lugar;
 	private String ISBN;
+	private static int puntos = 1;
 	
 	
 	@Override
 	public int calcularPuntaje(){
 		
-		return 0;
+		return puntos;
 	}
 }

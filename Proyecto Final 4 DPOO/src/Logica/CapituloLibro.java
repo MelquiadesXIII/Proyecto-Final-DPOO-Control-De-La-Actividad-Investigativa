@@ -11,11 +11,12 @@ public class CapituloLibro extends ResultadoInvestigativo{
 	private String ISSN;
 	private String nombre;
 	private String volumen;
+	private static int puntos = 3;
 	
 	
 	@Override
 	public int calcularPuntaje(){
 		
-		return 0;
+		return puntos;
 	}
 }
