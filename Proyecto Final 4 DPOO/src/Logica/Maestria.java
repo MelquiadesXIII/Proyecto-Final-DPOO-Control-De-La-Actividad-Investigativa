@@ -110,47 +110,40 @@ public class Maestria {
 	
 	
 	//Metodos
-	public void agregarMatriculado(Docente matriculado)
+	public void agregarMatriculado(Docente d)
 	{
-		if(matriculado == null)
+		if(d == null)
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
-		if(DocenteUtils.listaContieneDocente(matriculados, matriculado))
+		if(DocenteUtils.listaContieneDocente(matriculados, d))
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestria");
 
-		matriculados.add(matriculado);
+		matriculados.add(d);
 	}
 
-	public void removerMatriculado(Docente matriculado)
+	public void removerMatriculado(Docente d)
 	{
-		if(matriculado == null)
+		if(d == null)
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
-		if(!DocenteUtils.listaContieneDocente(matriculados, matriculado))
+		if(!matriculados.contains(d))
 			throw new NoExistenciaException("La lista de matriculados no contiene al docente");
 
-		matriculados.remove(matriculado);
+		matriculados.remove(d);
 
 		for(CursoPosgrado c: cursos){
 			
-				c.removerParticipante(matriculado);
+				c.removerParticipante(d);
 		}
 
 	}
 
 	public void agregarCursoPosgrado(CursoPosgrado c)
 	{
-		if(CursoPosgradoUtils.listaContieneCurso(cursos, c))
+		if(cursos.contains(c))
 			throw new DuplicacionException("El curso que intenta agregar ya esta registrado");
 
-		cursos.add(new CursoPosgrado(c.getTema(), c.getObjetivos(), c.getCantCreditos(), c.getProfesor()));
-
-		int indiceCursoAgregado = cursos.size() - 1;
-
-		for(Docente d: c.getParticipantes()){
-
-			cursos.get(indiceCursoAgregado).agregarParticipante(d);
-		}
+		cursos.add(c);
 	}
 
 	public boolean recibirVistoBueno(Docente d){
@@ -161,9 +154,8 @@ public class Maestria {
 	public int creditosObtenidosCursosRecibidos(Docente d){
 
 		int suma = 0;
-		ArrayList<CursoRecibido> cursosR = d.getCursosRecibidos();
 
-		for(CursoRecibido c: cursosR)
+		for(CursoRecibido c: d.getCursosRecibidos())
 			suma += c.getCreditosRecibidos();
 
 		return suma;
