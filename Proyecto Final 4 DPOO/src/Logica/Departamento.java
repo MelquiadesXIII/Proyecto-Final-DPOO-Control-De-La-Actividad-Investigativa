@@ -10,6 +10,9 @@ public class Departamento {
 	private ArrayList<Docente> docentes;
 	private	ArrayList<Estudiante> estudiantes;
 
+
+
+	//Constructor
 	public Departamento(String nombre){
 
 		docentes = new ArrayList<Docente>();

@@ -31,10 +31,13 @@ public class Estudiante extends Investigador{
 		return apellidos;
 	}
 
-	public String getGrupo() {
+	public String getGrupo() 
+	{
 		return grupo;
 	}
 
+
+	
 	//Setters
 	public void setNombre(String nombre) 
 	{
@@ -67,6 +70,7 @@ public class Estudiante extends Investigador{
 
 
 	//Metodos
+	@Override
 	public boolean equals(Object o) {
 		return o != null &&
 				(this == o ||

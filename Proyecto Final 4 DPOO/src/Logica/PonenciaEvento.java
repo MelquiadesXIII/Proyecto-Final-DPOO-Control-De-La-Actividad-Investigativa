@@ -10,12 +10,12 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 	private static int puntos = 1;
 	
 	
-	@Override
-	public int calcularPuntaje(){
-		
-		return puntos;
-	}
 
+	//Constructor
+
+
+
+	//Getters
 	public static int getPuntos() {
 		return puntos;
 	}
@@ -40,6 +40,13 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 		return nombre;
 	}
 
+
+
+	//Setters
+
+
+
+	//Metodos
 	@Override
 	public boolean equals(Object o) {
 		return o != null &&
@@ -50,5 +57,11 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 								fecha.equals(((PonenciaEvento)o).getFecha()) &&
 								lugar.equals(((PonenciaEvento)o).getLugar()) &&
 								ISBN.equals(((PonenciaEvento)o).getISBN())));
+	}
+
+	@Override
+	public int calcularPuntaje(){
+
+		return puntos;
 	}
 }

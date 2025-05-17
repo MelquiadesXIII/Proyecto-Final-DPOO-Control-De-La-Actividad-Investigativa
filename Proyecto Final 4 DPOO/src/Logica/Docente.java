@@ -160,7 +160,8 @@ public class Docente extends Investigador{
 
 		return d != null &&
 				(this == d ||
-						(nombre.equals(((Docente)d).getNombre()) &&
+						(d instanceof Docente &&
+								nombre.equals(((Docente)d).getNombre()) &&
 								apellidos.equals(((Docente)d).getApellidos()) &&
 								catCientifica == ((Docente)d).getCatCientifica() &&
 								catDocente == ((Docente)d).getCatDocente()));

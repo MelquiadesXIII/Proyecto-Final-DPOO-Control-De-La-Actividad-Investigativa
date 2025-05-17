@@ -14,12 +14,12 @@ public class CapituloLibro extends ResultadoInvestigativo{
 	private static int puntos = 3;
 	
 	
-	@Override
-	public int calcularPuntaje(){
-		
-		return puntos;
-	}
 
+	//Constructor
+
+
+
+	//Getters
 	public String getTitulo() {
 		return titulo;
 	}
@@ -52,6 +52,9 @@ public class CapituloLibro extends ResultadoInvestigativo{
 		return puntos;
 	}
 
+
+
+	//Metodos
 	@Override
 	public boolean equals(Object o) {
 		return o != null &&
@@ -64,4 +67,9 @@ public class CapituloLibro extends ResultadoInvestigativo{
 								volumen.equals(((CapituloLibro)o).getVolumen())));
 	}
 
+	@Override
+	public int calcularPuntaje(){
+
+		return puntos;
+	}
 }

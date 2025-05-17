@@ -169,6 +169,7 @@ public class Maestria {
 		return suma;
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		return o != null &&
 				(this == o ||

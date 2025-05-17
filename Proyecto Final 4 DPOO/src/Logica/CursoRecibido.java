@@ -60,6 +60,9 @@ public class CursoRecibido {
 		this.curso = curso;
 	}
 
+
+
+	//Metodos
 	public boolean equals(Object c) {
 		return c != null &&
 				(this == c ||

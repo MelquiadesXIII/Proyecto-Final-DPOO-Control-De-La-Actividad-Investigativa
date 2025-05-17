@@ -45,6 +45,9 @@ public class Articulo extends ResultadoInvestigativo{
 		return puntos;
 	}
 
+	
+	
+	//Metodos
 	@Override
 	public int calcularPuntaje(){
 
