@@ -45,13 +45,13 @@ public abstract class Investigador {
 		resultados.remove(r);
 	}
 	
-	public int calcularPuntaje(){
+	public int calcularPuntajeInvestigativo(){
 
 		int puntaje = 0;
 
 		for (ResultadoInvestigativo r: resultados){
 
-			puntaje += r.calcularPuntaje();
+			puntaje += r.aportarPuntaje();
 		}
 
 		return puntaje;
