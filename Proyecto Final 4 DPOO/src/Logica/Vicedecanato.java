@@ -1,8 +1,6 @@
 package Logica;
 
 import java.util.ArrayList;
-
-import Complementos.DocenteUtils;
 import Excepciones.DuplicacionException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
