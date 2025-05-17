@@ -1,9 +1,6 @@
 package Logica;
 
 import java.util.ArrayList;
-
-import Complementos.CursoPosgradoUtils;
-import Complementos.CursoRecibidoUtils;
 import Excepciones.CadenaNoValidaException;
 import Excepciones.CategoriaCientificaNoValidaException;
 import Excepciones.DuplicacionException;
