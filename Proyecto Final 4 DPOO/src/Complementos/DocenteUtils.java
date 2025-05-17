@@ -27,7 +27,7 @@ public class DocenteUtils {
 		boolean encontrado = false;
 		int indice = -1;
 
-		if(d != null && lista != null && lista.size() > 0){
+		if(d != null && lista != null && !lista.isEmpty()){
 
 			int i = 0;
 			while(i < lista.size() && !encontrado){
