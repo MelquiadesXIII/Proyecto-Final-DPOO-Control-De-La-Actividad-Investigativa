@@ -26,7 +26,7 @@ public class Inicializadora {
 		
 		CursoPosgrado c = new CursoPosgrado("Mujeres", obj, 5, d1);
 		c.agregarParticipante(d2);
-		c.emitirNota(d2, d2, 4);
+		c.emitirNota(d1, d2, 2);
 		
 		if(d1.equals(d1))
 			System.out.println("hola");
