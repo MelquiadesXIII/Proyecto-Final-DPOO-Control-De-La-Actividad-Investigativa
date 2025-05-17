@@ -60,7 +60,7 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 	}
 
 	@Override
-	public int calcularPuntaje(){
+	public int aportarPuntaje(){
 
 		return puntos;
 	}

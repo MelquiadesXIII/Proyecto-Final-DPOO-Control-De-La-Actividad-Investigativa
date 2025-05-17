@@ -49,7 +49,7 @@ public class Articulo extends ResultadoInvestigativo{
 	
 	//Metodos
 	@Override
-	public int calcularPuntaje(){
+	public int aportarPuntaje(){
 
 		return grupo.getPuntos();
 	}

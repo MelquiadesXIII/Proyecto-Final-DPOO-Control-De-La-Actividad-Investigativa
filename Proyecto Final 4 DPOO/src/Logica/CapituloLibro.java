@@ -68,7 +68,7 @@ public class CapituloLibro extends ResultadoInvestigativo{
 	}
 
 	@Override
-	public int calcularPuntaje(){
+	public int aportarPuntaje(){
 
 		return puntos;
 	}
