@@ -44,11 +44,9 @@ public class Vicedecanato {
 	//Metodos
 	public void agregarDocente(Docente d)
 	{
-		if(DocenteUtils.listaContieneDocente(docentes, d))
+		if(docentes.contains(d))
 			throw new DuplicacionException("El docente ya se encuentra en el vicedecanato");
 		
-		docentes.add(new Docente(d.getNombre(), d.getApellidos(), d.getCatCientifica(), d.getCatDocente()));
-		
-		
+		docentes.add(d);
 	}
 }
