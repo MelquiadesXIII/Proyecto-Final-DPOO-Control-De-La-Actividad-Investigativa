@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Complementos.DocenteUtils;
 import Excepciones.DuplicacionException;
+import Excepciones.ListaVaciaException;
+import Excepciones.NoExistenciaException;
 
 public class Vicedecanato {
 
@@ -48,5 +50,38 @@ public class Vicedecanato {
 			throw new DuplicacionException("El docente ya se encuentra en el vicedecanato");
 		
 		docentes.add(d);
+	}
+
+	public void agregarEstudiante(Estudiante e)
+	{
+		if(estudiantes.contains(e))
+			throw new DuplicacionException("El docente ya se encuentra en el vicedecanato");
+
+		estudiantes.add(e);
+	}
+
+	public void agregarDepartamento(Departamento d)
+	{
+		if(departamentos.contains(d))
+			throw new DuplicacionException("El docente ya se encuentra en el vicedecanato");
+
+		departamentos.add(d);
+	}
+
+	public void removerDocente(Docente d){
+
+		if(docentes.isEmpty())
+			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacia");
+
+		if(!docentes.contains(d))
+			throw new NoExistenciaException("El docente que desea remover no se encuentra registrado en el vicedecanato");
+
+		docentes.remove(d);
+
+		for(Departamento depto: departamentos){
+
+			if(depto.getDocentes().contains(d))
+				depto.removerDocente(d);
+		}
 	}
 }
