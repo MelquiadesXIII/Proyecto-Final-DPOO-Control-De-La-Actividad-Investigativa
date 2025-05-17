@@ -30,9 +30,11 @@ public class Estudiante extends Investigador{
 	{
 		return apellidos;
 	}
-	
-	
-	
+
+	public String getGrupo() {
+		return grupo;
+	}
+
 	//Setters
 	public void setNombre(String nombre) 
 	{
@@ -60,5 +62,17 @@ public class Estudiante extends Investigador{
 			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o simbolos");	
 
 		this.apellidos = apellidos;
+	}
+
+
+
+	//Metodos
+	public boolean equals(Object o) {
+		return o != null &&
+				(this == o ||
+						(o instanceof Estudiante &&
+								nombre.equals(((Estudiante)o).getNombre()) &&
+								apellidos.equals(((Estudiante)o).getApellidos()) &&
+								grupo.equals(((Estudiante)o).getGrupo())));
 	}
 }

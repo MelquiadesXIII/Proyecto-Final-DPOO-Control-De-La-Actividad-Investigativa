@@ -19,4 +19,49 @@ public class CapituloLibro extends ResultadoInvestigativo{
 		
 		return puntos;
 	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public ArrayList<String> getAutores() {
+		return autores;
+	}
+
+	public ArrayList<String> getNombresEditores() {
+		return nombresEditores;
+	}
+
+	public String getEditorial() {
+		return editorial;
+	}
+
+	public String getISSN() {
+		return ISSN;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getVolumen() {
+		return volumen;
+	}
+
+	public static int getPuntos() {
+		return puntos;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return o != null &&
+				(this == o ||
+						(o instanceof CapituloLibro &&
+								titulo.equals(((CapituloLibro)o).getTitulo()) &&
+								editorial.equals(((CapituloLibro)o).getEditorial()) &&
+								ISSN.equals(((CapituloLibro)o).getISSN()) &&
+								nombre.equals(((CapituloLibro)o).getNombre()) &&
+								volumen.equals(((CapituloLibro)o).getVolumen())));
+	}
+
 }

@@ -169,5 +169,14 @@ public class Maestria {
 		return suma;
 	}
 
+	public boolean equals(Object o) {
+		return o != null &&
+				(this == o ||
+						(o instanceof Maestria &&
+								nombre.equals(((Maestria)o).getNombre()) &&
+								duracionMeses == ((Maestria)o).getDuracionMeses() &&
+								campoEstudio.equals(((Maestria)o).getCampoEstudio())));
+	}
+
 	
 }

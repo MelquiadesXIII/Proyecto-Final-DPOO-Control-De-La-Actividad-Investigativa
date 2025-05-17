@@ -2,6 +2,7 @@ package Logica;
 
 import java.util.ArrayList;
 
+import Complementos.CursoPosgradoUtils;
 import Complementos.DocenteUtils;
 import Excepciones.CadenaNoValidaException;
 import Excepciones.CategoriaCientificaNoValidaException;
@@ -87,7 +88,7 @@ public class CursoPosgrado {
 		if(objetivos == null)
 			throw new NullPointerException("Los objetivos no pueden tener valor null");
 
-		if(objetivos.size() == 0){
+		if(objetivos.isEmpty()){
 			throw new ListaVaciaException("La lista de objetivos a añadir no puede estar vacio");
 		}
 
@@ -150,7 +151,7 @@ public class CursoPosgrado {
 
 	public void removerParticipante(Docente d){
 
-		if(participantes.size() == 0)
+		if(participantes.isEmpty())
 			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacia");
 
 		if(!DocenteUtils.listaContieneDocente(participantes, d))
@@ -174,6 +175,17 @@ public class CursoPosgrado {
 
 		participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
 
+	}
+
+	@Override
+	public boolean equals(Object c){
+
+		return c != null &&
+				(this == c ||
+				(objetivos.equals(((CursoPosgrado)c).getObjetivos()) &&
+						cantCreditos == ((CursoPosgrado)c).getCantCreditos() &&
+						tema.equals(((CursoPosgrado)c).getTema()) &&
+						profesor.equals(((CursoPosgrado)c).getProfesor())));
 	}
 
 }

@@ -135,7 +135,7 @@ public class Docente extends Investigador{
 		if(curso == null)
 			throw new NullPointerException("No puede remover un null de la lista de cursos impartidos");
 
-		if(cursosImpartidos.size() == 0)
+		if(cursosImpartidos.isEmpty())
 			throw new ListaVaciaException("La lista de la que desea remover al curso esta vacia");
 
 		if(!CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso))
@@ -153,6 +153,17 @@ public class Docente extends Investigador{
 			throw new DuplicacionException("El curso que intenta agregar ya se encuentra presente en el registro");
 			
 		cursosRecibidos.add(c);
+	}
+
+	@Override
+	public boolean equals(Object d){
+
+		return d != null &&
+				(this == d ||
+						(nombre.equals(((Docente)d).getNombre()) &&
+								apellidos.equals(((Docente)d).getApellidos()) &&
+								catCientifica == ((Docente)d).getCatCientifica() &&
+								catDocente == ((Docente)d).getCatDocente()));
 	}
 	
 }

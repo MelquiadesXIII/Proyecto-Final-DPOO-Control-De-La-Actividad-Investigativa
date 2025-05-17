@@ -49,4 +49,15 @@ public class Departamento {
 
 		this.nombre = nombre;
 	}
+
+
+
+	//Metodos
+	@Override
+	public boolean equals(Object o) {
+		return o != null &&
+				(this == o ||
+						(o instanceof Departamento &&
+								nombre.equals(((Departamento)o).getNombre())));
+	}
 }

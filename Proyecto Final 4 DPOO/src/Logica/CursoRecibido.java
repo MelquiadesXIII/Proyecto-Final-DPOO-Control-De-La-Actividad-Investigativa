@@ -60,4 +60,12 @@ public class CursoRecibido {
 		this.curso = curso;
 	}
 
+	public boolean equals(Object c) {
+		return c != null &&
+				(this == c ||
+						(c instanceof CursoRecibido &&
+								nota == ((CursoRecibido)c).getNota() &&
+								creditosRecibidos == ((CursoRecibido)c).getCreditosRecibidos() &&
+								curso.equals(((CursoRecibido)c).getCurso())));
+	}
 }
