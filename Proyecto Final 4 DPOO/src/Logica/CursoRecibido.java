@@ -50,8 +50,8 @@ public class CursoRecibido {
 
 	public void setCreditosRecibidos(int creditosRecibidos) {
 		
-		if(creditosRecibidos <= 0)
-			throw new ValorNoValidoException("Los creditos recibidos deben ser una cantidad positiva");
+		if(creditosRecibidos < 0)
+			throw new ValorNoValidoException("Los creditos recibidos no pueden ser una cantidad negativa");
 		
 		this.creditosRecibidos = creditosRecibidos;
 	}
