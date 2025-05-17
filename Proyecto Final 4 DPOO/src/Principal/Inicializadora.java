@@ -26,14 +26,10 @@ public class Inicializadora {
 		
 		CursoPosgrado c = new CursoPosgrado("Mujeres", obj, 5, d1);
 		c.agregarParticipante(d2);
-		c.emitirNota(d1, d2, 4);
+		c.emitirNota(d2, d2, 4);
 		
-		
-		
-		if(DocenteUtils.iguales(d1, d3)) 
-			System.out.println("ñ");
-		
-		System.out.println(d1.getCatCientifica());
+		if(d1.equals(d1))
+			System.out.println("hola");
 	}
 
 }
