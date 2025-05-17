@@ -22,12 +22,6 @@ public class LineaInvestigacion {
 
 
 	//Metodos
-	//Implementar
-	public int calcularPuntajeInvestigador(Investigador i){
-		
-		return 0;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		return o != null &&
