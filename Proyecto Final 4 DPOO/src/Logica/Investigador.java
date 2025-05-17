@@ -42,9 +42,19 @@ public abstract class Investigador {
 		if(!resultados.contains(r))
 			throw new NoExistenciaException("El resultado investigativo que intenta eliminar no se encuentra registrado");
 
-
+		resultados.remove(r);
 	}
 	
-	
+	public int calcularPuntaje(){
+
+		int puntaje = 0;
+
+		for (ResultadoInvestigativo r: resultados){
+
+			puntaje += r.calcularPuntaje();
+		}
+
+		return puntaje;
+	}
 	
 }
