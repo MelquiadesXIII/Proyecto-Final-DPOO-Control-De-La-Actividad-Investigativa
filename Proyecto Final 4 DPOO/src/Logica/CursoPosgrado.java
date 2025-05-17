@@ -154,7 +154,7 @@ public class CursoPosgrado {
 		if(participantes.isEmpty())
 			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacia");
 
-		if(!DocenteUtils.listaContieneDocente(participantes, d))
+		if(!participantes.contains(d))
 			throw new NoExistenciaException("El docente que desea remover no se encuentra entre los participantes del curso");
 
 		participantes.remove(d);
@@ -162,10 +162,10 @@ public class CursoPosgrado {
 
 	public void emitirNota(Docente evaluador, Docente participante, int nota)
 	{
-		if(!DocenteUtils.iguales(evaluador, profesor))
+		if(!profesor.equals(evaluador))
 			throw new InstanciaNoValidaException("Solo el profesor que imparte el curso es el que puede emitir notas");
 
-		if(!DocenteUtils.listaContieneDocente(this.participantes, participante))
+		if(!this.participantes.contains(participante))
 			throw new NoExistenciaException("El docente que va a recibir la nota no esta registrado en el curso");
 
 		if(nota < 2 || nota > 5)
