@@ -21,13 +21,13 @@ public class Maestria {
 
 	//Constructor
 	public Maestria(String nombre, int duracionMeses, String campoEstudio) 
-	{		
-		cursos = new ArrayList<CursoPosgrado>();
-		matriculados = new ArrayList<Docente>();
-		
+	{
 		setNombre(nombre);
 		setCampoEstudio(campoEstudio);
 		setDuracionMeses(duracionMeses);
+
+		cursos = new ArrayList<CursoPosgrado>();
+		matriculados = new ArrayList<Docente>();
 	}
 
 
