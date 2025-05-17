@@ -115,7 +115,7 @@ public class Maestria {
 		if(d == null)
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
-		if(DocenteUtils.listaContieneDocente(matriculados, d))
+		if(matriculados.contains(d))
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestria");
 
 		matriculados.add(d);
