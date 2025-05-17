@@ -19,10 +19,10 @@ public class Departamento {
 	//Constructor
 	public Departamento(String nombre){
 
+		setNombre(nombre);
+
 		docentes = new ArrayList<Docente>();
 		estudiantes = new ArrayList<Estudiante>();
-		
-		setNombre(nombre);
 	}
 
 	
