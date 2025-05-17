@@ -164,5 +164,4 @@ public class Docente extends Investigador{
 								catDocente == ((Docente)d).getCatDocente()));
 	}
 
-
 }
