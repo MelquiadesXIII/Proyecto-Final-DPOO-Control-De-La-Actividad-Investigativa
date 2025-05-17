@@ -66,5 +66,5 @@ public class Articulo extends ResultadoInvestigativo{
 								paginas == ((Articulo)o).getPaginas() &&
 								grupo.equals(((Articulo)o).getGrupo())));
 	}
-	
+
 }

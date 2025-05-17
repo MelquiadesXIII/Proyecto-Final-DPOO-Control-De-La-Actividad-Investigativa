@@ -2,9 +2,7 @@ package Principal;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-import Complementos.DocenteUtils;
+import javax.swing.*;
 import Logica.CategoriaCientifica;
 import Logica.CategoriaDocente;
 import Logica.CursoPosgrado;
