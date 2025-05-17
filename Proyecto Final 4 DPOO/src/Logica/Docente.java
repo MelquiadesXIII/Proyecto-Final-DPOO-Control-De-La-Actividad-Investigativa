@@ -123,7 +123,7 @@ public class Docente extends Investigador{
 		if(catCientifica != CategoriaCientifica.DOCTOR)
 			throw new CategoriaCientificaNoValidaException("El docente debe tener categoria cientifica Doctor para poder impartir un curso");
 
-		if(CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso)){
+		if(cursosImpartidos.contains(curso)){
 			throw new DuplicacionException("El curso que esta intentando agregar ya esta registrado en el docente");
 		}
 		
@@ -138,7 +138,7 @@ public class Docente extends Investigador{
 		if(cursosImpartidos.isEmpty())
 			throw new ListaVaciaException("La lista de la que desea remover al curso esta vacia");
 
-		if(!CursoPosgradoUtils.listaContieneCurso(cursosImpartidos, curso))
+		if(!cursosImpartidos.contains(curso))
 			throw new NoExistenciaException("El curso que desea remover no se encuentra entre los registros de cursos");
 		
 		cursosImpartidos.remove(curso);
@@ -149,7 +149,7 @@ public class Docente extends Investigador{
 		if(c == null)
 			throw new NullPointerException("No puede agregar un null a la lista de cursos recibidos");
 		
-		if(CursoRecibidoUtils.listaContieneCurso(cursosRecibidos, c))
+		if(cursosRecibidos.contains(c))
 			throw new DuplicacionException("El curso que intenta agregar ya se encuentra presente en el registro");
 			
 		cursosRecibidos.add(c);
@@ -166,5 +166,6 @@ public class Docente extends Investigador{
 								catCientifica == ((Docente)d).getCatCientifica() &&
 								catDocente == ((Docente)d).getCatDocente()));
 	}
-	
+
+
 }
