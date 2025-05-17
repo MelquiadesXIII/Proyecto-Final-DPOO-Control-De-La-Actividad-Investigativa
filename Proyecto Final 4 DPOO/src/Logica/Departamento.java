@@ -3,12 +3,16 @@ package Logica;
 import java.util.ArrayList;
 
 import Excepciones.CadenaNoValidaException;
+import Excepciones.ListaVaciaException;
+import Excepciones.NoExistenciaException;
 
 public class Departamento {
 
 	private String nombre;
 	private ArrayList<Docente> docentes;
 	private	ArrayList<Estudiante> estudiantes;
+	private ArrayList<Maestria> maestrias;
+	private ArrayList<LineaInvestigacion> lineasInvestigacion;
 
 
 
@@ -62,5 +66,27 @@ public class Departamento {
 				(this == o ||
 						(o instanceof Departamento &&
 								nombre.equals(((Departamento)o).getNombre())));
+	}
+
+	public void removerDocente(Docente d) {
+
+		if(docentes.isEmpty())
+			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacia");
+
+		if(!docentes.contains(d))
+			throw new NoExistenciaException("El docente que desea remover no se encuentra registrado en el vicedecanato");
+
+		docentes.remove(d);
+
+		for(Maestria m: maestrias){
+
+			if(m.getMatriculados().contains(d))
+				m.removerMatriculado(d);
+		}
+
+		for(LineaInvestigacion l: lineasInvestigacion){ //A implemementar con los investigadores
+
+
+		}
 	}
 }
