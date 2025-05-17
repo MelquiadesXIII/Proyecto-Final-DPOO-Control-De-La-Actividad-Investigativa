@@ -140,10 +140,10 @@ public class CursoPosgrado {
 		if(d == null)
 			throw new NullPointerException("Los docentes participantes no pueden tener valor null");
 
-		if(DocenteUtils.iguales(profesor, d))
+		if(profesor.equals(d))
 			throw new DuplicacionException("El profesor que imparte el curso no puede ser un docente participante");
 
-		if(DocenteUtils.listaContieneDocente(participantes, d))
+		if(participantes.contains(d))
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra en el curso");
 
 		participantes.add(d);
