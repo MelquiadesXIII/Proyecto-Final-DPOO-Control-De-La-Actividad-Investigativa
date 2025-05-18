@@ -61,10 +61,6 @@ public class CapituloLibro extends ResultadoInvestigativo{
 		return volumen;
 	}
 
-	public static int getPuntos() {
-		return puntos;
-	}
-
 
 
 	//Setters
