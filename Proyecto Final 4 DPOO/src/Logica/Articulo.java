@@ -13,7 +13,6 @@ public class Articulo extends ResultadoInvestigativo{
 	private String anioPublicacion;
 	private int paginas;
 	private GrupoImpacto grupo;
-	private static int puntos = 1;
 
 
 
@@ -37,7 +36,6 @@ public class Articulo extends ResultadoInvestigativo{
 		return grupo;
 	}
 
-
 	public String getTitulo() {
 		return titulo;
 	}
@@ -56,10 +54,6 @@ public class Articulo extends ResultadoInvestigativo{
 
 	public int getPaginas() {
 		return paginas;
-	}
-
-	public static int getPuntos() {
-		return puntos;
 	}
 
 
@@ -109,7 +103,7 @@ public class Articulo extends ResultadoInvestigativo{
         int anio = Integer.parseInt(anioPublicacion);
         
         if (anio < 1900 || anio >= Year.now().getValue())
-            throw new CadenaNoValidaException("El año debe estar entre 1900 y 2024.");
+            throw new CadenaNoValidaException("El año debe estar entre 1900 y " +(Year.now().getValue()-1));
         
         this.anioPublicacion = anioPublicacion;
     }
