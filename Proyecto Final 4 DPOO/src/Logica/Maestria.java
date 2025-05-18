@@ -144,18 +144,9 @@ public class Maestria {
 
 	public boolean recibirVistoBueno(Docente d){
 
-		return creditosObtenidosCursosRecibidos(d) == getCreditosTotalesCursos();
+		return d.creditosObtenidosCursosRecibidos() == getCreditosTotalesCursos();
 	}
 
-	public int creditosObtenidosCursosRecibidos(Docente d){
-
-		int suma = 0;
-
-		for(CursoRecibido c: d.getCursosRecibidos())
-			suma += c.getCreditosRecibidos();
-
-		return suma;
-	}
 
 	@Override
 	public boolean equals(Object o) {
