@@ -14,14 +14,14 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 	private String lugar;
 	private String ISBN;
 	private static int puntos = 1;
-	
-	
+
+
 
 	//Constructor
 	public PonenciaEvento(String nombre, LocalDate fecha, String lugar, String iSBN) {
-		
+
 		super();
-		
+
 		setNombre(nombre);
 		setFecha(fecha);
 		setISBN(iSBN);
@@ -66,44 +66,44 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 
 		if(fecha.getYear() < anyoMinimo)
 			throw new ValorNoValidoException("La fecha seleccionada no puede ser anterior a 1900");
-		
+
 		if(fecha.getYear() > anyoMaximo)
 			throw new ValorNoValidoException("La fecha seleccionada no puede ser después del año " +anyoMaximo);
 
 		this.fecha = fecha;
 		anio = Integer.toString(fecha.getYear()); //Inicializado aqui para garantizar la coherencia
 	}
-	
+
 	public void setNombre(String nombre) {
-		
+
 		if(nombre.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre de la ponencia no puede estar vacio");
 
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre de la ponencia solo puede tener letras y espacios");	
-		
+
 		this.nombre = nombre;
 	}
 
 	public void setLugar(String lugar) {
-		
+
 		if(lugar.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre del lugar no puede estar vacio");
 
 		if(!lugar.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del lugar solo puede tener letras y espacios");
-		
+
 		this.lugar = lugar;
 	}
 
 	public void setISBN(String ISBN) {
-		
+
 		if(ISBN.length() < 13 || ISBN.length() > 13)
 			throw new CadenaNoValidaException("El ISBN solo puede tener una longitud de 13 dígitos, la longitud de lo que usted ingresó es " +ISBN.length());
-			
+
 		if(!ISBN.matches("^\\d+$"))
 			throw new CadenaNoValidaException("El ISBN solo puede estar conformado por números");
-			
+
 		this.ISBN = ISBN;
 	}
 
@@ -112,12 +112,12 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 	public boolean equals(Object o) {
 		return o != null &&
 				(this == o ||
-						(o instanceof PonenciaEvento &&
-								nombre.equals(((PonenciaEvento)o).getNombre()) &&
-								anio.equals(((PonenciaEvento)o).getAnio()) &&
-								fecha.equals(((PonenciaEvento)o).getFecha()) &&
-								lugar.equals(((PonenciaEvento)o).getLugar()) &&
-								ISBN.equals(((PonenciaEvento)o).getISBN())));
+				(o instanceof PonenciaEvento &&
+						nombre.equals(((PonenciaEvento)o).getNombre()) &&
+						anio.equals(((PonenciaEvento)o).getAnio()) &&
+						fecha.equals(((PonenciaEvento)o).getFecha()) &&
+						lugar.equals(((PonenciaEvento)o).getLugar()) &&
+						ISBN.equals(((PonenciaEvento)o).getISBN())));
 	}
 
 	@Override
