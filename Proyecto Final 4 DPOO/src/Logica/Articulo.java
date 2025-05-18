@@ -60,72 +60,72 @@ public class Articulo extends ResultadoInvestigativo{
 
 	//Setters
 	public void setTitulo(String titulo) {
-		
+
 		if(titulo.trim().isEmpty())
 			throw new CadenaNoValidaException("El título no puede estar vacío.");
-		
+
 		if(!titulo.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El título solo puede contener letras y espacios.");
-		
+
 		this.titulo = titulo;
 	}
-	
-	public void setNumero(String numero) {
-		
-        if (numero.trim().isEmpty())
-            throw new CadenaNoValidaException("El número no puede estar vacío.");
-        
-        if (!numero.matches("\\d+"))
-            throw new CadenaNoValidaException("El número debe contener solo dígitos numéricos.");
-        
-        this.numero = numero;
-    }
-	
-	public void setVolumen(String volumen) {
-		
-        if (volumen.trim().isEmpty())
-            throw new CadenaNoValidaException("El volumen no puede estar vacío.");
-        
-        if (!volumen.matches("\\d+"))
-            throw new CadenaNoValidaException("El volumen debe contener solo dígitos numéricos.");
-        
-        this.volumen = volumen;
-    }
-	
-	public void setAnioPublicacion(String anioPublicacion) {
-		
-        if (anioPublicacion.trim().isEmpty())
-            throw new CadenaNoValidaException("El año de publicación no puede estar vacío.");
-        
-        if (!anioPublicacion.matches("\\d+"))
-            throw new CadenaNoValidaException("El año debe ser un número válido.");
-        
-        int anio = Integer.parseInt(anioPublicacion);
-        
-        if (anio < 1900 || anio >= Year.now().getValue())
-            throw new CadenaNoValidaException("El año debe estar entre 1900 y " +(Year.now().getValue()-1));
-        
-        this.anioPublicacion = anioPublicacion;
-    }
-	
-	public void setPaginas(int paginas) {
-		
-        if (paginas <= 0) 
-            throw new ValorNoValidoException("Las páginas deben ser un número entero positivo mayor que cero.");
-        
-        this.paginas = paginas;
-    }
-	
-	public void setGrupo(GrupoImpacto grupo){
-		
-        if (grupo == null)
-            throw new NullPointerException("El grupo de impacto no puede ser nulo.");
-        
-        this.grupo = grupo;
-    }
 
-	
-	
+	public void setNumero(String numero) {
+
+		if (numero.trim().isEmpty())
+			throw new CadenaNoValidaException("El número no puede estar vacío.");
+
+		if (!numero.matches("\\d+"))
+			throw new CadenaNoValidaException("El número debe contener solo dígitos numéricos.");
+
+		this.numero = numero;
+	}
+
+	public void setVolumen(String volumen) {
+
+		if (volumen.trim().isEmpty())
+			throw new CadenaNoValidaException("El volumen no puede estar vacío.");
+
+		if (!volumen.matches("\\d+"))
+			throw new CadenaNoValidaException("El volumen debe contener solo dígitos numéricos.");
+
+		this.volumen = volumen;
+	}
+
+	public void setAnioPublicacion(String anioPublicacion) {
+
+		if (anioPublicacion.trim().isEmpty())
+			throw new CadenaNoValidaException("El año de publicación no puede estar vacío.");
+
+		if (!anioPublicacion.matches("\\d+"))
+			throw new CadenaNoValidaException("El año debe ser un número válido.");
+
+		int anio = Integer.parseInt(anioPublicacion);
+
+		if (anio < 1900 || anio >= Year.now().getValue())
+			throw new CadenaNoValidaException("El año debe estar entre 1900 y " +(Year.now().getValue()-1));
+
+		this.anioPublicacion = anioPublicacion;
+	}
+
+	public void setPaginas(int paginas) {
+
+		if (paginas <= 0) 
+			throw new ValorNoValidoException("Las páginas deben ser un número entero positivo mayor que cero.");
+
+		this.paginas = paginas;
+	}
+
+	public void setGrupo(GrupoImpacto grupo){
+
+		if (grupo == null)
+			throw new NullPointerException("El grupo de impacto no puede ser nulo.");
+
+		this.grupo = grupo;
+	}
+
+
+
 	//Metodos
 	@Override
 	public int aportarPuntaje(){
