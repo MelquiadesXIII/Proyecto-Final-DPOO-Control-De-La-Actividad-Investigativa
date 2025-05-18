@@ -11,6 +11,7 @@ public abstract class Investigador {
 	protected ArrayList<ResultadoInvestigativo> resultados;
 
 
+	
 	//Constructor
 	public Investigador() {
 
