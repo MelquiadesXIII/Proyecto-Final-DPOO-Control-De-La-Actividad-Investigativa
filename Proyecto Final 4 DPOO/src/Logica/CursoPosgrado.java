@@ -71,11 +71,8 @@ public class CursoPosgrado {
 		if(tema.trim().isEmpty())
 			throw new CadenaNoValidaException("El tema no puede estar vacio");
 
-		if(!tema.matches("^[^0-9]*$"))
-			throw new CadenaNoValidaException("El tema del curso no puede tener numeros");
-
 		if(!tema.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El tema del curso no puede tener caracteres especiales o simbolos");	
+			throw new CadenaNoValidaException("El tema del curso solo puede tener letras y espacios");	
 
 		this.tema = tema;	
 	}
@@ -94,11 +91,8 @@ public class CursoPosgrado {
 			if(o.trim().isEmpty())
 				throw new CadenaNoValidaException("Un objetivo del curso no puede estar vacio");
 
-			if(!o.matches("^[^0-9]*$"))
-				throw new CadenaNoValidaException("Un objetivo del curso no puede tener numeros");
-
 			if(!o.matches("^[\\p{L}\\s]+$"))
-				throw new CadenaNoValidaException("Un objetivo del curso no puede tener caracteres especiales o simbolos");			
+				throw new CadenaNoValidaException("Un objetivo del curso solo puede tener letras y espacios");			
 		}
 
 		this.objetivos.clear();
