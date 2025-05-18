@@ -18,22 +18,18 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 
 
 	//Constructor
-	public PonenciaEvento(String nombre, LocalDate fecha, String lugar, String iSBN) {
+	public PonenciaEvento(String nombre, LocalDate fecha, String lugar, String ISBN) {
 
 		super();
 
 		setNombre(nombre);
 		setFecha(fecha);
-		setISBN(iSBN);
+		setISBN(ISBN);
 		setLugar(lugar);
 	}
 
 
 	//Getters
-	public static int getPuntos() {
-		return puntos;
-	}
-
 	public String getISBN() {
 		return ISBN;
 	}
