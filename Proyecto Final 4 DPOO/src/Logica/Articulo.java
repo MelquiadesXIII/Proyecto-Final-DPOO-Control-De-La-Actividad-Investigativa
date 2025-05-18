@@ -1,5 +1,10 @@
 package Logica;
 
+import java.time.Year;
+
+import Excepciones.CadenaNoValidaException;
+import Excepciones.ValorNoValidoException;
+
 public class Articulo extends ResultadoInvestigativo{
 
 	private String titulo;
@@ -10,17 +15,29 @@ public class Articulo extends ResultadoInvestigativo{
 	private GrupoImpacto grupo;
 	private static int puntos = 1;
 
-	
-	
+
+
 	//Constructor
-	
-	
-	
+	public Articulo(String titulo, String numero, String volumen, String anioPublicacion, int paginas, GrupoImpacto grupo) {
+
+		super();
+
+		setTitulo(titulo);
+		setNumero(numero);
+		setVolumen(volumen);
+		setAnioPublicacion(anioPublicacion);
+		setPaginas(paginas);
+		setGrupo(grupo);
+	}
+
+
+
 	//Getters
 	public GrupoImpacto getGrupo() {
 		return grupo;
 	}
-	
+
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -45,6 +62,74 @@ public class Articulo extends ResultadoInvestigativo{
 		return puntos;
 	}
 
+
+
+	//Setters
+	public void setTitulo(String titulo) {
+		
+		if(titulo.trim().isEmpty())
+			throw new CadenaNoValidaException("El título no puede estar vacío.");
+		
+		if(!titulo.matches("^[\\p{L}\\s]+$"))
+			throw new CadenaNoValidaException("El título solo puede contener letras y espacios.");
+		
+		this.titulo = titulo;
+	}
+	
+	public void setNumero(String numero) {
+		
+        if (numero.trim().isEmpty())
+            throw new CadenaNoValidaException("El número no puede estar vacío.");
+        
+        if (!numero.matches("\\d+"))
+            throw new CadenaNoValidaException("El número debe contener solo dígitos numéricos.");
+        
+        this.numero = numero;
+    }
+	
+	public void setVolumen(String volumen) {
+		
+        if (volumen.trim().isEmpty())
+            throw new CadenaNoValidaException("El volumen no puede estar vacío.");
+        
+        if (!volumen.matches("\\d+"))
+            throw new CadenaNoValidaException("El volumen debe contener solo dígitos numéricos.");
+        
+        this.volumen = volumen;
+    }
+	
+	public void setAnioPublicacion(String anioPublicacion) {
+		
+        if (anioPublicacion.trim().isEmpty())
+            throw new CadenaNoValidaException("El año de publicación no puede estar vacío.");
+        
+        if (!anioPublicacion.matches("\\d+"))
+            throw new CadenaNoValidaException("El año debe ser un número válido.");
+        
+        int anio = Integer.parseInt(anioPublicacion);
+        
+        if (anio < 1900 || anio >= Year.now().getValue())
+            throw new CadenaNoValidaException("El año debe estar entre 1900 y 2024.");
+        
+        this.anioPublicacion = anioPublicacion;
+    }
+	
+	public void setPaginas(int paginas) {
+		
+        if (paginas <= 0) 
+            throw new ValorNoValidoException("Las páginas deben ser un número entero positivo mayor que cero.");
+        
+        this.paginas = paginas;
+    }
+	
+	public void setGrupo(GrupoImpacto grupo){
+		
+        if (grupo == null)
+            throw new NullPointerException("El grupo de impacto no puede ser nulo.");
+        
+        this.grupo = grupo;
+    }
+
 	
 	
 	//Metodos
@@ -58,13 +143,13 @@ public class Articulo extends ResultadoInvestigativo{
 	public boolean equals(Object o) {
 		return o != null &&
 				(this == o ||
-						(o instanceof Articulo &&
-								titulo.equals(((Articulo)o).getTitulo()) &&
-								numero.equals(((Articulo)o).getNumero()) &&
-								volumen.equals(((Articulo)o).getVolumen()) &&
-								anioPublicacion.equals(((Articulo)o).getAnioPublicacion()) &&
-								paginas == ((Articulo)o).getPaginas() &&
-								grupo.equals(((Articulo)o).getGrupo())));
+				(o instanceof Articulo &&
+						titulo.equals(((Articulo)o).getTitulo()) &&
+						numero.equals(((Articulo)o).getNumero()) &&
+						volumen.equals(((Articulo)o).getVolumen()) &&
+						anioPublicacion.equals(((Articulo)o).getAnioPublicacion()) &&
+						paginas == ((Articulo)o).getPaginas() &&
+						grupo.equals(((Articulo)o).getGrupo())));
 	}
 
 }
