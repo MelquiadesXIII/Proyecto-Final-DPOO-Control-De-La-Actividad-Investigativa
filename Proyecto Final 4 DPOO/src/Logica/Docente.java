@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.ArrayList;
+
 import Excepciones.CadenaNoValidaException;
 import Excepciones.CategoriaCientificaNoValidaException;
 import Excepciones.DuplicacionException;
@@ -149,6 +150,16 @@ public class Docente extends Investigador{
 		cursosRecibidos.add(c);
 	}
 
+	public int creditosObtenidosCursosRecibidos(){
+
+		int suma = 0;
+
+		for(CursoRecibido c: cursosRecibidos)
+			suma += c.getCreditosRecibidos();
+
+		return suma;
+	}
+	
 	@Override
 	public boolean equals(Object d){
 
