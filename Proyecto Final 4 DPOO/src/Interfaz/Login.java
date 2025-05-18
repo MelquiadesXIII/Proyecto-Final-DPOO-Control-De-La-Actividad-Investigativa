@@ -15,7 +15,7 @@ public class Login extends JFrame {
 	
 	public Login() {
 		
-		setTitle("Vicedecanato: Iniciar sesiÃ³n o registrarse");
+		setTitle("Vicedecanato: Iniciar sesión o registrarse");
 		setResizable(false);
 		setSize(1080, 720);;
 		setLocationRelativeTo(null);
