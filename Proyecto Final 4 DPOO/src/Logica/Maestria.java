@@ -147,7 +147,6 @@ public class Maestria {
 		return d.creditosObtenidosCursosRecibidos() == getCreditosTotalesCursos();
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		return o != null &&
