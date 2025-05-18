@@ -29,22 +29,22 @@ public class LineaInvestigacion {
 		return investigadores;
 	}
 
-	
+
 
 	//Setters
 	public void setNombre(String nombre) {
-		
+
 		if(nombre.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre de la línea de investigación no puede estar vacio");
-		
+
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre de la línea de investigación solo puede tener letras y espacios");	
-		
+
 		this.nombre = nombre;
 	}
-	
-	
-	
+
+
+
 	//Metodos
 	@Override
 	public boolean equals(Object o) {
