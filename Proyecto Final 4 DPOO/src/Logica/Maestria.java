@@ -72,13 +72,10 @@ public class Maestria {
 	public void setNombre(String nombre) {
 		
 		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre no puede estar vacio");
-
-		if(!nombre.matches("^[^0-9]*$"))
-			throw new CadenaNoValidaException("El nombre no puede tener numeros");
+			throw new CadenaNoValidaException("El nombre de la maestria no puede estar vacio");
 
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre no puede tener caracteres especiales o simbolos");	
+			throw new CadenaNoValidaException("El nombre de la maestria solo puede tener letras y espacios");	
 		
 		this.nombre = nombre;
 	}
