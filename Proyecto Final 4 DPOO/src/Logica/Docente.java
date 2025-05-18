@@ -72,12 +72,9 @@ public class Docente extends Investigador{
 	{
 		if(nombre.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre del docente no puede estar vacio");
-
-		if(!nombre.matches("^[^0-9]*$"))
-			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
-
+		
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o simbolos");	
+			throw new CadenaNoValidaException("El nombre del docente solo puede tener letras y espacios");	
 
 		this.nombre = nombre;
 	}
