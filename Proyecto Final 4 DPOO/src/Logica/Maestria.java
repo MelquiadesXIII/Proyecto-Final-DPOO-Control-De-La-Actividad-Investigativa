@@ -130,8 +130,9 @@ public class Maestria {
 		matriculados.remove(d);
 
 		for(CursoPosgrado c: cursos){
-			
-				c.removerParticipante(d);
+
+				if(c.getParticipantes().contains(d))
+					c.removerParticipante(d);
 		}
 
 	}
