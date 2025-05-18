@@ -136,29 +136,29 @@ public class CapituloLibro extends ResultadoInvestigativo{
 	}
 
 	public void setNombre(String nombre){
-		
+
 		if(nombre.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre del libro no puede estar vacío.");
-		
+
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del libro solo puede contener letras y espacios.");
-		
+
 		this.nombre = nombre;
 	}
-	
-	public void setVolumen(String volumen){
-		
-        if(volumen.trim().isEmpty()) 
-            throw new CadenaNoValidaException("El volumen no puede estar vacío.");
-        
-        if (!volumen.matches("\\d+"))
-            throw new CadenaNoValidaException("El volumen debe contener solo dígitos numéricos.");
-        
-        this.volumen = volumen;
-    }
 
-	
-	
+	public void setVolumen(String volumen){
+
+		if(volumen.trim().isEmpty()) 
+			throw new CadenaNoValidaException("El volumen no puede estar vacío.");
+
+		if (!volumen.matches("\\d+"))
+			throw new CadenaNoValidaException("El volumen debe contener solo dígitos numéricos.");
+
+		this.volumen = volumen;
+	}
+
+
+
 	//Metodos
 	@Override
 	public boolean equals(Object o) {
