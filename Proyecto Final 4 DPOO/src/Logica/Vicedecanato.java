@@ -110,4 +110,12 @@ public class Vicedecanato {
 
 		departamentos.remove(d);
 	}
+
+	public boolean darVistoBuenoMaestria(Maestria m, Docente d) {
+
+		if(!m.getMatriculados().contains(d))
+			throw new NoExistenciaException("El docente no se encuentra matriculado en la maestria");
+
+		return d.creditosObtenidosCursosRecibidos() == m.getCreditosTotalesCursos();
+	}
 }
