@@ -82,4 +82,32 @@ public class Vicedecanato {
 				depto.removerDocente(d);
 		}
 	}
+
+	public void removerEstudiante(Estudiante e) {
+
+		if(estudiantes.isEmpty())
+			throw new ListaVaciaException("La lista de la que desea remover al estudiante esta vacia");
+
+		if(!estudiantes.contains(e))
+			throw new NoExistenciaException("El estudiante que desea remover no se encuentra registrado en el vicedecanato");
+
+		estudiantes.remove(e);
+
+		for(Departamento depto: departamentos) {
+
+			if(depto.getEstudiantes().contains(e))
+				depto.removerEstudiante(e);
+		}
+	}
+
+	public void removerDepartamento(Departamento d) {
+
+		if(departamentos.isEmpty())
+			throw new ListaVaciaException("La lista de la que desea remover el departamento esta vacia");
+
+		if(!departamentos.contains(d))
+			throw new NoExistenciaException("El departamento que desea remover no se encuentra registrado en el vicedecanato");
+
+		departamentos.remove(d);
+	}
 }
