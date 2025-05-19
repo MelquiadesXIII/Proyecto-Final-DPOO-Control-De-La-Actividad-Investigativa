@@ -11,14 +11,13 @@ public class CapituloLibro extends ResultadoInvestigativo{
 	private ArrayList<String> nombresEditores;
 	private String editorial;
 	private String ISSN;
-	private String nombre;
 	private String volumen;
 	private static int puntos = 3;
 
 
 
 	//Constructor
-	public CapituloLibro(String titulo, ArrayList<String> autores, ArrayList<String> nombresEditores, String editorial, String iSSN, String nombre, String volumen) {
+	public CapituloLibro(String titulo, ArrayList<String> autores, ArrayList<String> nombresEditores, String editorial, String iSSN, String volumen) {
 
 		super();
 
@@ -27,7 +26,6 @@ public class CapituloLibro extends ResultadoInvestigativo{
 		setNombresEditores(nombresEditores);
 		setEditorial(editorial);
 		setISSN(iSSN);
-		setNombre(nombre);
 		setVolumen(volumen);
 	}
 
@@ -51,10 +49,6 @@ public class CapituloLibro extends ResultadoInvestigativo{
 
 	public String getISSN() {
 		return ISSN;
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public String getVolumen() {
@@ -135,17 +129,6 @@ public class CapituloLibro extends ResultadoInvestigativo{
 		this.ISSN = ISSN;
 	}
 
-	public void setNombre(String nombre){
-
-		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del libro no puede estar vacío.");
-
-		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre del libro solo puede contener letras y espacios.");
-
-		this.nombre = nombre;
-	}
-
 	public void setVolumen(String volumen){
 
 		if(volumen.trim().isEmpty()) 
@@ -168,7 +151,6 @@ public class CapituloLibro extends ResultadoInvestigativo{
 						titulo.equals(((CapituloLibro)o).getTitulo()) &&
 						editorial.equals(((CapituloLibro)o).getEditorial()) &&
 						ISSN.equals(((CapituloLibro)o).getISSN()) &&
-						nombre.equals(((CapituloLibro)o).getNombre()) &&
 						volumen.equals(((CapituloLibro)o).getVolumen())));
 	}
 
