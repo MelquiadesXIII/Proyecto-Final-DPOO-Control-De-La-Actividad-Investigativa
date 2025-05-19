@@ -56,7 +56,7 @@ public class Maestria {
 		return campoEstudio;
 	}
 	
-	private int getCreditosTotalesCursos(){
+	public int getCreditosTotalesCursos(){
 
 		int total = 0;
 
@@ -140,11 +140,6 @@ public class Maestria {
 			throw new DuplicacionException("El curso que intenta agregar ya esta registrado");
 
 		cursos.add(c);
-	}
-
-	public boolean recibirVistoBueno(Docente d){
-
-		return d.creditosObtenidosCursosRecibidos() == getCreditosTotalesCursos();
 	}
 
 	@Override
