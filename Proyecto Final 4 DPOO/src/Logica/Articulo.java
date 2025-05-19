@@ -8,8 +8,8 @@ import Excepciones.ValorNoValidoException;
 public class Articulo extends ResultadoInvestigativo{
 
 	private String titulo;
-	private String numero;
-	private String volumen;
+	private int numero;
+	private int volumen;
 	private String anioPublicacion;
 	private int paginas;
 	private GrupoImpacto grupo;
@@ -17,7 +17,7 @@ public class Articulo extends ResultadoInvestigativo{
 
 
 	//Constructor
-	public Articulo(String titulo, String numero, String volumen, String anioPublicacion, int paginas, GrupoImpacto grupo) {
+	public Articulo(String titulo, int numero, int volumen, String anioPublicacion, int paginas, GrupoImpacto grupo) {
 
 		super();
 
@@ -40,11 +40,11 @@ public class Articulo extends ResultadoInvestigativo{
 		return titulo;
 	}
 
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public String getVolumen() {
+	public int getVolumen() {
 		return volumen;
 	}
 
@@ -70,24 +70,18 @@ public class Articulo extends ResultadoInvestigativo{
 		this.titulo = titulo;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 
-		if (numero.trim().isEmpty())
-			throw new CadenaNoValidaException("El número no puede estar vacío.");
-
-		if (!numero.matches("\\d+"))
-			throw new CadenaNoValidaException("El número debe contener solo dígitos numéricos.");
+		if(numero <= 0) 
+			throw new ValorNoValidoException("Las páginas deben ser un número entero positivo mayor que cero.");
 
 		this.numero = numero;
 	}
 
-	public void setVolumen(String volumen) {
+	public void setVolumen(int volumen) {
 
-		if (volumen.trim().isEmpty())
-			throw new CadenaNoValidaException("El volumen no puede estar vacío.");
-
-		if (!volumen.matches("\\d+"))
-			throw new CadenaNoValidaException("El volumen debe contener solo dígitos numéricos.");
+		if(volumen <= 0) 
+			throw new ValorNoValidoException("Las páginas deben ser un número entero positivo mayor que cero.");
 
 		this.volumen = volumen;
 	}
