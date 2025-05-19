@@ -83,7 +83,8 @@ public class Departamento {
 
 		for(LineaInvestigacion l: lineasInvestigacion){ //A implemementar con los investigadores
 
-
+			if(l.getInvestigadores().contains(d))
+				l.removerInvestigador(d);
 		}
 	}
 }
