@@ -14,8 +14,10 @@ public class Estudiante extends Investigador{
 	public Estudiante(String nombre, String apellidos, String grupo) {
 		
 		super();
-		
-		
+
+		setNombre(nombre);
+		setApellidos(apellidos);
+		setGrupo(grupo);
 	}
 	
 	
@@ -59,6 +61,17 @@ public class Estudiante extends Investigador{
 			throw new CadenaNoValidaException("El nombre del estudiante solo puede tener letras y espacios");	
 
 		this.apellidos = apellidos;
+	}
+
+	public void setGrupo(String grupo)
+	{
+		if(grupo.trim().isEmpty())
+			throw new CadenaNoValidaException("El grupo del estudiante no puede estar vacio");
+
+		if(!grupo.matches("^[\\p{L}\\s]+$"))
+			throw new CadenaNoValidaException("El grupo del estudiante solo puede tener letras y espacios");
+
+		this.grupo = grupo;
 	}
 
 
