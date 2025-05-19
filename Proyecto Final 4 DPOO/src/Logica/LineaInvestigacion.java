@@ -3,6 +3,7 @@ package Logica;
 import java.util.ArrayList;
 
 import Excepciones.CadenaNoValidaException;
+import Excepciones.DuplicacionException;
 import Excepciones.NoExistenciaException;
 
 public class LineaInvestigacion {
@@ -36,10 +37,10 @@ public class LineaInvestigacion {
 	public void setNombre(String nombre) {
 
 		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre de la línea de investigación no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre de la lï¿½nea de investigaciï¿½n no puede estar vacio");
 
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre de la línea de investigación solo puede tener letras y espacios");	
+			throw new CadenaNoValidaException("El nombre de la lï¿½nea de investigaciï¿½n solo puede tener letras y espacios");	
 
 		this.nombre = nombre;
 	}
@@ -53,9 +54,20 @@ public class LineaInvestigacion {
 			throw new NullPointerException("El investigador no puede tener valor null");
 
 		if(!investigadores.contains(i))
-			throw new NoExistenciaException("El investigador no está registrado en la línea de investigación");
+			throw new NoExistenciaException("El investigador no estï¿½ registrado en la lï¿½nea de investigaciï¿½n");
 
 		investigadores.remove(i);
+	}
+
+	public void agregarInvestigador(Investigador i) {
+
+		if(i == null)
+			throw new NullPointerException("El investigador no puede tener valor null");
+
+		if(investigadores.contains(i))
+			throw new DuplicacionException("El investigador ya estÃ¡ registrado en la lÃ­nea de investigaciÃ³n");
+
+		investigadores.add(i);
 	}
 	
 	@Override
