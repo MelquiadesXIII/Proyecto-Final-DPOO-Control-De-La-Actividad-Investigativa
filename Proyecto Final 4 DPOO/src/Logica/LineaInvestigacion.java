@@ -3,6 +3,7 @@ package Logica;
 import java.util.ArrayList;
 
 import Excepciones.CadenaNoValidaException;
+import Excepciones.NoExistenciaException;
 
 public class LineaInvestigacion {
 
@@ -46,6 +47,17 @@ public class LineaInvestigacion {
 
 
 	//Metodos
+	public void removerInvestigador(Investigador i){
+		
+		if(i == null)
+			throw new NullPointerException("El investigador no puede tener valor null");
+
+		if(!investigadores.contains(i))
+			throw new NoExistenciaException("El investigador no está registrado en la línea de investigación");
+
+		investigadores.remove(i);
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		return o != null &&
