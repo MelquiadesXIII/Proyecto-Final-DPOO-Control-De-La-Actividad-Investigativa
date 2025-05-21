@@ -3,10 +3,12 @@ package Interfaz;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
+import javax.swing.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,19 +23,22 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class InterfazPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	
 	public InterfazPrincipal() {
 		getContentPane().setBackground(Color.WHITE);
 		
-		
 		setTitle("Vicedecanato de Investigacion");
-		setResizable(false);
-		setSize(800, 600);;
+		setMinimumSize(new Dimension(800,600)); //Establece el tamannio minimo
+		//setResizable(false);
+		//setSize(800, 600);;
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -159,7 +164,7 @@ public class InterfazPrincipal extends JFrame {
 		btnEstudiantes.setBounds(594, 0, 199, 47);
 		panelBarraNav.add(btnEstudiantes);
 		
-		
 		setVisible(true);
+		setExtendedState(JFrame.MAXIMIZED_BOTH); //Maximiza la pantalla, quitalo si no lo quieres
 	}
 }
