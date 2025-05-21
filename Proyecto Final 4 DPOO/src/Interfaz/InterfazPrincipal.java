@@ -165,6 +165,6 @@ public class InterfazPrincipal extends JFrame {
 		panelBarraNav.add(btnEstudiantes);
 		
 		setVisible(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH); //Maximiza la pantalla, quitalo si no lo quieres
+		setExtendedState(JFrame.MAXIMIZED_BOTH); //Maximiza la pantalla a lo mas posible q permite la resolucion, quitalo si no lo quieres
 	}
 }
