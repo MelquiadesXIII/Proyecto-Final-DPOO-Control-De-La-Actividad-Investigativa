@@ -133,11 +133,11 @@ public class Articulo extends ResultadoInvestigativo{
 				(this == o ||
 				(o instanceof Articulo &&
 						titulo.equals(((Articulo)o).getTitulo()) &&
-						numero.equals(((Articulo)o).getNumero()) &&
-						volumen.equals(((Articulo)o).getVolumen()) &&
+						numero == ((Articulo)o).getNumero()) &&
+						volumen == ((Articulo)o).getVolumen()) &&
 						anioPublicacion.equals(((Articulo)o).getAnioPublicacion()) &&
 						paginas == ((Articulo)o).getPaginas() &&
-						grupo.equals(((Articulo)o).getGrupo())));
+						grupo.equals(((Articulo)o).getGrupo());
 	}
 
 }
