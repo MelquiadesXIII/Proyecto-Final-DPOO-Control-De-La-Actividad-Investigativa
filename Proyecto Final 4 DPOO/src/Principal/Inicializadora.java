@@ -328,6 +328,55 @@ public class Inicializadora{
 				m4d2.agregarCursoPosgrado(c1m4d2);
 				m4d2.agregarCursoPosgrado(c2m4d2);
 				m4d2.agregarCursoPosgrado(c3m4d2);
+				
+				// Cursos de la maestria 1 del departamento 3
+				CursoPosgrado c1m1d3 = new CursoPosgrado("Modelos Matemáticos Avanzados", new ArrayList<String>() {{ add("Aplicar modelos matemáticos a problemas complejos"); add("Desarrollar soluciones basadas en modelación matemática");  }}, 4, d41);
+				CursoPosgrado c2m1d3 = new CursoPosgrado("Ecuaciones Diferenciales", new ArrayList<String>() {{ add("Resolver ecuaciones diferenciales complejas"); add("Aplicar ecuaciones diferenciales en modelado físico"); }}, 5, d46);
+				CursoPosgrado c3m1d3 = new CursoPosgrado("Análisis Numérico", new ArrayList<String>() {{ add("Implementar métodos numéricos para resolver problemas matemáticos");add("Analizar errores en cálculos numéricos");}}, 4, d51);
+
+				m1d3.agregarCursoPosgrado(c1m1d3);
+				m1d3.agregarCursoPosgrado(c2m1d3);
+				m1d3.agregarCursoPosgrado(c3m1d3);
+
+				// Cursos de la maestria 2 del departamento 3
+				CursoPosgrado c1m2d3 = new CursoPosgrado("Estadística Multivariante", new ArrayList<String>() {{ add("Aplicar técnicas estadísticas multivariantes"); add("Interpretar resultados de análisis multivariados"); }}, 4, d42);
+				CursoPosgrado c2m2d3 = new CursoPosgrado("Diseño de Experimentos", new ArrayList<String>() {{ add("Planificar diseños experimentales eficientes");add("Analizar datos de experimentos científicos"); }}, 5, d47);
+			    CursoPosgrado c3m2d3 = new CursoPosgrado("Series Temporales", new ArrayList<String>() {{add("Modelar y predecir series temporales");add("Aplicar técnicas de suavizado y descomposición"); }}, 4, d52);
+
+				m2d3.agregarCursoPosgrado(c1m2d3);
+				m2d3.agregarCursoPosgrado(c2m2d3);
+				m2d3.agregarCursoPosgrado(c3m2d3);
+
+				// Cursos de la maestria 3 del departamento 3
+				CursoPosgrado c1m3d3 = new CursoPosgrado("Optimización Lineal", new ArrayList<String>() {{ add("Formular problemas de optimización lineal"); add("Resolver modelos usando métodos simplex"); }}, 4, d43);			    
+				CursoPosgrado c2m3d3 = new CursoPosgrado("Programación Dinámica", new ArrayList<String>() {{ add("Aplicar principios de programación dinámica");add("Resolver problemas de optimización multietapa"); }}, 5, d48);   
+				CursoPosgrado c3m3d3 = new CursoPosgrado("Teoría de Juegos", new ArrayList<String>() {{add("Analizar estrategias en situaciones competitivas"); add("Aplicar modelos de teoría de juegos");}}, 4, d53);    
+				CursoPosgrado c4m3d3 = new CursoPosgrado("Optimización en Redes", new ArrayList<String>() {{add("Resolver problemas de flujo en redes"); add("Aplicar algoritmos de optimización en grafos");}}, 4, d58);
+
+				m3d3.agregarCursoPosgrado(c1m3d3);
+				m3d3.agregarCursoPosgrado(c2m3d3);
+				m3d3.agregarCursoPosgrado(c3m3d3);
+				m3d3.agregarCursoPosgrado(c4m3d3);
+
+				// Cursos de la maestria 4 del departamento 3
+				CursoPosgrado c1m4d3 = new CursoPosgrado("Modelos Financieros Avanzados", new ArrayList<String>() {{add("Desarrollar modelos matemáticos para finanzas");add("Evaluar riesgos en instrumentos financieros"); }}, 4, d45);		    
+				CursoPosgrado c2m4d3 = new CursoPosgrado("Derivados Financieros", new ArrayList<String>() {{add("Valorar instrumentos derivados"); add("Aplicar modelos de fijación de precios"); }}, 5, d50);
+				CursoPosgrado c3m4d3 = new CursoPosgrado("Gestión de Riesgos", new ArrayList<String>() {{add("Cuantificar riesgos financieros");add("Implementar estrategias de cobertura"); }}, 4, d55);
+
+				m4d3.agregarCursoPosgrado(c1m4d3);
+				m4d3.agregarCursoPosgrado(c2m4d3);
+				m4d3.agregarCursoPosgrado(c3m4d3);
+
+				// Cursos de la maestria 5 del departamento 3
+				CursoPosgrado c1m5d3 = new CursoPosgrado("Algoritmos Criptográficos", new ArrayList<String>() {{ add("Implementar algoritmos criptográficos modernos");add("Analizar fortalezas de sistemas criptográficos");}}, 4, d44);	    
+				CursoPosgrado c2m5d3 = new CursoPosgrado("Seguridad Computacional",  new ArrayList<String>() {{ add("Evaluar vulnerabilidades en sistemas informáticos"); add("Diseñar protocolos seguros"); }}, 5, d49);
+				CursoPosgrado c3m5d3 = new CursoPosgrado("Teoría de Números Aplicada", new ArrayList<String>() {{add("Aplicar conceptos avanzados de teoría de números");add("Resolver problemas criptográficos con métodos numéricos");}}, 4, d54);
+				CursoPosgrado c4m5d3 = new CursoPosgrado("Firma Digital y Autenticación", new ArrayList<String>() {{add("Implementar sistemas de firma digital"); add("Diseñar protocolos de autenticación segura"); }}, 4, d59);
+
+				m5d3.agregarCursoPosgrado(c1m5d3);
+				m5d3.agregarCursoPosgrado(c2m5d3);
+				m5d3.agregarCursoPosgrado(c3m5d3);
+				m5d3.agregarCursoPosgrado(c4m5d3);
 			}
 		});
 	}
