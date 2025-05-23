@@ -3,6 +3,7 @@ package Logica;
 import java.util.ArrayList;
 
 import Excepciones.CadenaNoValidaException;
+import Excepciones.CategoriaCientificaNoValidaException;
 import Excepciones.DuplicacionException;
 import Excepciones.NoExistenciaException;
 import Excepciones.ValorNoValidoException;
@@ -110,6 +111,9 @@ public class Maestria {
 		if(d == null)
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
+		if(d.getCatCientifica() != CategoriaCientifica.NINGUNA)
+			throw new CategoriaCientificaNoValidaException("Solo un profesor sin categoría científica puede matricularse en la maestría");
+			
 		if(matriculados.contains(d))
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestria");
 
