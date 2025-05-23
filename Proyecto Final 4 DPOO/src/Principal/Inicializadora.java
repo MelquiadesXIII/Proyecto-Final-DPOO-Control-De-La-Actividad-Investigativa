@@ -225,30 +225,40 @@ public class Inicializadora{
 				depto3.agregarEstudiante(e39); 
 				depto3.agregarEstudiante(e40);
 
-			
-
+				//Maestrias del departamento 1
 				Maestria m1d1 = new Maestria("Maestría en Inteligencia Artificial", 24, "Ciencias de la Computación");
 				Maestria m2d1 = new Maestria("Maestría en Ciberseguridad y Redes", 18,"Seguridad Informática");
 				Maestria m3d1 = new Maestria("Maestría en Ciencia de Datos", 24, "Análisis de Datos");
 
-				depto1.agregarMaestria(m1d1); depto1.agregarMaestria(m2d1); depto1.agregarMaestria(m3d1);
+				depto1.agregarMaestria(m1d1); 
+				depto1.agregarMaestria(m2d1); 
+				depto1.agregarMaestria(m3d1);
 
+				//Maestrias del departamento 2
 				Maestria m1d2 = new Maestria("Maestría en Sistemas de Potencia", 24, "Energía Eléctrica");
 				Maestria m2d2 = new Maestria("Maestría en Automatización Industrial", 18, "Control de Procesos");
 				Maestria m3d2 = new Maestria("Maestría en Telecomunicaciones", 24, "Comunicaciones Digitales");
 				Maestria m4d2 = new Maestria("Maestría en Electrónica de Potencia", 18, "Electrónica Industrial");
 
-				depto2.agregarMaestria(m1d2); depto2.agregarMaestria(m2d2); depto2.agregarMaestria(m3d2); depto2.agregarMaestria(m4d2);
+				depto2.agregarMaestria(m1d2); 
+				depto2.agregarMaestria(m2d2); 
+				depto2.agregarMaestria(m3d2); 
+				depto2.agregarMaestria(m4d2);
 
+				//Maestrias del departamento 3
 				Maestria m1d3 = new Maestria("Maestría en Matemática Aplicada", 24, "Modelos Matemáticos");
 				Maestria m2d3 = new Maestria("Maestría en Estadística Avanzada", 18, "Análisis Estadístico");
 				Maestria m3d3 = new Maestria("Maestría en Investigación Operativa", 24, "Optimización Matemática");
 				Maestria m4d3 = new Maestria("Maestría en Matemática Financiera", 18, "Modelos Financieros");
 				Maestria m5d3 = new Maestria("Maestría en Criptografía", 24, "Seguridad Matemática");
 
-				depto3.agregarMaestria(m1d3); depto3.agregarMaestria(m2d3); depto3.agregarMaestria(m3d3); depto3.agregarMaestria(m4d3); 
+				depto3.agregarMaestria(m1d3); 
+				depto3.agregarMaestria(m2d3); 
+				depto3.agregarMaestria(m3d3); 
+				depto3.agregarMaestria(m4d3); 
 				depto3.agregarMaestria(m5d3);
 
+				//Cursos de la maestria 1 del departamento 1
 				CursoPosgrado c1m1d1 = new CursoPosgrado("Fundamentos de Inteligencia Artificial", new ArrayList<String>() {{ add("Comprender los fundamentos teóricos de la IA"); add("Aplicar algoritmos de aprendizaje automático"); }}, 4, d1);
 				CursoPosgrado c2m1d1 = new CursoPosgrado("Redes Neuronales y Deep Learning", new ArrayList<String>() {{ add("Desarrollar modelos de redes neuronales"); add("Implementar soluciones de deep learning"); }}, 5, d6);
 				CursoPosgrado c3m1d1 = new CursoPosgrado("Procesamiento de Lenguaje Natural", new ArrayList<String>() {{ add("Analizar problemas de procesamiento de lenguaje natural"); add("Implementar soluciones de NLP");}}, 4, d11);
@@ -259,6 +269,7 @@ public class Inicializadora{
 				m1d1.agregarCursoPosgrado(c3m1d1);
 				m1d1.agregarCursoPosgrado(c4m1d1);
 
+				//Cursos de la maestria 2 del departamento 1
 				CursoPosgrado c1m2d1 = new CursoPosgrado("Fundamentos de Ciberseguridad", new ArrayList<String>() {{ add("Comprender los principios de seguridad informática"); add("Analizar vulnerabilidades en sistemas"); }}, 4, d3);
 				CursoPosgrado c2m2d1 = new CursoPosgrado("Criptografía Avanzada", new ArrayList<String>() {{ add("Implementar técnicas de criptografía moderna"); add("Analizar protocolos de seguridad"); }}, 5, d8);
 				CursoPosgrado c3m2d1 = new CursoPosgrado("Seguridad en Redes", new ArrayList<String>() {{ add("Identificar amenazas en redes"); add("Diseñar redes seguras"); }}, 4, d13);
@@ -267,6 +278,7 @@ public class Inicializadora{
 				m2d1.agregarCursoPosgrado(c2m2d1);
 				m2d1.agregarCursoPosgrado(c3m2d1);
 
+				//Cursos de la maestria 3 del departamento 1
 				CursoPosgrado c1m3d1 = new CursoPosgrado("Análisis Exploratorio de Datos", new ArrayList<String>() {{ add("Manejar técnicas de análisis exploratorio de datos"); add("Visualizar datos efectivamente"); }}, 4, d5);
 				CursoPosgrado c2m3d1 = new CursoPosgrado("Machine Learning Aplicado", new ArrayList<String>() {{ add("Aplicar algoritmos de aprendizaje automático"); add("Evaluar modelos predictivos"); }}, 5, d10);
 				CursoPosgrado c3m3d1 = new CursoPosgrado("Big Data y Procesamiento Distribuido", new ArrayList<String>() {{ add("Procesar grandes volúmenes de datos"); add("Diseñar pipelines de datos"); }}, 5, d15);
@@ -279,6 +291,7 @@ public class Inicializadora{
 				m3d1.agregarCursoPosgrado(c4m3d1);
 				m3d1.agregarCursoPosgrado(c5m3d1);
 
+				//Cursos de la maestria 1 del departamento 2
 				CursoPosgrado c1m1d2 = new CursoPosgrado("Análisis de Sistemas de Potencia", new ArrayList<String>() {{ add("Analizar flujos de carga en sistemas eléctricos"); add("Evaluar estabilidad en sistemas de potencia");}}, 4, d21);
 				CursoPosgrado c2m1d2 = new CursoPosgrado("Protecciones Eléctricas", new ArrayList<String>() {{ add("Diseñar esquemas de protección para sistemas eléctricos"); add("Analizar fallas en sistemas de potencia"); }}, 5, d26);
 				CursoPosgrado c3m1d2 = new CursoPosgrado("Generación Distribuida", new ArrayList<String>() {{ add("Evaluar impactos de generación distribuida"); add("Diseñar sistemas con fuentes renovables"); }}, 4, d31);
@@ -287,6 +300,7 @@ public class Inicializadora{
 				m1d2.agregarCursoPosgrado(c2m1d2);
 				m1d2.agregarCursoPosgrado(c3m1d2);
 
+				//Cursos de la maestria 2 del departamento 2
 				CursoPosgrado c1m2d2 = new CursoPosgrado("Control de Procesos Industriales", new ArrayList<String>() {{ add("Diseñar sistemas de control para procesos industriales"); add("Implementar estrategias de control PID"); }}, 4, d23);
 				CursoPosgrado c2m2d2 = new CursoPosgrado("Sistemas SCADA", new ArrayList<String>() {{ add("Configurar sistemas SCADA industriales"); add("Implementar monitoreo remoto de procesos"); }}, 5, d28);
 				CursoPosgrado c3m2d2 = new CursoPosgrado("Robótica Industrial", new ArrayList<String>() {{ add("Programar robots industriales"); add("Diseñar células de trabajo automatizadas"); }}, 4, d33);
@@ -295,6 +309,7 @@ public class Inicializadora{
 				m2d2.agregarCursoPosgrado(c2m2d2);
 				m2d2.agregarCursoPosgrado(c3m2d2);
 
+				//Cursos de la maestria 3 del departamento 2
 				CursoPosgrado c1m3d2 = new CursoPosgrado("Redes de Telecomunicaciones", new ArrayList<String>() {{ add("Diseñar arquitecturas de redes de telecomunicaciones"); add("Analizar protocolos de comunicación"); }}, 4, d25);
 				CursoPosgrado c2m3d2 = new CursoPosgrado("Comunicaciones Digitales", new ArrayList<String>() {{ add("Implementar sistemas de modulación digital"); add("Analizar desempeño de sistemas de comunicación"); }}, 5, d30);
 				CursoPosgrado c3m3d2 = new CursoPosgrado("Redes 5G", new ArrayList<String>() {{ add("Evaluar tecnologías para redes 5G"); add("Diseñar redes de nueva generación"); }}, 4, d35);
@@ -305,20 +320,10 @@ public class Inicializadora{
 				m3d2.agregarCursoPosgrado(c3m3d2);
 				m3d2.agregarCursoPosgrado(c4m3d2);
 
-				CursoPosgrado c1m4d2 = new CursoPosgrado("Convertidores Electrónicos", new ArrayList<String>() {{ 
-					add("Diseñar convertidores CC-CC y CC-CA"); 
-					add("Analizar topologías de conversión"); 
-				}}, 4, d22);
-
-				CursoPosgrado c2m4d2 = new CursoPosgrado("Accionamientos Eléctricos", new ArrayList<String>() {{ 
-					add("Implementar control de motores eléctricos"); 
-					add("Diseñar sistemas de accionamiento variable"); 
-				}}, 5, d27);
-
-				CursoPosgrado c3m4d2 = new CursoPosgrado("Calidad de Energía", new ArrayList<String>() {{ 
-					add("Analizar problemas de calidad de energía"); 
-					add("Diseñar sistemas de compensación"); 
-				}}, 4, d32);
+				//Cursos de la maestria 4 del departamento 2
+				CursoPosgrado c1m4d2 = new CursoPosgrado("Convertidores Electrónicos", new ArrayList<String>() {{add("Diseñar convertidores CC-CC y CC-CA"); add("Analizar topologías de conversión"); }}, 4, d22);
+				CursoPosgrado c2m4d2 = new CursoPosgrado("Accionamientos Eléctricos", new ArrayList<String>() {{add("Implementar control de motores eléctricos"); add("Diseñar sistemas de accionamiento variable"); }}, 5, d27);
+				CursoPosgrado c3m4d2 = new CursoPosgrado("Calidad de Energía", new ArrayList<String>() {{add("Analizar problemas de calidad de energía"); add("Diseñar sistemas de compensación");}}, 4, d32);
 
 				m4d2.agregarCursoPosgrado(c1m4d2);
 				m4d2.agregarCursoPosgrado(c2m4d2);
