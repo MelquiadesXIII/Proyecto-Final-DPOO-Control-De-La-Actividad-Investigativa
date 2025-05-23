@@ -203,9 +203,7 @@ public class Inicializadora{
 		        depto3.agregarEstudiante(e16); depto3.agregarEstudiante(e17); depto3.agregarEstudiante(e18);
 		        depto3.agregarEstudiante(e19); depto3.agregarEstudiante(e20);
 
-		       
-				
-
+		        
 
 			}
 		});
