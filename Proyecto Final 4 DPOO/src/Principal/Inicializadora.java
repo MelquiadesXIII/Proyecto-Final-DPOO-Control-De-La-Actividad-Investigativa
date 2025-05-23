@@ -11,6 +11,7 @@ public class Inicializadora{
 	public static void main(String[] args) {
 
 		SwingUtilities.invokeLater(new Runnable() {
+			@SuppressWarnings("serial")
 			public void run() {
 		
 		        Vicedecanato vicedecanato = new Vicedecanato();
@@ -202,8 +203,59 @@ public class Inicializadora{
 		        depto3.agregarEstudiante(e13); depto3.agregarEstudiante(e14); depto3.agregarEstudiante(e15);
 		        depto3.agregarEstudiante(e16); depto3.agregarEstudiante(e17); depto3.agregarEstudiante(e18);
 		        depto3.agregarEstudiante(e19); depto3.agregarEstudiante(e20);
-
 		        
+		        Maestria m1d1 = new Maestria("Maestría en Inteligencia Artificial", 24, "Ciencias de la Computación");
+				Maestria m2d1 = new Maestria("Maestría en Ciberseguridad y Redes", 18,"Seguridad Informática");
+				Maestria m3d1 = new Maestria("Maestría en Ciencia de Datos", 24, "Análisis de Datos");
+
+				depto1.agregarMaestria(m1d1); depto1.agregarMaestria(m2d1); depto1.agregarMaestria(m3d1);
+
+				Maestria m1d2 = new Maestria("Maestría en Sistemas de Potencia", 24, "Energía Eléctrica");
+				Maestria m2d2 = new Maestria("Maestría en Automatización Industrial", 18, "Control de Procesos");
+				Maestria m3d2 = new Maestria("Maestría en Telecomunicaciones", 24, "Comunicaciones Digitales");
+				Maestria m4d2 = new Maestria("Maestría en Electrónica de Potencia", 18, "Electrónica Industrial");
+
+				depto2.agregarMaestria(m1d2); depto2.agregarMaestria(m2d2); depto2.agregarMaestria(m3d2); depto2.agregarMaestria(m4d2);
+
+				Maestria m1d3 = new Maestria("Maestría en Matemática Aplicada", 24, "Modelos Matemáticos");
+				Maestria m2d3 = new Maestria("Maestría en Estadística Avanzada", 18, "Análisis Estadístico");
+				Maestria m3d3 = new Maestria("Maestría en Investigación Operativa", 24, "Optimización Matemática");
+				Maestria m4d3 = new Maestria("Maestría en Matemática Financiera", 18, "Modelos Financieros");
+				Maestria m5d3 = new Maestria("Maestría en Criptografía", 24, "Seguridad Matemática");
+
+				depto3.agregarMaestria(m1d3); depto3.agregarMaestria(m2d3); depto3.agregarMaestria(m3d3); depto3.agregarMaestria(m4d3); 
+				depto3.agregarMaestria(m5d3);
+				
+				CursoPosgrado c1m1d1 = new CursoPosgrado("Fundamentos de Inteligencia Artificial", new ArrayList<String>() {{ add("Comprender los fundamentos teóricos de la IA"); add("Aplicar algoritmos de aprendizaje automático"); }}, 4, d1);
+				CursoPosgrado c2m1d1 = new CursoPosgrado("Redes Neuronales y Deep Learning", new ArrayList<String>() {{ add("Desarrollar modelos de redes neuronales"); add("Implementar soluciones de deep learning"); }}, 5, d6);
+				CursoPosgrado c3m1d1 = new CursoPosgrado("Procesamiento de Lenguaje Natural", new ArrayList<String>() {{ add("Analizar problemas de procesamiento de lenguaje natural"); add("Implementar soluciones de NLP");}}, 4, d11);
+				CursoPosgrado c4m1d1 = new CursoPosgrado("Visión por Computadora", new ArrayList<String>() {{add("Entender los principios de visión por computadora");add("Desarrollar aplicaciones de reconocimiento de imágenes"); }}, 5, d16);
+
+				m1d1.agregarCursoPosgrado(c1m1d1);
+				m1d1.agregarCursoPosgrado(c2m1d1);
+				m1d1.agregarCursoPosgrado(c3m1d1);
+				m1d1.agregarCursoPosgrado(c4m1d1);
+				
+				CursoPosgrado c1m2d1 = new CursoPosgrado("Fundamentos de Ciberseguridad", new ArrayList<String>() {{ add("Comprender los principios de seguridad informática"); add("Analizar vulnerabilidades en sistemas"); }}, 4, d3);
+				CursoPosgrado c2m2d1 = new CursoPosgrado("Criptografía Avanzada", new ArrayList<String>() {{ add("Implementar técnicas de criptografía moderna"); add("Analizar protocolos de seguridad"); }}, 5, d8);
+				CursoPosgrado c3m2d1 = new CursoPosgrado("Seguridad en Redes", new ArrayList<String>() {{ add("Identificar amenazas en redes"); add("Diseñar redes seguras"); }}, 4, d13);
+
+				m2d1.agregarCursoPosgrado(c1m2d1);
+				m2d1.agregarCursoPosgrado(c2m2d1);
+				m2d1.agregarCursoPosgrado(c3m2d1);
+
+				CursoPosgrado c1m3d1 = new CursoPosgrado("Análisis Exploratorio de Datos", new ArrayList<String>() {{ add("Manejar técnicas de análisis exploratorio de datos"); add("Visualizar datos efectivamente"); }}, 4, d5);
+				CursoPosgrado c2m3d1 = new CursoPosgrado("Machine Learning Aplicado", new ArrayList<String>() {{ add("Aplicar algoritmos de aprendizaje automático"); add("Evaluar modelos predictivos"); }}, 5, d10);
+				CursoPosgrado c3m3d1 = new CursoPosgrado("Big Data y Procesamiento Distribuido", new ArrayList<String>() {{ add("Procesar grandes volúmenes de datos"); add("Diseñar pipelines de datos"); }}, 5, d15);
+				CursoPosgrado c4m3d1 = new CursoPosgrado("Visualización de Datos", new ArrayList<String>() {{ add("Visualizar datos complejos"); add("Comunicar hallazgos efectivamente"); }}, 4, d20);
+				CursoPosgrado c5m3d1 = new CursoPosgrado("Gestión de Proyectos de Datos", new ArrayList<String>() {{ add("Gestionar proyectos de ciencia de datos"); add("Aplicar ética en el manejo de datos"); }}, 3, d4);
+
+				m3d1.agregarCursoPosgrado(c1m3d1);
+				m3d1.agregarCursoPosgrado(c2m3d1);
+				m3d1.agregarCursoPosgrado(c3m3d1);
+				m3d1.agregarCursoPosgrado(c4m3d1);
+				m3d1.agregarCursoPosgrado(c5m3d1);
+
 
 			}
 		});
