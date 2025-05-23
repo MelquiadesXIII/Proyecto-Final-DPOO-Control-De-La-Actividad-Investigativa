@@ -15,6 +15,7 @@ public class Inicializadora{
 	public static void main(String[] args) {
 		
 		SwingUtilities.invokeLater(new Runnable() {
+<<<<<<< Updated upstream
 			
 	        public void run() {
 	        	
@@ -49,6 +50,16 @@ public class Inicializadora{
 		
 		
 		
+=======
+
+			public void run() {
+				
+				
+
+			}
+		});
+
+>>>>>>> Stashed changes
 	}
 
 }
