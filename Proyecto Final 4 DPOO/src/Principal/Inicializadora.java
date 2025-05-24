@@ -866,6 +866,56 @@ public class Inicializadora{
 				m5d3.agregarMatriculado(d292);
 				m5d3.agregarMatriculado(d295);
 				m5d3.agregarMatriculado(d298);
+				
+				//Agregar participantes a cursos de Maestrias de Departamento 1
+				c1m1d1.agregarParticipante(d4);
+				c1m1d1.agregarParticipante(d9);
+				c1m1d1.agregarParticipante(d14);
+				c1m1d1.agregarParticipante(d19);
+				c1m1d1.agregarParticipante(d24);
+				
+				c2m1d1.agregarParticipante(d29);
+				c2m1d1.agregarParticipante(d34);
+				c2m1d1.agregarParticipante(d39);
+				c2m1d1.agregarParticipante(d44);
+				c2m1d1.agregarParticipante(d49);
+				
+				c3m1d1.agregarParticipante(d4);
+				c3m1d1.agregarParticipante(d14);
+				c3m1d1.agregarParticipante(d24);
+				c3m1d1.agregarParticipante(d34);
+				c3m1d1.agregarParticipante(d44);
+				
+				c4m1d1.agregarParticipante(d9);
+				c4m1d1.agregarParticipante(d19);
+				c4m1d1.agregarParticipante(d29);
+				c4m1d1.agregarParticipante(d39);
+				c4m1d1.agregarParticipante(d49);
+				
+				c1m2d1.agregarParticipante(d54);  
+				c1m2d1.agregarParticipante(d59);
+				c1m2d1.agregarParticipante(d61);
+
+				c2m2d1.agregarParticipante(d64);  
+				c2m2d1.agregarParticipante(d67);
+				c2m2d1.agregarParticipante(d70);
+
+				c3m2d1.agregarParticipante(d73);  
+				c3m2d1.agregarParticipante(d76);
+				c3m2d1.agregarParticipante(d79);
+
+				c1m3d1.agregarParticipante(d82);  
+				c1m3d1.agregarParticipante(d85);
+
+				c2m3d1.agregarParticipante(d88);  
+				c2m3d1.agregarParticipante(d91);
+
+				c3m3d1.agregarParticipante(d94); 
+				c3m3d1.agregarParticipante(d97);
+
+				c4m3d1.agregarParticipante(d100); 
+				c5m3d1.agregarParticipante(d82);  
+				
 			}
 		});
 	}
