@@ -7,7 +7,9 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.AbstractDocument.Content;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JSplitPane;
 
 import java.awt.Font;
@@ -26,9 +28,19 @@ public class InterfazPrincipal extends JFrame {
 
 	private Vicedecanato vicedecanato;
 	private static final long serialVersionUID = 1L;
+	private JList<String> listaEstudiantes;
+	private DefaultListModel<String> modeloEstudiantes;
+	private JPanel panelEstudiantes;
+	private JList<String> listaDocentes;
+	private DefaultListModel<String> modeloDocentes;
+	private JPanel panelDocentes;
+	private JList<String> listaDepartamentos;
+	private DefaultListModel<String> modeloDepartamentos;
+	private JPanel panelDepartamentos;
 	
 	
 	public InterfazPrincipal(Vicedecanato vicedecanato) {
+		
 		
 		this.vicedecanato = vicedecanato;
 		getContentPane().setBackground(Color.WHITE);
@@ -71,27 +83,15 @@ public class InterfazPrincipal extends JFrame {
 		panelInicio.setBorder(new LineBorder(Color.BLACK,0));
 		panelInicio.setLayout(null);
 		
-		JPanel panelDocentes = new JPanel();
+		panelDocentes = new JPanel();
 		panelContenido.add(panelDocentes, "panelDocentes");
 		panelDocentes.setBorder(new LineBorder(Color.BLACK,0));
 		panelDocentes.setLayout(null);
 		
-		JLabel lblListaDeDocentes = new JLabel("Lista de Docentes");
-		lblListaDeDocentes.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblListaDeDocentes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblListaDeDocentes.setBounds(229, 104, 326, 110);
-		panelDocentes.add(lblListaDeDocentes);
-		
-		JPanel panelEstudiantes = new JPanel();
+		panelEstudiantes = new JPanel();
 		panelContenido.add(panelEstudiantes, "panelEstudiantes");
-		panelEstudiantes.setBorder(new LineBorder(Color.BLACK,0));
+		((JComponent) panelEstudiantes).setBorder(new LineBorder(Color.BLACK,0));
 		panelEstudiantes.setLayout(null);
-		
-		JLabel lblListaDeEstudiantes = new JLabel("Lista de Estudiantes");
-		lblListaDeEstudiantes.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblListaDeEstudiantes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblListaDeEstudiantes.setBounds(224, 87, 351, 164);
-		panelEstudiantes.add(lblListaDeEstudiantes);
 		
 		JLabel lblBienvenido = new JLabel("Bienvenido!");
 		lblBienvenido.setBounds(0, 0, 794, 465);
@@ -99,16 +99,10 @@ public class InterfazPrincipal extends JFrame {
 		lblBienvenido.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInicio.add(lblBienvenido);
 		
-		JPanel panelDepartamentos = new JPanel();
+		panelDepartamentos = new JPanel();
 		panelContenido.add(panelDepartamentos, "panelDepartamentos");
 		panelDepartamentos.setBorder(new LineBorder(Color.BLACK,0));
 		panelDepartamentos.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Lista de Departamentos");
-		lblNewLabel.setBounds(0, 0, 794, 465);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panelDepartamentos.add(lblNewLabel);
 		
 		JButton btnInicio = new JButton("INICIO");
 		btnInicio.setFocusPainted(false);
@@ -162,7 +156,64 @@ public class InterfazPrincipal extends JFrame {
 		btnEstudiantes.setBounds(594, 0, 199, 47);
 		panelBarraNav.add(btnEstudiantes);
 		
+		modeloEstudiantes = new DefaultListModel<>();
+	    
+	    for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
+	        modeloEstudiantes.addElement(estudiante.getNombre());
+	    }
+	    
+	    listaEstudiantes = new JList<>(modeloEstudiantes);
+	    JScrollPane scrollEstudiantes = new JScrollPane(listaEstudiantes);
+	    scrollEstudiantes.setBounds(0, 1, 600, 465);
+	    
+		panelEstudiantes.add(scrollEstudiantes);
+		
+		JButton btnCrearEst = new JButton("Crear");
+		btnCrearEst.setBounds(655, 13, 97, 25);
+		panelEstudiantes.add(btnCrearEst);
+		
+		JButton btnEliminarEst = new JButton("Eliminar");
+		btnEliminarEst.setBounds(655, 68, 97, 25);
+		panelEstudiantes.add(btnEliminarEst);
+		
+		modeloDocentes = new DefaultListModel<>();
+		
+		for (Docente docente : vicedecanato.getDocentes()) {
+		    modeloDocentes.addElement(docente.getNombre());
+		}
+		
+		listaDocentes = new JList<>(modeloDocentes);
+		JScrollPane scrollDocentes = new JScrollPane(listaDocentes);
+		scrollDocentes.setBounds(0, 1, 600, 465);
+		panelDocentes.add(scrollDocentes);
+		
+		JButton btnCrearDoc = new JButton("Crear");
+		btnCrearDoc.setBounds(655, 13, 97, 25);
+		panelDocentes.add(btnCrearDoc);
+		
+		JButton btnEliminarDoc = new JButton("Eliminar");
+		btnEliminarDoc.setBounds(655, 60, 97, 25);
+		panelDocentes.add(btnEliminarDoc);
+		
+		modeloDepartamentos = new DefaultListModel<>();
+		
+		for (Departamento departamento : vicedecanato.getDepartamentos()) {
+		    modeloDepartamentos.addElement(departamento.getNombre());
+		}
+		
+		listaDepartamentos = new JList<>(modeloDepartamentos);
+		JScrollPane scrollDepartamentos = new JScrollPane(listaDepartamentos);
+		scrollDepartamentos.setBounds(0, 1, 600, 465);
+		panelDepartamentos.add(scrollDepartamentos);
+		
+		JButton btnCrearDep = new JButton("Crear");
+		btnCrearDep.setBounds(652, 13, 97, 25);
+		panelDepartamentos.add(btnCrearDep);
+		
+		JButton btnEliminarDep = new JButton("Eliminar");
+		btnEliminarDep.setBounds(652, 72, 97, 25);
+		panelDepartamentos.add(btnEliminarDep);
+		
 		setVisible(true);
-		//setExtendedState(JFrame.MAXIMIZED_BOTH); Maximiza la pantalla, quitalo si no lo quieres
 	}
 }
