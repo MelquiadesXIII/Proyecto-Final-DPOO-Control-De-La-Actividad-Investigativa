@@ -210,6 +210,7 @@ public class InterfazPrincipal extends JFrame {
 		}
 
 		listaDepartamentos = new JList<>(modeloDepartamentos);
+		listaDepartamentos.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		JScrollPane scrollDepartamentos = new JScrollPane(listaDepartamentos);
 		scrollDepartamentos.setBounds(0, 1, 600, 465);
 		panelDepartamentos.add(scrollDepartamentos);
@@ -224,6 +225,7 @@ public class InterfazPrincipal extends JFrame {
 		}
 
 		listaEstudiantes = new JList<>(modeloEstudiantes);
+		listaEstudiantes.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		JScrollPane scrollEstudiantes = new JScrollPane(listaEstudiantes);
 		scrollEstudiantes.setBounds(0, 1, 600, 465);
 
@@ -239,6 +241,7 @@ public class InterfazPrincipal extends JFrame {
 		}
 
 		listaDocentes = new JList<>(modeloDocentes);
+		listaDocentes.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		JScrollPane scrollDocentes = new JScrollPane(listaDocentes);
 		scrollDocentes.setBounds(0, 1, 600, 465);
 		panelDocentes.add(scrollDocentes);
