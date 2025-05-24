@@ -25,8 +25,10 @@ public class Inicializadora{
 				vicedecanato.agregarDepartamento(depto3);
 
 				//Aqui se crean 300 docentes y se agregan al vicedecanato
-				Docente d1 = new Docente("Carlos", "Pérez", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
-				Docente d2 = new Docente("María", "Gómez", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
+				
+				//Docentes del departamento 1
+				Docente d1 = new Docente("Sonia", "Pérez Lovelle", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
+				Docente d2 = new Docente("Rodolfo", "Remesar Martin", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
 				Docente d3 = new Docente("Luis", "Martínez", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
 				Docente d4 = new Docente("Ana", "López", CategoriaCientifica.NINGUNA, CategoriaDocente.ASISTENTE);
 				Docente d5 = new Docente("Javier", "Rodríguez", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_AUXILIAR);
@@ -126,6 +128,7 @@ public class Inicializadora{
 				Docente d99 = new Docente("Natalicio", "Lago Miranda", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d100 = new Docente("Olegario", "Pino Aguirre", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_TITULAR);
 				
+				//Docentes del departamento 2
 				Docente d101 = new Docente("Pacífica", "Roldán Solano", CategoriaCientifica.MASTER, CategoriaDocente.INSTRUCTOR);
 				Docente d102 = new Docente("Quirino", "Páez Montenegro", CategoriaCientifica.DOCTOR, CategoriaDocente.ASISTENTE);
 				Docente d103 = new Docente("Rosalía", "Espinoza Cervantes", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_AUXILIAR);
@@ -227,6 +230,7 @@ public class Inicializadora{
 				Docente d199 = new Docente("Natalia", "Montesinos Lara", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d200 = new Docente("Otilio", "Ríos Méndez", CategoriaCientifica.MASTER, CategoriaDocente.PROFESOR_TITULAR);
 				
+				//Docentes del departamento 3
 				Docente d201 = new Docente("Pascuala", "Ocampo Cortés", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
 				Docente d202 = new Docente("Quintiliano", "Villalba Peralta", CategoriaCientifica.NINGUNA, CategoriaDocente.ASISTENTE);
 				Docente d203 = new Docente("Ruperta", "Zambrano Ríos", CategoriaCientifica.MASTER, CategoriaDocente.PROFESOR_AUXILIAR);
