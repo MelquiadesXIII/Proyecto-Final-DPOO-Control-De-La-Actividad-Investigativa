@@ -159,7 +159,7 @@ public class InterfazPrincipal extends JFrame {
 		modeloEstudiantes = new DefaultListModel<>();
 	    
 	    for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
-	        modeloEstudiantes.addElement(estudiante.getNombre());
+	        modeloEstudiantes.addElement(estudiante.getNombre() + " " + estudiante.getApellidos());
 	    }
 	    
 	    listaEstudiantes = new JList<>(modeloEstudiantes);
@@ -179,7 +179,7 @@ public class InterfazPrincipal extends JFrame {
 		modeloDocentes = new DefaultListModel<>();
 		
 		for (Docente docente : vicedecanato.getDocentes()) {
-		    modeloDocentes.addElement(docente.getNombre());
+		    modeloDocentes.addElement(docente.getNombre() + " " + docente.getApellidos());
 		}
 		
 		listaDocentes = new JList<>(modeloDocentes);
