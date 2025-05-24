@@ -118,7 +118,7 @@ public class InterfazPrincipal extends JFrame {
 				cl.show(panelContenido, "panelInicio");
 			}
 		});
-		btnInicio.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		btnInicio.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnInicio.setBorder(new LineBorder(Color.BLACK,2));
 		btnInicio.setBounds(0, 0, 198, 47);
 		panelBarraNav.add(btnInicio);
@@ -131,7 +131,7 @@ public class InterfazPrincipal extends JFrame {
 				cl.show(panelContenido, "panelDepartamentos");
 			}
 		});
-		btnDepartamentos.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		btnDepartamentos.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDepartamentos.setBorder(new LineBorder(Color.BLACK,2));
 		btnDepartamentos.setBounds(198, 0, 198, 47);
 		panelBarraNav.add(btnDepartamentos);
@@ -144,7 +144,7 @@ public class InterfazPrincipal extends JFrame {
 				cl.show(panelContenido, "panelDocentes");
 			}
 		});
-		btnDocentes.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		btnDocentes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDocentes.setBorder(new LineBorder(Color.BLACK,2));
 		btnDocentes.setBounds(396, 0, 198, 47);
 		panelBarraNav.add(btnDocentes);
@@ -157,7 +157,7 @@ public class InterfazPrincipal extends JFrame {
 				cl.show(panelContenido, "panelEstudiantes");
 			}
 		});
-		btnEstudiantes.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		btnEstudiantes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEstudiantes.setBorder(new LineBorder(Color.BLACK,2));
 		btnEstudiantes.setBounds(594, 0, 199, 47);
 		panelBarraNav.add(btnEstudiantes);
