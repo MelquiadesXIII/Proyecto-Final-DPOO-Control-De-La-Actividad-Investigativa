@@ -983,7 +983,7 @@ public class Inicializadora{
 				c5m3d1.agregarParticipante(d100);
 				
 				
-				// Agregar participantes a cursos de Maestrías 1 del departamento 2
+				//Agregar participantes a cursos de Maestrías del departamento 2
 				c1m1d2.agregarParticipante(d103);
 				c1m1d2.agregarParticipante(d106);
 				c1m1d2.agregarParticipante(d109);
@@ -1103,6 +1103,135 @@ public class Inicializadora{
 				c3m4d2.agregarParticipante(d193);
 				c3m4d2.agregarParticipante(d196);
 				c3m4d2.agregarParticipante(d199);
+				
+				//Agregar participantes a cursos de Maestrías del departamento 3
+				c1m1d3.agregarParticipante(d202);
+				c1m1d3.agregarParticipante(d205);
+				c1m1d3.agregarParticipante(d208);
+				c1m1d3.agregarParticipante(d211);
+				c1m1d3.agregarParticipante(d214);
+				c1m1d3.agregarParticipante(d217);
+				c1m1d3.agregarParticipante(d220);
+
+				c2m1d3.agregarParticipante(d202);
+				c2m1d3.agregarParticipante(d205);
+				c2m1d3.agregarParticipante(d208);
+				c2m1d3.agregarParticipante(d211);
+				c2m1d3.agregarParticipante(d214);
+				c2m1d3.agregarParticipante(d217);
+				c2m1d3.agregarParticipante(d220);
+
+				c3m1d3.agregarParticipante(d202);
+				c3m1d3.agregarParticipante(d205);
+				c3m1d3.agregarParticipante(d208);
+				c3m1d3.agregarParticipante(d211);
+				c3m1d3.agregarParticipante(d214);
+				c3m1d3.agregarParticipante(d217);
+				c3m1d3.agregarParticipante(d220);
+				
+				c1m2d3.agregarParticipante(d223);
+				c1m2d3.agregarParticipante(d226);
+				c1m2d3.agregarParticipante(d229);
+				c1m2d3.agregarParticipante(d232);
+				c1m2d3.agregarParticipante(d235);
+				c1m2d3.agregarParticipante(d238);
+				c1m2d3.agregarParticipante(d241);
+
+				c2m2d3.agregarParticipante(d223);
+				c2m2d3.agregarParticipante(d226);
+				c2m2d3.agregarParticipante(d229);
+				c2m2d3.agregarParticipante(d232);
+				c2m2d3.agregarParticipante(d235);
+				c2m2d3.agregarParticipante(d238);
+				c2m2d3.agregarParticipante(d241);
+
+				c3m2d3.agregarParticipante(d223);
+				c3m2d3.agregarParticipante(d226);
+				c3m2d3.agregarParticipante(d229);
+				c3m2d3.agregarParticipante(d232);
+				c3m2d3.agregarParticipante(d235);
+				c3m2d3.agregarParticipante(d238);
+				c3m2d3.agregarParticipante(d241);
+
+				c1m3d3.agregarParticipante(d244);
+				c1m3d3.agregarParticipante(d247);
+				c1m3d3.agregarParticipante(d250);
+				c1m3d3.agregarParticipante(d253);
+				c1m3d3.agregarParticipante(d256);
+				c1m3d3.agregarParticipante(d259);
+
+				c2m3d3.agregarParticipante(d244);
+				c2m3d3.agregarParticipante(d247);
+				c2m3d3.agregarParticipante(d250);
+				c2m3d3.agregarParticipante(d253);
+				c2m3d3.agregarParticipante(d256);
+				c2m3d3.agregarParticipante(d259);
+
+				c3m3d3.agregarParticipante(d244);
+				c3m3d3.agregarParticipante(d247);
+				c3m3d3.agregarParticipante(d250);
+				c3m3d3.agregarParticipante(d253);
+				c3m3d3.agregarParticipante(d256);
+				c3m3d3.agregarParticipante(d259);
+
+				c4m3d3.agregarParticipante(d244);
+				c4m3d3.agregarParticipante(d247);
+				c4m3d3.agregarParticipante(d250);
+				c4m3d3.agregarParticipante(d253);
+				c4m3d3.agregarParticipante(d256);
+				c4m3d3.agregarParticipante(d259);
+
+				c1m4d3.agregarParticipante(d262);
+				c1m4d3.agregarParticipante(d265);
+				c1m4d3.agregarParticipante(d268);
+				c1m4d3.agregarParticipante(d271);
+				c1m4d3.agregarParticipante(d274);
+				c1m4d3.agregarParticipante(d277);
+				c1m4d3.agregarParticipante(d280);
+
+				c2m4d3.agregarParticipante(d262);
+				c2m4d3.agregarParticipante(d265);
+				c2m4d3.agregarParticipante(d268);
+				c2m4d3.agregarParticipante(d271);
+				c2m4d3.agregarParticipante(d274);
+				c2m4d3.agregarParticipante(d277);
+				c2m4d3.agregarParticipante(d280);
+
+				c3m4d3.agregarParticipante(d262);
+				c3m4d3.agregarParticipante(d265);
+				c3m4d3.agregarParticipante(d268);
+				c3m4d3.agregarParticipante(d271);
+				c3m4d3.agregarParticipante(d274);
+				c3m4d3.agregarParticipante(d277);
+				c3m4d3.agregarParticipante(d280);
+
+				c1m5d3.agregarParticipante(d283);
+				c1m5d3.agregarParticipante(d286);
+				c1m5d3.agregarParticipante(d289);
+				c1m5d3.agregarParticipante(d292);
+				c1m5d3.agregarParticipante(d295);
+				c1m5d3.agregarParticipante(d298);
+
+				c2m5d3.agregarParticipante(d283);
+				c2m5d3.agregarParticipante(d286);
+				c2m5d3.agregarParticipante(d289);
+				c2m5d3.agregarParticipante(d292);
+				c2m5d3.agregarParticipante(d295);
+				c2m5d3.agregarParticipante(d298);
+
+				c3m5d3.agregarParticipante(d283);
+				c3m5d3.agregarParticipante(d286);
+				c3m5d3.agregarParticipante(d289);
+				c3m5d3.agregarParticipante(d292);
+				c3m5d3.agregarParticipante(d295);
+				c3m5d3.agregarParticipante(d298);
+
+				c4m5d3.agregarParticipante(d283);
+				c4m5d3.agregarParticipante(d286);
+				c4m5d3.agregarParticipante(d289);
+				c4m5d3.agregarParticipante(d292);
+				c4m5d3.agregarParticipante(d295);
+				c4m5d3.agregarParticipante(d298);
 			}
 		});
 	}
