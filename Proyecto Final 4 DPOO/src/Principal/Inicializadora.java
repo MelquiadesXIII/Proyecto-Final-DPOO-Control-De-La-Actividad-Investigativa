@@ -28,10 +28,10 @@ public class Inicializadora{
 				//Aqui se crean 300 docentes y se agregan al vicedecanato
 				
 				//Docentes del departamento 1
-				Docente d1 = new Docente("Sonia", "Pérez Lovelle", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
+				Docente d1 = new Docente("Mae", "López", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
 				Docente d2 = new Docente("Rodolfo", "Remesar Martin", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
-				Docente d3 = new Docente("Mae", "López", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
-				Docente d4 = new Docente("Ana", "López", CategoriaCientifica.NINGUNA, CategoriaDocente.ASISTENTE);
+				Docente d3 = new Docente("Sonia", "Pérez Lovelle", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
+				Docente d4 = new Docente("Ana", "Ruiz", CategoriaCientifica.NINGUNA, CategoriaDocente.ASISTENTE);
 				Docente d5 = new Docente("Javier", "Rodríguez", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d6 = new Docente("Lucía", "Fernández", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
 				Docente d7 = new Docente("Diego", "Sánchez", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
