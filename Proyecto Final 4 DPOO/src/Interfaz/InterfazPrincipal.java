@@ -35,8 +35,8 @@ public class InterfazPrincipal extends JFrame {
 		
 		setTitle("Vicedecanato de Investigacion");
 		setMinimumSize(new Dimension(800,600)); //Establece el tamannio minimo
-		//setResizable(false);
-		//setSize(800, 600);;
+		setResizable(false);
+		setSize(800, 600);;
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -163,6 +163,6 @@ public class InterfazPrincipal extends JFrame {
 		panelBarraNav.add(btnEstudiantes);
 		
 		setVisible(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH); //Maximiza la pantalla, quitalo si no lo quieres
+		//setExtendedState(JFrame.MAXIMIZED_BOTH); Maximiza la pantalla, quitalo si no lo quieres
 	}
 }
