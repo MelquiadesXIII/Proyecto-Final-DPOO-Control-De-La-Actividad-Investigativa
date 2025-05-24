@@ -125,6 +125,7 @@ public class Inicializadora{
 				Docente d98 = new Docente("Macario", "Ríos Castañeda", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
 				Docente d99 = new Docente("Natalicio", "Lago Miranda", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d100 = new Docente("Olegario", "Pino Aguirre", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_TITULAR);
+				
 				Docente d101 = new Docente("Pacífica", "Roldán Solano", CategoriaCientifica.MASTER, CategoriaDocente.INSTRUCTOR);
 				Docente d102 = new Docente("Quirino", "Páez Montenegro", CategoriaCientifica.DOCTOR, CategoriaDocente.ASISTENTE);
 				Docente d103 = new Docente("Rosalía", "Espinoza Cervantes", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_AUXILIAR);
@@ -225,6 +226,7 @@ public class Inicializadora{
 				Docente d198 = new Docente("Martín", "Valdivia Ojeda", CategoriaCientifica.DOCTOR, CategoriaDocente.ASISTENTE);
 				Docente d199 = new Docente("Natalia", "Montesinos Lara", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d200 = new Docente("Otilio", "Ríos Méndez", CategoriaCientifica.MASTER, CategoriaDocente.PROFESOR_TITULAR);
+				
 				Docente d201 = new Docente("Pascuala", "Ocampo Cortés", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
 				Docente d202 = new Docente("Quintiliano", "Villalba Peralta", CategoriaCientifica.NINGUNA, CategoriaDocente.ASISTENTE);
 				Docente d203 = new Docente("Ruperta", "Zambrano Ríos", CategoriaCientifica.MASTER, CategoriaDocente.PROFESOR_AUXILIAR);
@@ -757,6 +759,37 @@ public class Inicializadora{
 				m5d3.agregarCursoPosgrado(c2m5d3);
 				m5d3.agregarCursoPosgrado(c3m5d3);
 				m5d3.agregarCursoPosgrado(c4m5d3);
+				
+				//Matricular docentes en maestrias del departamento 1
+				m1d1.agregarMatriculado(d4);
+				m1d1.agregarMatriculado(d9);
+				m1d1.agregarMatriculado(d14);
+				m1d1.agregarMatriculado(d19);
+				m1d1.agregarMatriculado(d24);
+				m1d1.agregarMatriculado(d29);
+				m1d1.agregarMatriculado(d34);
+				m1d1.agregarMatriculado(d39);
+				m1d1.agregarMatriculado(d44);
+				m1d1.agregarMatriculado(d49);
+				
+				m2d1.agregarMatriculado(d54);
+				m2d1.agregarMatriculado(d59);
+				m2d1.agregarMatriculado(d61);
+				m2d1.agregarMatriculado(d64);
+				m2d1.agregarMatriculado(d67);
+				m2d1.agregarMatriculado(d70);
+				m2d1.agregarMatriculado(d73);
+				m2d1.agregarMatriculado(d76);
+				m2d1.agregarMatriculado(d79);
+				
+				m3d1.agregarMatriculado(d82);
+				m3d1.agregarMatriculado(d85);
+				m3d1.agregarMatriculado(d88);
+				m3d1.agregarMatriculado(d91);
+				m3d1.agregarMatriculado(d94);
+				m3d1.agregarMatriculado(d97);
+				m3d1.agregarMatriculado(d100);
+				
 			}
 		});
 	}
