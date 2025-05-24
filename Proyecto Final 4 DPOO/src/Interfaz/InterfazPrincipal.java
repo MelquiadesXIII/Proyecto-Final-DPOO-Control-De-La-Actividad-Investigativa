@@ -1,17 +1,8 @@
 package Interfaz;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -26,9 +17,11 @@ import javax.swing.BoxLayout;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import Logica.*;
 import Excepciones.*;
 
+@SuppressWarnings("unused")
 public class InterfazPrincipal extends JFrame {
 
 	private Vicedecanato vicedecanato;
