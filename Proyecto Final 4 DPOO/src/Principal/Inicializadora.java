@@ -1237,6 +1237,8 @@ public class Inicializadora{
 				c4m5d3.agregarParticipante(d292);
 				c4m5d3.agregarParticipante(d295);
 				c4m5d3.agregarParticipante(d298);
+				
+				new InterfazPrincipal(vicedecanato);
 			}
 		});
 	}
