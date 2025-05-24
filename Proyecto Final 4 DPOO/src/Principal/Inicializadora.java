@@ -790,6 +790,44 @@ public class Inicializadora{
 				m3d1.agregarMatriculado(d97);
 				m3d1.agregarMatriculado(d100);
 				
+				//Matricular docentes en maestrias del departamento 2
+				m1d2.agregarMatriculado(d103);
+				m1d2.agregarMatriculado(d106);
+				m1d2.agregarMatriculado(d109);
+				m1d2.agregarMatriculado(d112);
+				m1d2.agregarMatriculado(d115);
+				m1d2.agregarMatriculado(d118);
+				m1d2.agregarMatriculado(d121);
+				m1d2.agregarMatriculado(d124);
+				m1d2.agregarMatriculado(d127);
+				
+				m2d2.agregarMatriculado(d130);
+				m2d2.agregarMatriculado(d133);
+				m2d2.agregarMatriculado(d136);
+				m2d2.agregarMatriculado(d139);
+				m2d2.agregarMatriculado(d142);
+				m2d2.agregarMatriculado(d145);
+				m2d2.agregarMatriculado(d148);
+				m2d2.agregarMatriculado(d151);
+				m2d2.agregarMatriculado(d154);
+				
+				m3d2.agregarMatriculado(d157);
+				m3d2.agregarMatriculado(d160);
+				m3d2.agregarMatriculado(d163);
+				m3d2.agregarMatriculado(d166);
+				m3d2.agregarMatriculado(d);
+				m3d2.agregarMatriculado(d);
+				m3d2.agregarMatriculado(d);
+				m3d2.agregarMatriculado(d);
+				
+				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d);
 			}
 		});
 	}
