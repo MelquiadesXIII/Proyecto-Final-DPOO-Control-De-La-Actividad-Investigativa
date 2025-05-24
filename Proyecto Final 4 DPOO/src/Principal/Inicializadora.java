@@ -873,49 +873,236 @@ public class Inicializadora{
 				c1m1d1.agregarParticipante(d14);
 				c1m1d1.agregarParticipante(d19);
 				c1m1d1.agregarParticipante(d24);
-				
+				c1m1d1.agregarParticipante(d29);
+				c1m1d1.agregarParticipante(d34);
+				c1m1d1.agregarParticipante(d39);
+				c1m1d1.agregarParticipante(d44);
+				c1m1d1.agregarParticipante(d49);
+
+				c2m1d1.agregarParticipante(d4);
+				c2m1d1.agregarParticipante(d9);
+				c2m1d1.agregarParticipante(d14);
+				c2m1d1.agregarParticipante(d19);
+				c2m1d1.agregarParticipante(d24);
 				c2m1d1.agregarParticipante(d29);
 				c2m1d1.agregarParticipante(d34);
 				c2m1d1.agregarParticipante(d39);
 				c2m1d1.agregarParticipante(d44);
 				c2m1d1.agregarParticipante(d49);
-				
+
 				c3m1d1.agregarParticipante(d4);
+				c3m1d1.agregarParticipante(d9);
 				c3m1d1.agregarParticipante(d14);
+				c3m1d1.agregarParticipante(d19);
 				c3m1d1.agregarParticipante(d24);
+				c3m1d1.agregarParticipante(d29);
 				c3m1d1.agregarParticipante(d34);
+				c3m1d1.agregarParticipante(d39);
 				c3m1d1.agregarParticipante(d44);
-				
+				c3m1d1.agregarParticipante(d49);
+
+				c4m1d1.agregarParticipante(d4);
 				c4m1d1.agregarParticipante(d9);
+				c4m1d1.agregarParticipante(d14);
 				c4m1d1.agregarParticipante(d19);
+				c4m1d1.agregarParticipante(d24);
 				c4m1d1.agregarParticipante(d29);
+				c4m1d1.agregarParticipante(d34);
 				c4m1d1.agregarParticipante(d39);
+				c4m1d1.agregarParticipante(d44);
 				c4m1d1.agregarParticipante(d49);
-				
-				c1m2d1.agregarParticipante(d54);  
+
+				c1m2d1.agregarParticipante(d54);
 				c1m2d1.agregarParticipante(d59);
 				c1m2d1.agregarParticipante(d61);
+				c1m2d1.agregarParticipante(d64);
+				c1m2d1.agregarParticipante(d67);
+				c1m2d1.agregarParticipante(d70);
+				c1m2d1.agregarParticipante(d73);
+				c1m2d1.agregarParticipante(d76);
+				c1m2d1.agregarParticipante(d79);
 
-				c2m2d1.agregarParticipante(d64);  
+				c2m2d1.agregarParticipante(d54);
+				c2m2d1.agregarParticipante(d59);
+				c2m2d1.agregarParticipante(d61);
+				c2m2d1.agregarParticipante(d64);
 				c2m2d1.agregarParticipante(d67);
 				c2m2d1.agregarParticipante(d70);
+				c2m2d1.agregarParticipante(d73);
+				c2m2d1.agregarParticipante(d76);
+				c2m2d1.agregarParticipante(d79);
 
-				c3m2d1.agregarParticipante(d73);  
+				c3m2d1.agregarParticipante(d54);
+				c3m2d1.agregarParticipante(d59);
+				c3m2d1.agregarParticipante(d61);
+				c3m2d1.agregarParticipante(d64);
+				c3m2d1.agregarParticipante(d67);
+				c3m2d1.agregarParticipante(d70);
+				c3m2d1.agregarParticipante(d73);
 				c3m2d1.agregarParticipante(d76);
 				c3m2d1.agregarParticipante(d79);
 
-				c1m3d1.agregarParticipante(d82);  
+				c1m3d1.agregarParticipante(d82);
 				c1m3d1.agregarParticipante(d85);
+				c1m3d1.agregarParticipante(d88);
+				c1m3d1.agregarParticipante(d91);
+				c1m3d1.agregarParticipante(d94);
+				c1m3d1.agregarParticipante(d97);
+				c1m3d1.agregarParticipante(d100);
 
-				c2m3d1.agregarParticipante(d88);  
+				c2m3d1.agregarParticipante(d82);
+				c2m3d1.agregarParticipante(d85);
+				c2m3d1.agregarParticipante(d88);
 				c2m3d1.agregarParticipante(d91);
+				c2m3d1.agregarParticipante(d94);
+				c2m3d1.agregarParticipante(d97);
+				c2m3d1.agregarParticipante(d100);
 
-				c3m3d1.agregarParticipante(d94); 
+				c3m3d1.agregarParticipante(d82);
+				c3m3d1.agregarParticipante(d85);
+				c3m3d1.agregarParticipante(d88);
+				c3m3d1.agregarParticipante(d91);
+				c3m3d1.agregarParticipante(d94);
 				c3m3d1.agregarParticipante(d97);
+				c3m3d1.agregarParticipante(d100);
 
-				c4m3d1.agregarParticipante(d100); 
-				c5m3d1.agregarParticipante(d82);  
+				c4m3d1.agregarParticipante(d82);
+				c4m3d1.agregarParticipante(d85);
+				c4m3d1.agregarParticipante(d88);
+				c4m3d1.agregarParticipante(d91);
+				c4m3d1.agregarParticipante(d94);
+				c4m3d1.agregarParticipante(d97);
+				c4m3d1.agregarParticipante(d100);
+
+				c5m3d1.agregarParticipante(d82);
+				c5m3d1.agregarParticipante(d85);
+				c5m3d1.agregarParticipante(d88);
+				c5m3d1.agregarParticipante(d91);
+				c5m3d1.agregarParticipante(d94);
+				c5m3d1.agregarParticipante(d97);
+				c5m3d1.agregarParticipante(d100);
 				
+				
+				// Agregar participantes a cursos de Maestrías 1 del departamento 2
+				c1m1d2.agregarParticipante(d103);
+				c1m1d2.agregarParticipante(d106);
+				c1m1d2.agregarParticipante(d109);
+				c1m1d2.agregarParticipante(d112);
+				c1m1d2.agregarParticipante(d115);
+				c1m1d2.agregarParticipante(d118);
+				c1m1d2.agregarParticipante(d121);
+				c1m1d2.agregarParticipante(d124);
+				c1m1d2.agregarParticipante(d127);
+
+				c2m1d2.agregarParticipante(d103);
+				c2m1d2.agregarParticipante(d106);
+				c2m1d2.agregarParticipante(d109);
+				c2m1d2.agregarParticipante(d112);
+				c2m1d2.agregarParticipante(d115);
+				c2m1d2.agregarParticipante(d118);
+				c2m1d2.agregarParticipante(d121);
+				c2m1d2.agregarParticipante(d124);
+				c2m1d2.agregarParticipante(d127);
+
+				c3m1d2.agregarParticipante(d103);
+				c3m1d2.agregarParticipante(d106);
+				c3m1d2.agregarParticipante(d109);
+				c3m1d2.agregarParticipante(d112);
+				c3m1d2.agregarParticipante(d115);
+				c3m1d2.agregarParticipante(d118);
+				c3m1d2.agregarParticipante(d121);
+				c3m1d2.agregarParticipante(d124);
+				c3m1d2.agregarParticipante(d127);
+
+				c1m2d2.agregarParticipante(d130);
+				c1m2d2.agregarParticipante(d133);
+				c1m2d2.agregarParticipante(d136);
+				c1m2d2.agregarParticipante(d139);
+				c1m2d2.agregarParticipante(d142);
+				c1m2d2.agregarParticipante(d145);
+				c1m2d2.agregarParticipante(d148);
+				c1m2d2.agregarParticipante(d151);
+				c1m2d2.agregarParticipante(d154);
+
+				c2m2d2.agregarParticipante(d130);
+				c2m2d2.agregarParticipante(d133);
+				c2m2d2.agregarParticipante(d136);
+				c2m2d2.agregarParticipante(d139);
+				c2m2d2.agregarParticipante(d142);
+				c2m2d2.agregarParticipante(d145);
+				c2m2d2.agregarParticipante(d148);
+				c2m2d2.agregarParticipante(d151);
+				c2m2d2.agregarParticipante(d154);
+
+				c3m2d2.agregarParticipante(d130);
+				c3m2d2.agregarParticipante(d133);
+				c3m2d2.agregarParticipante(d136);
+				c3m2d2.agregarParticipante(d139);
+				c3m2d2.agregarParticipante(d142);
+				c3m2d2.agregarParticipante(d145);
+				c3m2d2.agregarParticipante(d148);
+				c3m2d2.agregarParticipante(d151);
+				c3m2d2.agregarParticipante(d154);
+
+				c1m3d2.agregarParticipante(d157);
+				c1m3d2.agregarParticipante(d160);
+				c1m3d2.agregarParticipante(d163);
+				c1m3d2.agregarParticipante(d166);
+				c1m3d2.agregarParticipante(d169);
+				c1m3d2.agregarParticipante(d172);
+				c1m3d2.agregarParticipante(d175);
+				c1m3d2.agregarParticipante(d178);
+
+				c2m3d2.agregarParticipante(d157);
+				c2m3d2.agregarParticipante(d160);
+				c2m3d2.agregarParticipante(d163);
+				c2m3d2.agregarParticipante(d166);
+				c2m3d2.agregarParticipante(d169);
+				c2m3d2.agregarParticipante(d172);
+				c2m3d2.agregarParticipante(d175);
+				c2m3d2.agregarParticipante(d178);
+
+				c3m3d2.agregarParticipante(d157);
+				c3m3d2.agregarParticipante(d160);
+				c3m3d2.agregarParticipante(d163);
+				c3m3d2.agregarParticipante(d166);
+				c3m3d2.agregarParticipante(d169);
+				c3m3d2.agregarParticipante(d172);
+				c3m3d2.agregarParticipante(d175);
+				c3m3d2.agregarParticipante(d178);
+
+				c4m3d2.agregarParticipante(d157);
+				c4m3d2.agregarParticipante(d160);
+				c4m3d2.agregarParticipante(d163);
+				c4m3d2.agregarParticipante(d166);
+				c4m3d2.agregarParticipante(d169);
+				c4m3d2.agregarParticipante(d172);
+				c4m3d2.agregarParticipante(d175);
+				c4m3d2.agregarParticipante(d178);
+
+				c1m4d2.agregarParticipante(d181);
+				c1m4d2.agregarParticipante(d184);
+				c1m4d2.agregarParticipante(d187);
+				c1m4d2.agregarParticipante(d190);
+				c1m4d2.agregarParticipante(d193);
+				c1m4d2.agregarParticipante(d196);
+				c1m4d2.agregarParticipante(d199);
+
+				c2m4d2.agregarParticipante(d181);
+				c2m4d2.agregarParticipante(d184);
+				c2m4d2.agregarParticipante(d187);
+				c2m4d2.agregarParticipante(d190);
+				c2m4d2.agregarParticipante(d193);
+				c2m4d2.agregarParticipante(d196);
+				c2m4d2.agregarParticipante(d199);
+
+				c3m4d2.agregarParticipante(d181);
+				c3m4d2.agregarParticipante(d184);
+				c3m4d2.agregarParticipante(d187);
+				c3m4d2.agregarParticipante(d190);
+				c3m4d2.agregarParticipante(d193);
+				c3m4d2.agregarParticipante(d196);
+				c3m4d2.agregarParticipante(d199);
 			}
 		});
 	}
