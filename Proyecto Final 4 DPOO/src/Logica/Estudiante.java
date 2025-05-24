@@ -68,8 +68,8 @@ public class Estudiante extends Investigador{
 		if(grupo.trim().isEmpty())
 			throw new CadenaNoValidaException("El grupo del estudiante no puede estar vacio");
 
-		if(!grupo.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El grupo del estudiante solo puede tener letras y espacios");
+		/*if(!grupo.matches("^[\\p{L}\\s]+$"))
+			throw new CadenaNoValidaException("El grupo del estudiante solo puede tener letras y espacios");*/
 
 		this.grupo = grupo;
 	}
