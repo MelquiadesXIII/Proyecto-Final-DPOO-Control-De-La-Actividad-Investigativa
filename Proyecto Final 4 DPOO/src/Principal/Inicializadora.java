@@ -24,7 +24,7 @@ public class Inicializadora{
 				vicedecanato.agregarDepartamento(depto2);
 				vicedecanato.agregarDepartamento(depto3);
 
-				//Aqui se crean 60 docentes y se agregan al vicedecanato
+				//Aqui se crean 300 docentes y se agregan al vicedecanato
 				Docente d1 = new Docente("Carlos", "Pérez", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
 				Docente d2 = new Docente("María", "Gómez", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
 				Docente d3 = new Docente("Luis", "Martínez", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
@@ -642,9 +642,9 @@ public class Inicializadora{
 
 				//Cursos de la maestria 1 del departamento 1
 				CursoPosgrado c1m1d1 = new CursoPosgrado("Fundamentos de Inteligencia Artificial", new ArrayList<String>() {{ add("Comprender los fundamentos teóricos de la IA"); add("Aplicar algoritmos de aprendizaje automático"); }}, 4, d1);
-				CursoPosgrado c2m1d1 = new CursoPosgrado("Redes Neuronales y Deep Learning", new ArrayList<String>() {{ add("Desarrollar modelos de redes neuronales"); add("Implementar soluciones de deep learning"); }}, 5, d6);
-				CursoPosgrado c3m1d1 = new CursoPosgrado("Procesamiento de Lenguaje Natural", new ArrayList<String>() {{ add("Analizar problemas de procesamiento de lenguaje natural"); add("Implementar soluciones de NLP");}}, 4, d11);
-				CursoPosgrado c4m1d1 = new CursoPosgrado("Visión por Computadora", new ArrayList<String>() {{add("Entender los principios de visión por computadora");add("Desarrollar aplicaciones de reconocimiento de imágenes"); }}, 5, d16);
+				CursoPosgrado c2m1d1 = new CursoPosgrado("Redes Neuronales y Deep Learning", new ArrayList<String>() {{ add("Desarrollar modelos de redes neuronales"); add("Implementar soluciones de deep learning"); }}, 5, d1);
+				CursoPosgrado c3m1d1 = new CursoPosgrado("Procesamiento de Lenguaje Natural", new ArrayList<String>() {{ add("Analizar problemas de procesamiento de lenguaje natural"); add("Implementar soluciones de NLP");}}, 4, d3);
+				CursoPosgrado c4m1d1 = new CursoPosgrado("Visión por Computadora", new ArrayList<String>() {{add("Entender los principios de visión por computadora");add("Desarrollar aplicaciones de reconocimiento de imágenes"); }}, 5, d5);
 
 				m1d1.agregarCursoPosgrado(c1m1d1);
 				m1d1.agregarCursoPosgrado(c2m1d1);
@@ -652,7 +652,7 @@ public class Inicializadora{
 				m1d1.agregarCursoPosgrado(c4m1d1);
 
 				//Cursos de la maestria 2 del departamento 1
-				CursoPosgrado c1m2d1 = new CursoPosgrado("Fundamentos de Ciberseguridad", new ArrayList<String>() {{ add("Comprender los principios de seguridad informática"); add("Analizar vulnerabilidades en sistemas"); }}, 4, d3);
+				CursoPosgrado c1m2d1 = new CursoPosgrado("Fundamentos de Ciberseguridad", new ArrayList<String>() {{ add("Comprender los principios de seguridad informática"); add("Analizar vulnerabilidades en sistemas"); }}, 4, d6);
 				CursoPosgrado c2m2d1 = new CursoPosgrado("Criptografía Avanzada", new ArrayList<String>() {{ add("Implementar técnicas de criptografía moderna"); add("Analizar protocolos de seguridad"); }}, 5, d8);
 				CursoPosgrado c3m2d1 = new CursoPosgrado("Seguridad en Redes", new ArrayList<String>() {{ add("Identificar amenazas en redes"); add("Diseñar redes seguras"); }}, 4, d13);
 
@@ -661,11 +661,11 @@ public class Inicializadora{
 				m2d1.agregarCursoPosgrado(c3m2d1);
 
 				//Cursos de la maestria 3 del departamento 1
-				CursoPosgrado c1m3d1 = new CursoPosgrado("Análisis Exploratorio de Datos", new ArrayList<String>() {{ add("Manejar técnicas de análisis exploratorio de datos"); add("Visualizar datos efectivamente"); }}, 4, d5);
-				CursoPosgrado c2m3d1 = new CursoPosgrado("Machine Learning Aplicado", new ArrayList<String>() {{ add("Aplicar algoritmos de aprendizaje automático"); add("Evaluar modelos predictivos"); }}, 5, d10);
-				CursoPosgrado c3m3d1 = new CursoPosgrado("Big Data y Procesamiento Distribuido", new ArrayList<String>() {{ add("Procesar grandes volúmenes de datos"); add("Diseñar pipelines de datos"); }}, 5, d15);
+				CursoPosgrado c1m3d1 = new CursoPosgrado("Análisis Exploratorio de Datos", new ArrayList<String>() {{ add("Manejar técnicas de análisis exploratorio de datos"); add("Visualizar datos efectivamente"); }}, 4, d31);
+				CursoPosgrado c2m3d1 = new CursoPosgrado("Machine Learning Aplicado", new ArrayList<String>() {{ add("Aplicar algoritmos de aprendizaje automático"); add("Evaluar modelos predictivos"); }}, 5, d28);
+				CursoPosgrado c3m3d1 = new CursoPosgrado("Big Data y Procesamiento Distribuido", new ArrayList<String>() {{ add("Procesar grandes volúmenes de datos"); add("Diseñar pipelines de datos"); }}, 5, d23);
 				CursoPosgrado c4m3d1 = new CursoPosgrado("Visualización de Datos", new ArrayList<String>() {{ add("Visualizar datos complejos"); add("Comunicar hallazgos efectivamente"); }}, 4, d20);
-				CursoPosgrado c5m3d1 = new CursoPosgrado("Gestión de Proyectos de Datos", new ArrayList<String>() {{ add("Gestionar proyectos de ciencia de datos"); add("Aplicar ética en el manejo de datos"); }}, 3, d4);
+				CursoPosgrado c5m3d1 = new CursoPosgrado("Gestión de Proyectos de Datos", new ArrayList<String>() {{ add("Gestionar proyectos de ciencia de datos"); add("Aplicar ética en el manejo de datos"); }}, 3, d21);
 
 				m3d1.agregarCursoPosgrado(c1m3d1);
 				m3d1.agregarCursoPosgrado(c2m3d1);
@@ -674,28 +674,28 @@ public class Inicializadora{
 				m3d1.agregarCursoPosgrado(c5m3d1);
 
 				//Cursos de la maestria 1 del departamento 2
-				CursoPosgrado c1m1d2 = new CursoPosgrado("Análisis de Sistemas de Potencia", new ArrayList<String>() {{ add("Analizar flujos de carga en sistemas eléctricos"); add("Evaluar estabilidad en sistemas de potencia");}}, 4, d21);
-				CursoPosgrado c2m1d2 = new CursoPosgrado("Protecciones Eléctricas", new ArrayList<String>() {{ add("Diseñar esquemas de protección para sistemas eléctricos"); add("Analizar fallas en sistemas de potencia"); }}, 5, d26);
-				CursoPosgrado c3m1d2 = new CursoPosgrado("Generación Distribuida", new ArrayList<String>() {{ add("Evaluar impactos de generación distribuida"); add("Diseñar sistemas con fuentes renovables"); }}, 4, d31);
+				CursoPosgrado c1m1d2 = new CursoPosgrado("Análisis de Sistemas de Potencia", new ArrayList<String>() {{ add("Analizar flujos de carga en sistemas eléctricos"); add("Evaluar estabilidad en sistemas de potencia");}}, 4, d102);
+				CursoPosgrado c2m1d2 = new CursoPosgrado("Protecciones Eléctricas", new ArrayList<String>() {{ add("Diseñar esquemas de protección para sistemas eléctricos"); add("Analizar fallas en sistemas de potencia"); }}, 5, d105);
+				CursoPosgrado c3m1d2 = new CursoPosgrado("Generación Distribuida", new ArrayList<String>() {{ add("Evaluar impactos de generación distribuida"); add("Diseñar sistemas con fuentes renovables"); }}, 4, d108);
 
 				m1d2.agregarCursoPosgrado(c1m1d2);
 				m1d2.agregarCursoPosgrado(c2m1d2);
 				m1d2.agregarCursoPosgrado(c3m1d2);
 
 				//Cursos de la maestria 2 del departamento 2
-				CursoPosgrado c1m2d2 = new CursoPosgrado("Control de Procesos Industriales", new ArrayList<String>() {{ add("Diseñar sistemas de control para procesos industriales"); add("Implementar estrategias de control PID"); }}, 4, d23);
-				CursoPosgrado c2m2d2 = new CursoPosgrado("Sistemas SCADA", new ArrayList<String>() {{ add("Configurar sistemas SCADA industriales"); add("Implementar monitoreo remoto de procesos"); }}, 5, d28);
-				CursoPosgrado c3m2d2 = new CursoPosgrado("Robótica Industrial", new ArrayList<String>() {{ add("Programar robots industriales"); add("Diseñar células de trabajo automatizadas"); }}, 4, d33);
+				CursoPosgrado c1m2d2 = new CursoPosgrado("Control de Procesos Industriales", new ArrayList<String>() {{ add("Diseñar sistemas de control para procesos industriales"); add("Implementar estrategias de control PID"); }}, 4, d117);
+				CursoPosgrado c2m2d2 = new CursoPosgrado("Sistemas SCADA", new ArrayList<String>() {{ add("Configurar sistemas SCADA industriales"); add("Implementar monitoreo remoto de procesos"); }}, 5, d120);
+				CursoPosgrado c3m2d2 = new CursoPosgrado("Robótica Industrial", new ArrayList<String>() {{ add("Programar robots industriales"); add("Diseñar células de trabajo automatizadas"); }}, 4, d126);
 
 				m2d2.agregarCursoPosgrado(c1m2d2);
 				m2d2.agregarCursoPosgrado(c2m2d2);
 				m2d2.agregarCursoPosgrado(c3m2d2);
 
 				//Cursos de la maestria 3 del departamento 2
-				CursoPosgrado c1m3d2 = new CursoPosgrado("Redes de Telecomunicaciones", new ArrayList<String>() {{ add("Diseñar arquitecturas de redes de telecomunicaciones"); add("Analizar protocolos de comunicación"); }}, 4, d25);
-				CursoPosgrado c2m3d2 = new CursoPosgrado("Comunicaciones Digitales", new ArrayList<String>() {{ add("Implementar sistemas de modulación digital"); add("Analizar desempeño de sistemas de comunicación"); }}, 5, d30);
-				CursoPosgrado c3m3d2 = new CursoPosgrado("Redes 5G", new ArrayList<String>() {{ add("Evaluar tecnologías para redes 5G"); add("Diseñar redes de nueva generación"); }}, 4, d35);
-				CursoPosgrado c4m3d2 = new CursoPosgrado("Fibra Óptica", new ArrayList<String>() {{ add("Diseñar sistemas de transmisión por fibra óptica"); add("Analizar parámetros de desempeño en fibras"); }}, 4, d40);
+				CursoPosgrado c1m3d2 = new CursoPosgrado("Redes de Telecomunicaciones", new ArrayList<String>() {{ add("Diseñar arquitecturas de redes de telecomunicaciones"); add("Analizar protocolos de comunicación"); }}, 4, d129);
+				CursoPosgrado c2m3d2 = new CursoPosgrado("Comunicaciones Digitales", new ArrayList<String>() {{ add("Implementar sistemas de modulación digital"); add("Analizar desempeño de sistemas de comunicación"); }}, 5, d132);
+				CursoPosgrado c3m3d2 = new CursoPosgrado("Redes FiveG", new ArrayList<String>() {{ add("Evaluar tecnologías para redes FiveG"); add("Diseñar redes de nueva generación"); }}, 4, d35);
+				CursoPosgrado c4m3d2 = new CursoPosgrado("Fibra Óptica", new ArrayList<String>() {{ add("Diseñar sistemas de transmisión por fibra óptica"); add("Analizar parámetros de desempeño en fibras"); }}, 4, d135);
 
 				m3d2.agregarCursoPosgrado(c1m3d2);
 				m3d2.agregarCursoPosgrado(c2m3d2);
@@ -703,37 +703,37 @@ public class Inicializadora{
 				m3d2.agregarCursoPosgrado(c4m3d2);
 
 				//Cursos de la maestria 4 del departamento 2
-				CursoPosgrado c1m4d2 = new CursoPosgrado("Convertidores Electrónicos", new ArrayList<String>() {{add("Diseñar convertidores CC-CC y CC-CA"); add("Analizar topologías de conversión"); }}, 4, d22);
-				CursoPosgrado c2m4d2 = new CursoPosgrado("Accionamientos Eléctricos", new ArrayList<String>() {{add("Implementar control de motores eléctricos"); add("Diseñar sistemas de accionamiento variable"); }}, 5, d27);
-				CursoPosgrado c3m4d2 = new CursoPosgrado("Calidad de Energía", new ArrayList<String>() {{add("Analizar problemas de calidad de energía"); add("Diseñar sistemas de compensación");}}, 4, d32);
+				CursoPosgrado c1m4d2 = new CursoPosgrado("Convertidores Electrónicos", new ArrayList<String>() {{add("Diseñar convertidores CC CC y CC CA"); add("Analizar topologías de conversión"); }}, 4, d153);
+				CursoPosgrado c2m4d2 = new CursoPosgrado("Accionamientos Eléctricos", new ArrayList<String>() {{add("Implementar control de motores eléctricos"); add("Diseñar sistemas de accionamiento variable"); }}, 5, d156);
+				CursoPosgrado c3m4d2 = new CursoPosgrado("Calidad de Energía", new ArrayList<String>() {{add("Analizar problemas de calidad de energía"); add("Diseñar sistemas de compensación");}}, 4, d159);
 
 				m4d2.agregarCursoPosgrado(c1m4d2);
 				m4d2.agregarCursoPosgrado(c2m4d2);
 				m4d2.agregarCursoPosgrado(c3m4d2);
 				
 				// Cursos de la maestria 1 del departamento 3
-				CursoPosgrado c1m1d3 = new CursoPosgrado("Modelos Matemáticos Avanzados", new ArrayList<String>() {{ add("Aplicar modelos matemáticos a problemas complejos"); add("Desarrollar soluciones basadas en modelación matemática");  }}, 4, d41);
-				CursoPosgrado c2m1d3 = new CursoPosgrado("Ecuaciones Diferenciales", new ArrayList<String>() {{ add("Resolver ecuaciones diferenciales complejas"); add("Aplicar ecuaciones diferenciales en modelado físico"); }}, 5, d46);
-				CursoPosgrado c3m1d3 = new CursoPosgrado("Análisis Numérico", new ArrayList<String>() {{ add("Implementar métodos numéricos para resolver problemas matemáticos");add("Analizar errores en cálculos numéricos");}}, 4, d51);
+				CursoPosgrado c1m1d3 = new CursoPosgrado("Modelos Matemáticos Avanzados", new ArrayList<String>() {{ add("Aplicar modelos matemáticos a problemas complejos"); add("Desarrollar soluciones basadas en modelación matemática");  }}, 4, d201);
+				CursoPosgrado c2m1d3 = new CursoPosgrado("Ecuaciones Diferenciales", new ArrayList<String>() {{ add("Resolver ecuaciones diferenciales complejas"); add("Aplicar ecuaciones diferenciales en modelado físico"); }}, 5, d204);
+				CursoPosgrado c3m1d3 = new CursoPosgrado("Análisis Numérico", new ArrayList<String>() {{ add("Implementar métodos numéricos para resolver problemas matemáticos");add("Analizar errores en cálculos numéricos");}}, 4, d207);
 
 				m1d3.agregarCursoPosgrado(c1m1d3);
 				m1d3.agregarCursoPosgrado(c2m1d3);
 				m1d3.agregarCursoPosgrado(c3m1d3);
 
 				// Cursos de la maestria 2 del departamento 3
-				CursoPosgrado c1m2d3 = new CursoPosgrado("Estadística Multivariante", new ArrayList<String>() {{ add("Aplicar técnicas estadísticas multivariantes"); add("Interpretar resultados de análisis multivariados"); }}, 4, d42);
-				CursoPosgrado c2m2d3 = new CursoPosgrado("Diseño de Experimentos", new ArrayList<String>() {{ add("Planificar diseños experimentales eficientes");add("Analizar datos de experimentos científicos"); }}, 5, d47);
-			    CursoPosgrado c3m2d3 = new CursoPosgrado("Series Temporales", new ArrayList<String>() {{add("Modelar y predecir series temporales");add("Aplicar técnicas de suavizado y descomposición"); }}, 4, d52);
+				CursoPosgrado c1m2d3 = new CursoPosgrado("Estadística Multivariante", new ArrayList<String>() {{ add("Aplicar técnicas estadísticas multivariantes"); add("Interpretar resultados de análisis multivariados"); }}, 4, d210);
+				CursoPosgrado c2m2d3 = new CursoPosgrado("Diseño de Experimentos", new ArrayList<String>() {{ add("Planificar diseños experimentales eficientes");add("Analizar datos de experimentos científicos"); }}, 5, d213);
+			    CursoPosgrado c3m2d3 = new CursoPosgrado("Series Temporales", new ArrayList<String>() {{add("Modelar y predecir series temporales");add("Aplicar técnicas de suavizado y descomposición"); }}, 4, d216);
 
 				m2d3.agregarCursoPosgrado(c1m2d3);
 				m2d3.agregarCursoPosgrado(c2m2d3);
 				m2d3.agregarCursoPosgrado(c3m2d3);
 
 				// Cursos de la maestria 3 del departamento 3
-				CursoPosgrado c1m3d3 = new CursoPosgrado("Optimización Lineal", new ArrayList<String>() {{ add("Formular problemas de optimización lineal"); add("Resolver modelos usando métodos simplex"); }}, 4, d43);			    
-				CursoPosgrado c2m3d3 = new CursoPosgrado("Programación Dinámica", new ArrayList<String>() {{ add("Aplicar principios de programación dinámica");add("Resolver problemas de optimización multietapa"); }}, 5, d48);   
-				CursoPosgrado c3m3d3 = new CursoPosgrado("Teoría de Juegos", new ArrayList<String>() {{add("Analizar estrategias en situaciones competitivas"); add("Aplicar modelos de teoría de juegos");}}, 4, d53);    
-				CursoPosgrado c4m3d3 = new CursoPosgrado("Optimización en Redes", new ArrayList<String>() {{add("Resolver problemas de flujo en redes"); add("Aplicar algoritmos de optimización en grafos");}}, 4, d58);
+				CursoPosgrado c1m3d3 = new CursoPosgrado("Optimización Lineal", new ArrayList<String>() {{ add("Formular problemas de optimización lineal"); add("Resolver modelos usando métodos simplex"); }}, 4, d219);			    
+				CursoPosgrado c2m3d3 = new CursoPosgrado("Programación Dinámica", new ArrayList<String>() {{ add("Aplicar principios de programación dinámica");add("Resolver problemas de optimización multietapa"); }}, 5, d222);   
+				CursoPosgrado c3m3d3 = new CursoPosgrado("Teoría de Juegos", new ArrayList<String>() {{add("Analizar estrategias en situaciones competitivas"); add("Aplicar modelos de teoría de juegos");}}, 4, d225);    
+				CursoPosgrado c4m3d3 = new CursoPosgrado("Optimización en Redes", new ArrayList<String>() {{add("Resolver problemas de flujo en redes"); add("Aplicar algoritmos de optimización en grafos");}}, 4, d228);
 
 				m3d3.agregarCursoPosgrado(c1m3d3);
 				m3d3.agregarCursoPosgrado(c2m3d3);
@@ -741,19 +741,19 @@ public class Inicializadora{
 				m3d3.agregarCursoPosgrado(c4m3d3);
 
 				// Cursos de la maestria 4 del departamento 3
-				CursoPosgrado c1m4d3 = new CursoPosgrado("Modelos Financieros Avanzados", new ArrayList<String>() {{add("Desarrollar modelos matemáticos para finanzas");add("Evaluar riesgos en instrumentos financieros"); }}, 4, d45);		    
-				CursoPosgrado c2m4d3 = new CursoPosgrado("Derivados Financieros", new ArrayList<String>() {{add("Valorar instrumentos derivados"); add("Aplicar modelos de fijación de precios"); }}, 5, d50);
-				CursoPosgrado c3m4d3 = new CursoPosgrado("Gestión de Riesgos", new ArrayList<String>() {{add("Cuantificar riesgos financieros");add("Implementar estrategias de cobertura"); }}, 4, d55);
+				CursoPosgrado c1m4d3 = new CursoPosgrado("Modelos Financieros Avanzados", new ArrayList<String>() {{add("Desarrollar modelos matemáticos para finanzas");add("Evaluar riesgos en instrumentos financieros"); }}, 4, d231);		    
+				CursoPosgrado c2m4d3 = new CursoPosgrado("Derivados Financieros", new ArrayList<String>() {{add("Valorar instrumentos derivados"); add("Aplicar modelos de fijación de precios"); }}, 5, d234);
+				CursoPosgrado c3m4d3 = new CursoPosgrado("Gestión de Riesgos", new ArrayList<String>() {{add("Cuantificar riesgos financieros");add("Implementar estrategias de cobertura"); }}, 4, d237);
 
 				m4d3.agregarCursoPosgrado(c1m4d3);
 				m4d3.agregarCursoPosgrado(c2m4d3);
 				m4d3.agregarCursoPosgrado(c3m4d3);
 
 				// Cursos de la maestria 5 del departamento 3
-				CursoPosgrado c1m5d3 = new CursoPosgrado("Algoritmos Criptográficos", new ArrayList<String>() {{ add("Implementar algoritmos criptográficos modernos");add("Analizar fortalezas de sistemas criptográficos");}}, 4, d44);	    
-				CursoPosgrado c2m5d3 = new CursoPosgrado("Seguridad Computacional",  new ArrayList<String>() {{ add("Evaluar vulnerabilidades en sistemas informáticos"); add("Diseñar protocolos seguros"); }}, 5, d49);
-				CursoPosgrado c3m5d3 = new CursoPosgrado("Teoría de Números Aplicada", new ArrayList<String>() {{add("Aplicar conceptos avanzados de teoría de números");add("Resolver problemas criptográficos con métodos numéricos");}}, 4, d54);
-				CursoPosgrado c4m5d3 = new CursoPosgrado("Firma Digital y Autenticación", new ArrayList<String>() {{add("Implementar sistemas de firma digital"); add("Diseñar protocolos de autenticación segura"); }}, 4, d59);
+				CursoPosgrado c1m5d3 = new CursoPosgrado("Algoritmos Criptográficos", new ArrayList<String>() {{ add("Implementar algoritmos criptográficos modernos");add("Analizar fortalezas de sistemas criptográficos");}}, 4, d240);	    
+				CursoPosgrado c2m5d3 = new CursoPosgrado("Seguridad Computacional",  new ArrayList<String>() {{ add("Evaluar vulnerabilidades en sistemas informáticos"); add("Diseñar protocolos seguros"); }}, 5, d243);
+				CursoPosgrado c3m5d3 = new CursoPosgrado("Teoría de Números Aplicada", new ArrayList<String>() {{add("Aplicar conceptos avanzados de teoría de números");add("Resolver problemas criptográficos con métodos numéricos");}}, 4, d246);
+				CursoPosgrado c4m5d3 = new CursoPosgrado("Firma Digital y Autenticación", new ArrayList<String>() {{add("Implementar sistemas de firma digital"); add("Diseñar protocolos de autenticación segura"); }}, 4, d252);
 
 				m5d3.agregarCursoPosgrado(c1m5d3);
 				m5d3.agregarCursoPosgrado(c2m5d3);
@@ -815,19 +815,57 @@ public class Inicializadora{
 				m3d2.agregarMatriculado(d160);
 				m3d2.agregarMatriculado(d163);
 				m3d2.agregarMatriculado(d166);
-				m3d2.agregarMatriculado(d);
-				m3d2.agregarMatriculado(d);
-				m3d2.agregarMatriculado(d);
-				m3d2.agregarMatriculado(d);
+				m3d2.agregarMatriculado(d169);
+				m3d2.agregarMatriculado(d172);
+				m3d2.agregarMatriculado(d175);
+				m3d2.agregarMatriculado(d178);
 				
-				m4d2.agregarMatriculado(d);
-				m4d2.agregarMatriculado(d);
-				m4d2.agregarMatriculado(d);
-				m4d2.agregarMatriculado(d);
-				m4d2.agregarMatriculado(d);
-				m4d2.agregarMatriculado(d);
-				m4d2.agregarMatriculado(d);
-				m4d2.agregarMatriculado(d);
+				m4d2.agregarMatriculado(d181);
+				m4d2.agregarMatriculado(d184);
+				m4d2.agregarMatriculado(d187);
+				m4d2.agregarMatriculado(d190);
+				m4d2.agregarMatriculado(d193);
+				m4d2.agregarMatriculado(d196);
+				m4d2.agregarMatriculado(d199);
+				
+				//Matricular docentes en maestrias del departamento 3
+				m1d3.agregarMatriculado(d202);
+				m1d3.agregarMatriculado(d205);
+				m1d3.agregarMatriculado(d208);
+				m1d3.agregarMatriculado(d211);
+				m1d3.agregarMatriculado(d214);
+				m1d3.agregarMatriculado(d217);
+				m1d3.agregarMatriculado(d220);
+				
+				m2d3.agregarMatriculado(d223);
+				m2d3.agregarMatriculado(d226);
+				m2d3.agregarMatriculado(d229);
+				m2d3.agregarMatriculado(d232);
+				m2d3.agregarMatriculado(d235);
+				m2d3.agregarMatriculado(d238);
+				m2d3.agregarMatriculado(d241);
+				
+				m3d3.agregarMatriculado(d244);
+				m3d3.agregarMatriculado(d247);
+				m3d3.agregarMatriculado(d250);
+				m3d3.agregarMatriculado(d253);
+				m3d3.agregarMatriculado(d256);
+				m3d3.agregarMatriculado(d259);
+				
+				m4d3.agregarMatriculado(d262);
+				m4d3.agregarMatriculado(d265);
+				m4d3.agregarMatriculado(d268);
+				m4d3.agregarMatriculado(d271);
+				m4d3.agregarMatriculado(d274);
+				m4d3.agregarMatriculado(d277);
+				m4d3.agregarMatriculado(d280);
+				
+				m5d3.agregarMatriculado(d283);
+				m5d3.agregarMatriculado(d286);
+				m5d3.agregarMatriculado(d289);
+				m5d3.agregarMatriculado(d292);
+				m5d3.agregarMatriculado(d295);
+				m5d3.agregarMatriculado(d298);
 			}
 		});
 	}
