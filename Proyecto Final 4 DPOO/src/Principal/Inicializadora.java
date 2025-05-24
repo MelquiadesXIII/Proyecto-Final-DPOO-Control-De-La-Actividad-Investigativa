@@ -7,6 +7,7 @@ import javax.swing.*;
 import Interfaz.*;
 import Logica.*;
 
+@SuppressWarnings("unused")
 public class Inicializadora{
 	public static void main(String[] args) {
 
