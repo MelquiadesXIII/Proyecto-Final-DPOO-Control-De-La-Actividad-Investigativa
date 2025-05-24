@@ -30,7 +30,7 @@ public class Inicializadora{
 				//Docentes del departamento 1
 				Docente d1 = new Docente("Sonia", "Pérez Lovelle", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
 				Docente d2 = new Docente("Rodolfo", "Remesar Martin", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
-				Docente d3 = new Docente("Luis", "Martínez", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
+				Docente d3 = new Docente("Mae", "López", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
 				Docente d4 = new Docente("Ana", "López", CategoriaCientifica.NINGUNA, CategoriaDocente.ASISTENTE);
 				Docente d5 = new Docente("Javier", "Rodríguez", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d6 = new Docente("Lucía", "Fernández", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
@@ -542,7 +542,7 @@ public class Inicializadora{
 				Estudiante e27 = new Estudiante("Neldris", "Figueredo Acosta", "G22");
 				Estudiante e28 = new Estudiante("Maikel Alejandro", "García Bolívar", "G14");
 				Estudiante e29 = new Estudiante("Jonathan", "Váldes Bogaert", "G14");
-				Estudiante e30 = new Estudiante("Zamira", "Manzano", "G12");
+				Estudiante e30 = new Estudiante("Zamira", "Manzano Sánchez", "G12");
 				Estudiante e31 = new Estudiante("Erika", "Risco García", "G11");
 				Estudiante e32 = new Estudiante("Alejandro José", "Sardiñas Salomón", "G31");
 				Estudiante e33 = new Estudiante("Javier", "Otero Olave", "G13");
