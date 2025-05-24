@@ -26,13 +26,18 @@ import javax.swing.BoxLayout;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import Logica.*;
+import Excepciones.*;
 
 public class InterfazPrincipal extends JFrame {
 
+	private Vicedecanato vicedecanato;
 	private static final long serialVersionUID = 1L;
 	
 	
-	public InterfazPrincipal() {
+	public InterfazPrincipal(Vicedecanato vicedecanato) {
+		
+		this.vicedecanato = vicedecanato;
 		getContentPane().setBackground(Color.WHITE);
 		
 		setTitle("Vicedecanato de Investigacion");
