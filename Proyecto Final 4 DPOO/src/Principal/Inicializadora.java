@@ -1238,6 +1238,39 @@ public class Inicializadora{
 				c4m5d3.agregarParticipante(d295);
 				c4m5d3.agregarParticipante(d298);
 				
+				//Se crean lineas de investigacion y se agregan al departamento 1
+				LineaInvestigacion li1d1 = new LineaInvestigacion("Inteligencia Artificial y Aprendizaje Automático");
+				LineaInvestigacion li2d1 = new LineaInvestigacion("Ciberseguridad y Redes Avanzadas");
+				LineaInvestigacion li3d1 = new LineaInvestigacion("Ciencia de Datos y Big Data");
+
+				depto1.agregarLineaInvestigacion(li1d1);
+				depto1.agregarLineaInvestigacion(li2d1);
+				depto1.agregarLineaInvestigacion(li3d1);
+
+				//Se crean lineas de investigacion y se agregan al departamento 2
+				LineaInvestigacion li1d2 = new LineaInvestigacion("Sistemas de Energía y Potencia");
+				LineaInvestigacion li2d2 = new LineaInvestigacion("Automatización y Control Industrial");
+				LineaInvestigacion li3d2 = new LineaInvestigacion("Telecomunicaciones y Redes Inteligentes");
+				LineaInvestigacion li4d2 = new LineaInvestigacion("Electrónica de Potencia y Convertidores");
+
+				depto2.agregarLineaInvestigacion(li1d2);
+				depto2.agregarLineaInvestigacion(li2d2);
+				depto2.agregarLineaInvestigacion(li3d2);
+				depto2.agregarLineaInvestigacion(li4d2);
+
+				//Se crean lineas de investigacion y se agregan al departamento 3
+				LineaInvestigacion li1d3 = new LineaInvestigacion("Modelación Matemática y Simulación");
+				LineaInvestigacion li2d3 = new LineaInvestigacion("Estadística Avanzada y Análisis de Datos");
+				LineaInvestigacion li3d3 = new LineaInvestigacion("Investigación Operativa y Optimización");
+				LineaInvestigacion li4d3 = new LineaInvestigacion("Matemática Financiera y Actuarial");
+				LineaInvestigacion li5d3 = new LineaInvestigacion("Criptografía y Seguridad Informática");
+
+				depto3.agregarLineaInvestigacion(li1d3);
+				depto3.agregarLineaInvestigacion(li2d3);
+				depto3.agregarLineaInvestigacion(li3d3);
+				depto3.agregarLineaInvestigacion(li4d3);
+				depto3.agregarLineaInvestigacion(li5d3);
+				
 				new InterfazPrincipal(vicedecanato);
 			}
 		});
