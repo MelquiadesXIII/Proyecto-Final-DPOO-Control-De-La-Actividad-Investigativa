@@ -11,12 +11,19 @@ public class FramePrincipal extends JFrame {
 	private JPanel contentPane;
 
 	public FramePrincipal() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		configurarVentanaPrincipal();
 	}
 
+	private void configurarVentanaPrincipal(){
+
+		getContentPane().setBackground(Color.WHITE);
+		setTitle("Vicedecanato de Investigacion");
+		setMinimumSize(new Dimension(800,600)); //Establece el tamannio minimo
+		setResizable(false);
+		setSize(800, 600);;
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+	}
 }
