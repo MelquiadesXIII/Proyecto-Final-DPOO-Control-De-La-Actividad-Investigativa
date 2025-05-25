@@ -1271,6 +1271,45 @@ public class Inicializadora{
 				depto3.agregarLineaInvestigacion(li4d3);
 				depto3.agregarLineaInvestigacion(li5d3);
 				
+				//Agregando investigadores a las lineas del departamento 1, empezamos con los estudiantes que son la menor cantidad
+				li1d1.agregarInvestigador(e1);  
+				li1d1.agregarInvestigador(e4);  
+				li1d1.agregarInvestigador(e7); 
+				li1d1.agregarInvestigador(e10); 
+				li1d1.agregarInvestigador(e13); 
+				
+				li2d1.agregarInvestigador(e2);  
+				li2d1.agregarInvestigador(e5); 
+				li2d1.agregarInvestigador(e8);  
+				li2d1.agregarInvestigador(e11); 
+
+				li3d1.agregarInvestigador(e3); 
+				li3d1.agregarInvestigador(e6);  
+				li3d1.agregarInvestigador(e9);  
+				li3d1.agregarInvestigador(e12); 
+				
+				//Departamento 2 continua:
+				li1d2.agregarInvestigador(e15);  
+				li1d2.agregarInvestigador(e18);  
+				li1d2.agregarInvestigador(e22);  
+				li1d2.agregarInvestigador(e25);  
+
+				li2d2.agregarInvestigador(e16); 
+				li2d2.agregarInvestigador(e19);  
+				li2d2.agregarInvestigador(e23);  
+				li2d2.agregarInvestigador(e26); 
+
+				li3d2.agregarInvestigador(e14); 
+				li3d2.agregarInvestigador(e17);  
+				li3d2.agregarInvestigador(e20);  
+				li3d2.agregarInvestigador(e24);  
+
+				li4d2.agregarInvestigador(e21); 
+				li4d2.agregarInvestigador(e27);
+				
+				//Finalizamos con departamento 3:
+				
+				
 				new InterfazPrincipal(vicedecanato);
 			}
 		});
