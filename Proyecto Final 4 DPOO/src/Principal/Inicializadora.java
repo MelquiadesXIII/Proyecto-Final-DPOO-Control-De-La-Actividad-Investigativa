@@ -1823,9 +1823,8 @@ public class Inicializadora{
 				PonenciaEvento pon149 = new PonenciaEvento("IoT in Water Management", LocalDate.of(2021, 11, 15), "Zurich", "9789900112233");
 				PonenciaEvento pon150 = new PonenciaEvento("Hybrid Cloud Security", LocalDate.of(2023, 6, 8), "Geneva", "9780011223344");
 				
-				//new MapanetInterface();
+				
 				new VentanaPrincipal();
-				//new InterfazPrincipal(vicedecanato);
 			}
 		});
 	}
