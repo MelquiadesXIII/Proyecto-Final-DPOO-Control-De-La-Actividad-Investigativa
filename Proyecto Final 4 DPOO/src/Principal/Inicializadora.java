@@ -1308,7 +1308,23 @@ public class Inicializadora{
 				li4d2.agregarInvestigador(e27);
 				
 				//Finalizamos con departamento 3:
-				
+				li1d3.agregarInvestigador(e28); 
+				li1d3.agregarInvestigador(e33);  
+				li1d3.agregarInvestigador(e38);  
+
+				li2d3.agregarInvestigador(e29); 
+				li2d3.agregarInvestigador(e34);  
+				li2d3.agregarInvestigador(e39); 
+			
+				li3d3.agregarInvestigador(e30);
+				li3d3.agregarInvestigador(e35); 
+				li3d3.agregarInvestigador(e40); 
+
+				li4d3.agregarInvestigador(e31);
+				li4d3.agregarInvestigador(e36);  
+
+				li5d3.agregarInvestigador(e32); 
+				li5d3.agregarInvestigador(e37);
 				
 				new InterfazPrincipal(vicedecanato);
 			}
