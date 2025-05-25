@@ -1326,6 +1326,66 @@ public class Inicializadora{
 				li5d3.agregarInvestigador(e32); 
 				li5d3.agregarInvestigador(e37);
 				
+				//Empezar a agregar a los docentes
+				li1d1.agregarInvestigador(d1); li1d1.agregarInvestigador(d4); li1d1.agregarInvestigador(d7); 
+				li1d1.agregarInvestigador(d10); li1d1.agregarInvestigador(d13); li1d1.agregarInvestigador(d16); 
+				li1d1.agregarInvestigador(d19); li1d1.agregarInvestigador(d22); li1d1.agregarInvestigador(d25); 
+				li1d1.agregarInvestigador(d28); li1d1.agregarInvestigador(d31); li1d1.agregarInvestigador(d34); 
+				li1d1.agregarInvestigador(d37); li1d1.agregarInvestigador(d40); li1d1.agregarInvestigador(d43); 
+				li1d1.agregarInvestigador(d46); li1d1.agregarInvestigador(d49); li1d1.agregarInvestigador(d52); 
+				li1d1.agregarInvestigador(d55); li1d1.agregarInvestigador(d58); li1d1.agregarInvestigador(d61); 
+				li1d1.agregarInvestigador(d64); li1d1.agregarInvestigador(d67); li1d1.agregarInvestigador(d70); 
+				li1d1.agregarInvestigador(d73);
+
+				li2d1.agregarInvestigador(d2); li2d1.agregarInvestigador(d5); li2d1.agregarInvestigador(d8); 
+				li2d1.agregarInvestigador(d11); li2d1.agregarInvestigador(d14); li2d1.agregarInvestigador(d17); 
+				li2d1.agregarInvestigador(d20); li2d1.agregarInvestigador(d23); li2d1.agregarInvestigador(d26); 
+				li2d1.agregarInvestigador(d29); li2d1.agregarInvestigador(d32); li2d1.agregarInvestigador(d35); 
+				li2d1.agregarInvestigador(d38); li2d1.agregarInvestigador(d41); li2d1.agregarInvestigador(d44); 
+				li2d1.agregarInvestigador(d47); li2d1.agregarInvestigador(d50); li2d1.agregarInvestigador(d53);
+
+				li3d1.agregarInvestigador(d3); li3d1.agregarInvestigador(d6); li3d1.agregarInvestigador(d9); 
+				li3d1.agregarInvestigador(d12); li3d1.agregarInvestigador(d15); li3d1.agregarInvestigador(d18); 
+				li3d1.agregarInvestigador(d21); li3d1.agregarInvestigador(d24); li3d1.agregarInvestigador(d27); 
+				li3d1.agregarInvestigador(d30); li3d1.agregarInvestigador(d33); li3d1.agregarInvestigador(d36); 
+				li3d1.agregarInvestigador(d39); li3d1.agregarInvestigador(d42); li3d1.agregarInvestigador(d45); 
+				li3d1.agregarInvestigador(d48); li3d1.agregarInvestigador(d51); li3d1.agregarInvestigador(d54); 
+				li3d1.agregarInvestigador(d57); li3d1.agregarInvestigador(d60); li3d1.agregarInvestigador(d63); 
+				li3d1.agregarInvestigador(d66);
+				
+				//Se continua con los del departamento 2
+				li1d2.agregarInvestigador(d101); li1d2.agregarInvestigador(d105); li1d2.agregarInvestigador(d109);
+				li1d2.agregarInvestigador(d113); li1d2.agregarInvestigador(d117); li1d2.agregarInvestigador(d121);
+				li1d2.agregarInvestigador(d125); li1d2.agregarInvestigador(d129); li1d2.agregarInvestigador(d133);
+				li1d2.agregarInvestigador(d137); li1d2.agregarInvestigador(d141); li1d2.agregarInvestigador(d145);
+				li1d2.agregarInvestigador(d149); li1d2.agregarInvestigador(d153); li1d2.agregarInvestigador(d157);
+				li1d2.agregarInvestigador(d161); li1d2.agregarInvestigador(d165); li1d2.agregarInvestigador(d169);
+				li1d2.agregarInvestigador(d173); li1d2.agregarInvestigador(d177); li1d2.agregarInvestigador(d181);
+				li1d2.agregarInvestigador(d185);
+
+				li2d2.agregarInvestigador(d102); li2d2.agregarInvestigador(d106); li2d2.agregarInvestigador(d110);
+				li2d2.agregarInvestigador(d114); li2d2.agregarInvestigador(d118); li2d2.agregarInvestigador(d122);
+				li2d2.agregarInvestigador(d126); li2d2.agregarInvestigador(d130); li2d2.agregarInvestigador(d134);
+				li2d2.agregarInvestigador(d138); li2d2.agregarInvestigador(d142); li2d2.agregarInvestigador(d146);
+				li2d2.agregarInvestigador(d150); li2d2.agregarInvestigador(d154); li2d2.agregarInvestigador(d158);
+				li2d2.agregarInvestigador(d162); li2d2.agregarInvestigador(d166); li2d2.agregarInvestigador(d170);
+
+				li3d2.agregarInvestigador(d103); li3d2.agregarInvestigador(d107); li3d2.agregarInvestigador(d111);
+				li3d2.agregarInvestigador(d115); li3d2.agregarInvestigador(d119); li3d2.agregarInvestigador(d123);
+				li3d2.agregarInvestigador(d127); li3d2.agregarInvestigador(d131); li3d2.agregarInvestigador(d135);
+				li3d2.agregarInvestigador(d139); li3d2.agregarInvestigador(d143); li3d2.agregarInvestigador(d147);
+				li3d2.agregarInvestigador(d151); li3d2.agregarInvestigador(d155); li3d2.agregarInvestigador(d159);
+				li3d2.agregarInvestigador(d163); li3d2.agregarInvestigador(d167); li3d2.agregarInvestigador(d171);
+				li3d2.agregarInvestigador(d175); li3d2.agregarInvestigador(d179); li3d2.agregarInvestigador(d183);
+				li3d2.agregarInvestigador(d187); li3d2.agregarInvestigador(d191); li3d2.agregarInvestigador(d195);
+
+				li4d2.agregarInvestigador(d104); li4d2.agregarInvestigador(d108); li4d2.agregarInvestigador(d112);
+				li4d2.agregarInvestigador(d116); li4d2.agregarInvestigador(d120); li4d2.agregarInvestigador(d124);
+				li4d2.agregarInvestigador(d128); li4d2.agregarInvestigador(d132); li4d2.agregarInvestigador(d136);
+				li4d2.agregarInvestigador(d140); li4d2.agregarInvestigador(d144); li4d2.agregarInvestigador(d148);
+				li4d2.agregarInvestigador(d152); li4d2.agregarInvestigador(d156); li4d2.agregarInvestigador(d160);
+				li4d2.agregarInvestigador(d164);
+				
 				new InterfazPrincipal(vicedecanato);
 			}
 		});
