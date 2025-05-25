@@ -17,11 +17,14 @@ public class VentanaPrincipal extends JFrame{
 	JButton botonEstudiantes;
 	JButton botonAyuda;
 	JButton botonSalir;
+	JButton botonInicio;
+	CardLayout cardLayout;
 	
 	public VentanaPrincipal(){
 		
 		
 		inicializarConfiguracionUI();
+		crearPanelPrincipal();
 		crearPanelNavegacion();
 	}
 	
@@ -34,6 +37,7 @@ public class VentanaPrincipal extends JFrame{
 		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		setLayout(new BorderLayout());
 		
 		
 		setVisible(true);
@@ -61,7 +65,12 @@ public class VentanaPrincipal extends JFrame{
 		panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 		panelNavegacion.add(panelBotones);
 		
+		botonInicio = crearBoton("Inicio");
+		
 		botonDepartamentos = crearBoton("Departamentos");
+		
+		
+		
 		botonDocentes = crearBoton("Docentes");
 		botonEstudiantes = crearBoton("Estudiantes");
 		botonAyuda = crearBoton("Ayuda");
@@ -95,5 +104,13 @@ public class VentanaPrincipal extends JFrame{
 		panelBotones.add(boton);
 		
 		return boton;
+	}
+	
+	private void crearPanelPrincipal(){
+		
+		cardLayout = new CardLayout();
+		panelPrincipal = new JPanel(cardLayout);
+		panelPrincipal.setBackground(Color.DARK_GRAY);
+		getContentPane().add(panelPrincipal, BorderLayout.CENTER);
 	}
 }
