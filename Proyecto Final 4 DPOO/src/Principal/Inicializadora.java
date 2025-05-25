@@ -1711,11 +1711,11 @@ public class Inicializadora{
 				
 				//Resultados de los investigadores del departamento 3
 				Articulo art101 = new Articulo("Advanced Neural Architectures", 16, 4, "2023", 28, GrupoImpacto.WoS);
-				Articulo art102 = new Articulo("Post-Quantum Cryptography", 9, 2, "2022", 19, GrupoImpacto.GRUPO_1);
+				Articulo art102 = new Articulo("Post Quantum Cryptography", 9, 2, "2022", 19, GrupoImpacto.GRUPO_1);
 				Articulo art103 = new Articulo("Federated Learning Systems", 11, 3, "2023", 23, GrupoImpacto.GRUPO_2);
 				Articulo art104 = new Articulo("Explainable AI Methods", 6, 1, "2022", 16, GrupoImpacto.GRUPO_3);
 				Articulo art105 = new Articulo("Edge AI Applications", 13, 3, "2023", 25, GrupoImpacto.GRUPO_4);
-				Articulo art106 = new Articulo("6G Network Prospects", 8, 2, "2022", 18, GrupoImpacto.WoS);
+				Articulo art106 = new Articulo("SixG Network Prospects", 8, 2, "2022", 18, GrupoImpacto.WoS);
 				Articulo art107 = new Articulo("AI for Climate Modeling", 14, 4, "2023", 26, GrupoImpacto.GRUPO_1);
 				Articulo art108 = new Articulo("Blockchain Interoperability", 7, 1, "2022", 17, GrupoImpacto.GRUPO_2);
 				Articulo art109 = new Articulo("Generative AI Ethics", 12, 3, "2023", 24, GrupoImpacto.GRUPO_3);
@@ -1730,16 +1730,16 @@ public class Inicializadora{
 				Articulo art118 = new Articulo("Digital Forensics", 14, 4, "2023", 26, GrupoImpacto.GRUPO_2);
 				Articulo art119 = new Articulo("AI in Agriculture", 6, 1, "2022", 15, GrupoImpacto.GRUPO_3);
 				Articulo art120 = new Articulo("Smart Contract Analysis", 12, 3, "2023", 23, GrupoImpacto.GRUPO_4);
-				Articulo art121 = new Articulo("Multi-Agent Systems", 10, 2, "2022", 20, GrupoImpacto.WoS);
+				Articulo art121 = new Articulo("Multi Agent Systems", 10, 2, "2022", 20, GrupoImpacto.WoS);
 				Articulo art122 = new Articulo("AI for Education", 9, 2, "2023", 21, GrupoImpacto.GRUPO_1);
-				Articulo art123 = new Articulo("Cloud-Native Security", 15, 4, "2023", 27, GrupoImpacto.GRUPO_2);
+				Articulo art123 = new Articulo("Cloud Native Security", 15, 4, "2023", 27, GrupoImpacto.GRUPO_2);
 				Articulo art124 = new Articulo("Computer Vision in Medicine", 7, 1, "2022", 17, GrupoImpacto.GRUPO_3);
 				Articulo art125 = new Articulo("NLP for Legal Tech", 11, 3, "2023", 22, GrupoImpacto.GRUPO_4);
 				Articulo art126 = new Articulo("AI Hardware Acceleration", 8, 2, "2022", 19, GrupoImpacto.WoS);
 				Articulo art127 = new Articulo("Decentralized AI", 13, 3, "2023", 25, GrupoImpacto.GRUPO_1);
 				Articulo art128 = new Articulo("Robotic Process Automation", 5, 1, "2022", 14, GrupoImpacto.GRUPO_2);
 				Articulo art129 = new Articulo("AI for Renewable Energy", 12, 3, "2023", 23, GrupoImpacto.GRUPO_3);
-				Articulo art130 = new Articulo("Web3 Security Challenges", 10, 2, "2023", 21, GrupoImpacto.GRUPO_4);
+				Articulo art130 = new Articulo("WebThree Security Challenges", 10, 2, "2023", 21, GrupoImpacto.GRUPO_4);
 
 				CapituloLibro cap21 = new CapituloLibro("AI in Healthcare Innovations", new ArrayList<String>(Arrays.asList("Alexander Reed", "Lily Cooper")), new ArrayList<String>(Arrays.asList("Benjamin Brooks", "Chloe Bennett")), "Health Tech Press", "11223344", "6");
 				CapituloLibro cap22 = new CapituloLibro("Cybersecurity in Finance", new ArrayList<String>(Arrays.asList("Nathan Hughes", "Zoe Richardson")), new ArrayList<String>(Arrays.asList("Samuel Powell", "Hannah Russell")), "Finance Security", "22334455", "4");
@@ -1750,12 +1750,12 @@ public class Inicializadora{
 				CapituloLibro cap27 = new CapituloLibro("Computer Vision in Industry", new ArrayList<String>(Arrays.asList("Dominic Flores", "Aurora Ross")), new ArrayList<String>(Arrays.asList("Brayden Washington", "Skylar Henderson")), "Industrial Tech", "77889900", "4");
 				CapituloLibro cap28 = new CapituloLibro("NLP for Business Intelligence", new ArrayList<String>(Arrays.asList("Austin Perry", "Savannah Coleman")), new ArrayList<String>(Arrays.asList("Elias James", "Madeline Foster")), "Business AI Press", "88990011", "2");
 				CapituloLibro cap29 = new CapituloLibro("IoT Security Protocols", new ArrayList<String>(Arrays.asList("Colton Simmons", "Bella Patterson")), new ArrayList<String>(Arrays.asList("Miles Bryant", "Natalie Griffin")), "IoT Security", "99001122", "5");
-				CapituloLibro cap30 = new CapituloLibro("Cloud-Native AI Systems", new ArrayList<String>(Arrays.asList("Xavier Howard", "Leah Jenkins")), new ArrayList<String>(Arrays.asList("Vincent Ward", "Hailey Sanders")), "Cloud AI Press", "00112233", "3");
+				CapituloLibro cap30 = new CapituloLibro("Cloud Native AI Systems", new ArrayList<String>(Arrays.asList("Xavier Howard", "Leah Jenkins")), new ArrayList<String>(Arrays.asList("Vincent Ward", "Hailey Sanders")), "Cloud AI Press", "00112233", "3");
 
 				PonenciaEvento pon81 = new PonenciaEvento("AI in Financial Forecasting", LocalDate.of(2023, 6, 12), "Lisbon", "9781122334455");
-				PonenciaEvento pon82 = new PonenciaEvento("Next-Gen Cybersecurity", LocalDate.of(2022, 11, 8), "Brussels", "9782233445566");
+				PonenciaEvento pon82 = new PonenciaEvento("Next Gen Cybersecurity", LocalDate.of(2022, 11, 8), "Brussels", "9782233445566");
 				PonenciaEvento pon83 = new PonenciaEvento("Quantum Networking Advances", LocalDate.of(2021, 9, 15), "Oslo", "9783344556677");
-				PonenciaEvento pon84 = new PonenciaEvento("Edge Computing in 5G", LocalDate.of(2023, 4, 22), "Prague", "9784455667788");
+				PonenciaEvento pon84 = new PonenciaEvento("Edge Computing in FiveG", LocalDate.of(2023, 4, 22), "Prague", "9784455667788");
 				PonenciaEvento pon85 = new PonenciaEvento("Blockchain for Digital Identity", LocalDate.of(2022, 10, 5), "Warsaw", "9785566778899");
 				PonenciaEvento pon86 = new PonenciaEvento("AI for Predictive Maintenance", LocalDate.of(2021, 8, 18), "Dublin", "9786677889900");
 				PonenciaEvento pon87 = new PonenciaEvento("Computer Vision in Manufacturing", LocalDate.of(2023, 5, 30), "Athens", "9787788990011");
@@ -1771,10 +1771,10 @@ public class Inicializadora{
 				PonenciaEvento pon97 = new PonenciaEvento("Computer Vision in Agriculture", LocalDate.of(2022, 7, 10), "Zagreb", "9787788990011");
 				PonenciaEvento pon98 = new PonenciaEvento("NLP for Financial Reports", LocalDate.of(2021, 4, 3), "Sofia", "9788899001122");
 				PonenciaEvento pon99 = new PonenciaEvento("IoT in Healthcare", LocalDate.of(2023, 11, 16), "Bucharest", "9789900112233");
-				PonenciaEvento pon100 = new PonenciaEvento("Cloud-Native Security Patterns", LocalDate.of(2022, 6, 9), "Belgrade", "9780011223344");
+				PonenciaEvento pon100 = new PonenciaEvento("Cloud Native Security Patterns", LocalDate.of(2022, 6, 9), "Belgrade", "9780011223344");
 				PonenciaEvento pon101 = new PonenciaEvento("AI for Smart Cities", LocalDate.of(2021, 3, 22), "Kiev", "9781122334455");
 				PonenciaEvento pon102 = new PonenciaEvento("Zero Trust Architecture", LocalDate.of(2023, 10, 15), "Minsk", "9782233445566");
-				PonenciaEvento pon103 = new PonenciaEvento("Post-Quantum Cryptography Standards", LocalDate.of(2022, 5, 8), "Warsaw", "9783344556677");
+				PonenciaEvento pon103 = new PonenciaEvento("Post Quantum Cryptography Standards", LocalDate.of(2022, 5, 8), "Warsaw", "9783344556677");
 				PonenciaEvento pon104 = new PonenciaEvento("Edge Computing for IoT", LocalDate.of(2021, 2, 1), "Prague", "9784455667788");
 				PonenciaEvento pon105 = new PonenciaEvento("Blockchain for Digital Art", LocalDate.of(2023, 9, 24), "Berlin", "9785566778899");
 				PonenciaEvento pon106 = new PonenciaEvento("AI for Fraud Detection", LocalDate.of(2022, 4, 17), "Paris", "9786677889900");
@@ -1795,13 +1795,13 @@ public class Inicializadora{
 				PonenciaEvento pon121 = new PonenciaEvento("AI in Human Resources", LocalDate.of(2022, 11, 2), "Luxembourg", "9781122334455");
 				PonenciaEvento pon122 = new PonenciaEvento("Cyber Threat Hunting", LocalDate.of(2021, 8, 25), "Riga", "9782233445566");
 				PonenciaEvento pon123 = new PonenciaEvento("Quantum Machine Learning", LocalDate.of(2023, 3, 18), "Vilnius", "9783344556677");
-				PonenciaEvento pon124 = new PonenciaEvento("Edge Computing for AR/VR", LocalDate.of(2022, 10, 11), "Tallinn", "9784455667788");
+				PonenciaEvento pon124 = new PonenciaEvento("Edge Computing for AR VR", LocalDate.of(2022, 10, 11), "Tallinn", "9784455667788");
 				PonenciaEvento pon125 = new PonenciaEvento("Blockchain for Digital Identity", LocalDate.of(2021, 7, 4), "Bratislava", "9785566778899");
 				PonenciaEvento pon126 = new PonenciaEvento("AI for Predictive Analytics", LocalDate.of(2023, 2, 27), "Ljubljana", "9786677889900");
 				PonenciaEvento pon127 = new PonenciaEvento("Computer Vision in Retail", LocalDate.of(2022, 9, 20), "Zagreb", "9787788990011");
 				PonenciaEvento pon128 = new PonenciaEvento("NLP for Voice Assistants", LocalDate.of(2021, 6, 13), "Sofia", "9788899001122");
 				PonenciaEvento pon129 = new PonenciaEvento("IoT in Smart Agriculture", LocalDate.of(2023, 1, 6), "Bucharest", "9789900112233");
-				PonenciaEvento pon130 = new PonenciaEvento("Multi-Cloud Security", LocalDate.of(2022, 8, 30), "Belgrade", "9780011223344");
+				PonenciaEvento pon130 = new PonenciaEvento("Multi Cloud Security", LocalDate.of(2022, 8, 30), "Belgrade", "9780011223344");
 				PonenciaEvento pon131 = new PonenciaEvento("AI for Content Moderation", LocalDate.of(2021, 5, 23), "Kiev", "9781122334455");
 				PonenciaEvento pon132 = new PonenciaEvento("Cybersecurity Awareness Training", LocalDate.of(2023, 12, 16), "Minsk", "9782233445566");
 				PonenciaEvento pon133 = new PonenciaEvento("Quantum Cryptography Protocols", LocalDate.of(2022, 7, 9), "Warsaw", "9783344556677");
@@ -1823,8 +1823,9 @@ public class Inicializadora{
 				PonenciaEvento pon149 = new PonenciaEvento("IoT in Water Management", LocalDate.of(2021, 11, 15), "Zurich", "9789900112233");
 				PonenciaEvento pon150 = new PonenciaEvento("Hybrid Cloud Security", LocalDate.of(2023, 6, 8), "Geneva", "9780011223344");
 				
-				
-				new InterfazPrincipal(vicedecanato);
+				//new MapanetInterface();
+				new VentanaPrincipal();
+				//new InterfazPrincipal(vicedecanato);
 			}
 		});
 	}
