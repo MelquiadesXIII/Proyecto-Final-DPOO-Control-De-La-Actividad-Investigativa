@@ -1386,6 +1386,44 @@ public class Inicializadora{
 				li4d2.agregarInvestigador(d152); li4d2.agregarInvestigador(d156); li4d2.agregarInvestigador(d160);
 				li4d2.agregarInvestigador(d164);
 				
+				//Departamento 3
+				li1d3.agregarInvestigador(d201); li1d3.agregarInvestigador(d206); li1d3.agregarInvestigador(d211);
+				li1d3.agregarInvestigador(d216); li1d3.agregarInvestigador(d221); li1d3.agregarInvestigador(d226);
+				li1d3.agregarInvestigador(d231); li1d3.agregarInvestigador(d236); li1d3.agregarInvestigador(d241);
+				li1d3.agregarInvestigador(d246); li1d3.agregarInvestigador(d251); li1d3.agregarInvestigador(d256);
+				li1d3.agregarInvestigador(d261); li1d3.agregarInvestigador(d266); li1d3.agregarInvestigador(d271);
+				li1d3.agregarInvestigador(d276); li1d3.agregarInvestigador(d281); li1d3.agregarInvestigador(d286);
+				li1d3.agregarInvestigador(d291); li1d3.agregarInvestigador(d296); li1d3.agregarInvestigador(d202);
+				li1d3.agregarInvestigador(d207);
+
+				li2d3.agregarInvestigador(d203); li2d3.agregarInvestigador(d208); li2d3.agregarInvestigador(d213);
+				li2d3.agregarInvestigador(d218); li2d3.agregarInvestigador(d223); li2d3.agregarInvestigador(d228);
+				li2d3.agregarInvestigador(d233); li2d3.agregarInvestigador(d238); li2d3.agregarInvestigador(d243);
+				li2d3.agregarInvestigador(d248); li2d3.agregarInvestigador(d253); li2d3.agregarInvestigador(d258);
+				li2d3.agregarInvestigador(d263); li2d3.agregarInvestigador(d268); li2d3.agregarInvestigador(d273);
+				li2d3.agregarInvestigador(d278); li2d3.agregarInvestigador(d283); li2d3.agregarInvestigador(d288);
+
+				li3d3.agregarInvestigador(d204); li3d3.agregarInvestigador(d209); li3d3.agregarInvestigador(d214);
+				li3d3.agregarInvestigador(d219); li3d3.agregarInvestigador(d224); li3d3.agregarInvestigador(d229);
+				li3d3.agregarInvestigador(d234); li3d3.agregarInvestigador(d239); li3d3.agregarInvestigador(d244);
+				li3d3.agregarInvestigador(d249); li3d3.agregarInvestigador(d254); li3d3.agregarInvestigador(d259);
+				li3d3.agregarInvestigador(d264); li3d3.agregarInvestigador(d269); li3d3.agregarInvestigador(d274);
+				li3d3.agregarInvestigador(d279); li3d3.agregarInvestigador(d284); li3d3.agregarInvestigador(d289);
+				li3d3.agregarInvestigador(d294); li3d3.agregarInvestigador(d299);
+
+				li4d3.agregarInvestigador(d205); li4d3.agregarInvestigador(d210); li4d3.agregarInvestigador(d215);
+				li4d3.agregarInvestigador(d220); li4d3.agregarInvestigador(d225); li4d3.agregarInvestigador(d230);
+				li4d3.agregarInvestigador(d235); li4d3.agregarInvestigador(d240); li4d3.agregarInvestigador(d245);
+				li4d3.agregarInvestigador(d250); li4d3.agregarInvestigador(d255); li4d3.agregarInvestigador(d260);
+				li4d3.agregarInvestigador(d265); li4d3.agregarInvestigador(d270); li4d3.agregarInvestigador(d275);
+				li4d3.agregarInvestigador(d280);
+
+				li5d3.agregarInvestigador(d212); li5d3.agregarInvestigador(d217); li5d3.agregarInvestigador(d222);
+				li5d3.agregarInvestigador(d227); li5d3.agregarInvestigador(d232); li5d3.agregarInvestigador(d237);
+				li5d3.agregarInvestigador(d242); li5d3.agregarInvestigador(d247); li5d3.agregarInvestigador(d252);
+				li5d3.agregarInvestigador(d257); li5d3.agregarInvestigador(d262); li5d3.agregarInvestigador(d267);
+				li5d3.agregarInvestigador(d272); li5d3.agregarInvestigador(d277);
+				
 				new InterfazPrincipal(vicedecanato);
 			}
 		});
