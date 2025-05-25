@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame{
 	
@@ -37,7 +39,7 @@ public class VentanaPrincipal extends JFrame{
 		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		
 		
 		setVisible(true);
@@ -69,12 +71,24 @@ public class VentanaPrincipal extends JFrame{
 		
 		botonDepartamentos = crearBoton("Departamentos");
 		
-		
-		
 		botonDocentes = crearBoton("Docentes");
+		
 		botonEstudiantes = crearBoton("Estudiantes");
+		
 		botonAyuda = crearBoton("Ayuda");
+		
 		botonSalir = crearBoton("Salir");
+		botonSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ConfirmacionSalidaDialog dialog = new ConfirmacionSalidaDialog(VentanaPrincipal.this);
+		        dialog.setVisible(true);
+		        
+		        if (dialog.isConfirmado()) {
+		            System.exit(0);
+		        }
+			}
+		});
 	}
 	
 	private JButton crearBoton(String nombre){
@@ -84,7 +98,7 @@ public class VentanaPrincipal extends JFrame{
 		boton.setBackground(new Color(30, 40, 50));
 		boton.setForeground(Color.WHITE);
 		boton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		boton.setPreferredSize(new Dimension(200, 40));
+		boton.setSize(new Dimension(200, 40));
 		boton.setFocusPainted(false);
 		boton.setBorderPainted(false);
 		
