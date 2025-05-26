@@ -1864,7 +1864,7 @@ public class Inicializadora{
 				d240.agregarResultado(pon147); d241.agregarResultado(pon148); d242.agregarResultado(pon149);
 				d243.agregarResultado(pon150);
 				
-				new VentanaPrincipal();
+				new VentanaPrincipal(vicedecanato);
 			}
 		});
 	}
