@@ -1822,7 +1822,47 @@ public class Inicializadora{
 				PonenciaEvento pon148 = new PonenciaEvento("NLP for Legal Document Analysis", LocalDate.of(2022, 2, 22), "Copenhagen", "9788899001122");
 				PonenciaEvento pon149 = new PonenciaEvento("IoT in Water Management", LocalDate.of(2021, 11, 15), "Zurich", "9789900112233");
 				PonenciaEvento pon150 = new PonenciaEvento("Hybrid Cloud Security", LocalDate.of(2023, 6, 8), "Geneva", "9780011223344");
-				
+		
+				d201.agregarResultado(art101); e28.agregarResultado(art102); d203.agregarResultado(art103);
+				d206.agregarResultado(art104); e29.agregarResultado(art105); d208.agregarResultado(art106);
+				d211.agregarResultado(art107); e30.agregarResultado(art108); d213.agregarResultado(art109);
+				d216.agregarResultado(art110); e31.agregarResultado(art111); d218.agregarResultado(art112);
+				d221.agregarResultado(art113); e32.agregarResultado(art114); d223.agregarResultado(art115);
+				d226.agregarResultado(art116); e33.agregarResultado(art117); d228.agregarResultado(art118);
+				d231.agregarResultado(art119); e34.agregarResultado(art120); d233.agregarResultado(art121);
+				d236.agregarResultado(art122); e35.agregarResultado(art123); d238.agregarResultado(art124);
+				d241.agregarResultado(art125); e36.agregarResultado(art126); d243.agregarResultado(art127);
+				d246.agregarResultado(art128); e37.agregarResultado(art129); d248.agregarResultado(art130);
+
+				d202.agregarResultado(cap21); e38.agregarResultado(cap22); d204.agregarResultado(cap23);
+				d207.agregarResultado(cap24); e39.agregarResultado(cap25); d209.agregarResultado(cap26);
+				d212.agregarResultado(cap27); e40.agregarResultado(cap28); d214.agregarResultado(cap29);
+				d217.agregarResultado(cap30);
+
+				d205.agregarResultado(pon81); e28.agregarResultado(pon82); d210.agregarResultado(pon83);
+				e29.agregarResultado(pon84); d215.agregarResultado(pon85); e30.agregarResultado(pon86);
+				d220.agregarResultado(pon87); e31.agregarResultado(pon88); d225.agregarResultado(pon89);
+				e32.agregarResultado(pon90); d230.agregarResultado(pon91); e33.agregarResultado(pon92);
+				d235.agregarResultado(pon93); e34.agregarResultado(pon94); d240.agregarResultado(pon95);
+				e35.agregarResultado(pon96); d245.agregarResultado(pon97); e36.agregarResultado(pon98);
+				d250.agregarResultado(pon99); e37.agregarResultado(pon100); d255.agregarResultado(pon101);
+				e38.agregarResultado(pon102); d260.agregarResultado(pon103); e39.agregarResultado(pon104);
+				d265.agregarResultado(pon105); e40.agregarResultado(pon106); d270.agregarResultado(pon107);
+				d201.agregarResultado(pon108); d202.agregarResultado(pon109); d203.agregarResultado(pon110);
+				d204.agregarResultado(pon111); d205.agregarResultado(pon112); d206.agregarResultado(pon113);
+				d207.agregarResultado(pon114); d208.agregarResultado(pon115); d209.agregarResultado(pon116);
+				d210.agregarResultado(pon117); d211.agregarResultado(pon118); d212.agregarResultado(pon119);
+				d213.agregarResultado(pon120); d214.agregarResultado(pon121); d215.agregarResultado(pon122);
+				d216.agregarResultado(pon123); d217.agregarResultado(pon124); d218.agregarResultado(pon125);
+				d219.agregarResultado(pon126); d220.agregarResultado(pon127); d221.agregarResultado(pon128);
+				d222.agregarResultado(pon129); d223.agregarResultado(pon130); d224.agregarResultado(pon131);
+				d225.agregarResultado(pon132); d226.agregarResultado(pon133); d227.agregarResultado(pon134);
+				d228.agregarResultado(pon135); d229.agregarResultado(pon136); d230.agregarResultado(pon137);
+				d231.agregarResultado(pon138); d232.agregarResultado(pon139); d233.agregarResultado(pon140);
+				d234.agregarResultado(pon141); d235.agregarResultado(pon142); d236.agregarResultado(pon143);
+				d237.agregarResultado(pon144); d238.agregarResultado(pon145); d239.agregarResultado(pon146);
+				d240.agregarResultado(pon147); d241.agregarResultado(pon148); d242.agregarResultado(pon149);
+				d243.agregarResultado(pon150);
 				
 				new VentanaPrincipal();
 			}
