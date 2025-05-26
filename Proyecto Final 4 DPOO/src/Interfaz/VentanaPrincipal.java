@@ -2,6 +2,8 @@ package Interfaz;
 
 import javax.swing.*;
 
+import Interfaz.MensajeDialog.Tipo;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -81,7 +83,7 @@ public class VentanaPrincipal extends JFrame{
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				ConfirmacionSalidaDialog dialog = new ConfirmacionSalidaDialog(VentanaPrincipal.this);
+				MensajeDialog dialog = new MensajeDialog(VentanaPrincipal.this, "Desea salir de la aplicación?", Tipo.CONFIRMACION);
 		        dialog.setVisible(true);
 		        
 		        if (dialog.isConfirmado()) {
@@ -127,4 +129,6 @@ public class VentanaPrincipal extends JFrame{
 		panelPrincipal.setBackground(Color.DARK_GRAY);
 		getContentPane().add(panelPrincipal, BorderLayout.CENTER);
 	}
+	
+	
 }
