@@ -43,13 +43,11 @@ public class MensajeDialog extends JDialog {
         estiloBoton(botonAceptar);
         estiloBoton(botonCancelar);
 
-        // Ajustar tamaño de botones para que el texto entre bien
         botonAceptar.setPreferredSize(new Dimension(120, 40));
         botonCancelar.setPreferredSize(new Dimension(120, 40));
 
         botonCancelar.setVisible(tipo == Tipo.CONFIRMACION);
 
-        // Acción botón aceptar
         botonAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (tipo == Tipo.CONFIRMACION) {
@@ -59,7 +57,6 @@ public class MensajeDialog extends JDialog {
             }
         });
 
-        // Acción botón cancelar
         botonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -70,7 +67,6 @@ public class MensajeDialog extends JDialog {
         if (botonCancelar.isVisible()) panelBotones.add(botonCancelar);
         panel.add(panelBotones, BorderLayout.SOUTH);
 
-        // Eventos de arrastre
         MouseAdapter mouseAdapter = new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 point.x = e.getX();
