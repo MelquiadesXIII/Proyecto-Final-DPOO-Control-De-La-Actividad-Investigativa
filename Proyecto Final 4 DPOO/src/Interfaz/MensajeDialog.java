@@ -100,7 +100,7 @@ public class MensajeDialog extends JDialog {
         boton.setFocusPainted(false);
         boton.setBorderPainted(false);
         boton.setOpaque(true);
-        boton.setPreferredSize(new Dimension(80, 30));
+       
     }
 
     public boolean isConfirmado() {
