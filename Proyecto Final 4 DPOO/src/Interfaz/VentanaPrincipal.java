@@ -3,7 +3,7 @@ package Interfaz;
 import javax.swing.*;
 
 import Interfaz.MensajeDialog.Tipo;
-
+import Logica.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,10 +23,11 @@ public class VentanaPrincipal extends JFrame{
 	JButton botonSalir;
 	JButton botonInicio;
 	CardLayout cardLayout;
+	Vicedecanato vicedecanato;
 	
-	public VentanaPrincipal(){
+	public VentanaPrincipal(Vicedecanato vicedecanato){
 		
-		
+		this.vicedecanato = vicedecanato;
 		inicializarConfiguracionUI();
 		crearPanelPrincipal();
 		crearPanelNavegacion();
