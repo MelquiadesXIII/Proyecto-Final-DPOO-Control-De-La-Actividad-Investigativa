@@ -2009,7 +2009,121 @@ public class Inicializadora{
 				c3m1d2.emitirNota(d108, d124, 5);
 				c3m1d2.emitirNota(d108, d127, 3);
 
+				c1m2d2.emitirNota(d117, d130, 4);
+				c1m2d2.emitirNota(d117, d133, 3);
+				c1m2d2.emitirNota(d117, d136, 2);
+				c1m2d2.emitirNota(d117, d139, 5);
+				c1m2d2.emitirNota(d117, d142, 4);
+				c1m2d2.emitirNota(d117, d145, 3);
+				c1m2d2.emitirNota(d117, d148, 5);
+				c1m2d2.emitirNota(d117, d151, 2);
+				c1m2d2.emitirNota(d117, d154, 3);
 
+				c2m2d2.emitirNota(d120, d130, 5);
+				c2m2d2.emitirNota(d120, d133, 4);
+				c2m2d2.emitirNota(d120, d136, 3);
+				c2m2d2.emitirNota(d120, d139, 2);
+				c2m2d2.emitirNota(d120, d142, 4);
+				c2m2d2.emitirNota(d120, d145, 5);
+				c2m2d2.emitirNota(d120, d148, 3);
+				c2m2d2.emitirNota(d120, d151, 2);
+				c2m2d2.emitirNota(d120, d154, 4);
+
+				c3m2d2.emitirNota(d126, d130, 3);
+				c3m2d2.emitirNota(d126, d133, 4);
+				c3m2d2.emitirNota(d126, d136, 2);
+				c3m2d2.emitirNota(d126, d139, 5);
+				c3m2d2.emitirNota(d126, d142, 3);
+				c3m2d2.emitirNota(d126, d145, 4);
+				c3m2d2.emitirNota(d126, d148, 2);
+				c3m2d2.emitirNota(d126, d151, 5);
+				c3m2d2.emitirNota(d126, d154, 3);
+
+				c1m3d2.emitirNota(d129, d157, 4);
+				c1m3d2.emitirNota(d129, d160, 3);
+				c1m3d2.emitirNota(d129, d163, 2);
+				c1m3d2.emitirNota(d129, d166, 5);
+				c1m3d2.emitirNota(d129, d169, 4);
+				c1m3d2.emitirNota(d129, d172, 3);
+				c1m3d2.emitirNota(d129, d175, 5);
+				c1m3d2.emitirNota(d129, d178, 2);
+
+				c2m3d2.emitirNota(d132, d157, 5);
+				c2m3d2.emitirNota(d132, d160, 4);
+				c2m3d2.emitirNota(d132, d163, 3);
+				c2m3d2.emitirNota(d132, d166, 2);
+				c2m3d2.emitirNota(d132, d169, 4);
+				c2m3d2.emitirNota(d132, d172, 5);
+				c2m3d2.emitirNota(d132, d175, 3);
+				c2m3d2.emitirNota(d132, d178, 2);
+
+				c3m3d2.emitirNota(d35, d157, 3);
+				c3m3d2.emitirNota(d35, d160, 4);
+				c3m3d2.emitirNota(d35, d163, 2);
+				c3m3d2.emitirNota(d35, d166, 5);
+				c3m3d2.emitirNota(d35, d169, 3);
+				c3m3d2.emitirNota(d35, d172, 4);
+				c3m3d2.emitirNota(d35, d175, 2);
+				c3m3d2.emitirNota(d35, d178, 5);
+
+				c4m3d2.emitirNota(d135, d157, 4);
+				c4m3d2.emitirNota(d135, d160, 3);
+				c4m3d2.emitirNota(d135, d163, 5);
+				c4m3d2.emitirNota(d135, d166, 2);
+				c4m3d2.emitirNota(d135, d169, 4);
+				c4m3d2.emitirNota(d135, d172, 3);
+				c4m3d2.emitirNota(d135, d175, 5);
+				c4m3d2.emitirNota(d135, d178, 2);
+
+				c1m4d2.emitirNota(d153, d181, 4);
+				c1m4d2.emitirNota(d153, d184, 3);
+				c1m4d2.emitirNota(d153, d187, 2);
+				c1m4d2.emitirNota(d153, d190, 5);
+				c1m4d2.emitirNota(d153, d193, 4);
+				c1m4d2.emitirNota(d153, d196, 3);
+				c1m4d2.emitirNota(d153, d199, 5);
+
+				c2m4d2.emitirNota(d156, d181, 5);
+				c2m4d2.emitirNota(d156, d184, 4);
+				c2m4d2.emitirNota(d156, d187, 3);
+				c2m4d2.emitirNota(d156, d190, 2);
+				c2m4d2.emitirNota(d156, d193, 4);
+				c2m4d2.emitirNota(d156, d196, 5);
+				c2m4d2.emitirNota(d156, d199, 3);
+
+				c3m4d2.emitirNota(d159, d181, 3);
+				c3m4d2.emitirNota(d159, d184, 4);
+				c3m4d2.emitirNota(d159, d187, 2);
+				c3m4d2.emitirNota(d159, d190, 5);
+				c3m4d2.emitirNota(d159, d193, 3);
+				c3m4d2.emitirNota(d159, d196, 4);
+				c3m4d2.emitirNota(d159, d199, 2);
+
+				c1m1d3.emitirNota(d201, d202, 4);
+				c1m1d3.emitirNota(d201, d205, 3);
+				c1m1d3.emitirNota(d201, d208, 2);
+				c1m1d3.emitirNota(d201, d211, 5);
+				c1m1d3.emitirNota(d201, d214, 4);
+				c1m1d3.emitirNota(d201, d217, 3);
+				c1m1d3.emitirNota(d201, d220, 5);
+
+				c2m1d3.emitirNota(d204, d202, 5);
+				c2m1d3.emitirNota(d204, d205, 4);
+				c2m1d3.emitirNota(d204, d208, 3);
+				c2m1d3.emitirNota(d204, d211, 2);
+				c2m1d3.emitirNota(d204, d214, 4);
+				c2m1d3.emitirNota(d204, d217, 5);
+				c2m1d3.emitirNota(d204, d220, 3);
+
+				c3m1d3.emitirNota(d207, d202, 3);
+				c3m1d3.emitirNota(d207, d205, 4);
+				c3m1d3.emitirNota(d207, d208, 2);
+				c3m1d3.emitirNota(d207, d211, 5);
+				c3m1d3.emitirNota(d207, d214, 3);
+				c3m1d3.emitirNota(d207, d217, 4);
+				c3m1d3.emitirNota(d207, d220, 2);
+
+				
 				new VentanaPrincipal(vicedecanato);
 			}
 		});
