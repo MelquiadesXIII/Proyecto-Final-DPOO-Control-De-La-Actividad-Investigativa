@@ -38,12 +38,12 @@ public class VentanaPrincipal extends JFrame{
 	private DefaultListModel<String> modeloDocentes;
 	private JList<String> listaEstudiantes;
 	private DefaultListModel<String> modeloEstudiantes;
-	
 	private ArrayList<JButton> botonesNavegacion;
 	private JButton botonSeleccionadoActual;
 	private final Color COLOR_DEFAULT = new Color(30, 40, 50);
-	private final Color COLOR_HOVER = new Color(50, 60, 70); // Gris oscuro para hover
-	private final Color COLOR_SELECTED = new Color(70, 80, 90); // Gris más oscuro para seleccionado
+	private final Color COLOR_HOVER = new Color(50, 60, 70); 
+	private final Color COLOR_SELECTED = new Color(70, 80, 90);
+	private final Color COLOR_HEADER_BACKGROUND = new Color(45, 55, 65); 
 	
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 		
