@@ -211,25 +211,25 @@ public class VentanaPrincipal extends JFrame{
 
 	private void crearPaneles(){
 		
-		panelInicio = new JPanel();
+		panelInicio = crearPanelesConEncabezado("Bienvenido");
 		panelPrincipal.add(panelInicio, "panelInicio");
-		panelInicio.setBackground(Color.DARK_GRAY);
+		//panelInicio.setBackground(Color.DARK_GRAY);
 
-		panelDocentes = new JPanel();
+		panelDocentes = crearPanelesConEncabezado("Docentes registrados en el vicedecanato:");
 		panelPrincipal.add(panelDocentes, "panelDocentes");
-		panelDocentes.setBackground(Color.DARK_GRAY);
+		//panelDocentes.setBackground(Color.DARK_GRAY);
 		
-		panelEstudiantes = new JPanel();
+		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el vicedecanato");
 		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
 		panelEstudiantes.setBackground(Color.DARK_GRAY);
 
-		panelDepartamentos = new JPanel();
+		panelDepartamentos = crearPanelesConEncabezado("Departamentos:");
 		panelPrincipal.add(panelDepartamentos, "panelDepartamentos");
-		panelDepartamentos.setBackground(Color.DARK_GRAY);
+		//panelDepartamentos.setBackground(Color.DARK_GRAY);
 		
-		panelReportes = new JPanel();
+		panelReportes = crearPanelesConEncabezado("Listado de reportes");
 		panelPrincipal.add(panelReportes, "panelReportes");
-		panelReportes.setBackground(Color.DARK_GRAY);
+		//panelReportes.setBackground(Color.DARK_GRAY);
 		
 		JLabel lblBienvenida = new JLabel("Bienvenido!");
 		lblBienvenida.setBounds(0, 0, 794, 465);
@@ -329,6 +329,27 @@ public class VentanaPrincipal extends JFrame{
 				btn.setBackground(COLOR_DEFAULT);
 			}
 		}
+	}
+	
+	private JPanel crearPanelesConEncabezado(String titulo){
+		
+		JPanel panel = new JPanel();
+	    panel.setLayout(new BorderLayout());
+	    panel.setBackground(Color.DARK_GRAY);
+	     
+	    // Crear el encabezado
+	    JPanel encabezado = new JPanel();
+	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+	    encabezado.setPreferredSize(new Dimension(0, 50)); // Altura del encabezado
+	    JLabel lblTitulo = new JLabel(titulo);
+	    lblTitulo.setForeground(Color.WHITE);
+	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+	    encabezado.add(lblTitulo);
+	    
+	    // Agregar el encabezado al panel
+	    panel.add(encabezado, BorderLayout.NORTH);
+	    
+	    return panel;
 	}
 	
 }
