@@ -1908,8 +1908,78 @@ public class Inicializadora{
 				c4m1d1.emitirNota(d5, d39, 2); 
 				c4m1d1.emitirNota(d5, d44, 5);
 				c4m1d1.emitirNota(d5, d49, 4); 
+				
+				c1m2d1.emitirNota(d6, d54, 4);
+				c1m2d1.emitirNota(d6, d59, 3);
+				c1m2d1.emitirNota(d6, d61, 2);
+				c1m2d1.emitirNota(d6, d64, 5);
+				c1m2d1.emitirNota(d6, d67, 4);
+				c1m2d1.emitirNota(d6, d70, 3);
+				c1m2d1.emitirNota(d6, d73, 5);
+				c1m2d1.emitirNota(d6, d76, 2);
+				c1m2d1.emitirNota(d6, d79, 3);
 
+				c2m2d1.emitirNota(d8, d54, 5);
+				c2m2d1.emitirNota(d8, d59, 4);
+				c2m2d1.emitirNota(d8, d61, 3);
+				c2m2d1.emitirNota(d8, d64, 2);
+				c2m2d1.emitirNota(d8, d67, 4);
+				c2m2d1.emitirNota(d8, d70, 5);
+				c2m2d1.emitirNota(d8, d73, 3);
+				c2m2d1.emitirNota(d8, d76, 2);
+				c2m2d1.emitirNota(d8, d79, 4);
 
+				c3m2d1.emitirNota(d13, d54, 3);
+				c3m2d1.emitirNota(d13, d59, 4);
+				c3m2d1.emitirNota(d13, d61, 2);
+				c3m2d1.emitirNota(d13, d64, 5);
+				c3m2d1.emitirNota(d13, d67, 3);
+				c3m2d1.emitirNota(d13, d70, 4);
+				c3m2d1.emitirNota(d13, d73, 2);
+				c3m2d1.emitirNota(d13, d76, 5);
+				c3m2d1.emitirNota(d13, d79, 3);
+
+				c1m3d1.emitirNota(d31, d82, 4);
+				c1m3d1.emitirNota(d31, d85, 3);
+				c1m3d1.emitirNota(d31, d88, 2);
+				c1m3d1.emitirNota(d31, d91, 5);
+				c1m3d1.emitirNota(d31, d94, 4);
+				c1m3d1.emitirNota(d31, d97, 3);
+				c1m3d1.emitirNota(d31, d100, 5);
+
+				c2m3d1.emitirNota(d28, d82, 5);
+				c2m3d1.emitirNota(d28, d85, 4);
+				c2m3d1.emitirNota(d28, d88, 3);
+				c2m3d1.emitirNota(d28, d91, 2);
+				c2m3d1.emitirNota(d28, d94, 4);
+				c2m3d1.emitirNota(d28, d97, 5);
+				c2m3d1.emitirNota(d28, d100, 3);
+
+				c3m3d1.emitirNota(d23, d82, 3);
+				c3m3d1.emitirNota(d23, d85, 4);
+				c3m3d1.emitirNota(d23, d88, 2);
+				c3m3d1.emitirNota(d23, d91, 5);
+				c3m3d1.emitirNota(d23, d94, 3);
+				c3m3d1.emitirNota(d23, d97, 4);
+				c3m3d1.emitirNota(d23, d100, 2);
+
+				c4m3d1.emitirNota(d20, d82, 4);
+				c4m3d1.emitirNota(d20, d85, 3);
+				c4m3d1.emitirNota(d20, d88, 5);
+				c4m3d1.emitirNota(d20, d91, 2);
+				c4m3d1.emitirNota(d20, d94, 4);
+				c4m3d1.emitirNota(d20, d97, 3);
+				c4m3d1.emitirNota(d20, d100, 5);
+
+				c5m3d1.emitirNota(d21, d82, 3);
+				c5m3d1.emitirNota(d21, d85, 4);
+				c5m3d1.emitirNota(d21, d88, 2);
+				c5m3d1.emitirNota(d21, d91, 5);
+				c5m3d1.emitirNota(d21, d94, 3);
+				c5m3d1.emitirNota(d21, d97, 4);
+				c5m3d1.emitirNota(d21, d100, 2);
+
+				
 
 				new VentanaPrincipal(vicedecanato);
 			}
