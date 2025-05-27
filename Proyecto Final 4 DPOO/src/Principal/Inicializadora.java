@@ -2123,6 +2123,58 @@ public class Inicializadora{
 				c3m1d3.emitirNota(d207, d217, 4);
 				c3m1d3.emitirNota(d207, d220, 2);
 
+				c1m2d3.emitirNota(d210, d223, 4);
+				c1m2d3.emitirNota(d210, d226, 3);
+				c1m2d3.emitirNota(d210, d229, 2);
+				c1m2d3.emitirNota(d210, d232, 5);
+				c1m2d3.emitirNota(d210, d235, 4);
+				c1m2d3.emitirNota(d210, d238, 3);
+				c1m2d3.emitirNota(d210, d241, 5);
+
+				c2m2d3.emitirNota(d213, d223, 5);
+				c2m2d3.emitirNota(d213, d226, 4);
+				c2m2d3.emitirNota(d213, d229, 3);
+				c2m2d3.emitirNota(d213, d232, 2);
+				c2m2d3.emitirNota(d213, d235, 4);
+				c2m2d3.emitirNota(d213, d238, 5);
+				c2m2d3.emitirNota(d213, d241, 3);
+
+				c3m2d3.emitirNota(d216, d223, 3);
+				c3m2d3.emitirNota(d216, d226, 4);
+				c3m2d3.emitirNota(d216, d229, 2);
+				c3m2d3.emitirNota(d216, d232, 5);
+				c3m2d3.emitirNota(d216, d235, 3);
+				c3m2d3.emitirNota(d216, d238, 4);
+				c3m2d3.emitirNota(d216, d241, 2);
+
+				// Notas para curso c1m3d3 - Profesor d219
+				c1m3d3.emitirNota(d219, d244, 4);
+				c1m3d3.emitirNota(d219, d247, 3);
+				c1m3d3.emitirNota(d219, d250, 2);
+				c1m3d3.emitirNota(d219, d253, 5);
+				c1m3d3.emitirNota(d219, d256, 4);
+				c1m3d3.emitirNota(d219, d259, 3);
+
+				c2m3d3.emitirNota(d222, d244, 5);
+				c2m3d3.emitirNota(d222, d247, 3);
+				c2m3d3.emitirNota(d222, d250, 4);
+				c2m3d3.emitirNota(d222, d253, 2);
+				c2m3d3.emitirNota(d222, d256, 4);
+				c2m3d3.emitirNota(d222, d259, 5);
+
+				c3m3d3.emitirNota(d225, d244, 3);
+				c3m3d3.emitirNota(d225, d247, 4);
+				c3m3d3.emitirNota(d225, d250, 2);
+				c3m3d3.emitirNota(d225, d253, 5);
+				c3m3d3.emitirNota(d225, d256, 4);
+				c3m3d3.emitirNota(d225, d259, 3);
+				
+				c4m3d3.emitirNota(d228, d244, 4);
+				c4m3d3.emitirNota(d228, d247, 2);
+				c4m3d3.emitirNota(d228, d250, 5);
+				c4m3d3.emitirNota(d228, d253, 3);
+				c4m3d3.emitirNota(d228, d256, 4);
+				c4m3d3.emitirNota(d228, d259, 5);
 				
 				new VentanaPrincipal(vicedecanato);
 			}
