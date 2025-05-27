@@ -1978,8 +1978,37 @@ public class Inicializadora{
 				c5m3d1.emitirNota(d21, d94, 3);
 				c5m3d1.emitirNota(d21, d97, 4);
 				c5m3d1.emitirNota(d21, d100, 2);
-
 				
+				c1m1d2.emitirNota(d102, d103, 4);
+				c1m1d2.emitirNota(d102, d106, 3);
+				c1m1d2.emitirNota(d102, d109, 2);
+				c1m1d2.emitirNota(d102, d112, 5);
+				c1m1d2.emitirNota(d102, d115, 4);
+				c1m1d2.emitirNota(d102, d118, 3);
+				c1m1d2.emitirNota(d102, d121, 5);
+				c1m1d2.emitirNota(d102, d124, 2);
+				c1m1d2.emitirNota(d102, d127, 3);
+
+				c2m1d2.emitirNota(d105, d103, 5);
+				c2m1d2.emitirNota(d105, d106, 4);
+				c2m1d2.emitirNota(d105, d109, 3);
+				c2m1d2.emitirNota(d105, d112, 2);
+				c2m1d2.emitirNota(d105, d115, 4);
+				c2m1d2.emitirNota(d105, d118, 5);
+				c2m1d2.emitirNota(d105, d121, 3);
+				c2m1d2.emitirNota(d105, d124, 2);
+				c2m1d2.emitirNota(d105, d127, 4);
+
+				c3m1d2.emitirNota(d108, d103, 3);
+				c3m1d2.emitirNota(d108, d106, 4);
+				c3m1d2.emitirNota(d108, d109, 2);
+				c3m1d2.emitirNota(d108, d112, 5);
+				c3m1d2.emitirNota(d108, d115, 3);
+				c3m1d2.emitirNota(d108, d118, 4);
+				c3m1d2.emitirNota(d108, d121, 2);
+				c3m1d2.emitirNota(d108, d124, 5);
+				c3m1d2.emitirNota(d108, d127, 3);
+
 
 				new VentanaPrincipal(vicedecanato);
 			}
