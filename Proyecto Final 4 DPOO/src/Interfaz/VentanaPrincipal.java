@@ -43,7 +43,8 @@ public class VentanaPrincipal extends JFrame{
 	private final Color COLOR_DEFAULT = new Color(30, 40, 50);
 	private final Color COLOR_HOVER = new Color(50, 60, 70); 
 	private final Color COLOR_SELECTED = new Color(70, 80, 90);
-	private final Color COLOR_HEADER_BACKGROUND = new Color(45, 55, 65); 
+	private final Color COLOR_HEADER_BACKGROUND = new Color(45, 55, 65);
+	private JPanel panelReportes; 
 	
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 		
@@ -139,6 +140,8 @@ public class VentanaPrincipal extends JFrame{
 		botonReportes = crearBoton("Reportes");
 		botonReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
+				cl.show(panelPrincipal, "panelReportes");
 				actualizarAparienciaBotones(botonReportes);
 			}
 		});
@@ -223,7 +226,10 @@ public class VentanaPrincipal extends JFrame{
 		panelDepartamentos = new JPanel();
 		panelPrincipal.add(panelDepartamentos, "panelDepartamentos");
 		panelDepartamentos.setBackground(Color.DARK_GRAY);
-		panelInicio.setLayout(null);
+		
+		panelReportes = new JPanel();
+		panelPrincipal.add(panelReportes, "panelReportes");
+		panelReportes.setBackground(Color.DARK_GRAY);
 		
 		JLabel lblBienvenida = new JLabel("Bienvenido!");
 		lblBienvenida.setBounds(0, 0, 794, 465);
