@@ -2199,6 +2199,34 @@ public class Inicializadora{
 				c3m4d3.emitirNota(d237, d277, 5);
 				c3m4d3.emitirNota(d237, d280, 3);
 				
+				c1m5d3.emitirNota(d240, d283, 4);
+				c1m5d3.emitirNota(d240, d286, 5);
+				c1m5d3.emitirNota(d240, d289, 3);
+				c1m5d3.emitirNota(d240, d292, 2);
+				c1m5d3.emitirNota(d240, d295, 4);
+				c1m5d3.emitirNota(d240, d298, 5);
+
+				c2m5d3.emitirNota(d243, d283, 3);
+				c2m5d3.emitirNota(d243, d286, 5);
+				c2m5d3.emitirNota(d243, d289, 4);
+				c2m5d3.emitirNota(d243, d292, 5);
+				c2m5d3.emitirNota(d243, d295, 2);
+				c2m5d3.emitirNota(d243, d298, 4);
+
+				c3m5d3.emitirNota(d246, d283, 4);
+				c3m5d3.emitirNota(d246, d286, 3);
+				c3m5d3.emitirNota(d246, d289, 2);
+				c3m5d3.emitirNota(d246, d292, 5);
+				c3m5d3.emitirNota(d246, d295, 4);
+				c3m5d3.emitirNota(d246, d298, 5);
+
+				c4m5d3.emitirNota(d252, d283, 5);
+				c4m5d3.emitirNota(d252, d286, 4);
+				c4m5d3.emitirNota(d252, d289, 3);
+				c4m5d3.emitirNota(d252, d292, 4);
+				c4m5d3.emitirNota(d252, d295, 5);
+				c4m5d3.emitirNota(d252, d298, 3);
+				
 				new VentanaPrincipal(vicedecanato);
 			}
 		});
