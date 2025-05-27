@@ -1,11 +1,12 @@
 package Interfaz;
 
+
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
+import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,6 +25,7 @@ public class VentanaPrincipal extends JFrame{
 	private JButton botonAyuda;
 	private JButton botonSalir;
 	private JButton botonInicio;
+	private JButton botonReportes;
 	private CardLayout cardLayout;
 	private Vicedecanato vicedecanato;
 	private JPanel panelDepartamentos;
@@ -37,12 +39,23 @@ public class VentanaPrincipal extends JFrame{
 	private JList<String> listaEstudiantes;
 	private DefaultListModel<String> modeloEstudiantes;
 	
+	private ArrayList<JButton> botonesNavegacion;
+	private JButton botonSeleccionadoActual;
+	private final Color COLOR_DEFAULT = new Color(30, 40, 50);
+	private final Color COLOR_HOVER = new Color(50, 60, 70); // Gris oscuro para hover
+	private final Color COLOR_SELECTED = new Color(70, 80, 90); // Gris más oscuro para seleccionado
+	
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 		
 		this.vicedecanato = vicedecanato;
 		inicializarConfiguracionUI();
 		crearPanelPrincipal();
 		crearPanelNavegacion();
+		
+		if (this.botonInicio != null) {
+			actualizarAparienciaBotones(this.botonInicio);
+		}
+		
 		crearPaneles();
 		crearTablaDocentes();
 		crearTablaDepartamentos();
@@ -60,7 +73,7 @@ public class VentanaPrincipal extends JFrame{
 		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		
+		this.botonesNavegacion = new ArrayList<JButton>();
 		
 		setVisible(true);
 	}
@@ -83,7 +96,7 @@ public class VentanaPrincipal extends JFrame{
 		
 		panelBotones = new JPanel();
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
-		panelBotones.setBackground(new Color(30, 40, 50));
+		panelBotones.setBackground(new Color(30, 40, 50)); //new Color(30, 40, 50)
 		panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 		panelNavegacion.add(panelBotones);
 		
@@ -92,6 +105,7 @@ public class VentanaPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
 				cl.show(panelPrincipal, "panelInicio");
+				actualizarAparienciaBotones(botonInicio);
 			}
 		});
 		
@@ -100,6 +114,7 @@ public class VentanaPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
 				cl.show(panelPrincipal, "panelDepartamentos");
+				actualizarAparienciaBotones(botonDepartamentos);
 			}
 		});
 		
@@ -108,6 +123,7 @@ public class VentanaPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
 				cl.show(panelPrincipal, "panelDocentes");
+				actualizarAparienciaBotones(botonDocentes);
 			}
 		});
 		
@@ -116,15 +132,28 @@ public class VentanaPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
 				cl.show(panelPrincipal, "panelEstudiantes");
+				actualizarAparienciaBotones(botonEstudiantes);
+			}
+		});
+		
+		botonReportes = crearBoton("Reportes");
+		botonReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarAparienciaBotones(botonReportes);
 			}
 		});
 		
 		botonAyuda = crearBoton("Ayuda");
+		botonAyuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarAparienciaBotones(botonAyuda);
+			}
+		});
 		
 		botonSalir = crearBoton("Salir");
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				actualizarAparienciaBotones(botonSalir);
 				MensajeDialog dialog = new MensajeDialog(VentanaPrincipal.this, "Desea salir de la aplicación?", Tipo.CONFIRMACION);
 		        dialog.setVisible(true);
 		        
@@ -142,24 +171,29 @@ public class VentanaPrincipal extends JFrame{
 		boton.setBackground(new Color(30, 40, 50));
 		boton.setForeground(Color.WHITE);
 		boton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		boton.setSize(new Dimension(200, 40));
+		boton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 		boton.setFocusPainted(false);
 		boton.setBorderPainted(false);
 		
 		boton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				boton.setBackground(new Color(50, 60, 70));
-			}
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (boton != botonSeleccionadoActual) { 
+                    boton.setBackground(COLOR_HOVER);
+                }
+            }
 
-			@Override
-			public void mouseExited(MouseEvent e) {
-				boton.setBackground(new Color(30, 40, 50));
-			}
-		});
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if (boton != botonSeleccionadoActual) { 
+                    boton.setBackground(COLOR_DEFAULT);
+                }
+            }
+        });
 		
 		panelBotones.add(Box.createRigidArea(new Dimension(0, 40)));
 		panelBotones.add(boton);
+		this.botonesNavegacion.add(boton);
 		
 		return boton;
 	}
@@ -280,5 +314,15 @@ public class VentanaPrincipal extends JFrame{
 		panelDepartamentos.add(btnEliminarDep);
 	}
 	
+	private void actualizarAparienciaBotones(JButton botonActivo) {
+		botonSeleccionadoActual = botonActivo;
+		for (JButton btn : botonesNavegacion) {
+			if (btn == botonSeleccionadoActual && !btn.equals(botonSalir)) {
+				btn.setBackground(COLOR_SELECTED);
+			} else {
+				btn.setBackground(COLOR_DEFAULT);
+			}
+		}
+	}
 	
 }
