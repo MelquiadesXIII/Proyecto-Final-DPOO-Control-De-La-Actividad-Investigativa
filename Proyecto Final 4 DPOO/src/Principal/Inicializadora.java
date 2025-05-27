@@ -28,7 +28,7 @@ public class Inicializadora{
 				vicedecanato.agregarDepartamento(depto3);
 
 				//Aqui se crean 300 docentes y se agregan al vicedecanato
-				
+
 				//Docentes del departamento 1
 				Docente d1 = new Docente("Mae", "López", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_TITULAR);
 				Docente d2 = new Docente("Rodolfo", "Remesar Martin", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
@@ -130,7 +130,7 @@ public class Inicializadora{
 				Docente d98 = new Docente("Macario", "Ríos Castañeda", CategoriaCientifica.MASTER, CategoriaDocente.ASISTENTE);
 				Docente d99 = new Docente("Natalicio", "Lago Miranda", CategoriaCientifica.DOCTOR, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d100 = new Docente("Olegario", "Pino Aguirre", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_TITULAR);
-				
+
 				//Docentes del departamento 2
 				Docente d101 = new Docente("Pacífica", "Roldán Solano", CategoriaCientifica.MASTER, CategoriaDocente.INSTRUCTOR);
 				Docente d102 = new Docente("Quirino", "Páez Montenegro", CategoriaCientifica.DOCTOR, CategoriaDocente.ASISTENTE);
@@ -232,7 +232,7 @@ public class Inicializadora{
 				Docente d198 = new Docente("Martín", "Valdivia Ojeda", CategoriaCientifica.DOCTOR, CategoriaDocente.ASISTENTE);
 				Docente d199 = new Docente("Natalia", "Montesinos Lara", CategoriaCientifica.NINGUNA, CategoriaDocente.PROFESOR_AUXILIAR);
 				Docente d200 = new Docente("Otilio", "Ríos Méndez", CategoriaCientifica.MASTER, CategoriaDocente.PROFESOR_TITULAR);
-				
+
 				//Docentes del departamento 3
 				Docente d201 = new Docente("Pascuala", "Ocampo Cortés", CategoriaCientifica.DOCTOR, CategoriaDocente.INSTRUCTOR);
 				Docente d202 = new Docente("Quintiliano", "Villalba Peralta", CategoriaCientifica.NINGUNA, CategoriaDocente.ASISTENTE);
@@ -584,7 +584,7 @@ public class Inicializadora{
 				depto1.agregarEstudiante(e11); 
 				depto1.agregarEstudiante(e12);
 				depto1.agregarEstudiante(e13); 
-				
+
 				depto2.agregarEstudiante(e14); 
 				depto2.agregarEstudiante(e15);
 				depto2.agregarEstudiante(e16); 
@@ -599,7 +599,7 @@ public class Inicializadora{
 				depto2.agregarEstudiante(e25); 
 				depto2.agregarEstudiante(e26);
 				depto2.agregarEstudiante(e27); 
-				
+
 				depto3.agregarEstudiante(e28); 
 				depto3.agregarEstudiante(e29);
 				depto3.agregarEstudiante(e30); 
@@ -717,7 +717,7 @@ public class Inicializadora{
 				m4d2.agregarCursoPosgrado(c1m4d2);
 				m4d2.agregarCursoPosgrado(c2m4d2);
 				m4d2.agregarCursoPosgrado(c3m4d2);
-				
+
 				// Cursos de la maestria 1 del departamento 3
 				CursoPosgrado c1m1d3 = new CursoPosgrado("Modelos Matemáticos Avanzados", new ArrayList<String>() {{ add("Aplicar modelos matemáticos a problemas complejos"); add("Desarrollar soluciones basadas en modelación matemática");  }}, 4, d201);
 				CursoPosgrado c2m1d3 = new CursoPosgrado("Ecuaciones Diferenciales", new ArrayList<String>() {{ add("Resolver ecuaciones diferenciales complejas"); add("Aplicar ecuaciones diferenciales en modelado físico"); }}, 5, d204);
@@ -730,7 +730,7 @@ public class Inicializadora{
 				// Cursos de la maestria 2 del departamento 3
 				CursoPosgrado c1m2d3 = new CursoPosgrado("Estadística Multivariante", new ArrayList<String>() {{ add("Aplicar técnicas estadísticas multivariantes"); add("Interpretar resultados de análisis multivariados"); }}, 4, d210);
 				CursoPosgrado c2m2d3 = new CursoPosgrado("Diseño de Experimentos", new ArrayList<String>() {{ add("Planificar diseños experimentales eficientes");add("Analizar datos de experimentos científicos"); }}, 5, d213);
-			    CursoPosgrado c3m2d3 = new CursoPosgrado("Series Temporales", new ArrayList<String>() {{add("Modelar y predecir series temporales");add("Aplicar técnicas de suavizado y descomposición"); }}, 4, d216);
+				CursoPosgrado c3m2d3 = new CursoPosgrado("Series Temporales", new ArrayList<String>() {{add("Modelar y predecir series temporales");add("Aplicar técnicas de suavizado y descomposición"); }}, 4, d216);
 
 				m2d3.agregarCursoPosgrado(c1m2d3);
 				m2d3.agregarCursoPosgrado(c2m2d3);
@@ -766,7 +766,7 @@ public class Inicializadora{
 				m5d3.agregarCursoPosgrado(c2m5d3);
 				m5d3.agregarCursoPosgrado(c3m5d3);
 				m5d3.agregarCursoPosgrado(c4m5d3);
-				
+
 				//Matricular docentes en maestrias del departamento 1
 				m1d1.agregarMatriculado(d4);
 				m1d1.agregarMatriculado(d9);
@@ -778,7 +778,7 @@ public class Inicializadora{
 				m1d1.agregarMatriculado(d39);
 				m1d1.agregarMatriculado(d44);
 				m1d1.agregarMatriculado(d49);
-				
+
 				m2d1.agregarMatriculado(d54);
 				m2d1.agregarMatriculado(d59);
 				m2d1.agregarMatriculado(d61);
@@ -788,7 +788,7 @@ public class Inicializadora{
 				m2d1.agregarMatriculado(d73);
 				m2d1.agregarMatriculado(d76);
 				m2d1.agregarMatriculado(d79);
-				
+
 				m3d1.agregarMatriculado(d82);
 				m3d1.agregarMatriculado(d85);
 				m3d1.agregarMatriculado(d88);
@@ -796,7 +796,7 @@ public class Inicializadora{
 				m3d1.agregarMatriculado(d94);
 				m3d1.agregarMatriculado(d97);
 				m3d1.agregarMatriculado(d100);
-				
+
 				//Matricular docentes en maestrias del departamento 2
 				m1d2.agregarMatriculado(d103);
 				m1d2.agregarMatriculado(d106);
@@ -807,7 +807,7 @@ public class Inicializadora{
 				m1d2.agregarMatriculado(d121);
 				m1d2.agregarMatriculado(d124);
 				m1d2.agregarMatriculado(d127);
-				
+
 				m2d2.agregarMatriculado(d130);
 				m2d2.agregarMatriculado(d133);
 				m2d2.agregarMatriculado(d136);
@@ -817,7 +817,7 @@ public class Inicializadora{
 				m2d2.agregarMatriculado(d148);
 				m2d2.agregarMatriculado(d151);
 				m2d2.agregarMatriculado(d154);
-				
+
 				m3d2.agregarMatriculado(d157);
 				m3d2.agregarMatriculado(d160);
 				m3d2.agregarMatriculado(d163);
@@ -826,7 +826,7 @@ public class Inicializadora{
 				m3d2.agregarMatriculado(d172);
 				m3d2.agregarMatriculado(d175);
 				m3d2.agregarMatriculado(d178);
-				
+
 				m4d2.agregarMatriculado(d181);
 				m4d2.agregarMatriculado(d184);
 				m4d2.agregarMatriculado(d187);
@@ -834,7 +834,7 @@ public class Inicializadora{
 				m4d2.agregarMatriculado(d193);
 				m4d2.agregarMatriculado(d196);
 				m4d2.agregarMatriculado(d199);
-				
+
 				//Matricular docentes en maestrias del departamento 3
 				m1d3.agregarMatriculado(d202);
 				m1d3.agregarMatriculado(d205);
@@ -843,7 +843,7 @@ public class Inicializadora{
 				m1d3.agregarMatriculado(d214);
 				m1d3.agregarMatriculado(d217);
 				m1d3.agregarMatriculado(d220);
-				
+
 				m2d3.agregarMatriculado(d223);
 				m2d3.agregarMatriculado(d226);
 				m2d3.agregarMatriculado(d229);
@@ -851,14 +851,14 @@ public class Inicializadora{
 				m2d3.agregarMatriculado(d235);
 				m2d3.agregarMatriculado(d238);
 				m2d3.agregarMatriculado(d241);
-				
+
 				m3d3.agregarMatriculado(d244);
 				m3d3.agregarMatriculado(d247);
 				m3d3.agregarMatriculado(d250);
 				m3d3.agregarMatriculado(d253);
 				m3d3.agregarMatriculado(d256);
 				m3d3.agregarMatriculado(d259);
-				
+
 				m4d3.agregarMatriculado(d262);
 				m4d3.agregarMatriculado(d265);
 				m4d3.agregarMatriculado(d268);
@@ -866,14 +866,14 @@ public class Inicializadora{
 				m4d3.agregarMatriculado(d274);
 				m4d3.agregarMatriculado(d277);
 				m4d3.agregarMatriculado(d280);
-				
+
 				m5d3.agregarMatriculado(d283);
 				m5d3.agregarMatriculado(d286);
 				m5d3.agregarMatriculado(d289);
 				m5d3.agregarMatriculado(d292);
 				m5d3.agregarMatriculado(d295);
 				m5d3.agregarMatriculado(d298);
-				
+
 				//Agregar participantes a cursos de Maestrias de Departamento 1
 				c1m1d1.agregarParticipante(d4);
 				c1m1d1.agregarParticipante(d9);
@@ -988,8 +988,8 @@ public class Inicializadora{
 				c5m3d1.agregarParticipante(d94);
 				c5m3d1.agregarParticipante(d97);
 				c5m3d1.agregarParticipante(d100);
-				
-				
+
+
 				//Agregar participantes a cursos de Maestrías del departamento 2
 				c1m1d2.agregarParticipante(d103);
 				c1m1d2.agregarParticipante(d106);
@@ -1110,7 +1110,7 @@ public class Inicializadora{
 				c3m4d2.agregarParticipante(d193);
 				c3m4d2.agregarParticipante(d196);
 				c3m4d2.agregarParticipante(d199);
-				
+
 				//Agregar participantes a cursos de Maestrías del departamento 3
 				c1m1d3.agregarParticipante(d202);
 				c1m1d3.agregarParticipante(d205);
@@ -1135,7 +1135,7 @@ public class Inicializadora{
 				c3m1d3.agregarParticipante(d214);
 				c3m1d3.agregarParticipante(d217);
 				c3m1d3.agregarParticipante(d220);
-				
+
 				c1m2d3.agregarParticipante(d223);
 				c1m2d3.agregarParticipante(d226);
 				c1m2d3.agregarParticipante(d229);
@@ -1239,7 +1239,7 @@ public class Inicializadora{
 				c4m5d3.agregarParticipante(d292);
 				c4m5d3.agregarParticipante(d295);
 				c4m5d3.agregarParticipante(d298);
-				
+
 				//Se crean lineas de investigacion y se agregan al departamento 1
 				LineaInvestigacion li1d1 = new LineaInvestigacion("Inteligencia Artificial y Aprendizaje Automático");
 				LineaInvestigacion li2d1 = new LineaInvestigacion("Ciberseguridad y Redes Avanzadas");
@@ -1272,14 +1272,14 @@ public class Inicializadora{
 				depto3.agregarLineaInvestigacion(li3d3);
 				depto3.agregarLineaInvestigacion(li4d3);
 				depto3.agregarLineaInvestigacion(li5d3);
-				
+
 				//Agregando investigadores a las lineas del departamento 1, empezamos con los estudiantes que son la menor cantidad
 				li1d1.agregarInvestigador(e1);  
 				li1d1.agregarInvestigador(e4);  
 				li1d1.agregarInvestigador(e7); 
 				li1d1.agregarInvestigador(e10); 
 				li1d1.agregarInvestigador(e13); 
-				
+
 				li2d1.agregarInvestigador(e2);  
 				li2d1.agregarInvestigador(e5); 
 				li2d1.agregarInvestigador(e8);  
@@ -1289,7 +1289,7 @@ public class Inicializadora{
 				li3d1.agregarInvestigador(e6);  
 				li3d1.agregarInvestigador(e9);  
 				li3d1.agregarInvestigador(e12); 
-				
+
 				//Departamento 2 continua:
 				li1d2.agregarInvestigador(e15);  
 				li1d2.agregarInvestigador(e18);  
@@ -1308,7 +1308,7 @@ public class Inicializadora{
 
 				li4d2.agregarInvestigador(e21); 
 				li4d2.agregarInvestigador(e27);
-				
+
 				//Finalizamos con departamento 3:
 				li1d3.agregarInvestigador(e28); 
 				li1d3.agregarInvestigador(e33);  
@@ -1317,7 +1317,7 @@ public class Inicializadora{
 				li2d3.agregarInvestigador(e29); 
 				li2d3.agregarInvestigador(e34);  
 				li2d3.agregarInvestigador(e39); 
-			
+
 				li3d3.agregarInvestigador(e30);
 				li3d3.agregarInvestigador(e35); 
 				li3d3.agregarInvestigador(e40); 
@@ -1327,7 +1327,7 @@ public class Inicializadora{
 
 				li5d3.agregarInvestigador(e32); 
 				li5d3.agregarInvestigador(e37);
-				
+
 				//Empezar a agregar a los docentes
 				li1d1.agregarInvestigador(d1); li1d1.agregarInvestigador(d4); li1d1.agregarInvestigador(d7); 
 				li1d1.agregarInvestigador(d10); li1d1.agregarInvestigador(d13); li1d1.agregarInvestigador(d16); 
@@ -1354,7 +1354,7 @@ public class Inicializadora{
 				li3d1.agregarInvestigador(d48); li3d1.agregarInvestigador(d51); li3d1.agregarInvestigador(d54); 
 				li3d1.agregarInvestigador(d57); li3d1.agregarInvestigador(d60); li3d1.agregarInvestigador(d63); 
 				li3d1.agregarInvestigador(d66);
-				
+
 				//Se continua con los del departamento 2
 				li1d2.agregarInvestigador(d101); li1d2.agregarInvestigador(d105); li1d2.agregarInvestigador(d109);
 				li1d2.agregarInvestigador(d113); li1d2.agregarInvestigador(d117); li1d2.agregarInvestigador(d121);
@@ -1387,7 +1387,7 @@ public class Inicializadora{
 				li4d2.agregarInvestigador(d140); li4d2.agregarInvestigador(d144); li4d2.agregarInvestigador(d148);
 				li4d2.agregarInvestigador(d152); li4d2.agregarInvestigador(d156); li4d2.agregarInvestigador(d160);
 				li4d2.agregarInvestigador(d164);
-				
+
 				//Departamento 3
 				li1d3.agregarInvestigador(d201); li1d3.agregarInvestigador(d206); li1d3.agregarInvestigador(d211);
 				li1d3.agregarInvestigador(d216); li1d3.agregarInvestigador(d221); li1d3.agregarInvestigador(d226);
@@ -1425,7 +1425,7 @@ public class Inicializadora{
 				li5d3.agregarInvestigador(d242); li5d3.agregarInvestigador(d247); li5d3.agregarInvestigador(d252);
 				li5d3.agregarInvestigador(d257); li5d3.agregarInvestigador(d262); li5d3.agregarInvestigador(d267);
 				li5d3.agregarInvestigador(d272); li5d3.agregarInvestigador(d277);
-				
+
 				//Resultados de los investigadores del departamento 1
 				Articulo art1 = new Articulo("Machine Learning Applications", 1, 10, "2020", 15, GrupoImpacto.WoS);
 				Articulo art2 = new Articulo("Cybersecurity Trends", 2, 5, "2019", 20, GrupoImpacto.GRUPO_1);
@@ -1529,7 +1529,7 @@ public class Inicializadora{
 				PonenciaEvento pon18 = new PonenciaEvento("Decentralized Finance", LocalDate.of(2021, 3, 7), "Hong Kong Fintech Week", "9788901276543");
 				PonenciaEvento pon19 = new PonenciaEvento("AI Regulation Policies", LocalDate.of(2018, 11, 30), "Brussels Policy Center", "9789012387654");
 				PonenciaEvento pon20 = new PonenciaEvento("Network Virtualization", LocalDate.of(2022, 1, 25), "Seoul Tech Conference", "9780123498765");
-				
+
 				d1.agregarResultado(art1); d3.agregarResultado(art2); e1.agregarResultado(art3); 
 				d5.agregarResultado(art4); d7.agregarResultado(art5); e3.agregarResultado(art6);
 				d9.agregarResultado(art7); d11.agregarResultado(art8); e5.agregarResultado(art9);
@@ -1567,7 +1567,7 @@ public class Inicializadora{
 				d18.agregarResultado(pon13); d20.agregarResultado(pon14); e10.agregarResultado(pon15);
 				d22.agregarResultado(pon16); d24.agregarResultado(pon17); e12.agregarResultado(pon18);
 				d26.agregarResultado(pon19); d28.agregarResultado(pon20);
-				
+
 				//Resultados de los investigadores del departamento 2
 				Articulo art71 = new Articulo("Machine Learning Applications", 15, 3, "2020", 25, GrupoImpacto.WoS);
 				Articulo art72 = new Articulo("Quantum Computing Advances", 8, 2, "2019", 18, GrupoImpacto.GRUPO_1);
@@ -1610,7 +1610,7 @@ public class Inicializadora{
 				CapituloLibro cap18 = new CapituloLibro("Blockchain Applications", new ArrayList<String>(Arrays.asList("Ryan Wright", "Abigail Green")), new ArrayList<String>(Arrays.asList("Nicholas Adams", "Elizabeth Baker")), "Blockchain Books", "78901234", "4");
 				CapituloLibro cap19 = new CapituloLibro("Human Centered AI", new ArrayList<String>(Arrays.asList("Tyler Nelson", "Sofia Carter")), new ArrayList<String>(Arrays.asList("Brandon Mitchell", "Avery Phillips")), "AI Publications", "89012345", "1");
 				CapituloLibro cap20 = new CapituloLibro("Edge Computing Paradigms", new ArrayList<String>(Arrays.asList("Christian Roberts", "Scarlett Turner")), new ArrayList<String>(Arrays.asList("Samuel Parker", "Victoria Parker")), "Edge Tech Press", "90123456", "3");
-		
+
 				PonenciaEvento pon21 = new PonenciaEvento("AI Future Trends", LocalDate.of(2022, 5, 15), "Barcelona", "9781234567890");
 				PonenciaEvento pon22 = new PonenciaEvento("Cybersecurity Innovations", LocalDate.of(2021, 10, 22), "Berlin", "9782345678901");
 				PonenciaEvento pon23 = new PonenciaEvento("Data Privacy Regulations", LocalDate.of(2020, 7, 30), "Paris", "9783456789012");
@@ -1671,7 +1671,7 @@ public class Inicializadora{
 				PonenciaEvento pon78 = new PonenciaEvento("Network Performance Analysis", LocalDate.of(2021, 10, 4), "Madrid", "9788901276543");
 				PonenciaEvento pon79 = new PonenciaEvento("Computer Vision in Sports", LocalDate.of(2020, 3, 27), "Amsterdam", "9789012387654");
 				PonenciaEvento pon80 = new PonenciaEvento("NLP for Chatbots", LocalDate.of(2023, 5, 20), "Zurich", "9780123498765");
-				
+
 				d101.agregarResultado(art71); e15.agregarResultado(art72); d103.agregarResultado(art73);
 				d105.agregarResultado(art74); e17.agregarResultado(art75); d107.agregarResultado(art76);
 				d109.agregarResultado(art77); e19.agregarResultado(art78); d111.agregarResultado(art79);
@@ -1708,7 +1708,7 @@ public class Inicializadora{
 				d166.agregarResultado(pon72); d167.agregarResultado(pon73); d168.agregarResultado(pon74);
 				d169.agregarResultado(pon75); d170.agregarResultado(pon76); d171.agregarResultado(pon77);
 				d172.agregarResultado(pon78); d173.agregarResultado(pon79); d174.agregarResultado(pon80);
-				
+
 				//Resultados de los investigadores del departamento 3
 				Articulo art101 = new Articulo("Advanced Neural Architectures", 16, 4, "2023", 28, GrupoImpacto.WoS);
 				Articulo art102 = new Articulo("Post Quantum Cryptography", 9, 2, "2022", 19, GrupoImpacto.GRUPO_1);
@@ -1822,7 +1822,7 @@ public class Inicializadora{
 				PonenciaEvento pon148 = new PonenciaEvento("NLP for Legal Document Analysis", LocalDate.of(2022, 2, 22), "Copenhagen", "9788899001122");
 				PonenciaEvento pon149 = new PonenciaEvento("IoT in Water Management", LocalDate.of(2021, 11, 15), "Zurich", "9789900112233");
 				PonenciaEvento pon150 = new PonenciaEvento("Hybrid Cloud Security", LocalDate.of(2023, 6, 8), "Geneva", "9780011223344");
-		
+
 				d201.agregarResultado(art101); e28.agregarResultado(art102); d203.agregarResultado(art103);
 				d206.agregarResultado(art104); e29.agregarResultado(art105); d208.agregarResultado(art106);
 				d211.agregarResultado(art107); e30.agregarResultado(art108); d213.agregarResultado(art109);
@@ -1863,7 +1863,54 @@ public class Inicializadora{
 				d237.agregarResultado(pon144); d238.agregarResultado(pon145); d239.agregarResultado(pon146);
 				d240.agregarResultado(pon147); d241.agregarResultado(pon148); d242.agregarResultado(pon149);
 				d243.agregarResultado(pon150);
-				
+
+				//Asignacion de notas para crear cursos recibidos
+				c1m1d1.emitirNota(d1, d4, 4); 
+				c1m1d1.emitirNota(d1, d9, 3); 
+				c1m1d1.emitirNota(d1, d14, 2); 
+				c1m1d1.emitirNota(d1, d19, 5); 
+				c1m1d1.emitirNota(d1, d24, 3); 
+				c1m1d1.emitirNota(d1, d29, 2);
+				c1m1d1.emitirNota(d1, d34, 4); 
+				c1m1d1.emitirNota(d1, d39, 5); 
+				c1m1d1.emitirNota(d1, d44, 3); 
+				c1m1d1.emitirNota(d1, d49, 2); 
+
+				c2m1d1.emitirNota(d1, d4, 5); 
+				c2m1d1.emitirNota(d1, d9, 4); 
+				c2m1d1.emitirNota(d1, d14, 3); 
+				c2m1d1.emitirNota(d1, d19, 2); 
+				c2m1d1.emitirNota(d1, d24, 5); 
+				c2m1d1.emitirNota(d1, d29, 4); 
+				c2m1d1.emitirNota(d1, d34, 3);
+				c2m1d1.emitirNota(d1, d39, 2); 
+				c2m1d1.emitirNota(d1, d44, 5);
+				c2m1d1.emitirNota(d1, d49, 4); 
+
+				c3m1d1.emitirNota(d3, d4, 3); 
+				c3m1d1.emitirNota(d3, d9, 2); 
+				c3m1d1.emitirNota(d3, d14, 4);
+				c3m1d1.emitirNota(d3, d19, 5); 
+				c3m1d1.emitirNota(d3, d24, 3); 
+				c3m1d1.emitirNota(d3, d29, 2); 
+				c3m1d1.emitirNota(d3, d34, 4); 
+				c3m1d1.emitirNota(d3, d39, 5); 
+				c3m1d1.emitirNota(d3, d44, 3); 
+				c3m1d1.emitirNota(d3, d49, 2);
+
+				c4m1d1.emitirNota(d5, d4, 5); 
+				c4m1d1.emitirNota(d5, d9, 4); 
+				c4m1d1.emitirNota(d5, d14, 3); 
+				c4m1d1.emitirNota(d5, d19, 2); 
+				c4m1d1.emitirNota(d5, d24, 5); 
+				c4m1d1.emitirNota(d5, d29, 4);
+				c4m1d1.emitirNota(d5, d34, 3);
+				c4m1d1.emitirNota(d5, d39, 2); 
+				c4m1d1.emitirNota(d5, d44, 5);
+				c4m1d1.emitirNota(d5, d49, 4); 
+
+
+
 				new VentanaPrincipal(vicedecanato);
 			}
 		});
