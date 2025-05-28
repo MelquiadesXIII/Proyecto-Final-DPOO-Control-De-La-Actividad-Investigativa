@@ -141,7 +141,6 @@ public class CapituloLibro extends ResultadoInvestigativo{
 	}
 
 
-
 	//Metodos
 	@Override
 	public boolean equals(Object o) {
