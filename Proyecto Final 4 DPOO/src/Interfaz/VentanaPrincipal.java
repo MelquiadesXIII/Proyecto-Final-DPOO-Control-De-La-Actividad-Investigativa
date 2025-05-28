@@ -243,19 +243,19 @@ public class VentanaPrincipal extends JFrame{
 		panelInicio.add(lblBienvenida);
 		
 		pestañasReportes = new JTabbedPane();
-		pestañasReportes.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		pestañasReportes.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		pestañasReportes.setTabPlacement(JTabbedPane.TOP);
 		panelReportes.add(pestañasReportes, BorderLayout.CENTER);
 		
 		panelReporte1 = new JPanel();
 		panelReporte1.setBackground(Color.LIGHT_GRAY);
 		panelReporte1.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Ranking de los investigadores por puntaje", panelReporte1);
+		pestañasReportes.addTab("Ranking de los investigadores", panelReporte1);
 		
 		panelReporte2 = new JPanel();
 		panelReporte2.setBackground(Color.LIGHT_GRAY);
 		panelReporte2.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Estado de los docentes matriculados en la maestría", panelReporte2);
+		pestañasReportes.addTab("Estado de los matriculados", panelReporte2);
 		
 		panelReporte3 = new JPanel();
 		panelReporte3.setBackground(Color.LIGHT_GRAY);
@@ -265,7 +265,7 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte4 = new JPanel();
 		panelReporte4.setBackground(Color.LIGHT_GRAY);
 		panelReporte4.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Producción científica de los investigadores", panelReporte4);
+		pestañasReportes.addTab("Producción científica", panelReporte4);
 
 		for (int i = 0; i < 4; i++) {
 		    JLabel label = new JLabel(pestañasReportes.getTitleAt(i), SwingConstants.CENTER);
@@ -373,16 +373,14 @@ public class VentanaPrincipal extends JFrame{
 	    panel.setLayout(new BorderLayout());
 	    panel.setBackground(Color.DARK_GRAY);
 	     
-	    // Crear el encabezado
 	    JPanel encabezado = new JPanel();
 	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
-	    encabezado.setPreferredSize(new Dimension(0, 50)); // Altura del encabezado
+	    encabezado.setPreferredSize(new Dimension(0, 50)); 
 	    JLabel lblTitulo = new JLabel(titulo);
 	    lblTitulo.setForeground(Color.WHITE);
 	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 	    encabezado.add(lblTitulo);
 	    
-	    // Agregar el encabezado al panel
 	    panel.add(encabezado, BorderLayout.NORTH);
 	    
 	    return panel;
