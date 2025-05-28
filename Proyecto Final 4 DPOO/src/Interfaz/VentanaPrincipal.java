@@ -230,11 +230,11 @@ public class VentanaPrincipal extends JFrame{
 
 		panelDepartamentos = crearPanelesConEncabezado("Departamentos:");
 		panelPrincipal.add(panelDepartamentos, "panelDepartamentos");
-		//panelDepartamentos.setBackground(Color.DARK_GRAY);
+		panelDepartamentos.setBackground(Color.DARK_GRAY);
 		
 		panelReportes = crearPanelesConEncabezado("Listado de reportes");
 		panelPrincipal.add(panelReportes, "panelReportes");
-		//panelReportes.setBackground(Color.DARK_GRAY);
+		panelReportes.setBackground(Color.DARK_GRAY);
 		
 		JLabel lblBienvenida = new JLabel("Bienvenido!");
 		lblBienvenida.setBounds(0, 0, 794, 465);
