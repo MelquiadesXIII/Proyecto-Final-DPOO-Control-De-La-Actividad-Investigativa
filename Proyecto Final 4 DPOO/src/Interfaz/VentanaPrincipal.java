@@ -10,6 +10,8 @@ import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -474,7 +476,7 @@ public class VentanaPrincipal extends JFrame{
 
 	   
 	    panelFiltros.add(new JLabel("Departamento:"));
-	    panelFiltros.add(seleccionarDeptoReporte1);
+	    panelFiltros.add(seleccionarDeptoReporte2);
 	    panelFiltros.add(new JLabel("Maestría:"));
 	    panelFiltros.add(seleccionarMaestriaReporte2);
 
@@ -506,13 +508,6 @@ public class VentanaPrincipal extends JFrame{
 	
 	private void mostrarReporte1(){
 		
-		//Crear clase local
-	    class InvestigadoresRanking{
-	    	
-	    	String nombre;
-	    	int puntos;
-	    }
-	    
 		JPanel panelFiltros = new JPanel();
 	    panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER)); 
 	    panelFiltros.setBackground(Color.LIGHT_GRAY);
@@ -570,11 +565,70 @@ public class VentanaPrincipal extends JFrame{
 	
 	private void actualizarTablaRanking(){
 		
+		//Crear clase local
+	    class InvestigadorRanking{
+	    	
+	    	String nombre;
+	    	String apellidos;
+	    	int puntos;
+	    	
+	    	InvestigadorRanking(String nombre, int puntos, String apellidos){
+	    		this.nombre = nombre;
+	    		this.puntos = puntos;
+	    		this.apellidos = apellidos;
+	    	}
+	    	
+	    	String getNombre(){
+	    		return nombre;
+	    	}
+	    	
+	    	int getPuntos(){
+	    		return puntos;
+	    	}
+
+			public String getApellidos() {
+				return apellidos;
+			}
+	    }
+	    
+	    ArrayList<InvestigadorRanking> ranking = new ArrayList<InvestigadorRanking>();
+		
 		modeloTablaRanking.setRowCount(0);
 		
 		Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
 		
-		
+		if(deptoSeleccionado != null){
+			
+			for(LineaInvestigacion l: deptoSeleccionado.getLineasInvestigacion()){
+				for(Investigador i: l.getInvestigadores()){
+					
+					if(i instanceof Docente){
+						ranking.add(new InvestigadorRanking(((Docente)i).getNombre(), i.calcularPuntajeInvestigativo(), ((Docente)i).getApellidos()));
+					}else
+						ranking.add(new InvestigadorRanking(((Estudiante)i).getNombre(), i.calcularPuntajeInvestigativo(), ((Estudiante)i).getApellidos()));
+				}
+			}
+			
+			Collections.sort(ranking, new Comparator<InvestigadorRanking>() {
+	            @Override
+	            public int compare(InvestigadorRanking i1, InvestigadorRanking i2) {
+	                return Integer.compare(i2.getPuntos(), i1.getPuntos());
+	                
+	            }
+	        });
+			
+			int i = 1;
+			for(InvestigadorRanking r: ranking){
+				
+				Object[] fila = {
+		                i,
+		                r.getNombre() + " " + r.getApellidos(),
+		                r.getPuntos(),
+		            };
+		            modeloTablaRanking.addRow(fila);
+		            i++;
+			}
+		}
 		
 	}
 	
