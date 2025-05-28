@@ -54,9 +54,12 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelReporte3;
 	private JPanel panelReporte4;
 	private JComboBox<Departamento> seleccionarDeptoReporte1 = new JComboBox<>();
-	private JComboBox<Maestria> seleccionarMaestriaReporte1 = new JComboBox<>();
+	private JComboBox<Maestria> seleccionarMaestriaReporte2 = new JComboBox<>();
+	private JComboBox<Departamento> seleccionarDeptoReporte2 = new JComboBox<>();
 	private JTable tablaMatriculados;
-	private DefaultTableModel modeloTabla;
+	private DefaultTableModel modeloTablaMatriculados;
+	private JTable tablaRanking;
+	private DefaultTableModel modeloTablaRanking;
 
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 
@@ -374,7 +377,7 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte1.setBackground(Color.LIGHT_GRAY);
 		panelReporte1.setLayout(new BorderLayout());
 		pestañasReportes.addTab("Ranking de los investigadores", panelReporte1);
-		
+		mostrarReporte1();
 		
 		panelReporte2 = new JPanel();
 		panelReporte2.setBackground(Color.LIGHT_GRAY);
@@ -409,7 +412,7 @@ public class VentanaPrincipal extends JFrame{
 	    final Maestria verSeleccionarMaestria = new Maestria("Seleccionar", 1, "ninguno");
 	    
 	    String[] columnas = {"Nombre y apellidos", "Créditos Acumulados", "Listo para defender maestría"};
-	    modeloTabla = new DefaultTableModel(columnas, 0){
+	    modeloTablaMatriculados = new DefaultTableModel(columnas, 0){
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -417,7 +420,7 @@ public class VentanaPrincipal extends JFrame{
 	            return false;
 	        }
 	    };
-	    tablaMatriculados = new JTable(modeloTabla);
+	    tablaMatriculados = new JTable(modeloTablaMatriculados);
 	    tablaMatriculados.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 	    tablaMatriculados.setRowHeight(25);
 	    JTableHeader header = tablaMatriculados.getTableHeader();
@@ -436,25 +439,25 @@ public class VentanaPrincipal extends JFrame{
 	    panelReporte2.add(scrollTabla, BorderLayout.CENTER);
 	    
 	    
-	    seleccionarDeptoReporte1.addItem(verSeleccionarDepto);
+	    seleccionarDeptoReporte2.addItem(verSeleccionarDepto);
 	    for (Departamento d : vicedecanato.getDepartamentos()) {
-	        seleccionarDeptoReporte1.addItem(d);
+	        seleccionarDeptoReporte2.addItem(d);
 	    }
 
-        seleccionarMaestriaReporte1.addItem(verSeleccionarMaestria);
+        seleccionarMaestriaReporte2.addItem(verSeleccionarMaestria);
 	    
-	    seleccionarDeptoReporte1.addActionListener(new ActionListener() {
+	    seleccionarDeptoReporte2.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	        	
-	            Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
+	            Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte2.getSelectedItem();
 	            if (deptoSeleccionado != null) {
 	            	
-	                seleccionarMaestriaReporte1.removeAllItems();
-	                seleccionarMaestriaReporte1.addItem(verSeleccionarMaestria);
+	                seleccionarMaestriaReporte2.removeAllItems();
+	                seleccionarMaestriaReporte2.addItem(verSeleccionarMaestria);
 	                
 	                for (Maestria m : deptoSeleccionado.getMaestrias()) {
-	                    seleccionarMaestriaReporte1.addItem(m);
+	                    seleccionarMaestriaReporte2.addItem(m);
 	                }
 	                
 	                actualizarTablaMatriculados();
@@ -462,7 +465,7 @@ public class VentanaPrincipal extends JFrame{
 	        }
 	    });
 	    
-	    seleccionarMaestriaReporte1.addActionListener(new ActionListener() {
+	    seleccionarMaestriaReporte2.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            actualizarTablaMatriculados();
@@ -473,20 +476,20 @@ public class VentanaPrincipal extends JFrame{
 	    panelFiltros.add(new JLabel("Departamento:"));
 	    panelFiltros.add(seleccionarDeptoReporte1);
 	    panelFiltros.add(new JLabel("Maestría:"));
-	    panelFiltros.add(seleccionarMaestriaReporte1);
+	    panelFiltros.add(seleccionarMaestriaReporte2);
 
 	    panelReporte2.add(panelFiltros, BorderLayout.NORTH);
 	    
 	    if (!vicedecanato.getDepartamentos().isEmpty()) {
-	        seleccionarMaestriaReporte1.setSelectedIndex(0);
+	        seleccionarMaestriaReporte2.setSelectedIndex(0);
 	        actualizarTablaMatriculados();
 	    }
 	}
 	
 	private void actualizarTablaMatriculados() {
-	    modeloTabla.setRowCount(0); 
+	    modeloTablaMatriculados.setRowCount(0); 
 
-	    Maestria maestriaSeleccionada = (Maestria) seleccionarMaestriaReporte1.getSelectedItem();
+	    Maestria maestriaSeleccionada = (Maestria) seleccionarMaestriaReporte2.getSelectedItem();
 	    if (maestriaSeleccionada != null) {
 	    	
 	        for (Docente d : maestriaSeleccionada.getMatriculados()) {
@@ -496,8 +499,83 @@ public class VentanaPrincipal extends JFrame{
 	                d.creditosObtenidosCursosRecibidos(),
 	                condicion
 	            };
-	            modeloTabla.addRow(fila);
+	            modeloTablaMatriculados.addRow(fila);
 	        }
 	    }
 	}
+	
+	private void mostrarReporte1(){
+		
+		//Crear clase local
+	    class InvestigadoresRanking{
+	    	
+	    	String nombre;
+	    	int puntos;
+	    }
+	    
+		JPanel panelFiltros = new JPanel();
+	    panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER)); 
+	    panelFiltros.setBackground(Color.LIGHT_GRAY);
+	    
+	    Departamento verSeleccionarDepto = new Departamento("Seleccionar");
+	    seleccionarDeptoReporte1.addItem(verSeleccionarDepto);
+	    for (Departamento d : vicedecanato.getDepartamentos()) {
+	        seleccionarDeptoReporte1.addItem(d);
+	    }
+	    seleccionarDeptoReporte1.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	
+	            Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
+	            if (deptoSeleccionado != null) {
+	                
+	                actualizarTablaRanking();
+	            }
+	        }
+	    });
+	    
+		String[] columnas = {"Lugar", "Nombre y apellidos", "Puntaje"};
+	    modeloTablaRanking = new DefaultTableModel(columnas, 0){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+	    tablaRanking = new JTable(modeloTablaRanking);
+	    tablaRanking.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+	    tablaRanking.setRowHeight(25);
+	    JTableHeader header = tablaRanking.getTableHeader();
+	    header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
+	    header.setBackground(new Color(230, 230, 230));      
+	    header.setForeground(Color.BLACK);
+	    
+	    DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+	    centrar.setHorizontalAlignment(SwingConstants.CENTER);
+	    for(int i = 0; i < tablaRanking.getColumnCount(); i++){
+			tablaRanking.getColumnModel().getColumn(i).setCellRenderer(centrar);
+		}
+	    
+	    JScrollPane scrollTabla = new JScrollPane(tablaRanking);
+	    scrollTabla.setPreferredSize(new Dimension(800, 400));
+	    panelReporte1.add(scrollTabla, BorderLayout.CENTER);
+	    
+	    
+	    
+	    panelFiltros.add(new JLabel("Departamento:"));
+	    panelFiltros.add(seleccionarDeptoReporte1);
+	    panelReporte1.add(panelFiltros, BorderLayout.NORTH);
+	}
+	
+	private void actualizarTablaRanking(){
+		
+		modeloTablaRanking.setRowCount(0);
+		
+		Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
+		
+		
+		
+	}
+	
 }
