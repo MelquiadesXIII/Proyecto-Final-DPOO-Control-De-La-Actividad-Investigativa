@@ -50,6 +50,8 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelReporte2;
 	private JPanel panelReporte3;
 	private JPanel panelReporte4;
+	private JComboBox<Departamento> seleccionarDeptoReporte1;
+	private JComboBox<Maestria> seleccionarMaestriaReporte1;
 
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 
@@ -367,7 +369,8 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte1.setBackground(Color.LIGHT_GRAY);
 		panelReporte1.setLayout(new BorderLayout());
 		pestañasReportes.addTab("Ranking de los investigadores", panelReporte1);
-
+		mostrarReporte1();
+		
 		panelReporte2 = new JPanel();
 		panelReporte2.setBackground(Color.LIGHT_GRAY);
 		panelReporte2.setLayout(new BorderLayout());
@@ -388,5 +391,33 @@ public class VentanaPrincipal extends JFrame{
 			label.setPreferredSize(new Dimension(183, 30));
 			pestañasReportes.setTabComponentAt(i, label);
 		}
+	}
+	
+	private void mostrarReporte1(){
+		
+		for (Departamento d : vicedecanato.getDepartamentos()) {
+		    seleccionarDeptoReporte1.addItem(d);
+		}
+
+		seleccionarDeptoReporte1.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        
+		        Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
+		        
+		        if (deptoSeleccionado != null) {
+		            
+		            seleccionarMaestriaReporte1.removeAllItems();
+		            
+		            for (Maestria m : deptoSeleccionado.getMaestrias()) {
+		                seleccionarMaestriaReporte1.addItem(m);
+		            }
+		        }
+		    }
+		});
+		
+		Maestria maestriaSeleccionada = (Maestria) seleccionarMaestriaReporte1.getSelectedItem();
+		
+		
 	}
 }
