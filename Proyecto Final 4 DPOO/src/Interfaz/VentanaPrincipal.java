@@ -9,6 +9,7 @@ import javax.swing.table.JTableHeader;
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,6 +37,7 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelDepartamentos;
 	private JPanel panelEstudiantes;
 	private JPanel panelDocentes;
+	private JPanel panelAyuda;
 	private JPanel panelInicio;
 	private JList<String> listaDepartamentos;
 	private DefaultListModel<String> modeloDepartamentos;
@@ -75,6 +77,7 @@ public class VentanaPrincipal extends JFrame{
 		}
 
 		crearPaneles();
+		crearPanelesReportes();
 		crearTablaDocentes();
 		crearTablaDepartamentos();
 		crearTablaEstudiantes();
@@ -166,6 +169,8 @@ public class VentanaPrincipal extends JFrame{
 		botonAyuda = crearBoton("Ayuda");
 		botonAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
+				cl.show(panelPrincipal, "panelAyuda");
 				actualizarAparienciaBotones(botonAyuda);
 			}
 		});
@@ -174,7 +179,7 @@ public class VentanaPrincipal extends JFrame{
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarAparienciaBotones(botonSalir);
-				MensajeDialog dialog = new MensajeDialog(VentanaPrincipal.this, "Desea salir de la aplicación?", Tipo.CONFIRMACION);
+				MensajeDialog dialog = new MensajeDialog(VentanaPrincipal.this, "¿Desea salir de la aplicación?", Tipo.CONFIRMACION);
 				dialog.setVisible(true);
 
 				if (dialog.isConfirmado()) {
@@ -247,6 +252,10 @@ public class VentanaPrincipal extends JFrame{
 		panelReportes = crearPanelesConEncabezado("Listado de reportes");
 		panelPrincipal.add(panelReportes, "panelReportes");
 		panelReportes.setBackground(Color.DARK_GRAY);
+		
+		panelAyuda = crearPanelesConEncabezado("¿Necesitas Ayuda? Contáctanos");
+		panelPrincipal.add(panelAyuda, "panelAyuda");
+		panelAyuda.setBackground(Color.DARK_GRAY);
 
 		JLabel lblBienvenida = new JLabel("<html>" +
             "<div style='text-align: center; font-family: Segoe UI;'>" +
@@ -269,7 +278,46 @@ public class VentanaPrincipal extends JFrame{
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInicio.add(lblBienvenida);
 
-		crearPanelesReportes();
+		JLabel lblInfo = new JLabel(
+	            "<html>" +
+	            "<div style='text-align: center; font-family: Segoe UI;'>" +
+	            "<h2 style='color: #2E86C1;'>Soporte y Contacto</h2>" +
+	            "<hr>" +
+	            "<p style='text-align: left;'>" +
+	            "<b>Para soporte técnico o más información, contacte a:</b><br><br>" +
+	            "• <b>Desarrollador 1:</b> liancarlos365@gmail.com<br>" +
+	            "• <b>Desarrollador 2:</b> llerandimarlon05@gmail.com<br><br>" +
+	            "<b>Repositorio del proyecto:</b><br>" +
+	            "<span style='color: #3498DB; text-decoration: underline; cursor: pointer;'>" +
+	            "https://github.com/MelquiadesXIII/Proyecto-Final-DPOO-Control-De-La-Actividad-Investigativa.git" +
+	            "</span>" +
+	            "</p>" +
+	            "<hr>" +
+	            "<p style='font-size: 10px; color: #7F8C8D;'>Versión 1.0 - Junio 2025</p>" +
+	            "</div>" +
+	            "</html>"
+	        );
+		
+		lblInfo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    if (e.getClickCount() == 1) { // Click simple
+                        Desktop.getDesktop().browse(new URI("https://github.com/MelquiadesXIII/Proyecto-Final-DPOO-Control-De-La-Actividad-Investigativa.git"));
+                    }
+                } catch (Exception ex) {
+                    new MensajeDialog(VentanaPrincipal.this, "Error al abrir el enlace.", Tipo.RETROALIMENTACION);
+                }
+            }
+        });
+		
+		lblInfo.setBounds(0, 0, 794, 465);
+		lblInfo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		lblInfo.setForeground(Color.WHITE);
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		panelAyuda.add(lblInfo, BorderLayout.CENTER);
+		
+		
 	}
 
 	private void crearTablaDepartamentos(){
