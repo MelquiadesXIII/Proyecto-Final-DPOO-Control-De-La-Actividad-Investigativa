@@ -248,9 +248,24 @@ public class VentanaPrincipal extends JFrame{
 		panelPrincipal.add(panelReportes, "panelReportes");
 		panelReportes.setBackground(Color.DARK_GRAY);
 
-		JLabel lblBienvenida = new JLabel("Bienvenido!");
+		JLabel lblBienvenida = new JLabel("<html>" +
+            "<div style='text-align: center; font-family: Segoe UI;'>" +
+            "<h1>Sistema Integral de Gestión Investigativa y de Posgrado</h1>" +
+            "<p><b>Facultad de Ingeniería Informática" +
+            "<hr>" +
+            "<p style='text-align: left;'>" +
+            "Plataforma oficial del <b>Vicedecanato de Investigaciones y Posgrado</b> para:<br><br>" +
+            "• Registrar y monitorear <b>líneas de investigación</b>.<br>" +
+            "• Gestionar <b>resultados científicos</b> (artículos, capítulos, ponencias).<br>" +
+            "• Administrar <b>cursos de posgrado</b> (impartidos, recibidos, créditos).<br>" +
+            "• Acompañar el progreso en <b>maestrías</b> (matrículas, defensas).<br><br>" +
+            "<i>Optimice la toma de decisiones con reportes automatizados.</i>" +
+            "</p>" +
+            "</div>" +
+            "</html>");
 		lblBienvenida.setBounds(0, 0, 794, 465);
-		lblBienvenida.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+		lblBienvenida.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		lblBienvenida.setForeground(Color.WHITE);
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInicio.add(lblBienvenida);
 
