@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame{
-	
+
 	private static final long serialVersionUID = 1L;
 	private JPanel panelNavegacion;
 	private JPanel panelPrincipal;
@@ -50,27 +50,27 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelReporte2;
 	private JPanel panelReporte3;
 	private JPanel panelReporte4;
-	
+
 	public VentanaPrincipal(Vicedecanato vicedecanato){
-		
+
 		this.vicedecanato = vicedecanato;
 		inicializarConfiguracionUI();
 		crearPanelPrincipal();
 		crearPanelNavegacion();
-		
+
 		if (this.botonInicio != null) {
 			actualizarAparienciaBotones(this.botonInicio);
 		}
-		
+
 		crearPaneles();
 		crearTablaDocentes();
 		crearTablaDepartamentos();
 		crearTablaEstudiantes();
 		crearBotones();
 	}
-	
+
 	private void inicializarConfiguracionUI(){
-		
+
 		setBackground(Color.WHITE);
 		setTitle("Vicedecanato: Ventana Principal");
 		setSize(new Dimension(1080, 720));
@@ -80,32 +80,32 @@ public class VentanaPrincipal extends JFrame{
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		this.botonesNavegacion = new ArrayList<JButton>();
-		
+
 		setVisible(true);
 	}
-	
+
 	private void crearPanelNavegacion(){
-		
+
 		panelNavegacion = new JPanel();
 		panelNavegacion.setBackground(new Color(30, 40, 50));
 		panelNavegacion.setLayout(new BoxLayout(panelNavegacion, BoxLayout.Y_AXIS));
 		panelNavegacion.setPreferredSize(new Dimension(250, getHeight())); 
-		
+
 		JLabel titulo = new JLabel("Vicedecanato");
 		titulo.setForeground(Color.WHITE);
 		titulo.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		titulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
 		panelNavegacion.add(titulo);
-		
+
 		getContentPane().add(panelNavegacion, BorderLayout.WEST);
-		
+
 		panelBotones = new JPanel();
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
 		panelBotones.setBackground(new Color(30, 40, 50)); //new Color(30, 40, 50)
 		panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 		panelNavegacion.add(panelBotones);
-		
+
 		botonInicio = crearBoton("Inicio");
 		botonInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,7 +114,7 @@ public class VentanaPrincipal extends JFrame{
 				actualizarAparienciaBotones(botonInicio);
 			}
 		});
-		
+
 		botonDepartamentos = crearBoton("Departamentos");
 		botonDepartamentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -123,7 +123,7 @@ public class VentanaPrincipal extends JFrame{
 				actualizarAparienciaBotones(botonDepartamentos);
 			}
 		});
-		
+
 		botonDocentes = crearBoton("Docentes");
 		botonDocentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,7 +132,7 @@ public class VentanaPrincipal extends JFrame{
 				actualizarAparienciaBotones(botonDocentes);
 			}
 		});
-		
+
 		botonEstudiantes = crearBoton("Estudiantes");
 		botonEstudiantes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -141,7 +141,7 @@ public class VentanaPrincipal extends JFrame{
 				actualizarAparienciaBotones(botonEstudiantes);
 			}
 		});
-		
+
 		botonReportes = crearBoton("Reportes");
 		botonReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -150,30 +150,30 @@ public class VentanaPrincipal extends JFrame{
 				actualizarAparienciaBotones(botonReportes);
 			}
 		});
-		
+
 		botonAyuda = crearBoton("Ayuda");
 		botonAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarAparienciaBotones(botonAyuda);
 			}
 		});
-		
+
 		botonSalir = crearBoton("Salir");
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarAparienciaBotones(botonSalir);
 				MensajeDialog dialog = new MensajeDialog(VentanaPrincipal.this, "Desea salir de la aplicación?", Tipo.CONFIRMACION);
-		        dialog.setVisible(true);
-		        
-		        if (dialog.isConfirmado()) {
-		            System.exit(0);
-		        }
+				dialog.setVisible(true);
+
+				if (dialog.isConfirmado()) {
+					System.exit(0);
+				}
 			}
 		});
 	}
-	
+
 	private JButton crearBoton(String nombre){
-		
+
 		final JButton boton = new JButton(nombre);
 		boton.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		boton.setBackground(new Color(30, 40, 50));
@@ -182,32 +182,32 @@ public class VentanaPrincipal extends JFrame{
 		boton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 		boton.setFocusPainted(false);
 		boton.setBorderPainted(false);
-		
-		boton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                if (boton != botonSeleccionadoActual) { 
-                    boton.setBackground(COLOR_HOVER);
-                }
-            }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                if (boton != botonSeleccionadoActual) { 
-                    boton.setBackground(COLOR_DEFAULT);
-                }
-            }
-        });
-		
+		boton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (boton != botonSeleccionadoActual) { 
+					boton.setBackground(COLOR_HOVER);
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (boton != botonSeleccionadoActual) { 
+					boton.setBackground(COLOR_DEFAULT);
+				}
+			}
+		});
+
 		panelBotones.add(Box.createRigidArea(new Dimension(0, 40)));
 		panelBotones.add(boton);
 		this.botonesNavegacion.add(boton);
-		
+
 		return boton;
 	}
-	
+
 	private void crearPanelPrincipal(){
-		
+
 		cardLayout = new CardLayout();
 		panelPrincipal = new JPanel(cardLayout);
 		panelPrincipal.setBackground(Color.DARK_GRAY);
@@ -215,15 +215,15 @@ public class VentanaPrincipal extends JFrame{
 	}
 
 	private void crearPaneles(){
-		
+
 		panelInicio = crearPanelesConEncabezado("Bienvenido");
 		panelPrincipal.add(panelInicio, "panelInicio");
-		//panelInicio.setBackground(Color.DARK_GRAY);
+		panelInicio.setBackground(Color.DARK_GRAY);
 
 		panelDocentes = crearPanelesConEncabezado("Docentes registrados en el vicedecanato:");
 		panelPrincipal.add(panelDocentes, "panelDocentes");
-		//panelDocentes.setBackground(Color.DARK_GRAY);
-		
+		panelDocentes.setBackground(Color.DARK_GRAY);
+
 		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el vicedecanato");
 		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
 		panelEstudiantes.setBackground(Color.DARK_GRAY);
@@ -231,51 +231,22 @@ public class VentanaPrincipal extends JFrame{
 		panelDepartamentos = crearPanelesConEncabezado("Departamentos:");
 		panelPrincipal.add(panelDepartamentos, "panelDepartamentos");
 		panelDepartamentos.setBackground(Color.DARK_GRAY);
-		
+
 		panelReportes = crearPanelesConEncabezado("Listado de reportes");
 		panelPrincipal.add(panelReportes, "panelReportes");
 		panelReportes.setBackground(Color.DARK_GRAY);
-		
+
 		JLabel lblBienvenida = new JLabel("Bienvenido!");
 		lblBienvenida.setBounds(0, 0, 794, 465);
 		lblBienvenida.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInicio.add(lblBienvenida);
-		
-		pestañasReportes = new JTabbedPane();
-		pestañasReportes.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		pestañasReportes.setTabPlacement(JTabbedPane.TOP);
-		panelReportes.add(pestañasReportes, BorderLayout.CENTER);
-		
-		panelReporte1 = new JPanel();
-		panelReporte1.setBackground(Color.LIGHT_GRAY);
-		panelReporte1.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Ranking de los investigadores", panelReporte1);
-		
-		panelReporte2 = new JPanel();
-		panelReporte2.setBackground(Color.LIGHT_GRAY);
-		panelReporte2.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Estado de los matriculados", panelReporte2);
-		
-		panelReporte3 = new JPanel();
-		panelReporte3.setBackground(Color.LIGHT_GRAY);
-		panelReporte3.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Plan de estudios de la maestría", panelReporte3);
-		
-		panelReporte4 = new JPanel();
-		panelReporte4.setBackground(Color.LIGHT_GRAY);
-		panelReporte4.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Producción científica", panelReporte4);
 
-		for (int i = 0; i < 4; i++) {
-		    JLabel label = new JLabel(pestañasReportes.getTitleAt(i), SwingConstants.CENTER);
-		    label.setPreferredSize(new Dimension(183, 30));
-		    pestañasReportes.setTabComponentAt(i, label);
-		}
+		crearPanelesReportes();
 	}
-	
+
 	private void crearTablaDepartamentos(){
-		
+
 		modeloDepartamentos = new DefaultListModel<>();
 
 		for (Departamento departamento : vicedecanato.getDepartamentos()) {
@@ -291,9 +262,9 @@ public class VentanaPrincipal extends JFrame{
 		scrollDepartamentos.setBounds(0, 1, 650, 685);
 		panelDepartamentos.add(scrollDepartamentos);
 	}
-	
+
 	private void crearTablaEstudiantes(){
-		
+
 		modeloEstudiantes = new DefaultListModel<>();
 
 		for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
@@ -310,9 +281,9 @@ public class VentanaPrincipal extends JFrame{
 
 		panelEstudiantes.add(scrollEstudiantes);
 	}
-	
+
 	private void crearTablaDocentes(){
-		
+
 		modeloDocentes = new DefaultListModel<>();
 
 		for (Docente docente : vicedecanato.getDocentes()) {
@@ -328,17 +299,17 @@ public class VentanaPrincipal extends JFrame{
 		scrollDocentes.setBounds(0, 1, 650, 685);
 		panelDocentes.add(scrollDocentes);
 	}
-	
+
 	private void crearBotones(){
-		
+
 		JButton btnCrearEst = new JButton("Crear");
 		btnCrearEst.setBounds(660, 13, 140, 25);
 		panelEstudiantes.add(btnCrearEst);
-		
+
 		JButton btnEliminarEst = new JButton("Eliminar");
 		btnEliminarEst.setBounds(660, 60, 140, 25);
 		panelEstudiantes.add(btnEliminarEst);
-		
+
 		JButton btnCrearDoc = new JButton("Crear");
 		btnCrearDoc.setBounds(660, 13, 140, 25);
 		panelDocentes.add(btnCrearDoc);
@@ -346,7 +317,7 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnEliminarDoc = new JButton("Eliminar");
 		btnEliminarDoc.setBounds(660, 60, 140, 25);
 		panelDocentes.add(btnEliminarDoc);
-		
+
 		JButton btnCrearDep = new JButton("Crear");
 		btnCrearDep.setBounds(660, 13, 140, 25);
 		panelDepartamentos.add(btnCrearDep);
@@ -355,7 +326,7 @@ public class VentanaPrincipal extends JFrame{
 		btnEliminarDep.setBounds(660, 60, 140, 25);
 		panelDepartamentos.add(btnEliminarDep);
 	}
-	
+
 	private void actualizarAparienciaBotones(JButton botonActivo) {
 		botonSeleccionadoActual = botonActivo;
 		for (JButton btn : botonesNavegacion) {
@@ -366,24 +337,56 @@ public class VentanaPrincipal extends JFrame{
 			}
 		}
 	}
-	
+
 	private JPanel crearPanelesConEncabezado(String titulo){
-		
+
 		JPanel panel = new JPanel();
-	    panel.setLayout(new BorderLayout());
-	    panel.setBackground(Color.DARK_GRAY);
-	     
-	    JPanel encabezado = new JPanel();
-	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
-	    encabezado.setPreferredSize(new Dimension(0, 50)); 
-	    JLabel lblTitulo = new JLabel(titulo);
-	    lblTitulo.setForeground(Color.WHITE);
-	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-	    encabezado.add(lblTitulo);
-	    
-	    panel.add(encabezado, BorderLayout.NORTH);
-	    
-	    return panel;
+		panel.setLayout(new BorderLayout());
+		panel.setBackground(Color.DARK_GRAY);
+
+		JPanel encabezado = new JPanel();
+		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+		encabezado.setPreferredSize(new Dimension(0, 50)); 
+		JLabel lblTitulo = new JLabel(titulo);
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		encabezado.add(lblTitulo);
+
+		panel.add(encabezado, BorderLayout.NORTH);
+
+		return panel;
 	}
-	
+
+	private void crearPanelesReportes(){
+		pestañasReportes = new JTabbedPane();
+		pestañasReportes.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		pestañasReportes.setTabPlacement(JTabbedPane.TOP);
+		panelReportes.add(pestañasReportes, BorderLayout.CENTER);
+
+		panelReporte1 = new JPanel();
+		panelReporte1.setBackground(Color.LIGHT_GRAY);
+		panelReporte1.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Ranking de los investigadores", panelReporte1);
+
+		panelReporte2 = new JPanel();
+		panelReporte2.setBackground(Color.LIGHT_GRAY);
+		panelReporte2.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Estado de los matriculados", panelReporte2);
+
+		panelReporte3 = new JPanel();
+		panelReporte3.setBackground(Color.LIGHT_GRAY);
+		panelReporte3.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Plan de estudios de la maestría", panelReporte3);
+
+		panelReporte4 = new JPanel();
+		panelReporte4.setBackground(Color.LIGHT_GRAY);
+		panelReporte4.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Producción científica", panelReporte4);
+
+		for (int i = 0; i < 4; i++) {
+			JLabel label = new JLabel(pestañasReportes.getTitleAt(i), SwingConstants.CENTER);
+			label.setPreferredSize(new Dimension(183, 30));
+			pestañasReportes.setTabComponentAt(i, label);
+		}
+	}
 }
