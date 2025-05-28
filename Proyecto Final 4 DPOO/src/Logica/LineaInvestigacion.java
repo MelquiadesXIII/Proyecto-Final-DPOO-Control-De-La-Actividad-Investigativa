@@ -10,6 +10,7 @@ public class LineaInvestigacion {
 
 	private String nombre;
 	private ArrayList<Investigador> investigadores;
+	private Docente responsable;
 
 
 
