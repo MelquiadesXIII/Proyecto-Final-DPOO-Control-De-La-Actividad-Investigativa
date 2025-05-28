@@ -156,5 +156,8 @@ public class Maestria {
 								campoEstudio.equals(((Maestria)o).getCampoEstudio())));
 	}
 
-	
+	@Override
+    public String toString() {
+        return this.nombre; 
+    }
 }
