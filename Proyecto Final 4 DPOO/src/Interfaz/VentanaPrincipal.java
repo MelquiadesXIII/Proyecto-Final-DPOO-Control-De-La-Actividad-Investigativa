@@ -2,6 +2,9 @@ package Interfaz;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
@@ -50,8 +53,10 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelReporte2;
 	private JPanel panelReporte3;
 	private JPanel panelReporte4;
-	private JComboBox<Departamento> seleccionarDeptoReporte1;
-	private JComboBox<Maestria> seleccionarMaestriaReporte1;
+	private JComboBox<Departamento> seleccionarDeptoReporte1 = new JComboBox<>();
+	private JComboBox<Maestria> seleccionarMaestriaReporte1 = new JComboBox<>();
+	private JTable tablaMatriculados;
+	private DefaultTableModel modeloTabla;
 
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 
@@ -369,13 +374,14 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte1.setBackground(Color.LIGHT_GRAY);
 		panelReporte1.setLayout(new BorderLayout());
 		pestañasReportes.addTab("Ranking de los investigadores", panelReporte1);
-		mostrarReporte1();
+		
 		
 		panelReporte2 = new JPanel();
 		panelReporte2.setBackground(Color.LIGHT_GRAY);
 		panelReporte2.setLayout(new BorderLayout());
 		pestañasReportes.addTab("Estado de los matriculados", panelReporte2);
-
+		mostrarReporte2();
+		
 		panelReporte3 = new JPanel();
 		panelReporte3.setBackground(Color.LIGHT_GRAY);
 		panelReporte3.setLayout(new BorderLayout());
@@ -393,31 +399,105 @@ public class VentanaPrincipal extends JFrame{
 		}
 	}
 	
-	private void mostrarReporte1(){
-		
-		for (Departamento d : vicedecanato.getDepartamentos()) {
-		    seleccionarDeptoReporte1.addItem(d);
-		}
+	private void mostrarReporte2(){
+	   
+	    JPanel panelFiltros = new JPanel();
+	    panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER)); 
+	    panelFiltros.setBackground(Color.LIGHT_GRAY);
 
-		seleccionarDeptoReporte1.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        
-		        Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
-		        
-		        if (deptoSeleccionado != null) {
-		            
-		            seleccionarMaestriaReporte1.removeAllItems();
-		            
-		            for (Maestria m : deptoSeleccionado.getMaestrias()) {
-		                seleccionarMaestriaReporte1.addItem(m);
-		            }
-		        }
-		    }
-		});
-		
-		Maestria maestriaSeleccionada = (Maestria) seleccionarMaestriaReporte1.getSelectedItem();
-		
-		
+	    Departamento verSeleccionarDepto = new Departamento("Seleccionar");
+	    final Maestria verSeleccionarMaestria = new Maestria("Seleccionar", 1, "ninguno");
+	    
+	    String[] columnas = {"Nombre y apellidos", "Créditos Acumulados", "Listo para defender maestría"};
+	    modeloTabla = new DefaultTableModel(columnas, 0){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+	    tablaMatriculados = new JTable(modeloTabla);
+	    tablaMatriculados.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+	    tablaMatriculados.setRowHeight(25);
+	    JTableHeader header = tablaMatriculados.getTableHeader();
+	    header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
+	    header.setBackground(new Color(230, 230, 230));      
+	    header.setForeground(Color.BLACK);
+	    
+	    DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+	    centrar.setHorizontalAlignment(SwingConstants.CENTER);
+	    for(int i = 0; i < tablaMatriculados.getColumnCount(); i++){
+			tablaMatriculados.getColumnModel().getColumn(i).setCellRenderer(centrar);
+		}
+	    
+	    JScrollPane scrollTabla = new JScrollPane(tablaMatriculados);
+	    scrollTabla.setPreferredSize(new Dimension(800, 400));
+	    panelReporte2.add(scrollTabla, BorderLayout.CENTER);
+	    
+	    
+	    seleccionarDeptoReporte1.addItem(verSeleccionarDepto);
+	    for (Departamento d : vicedecanato.getDepartamentos()) {
+	        seleccionarDeptoReporte1.addItem(d);
+	    }
+
+        seleccionarMaestriaReporte1.addItem(verSeleccionarMaestria);
+	    
+	    seleccionarDeptoReporte1.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	
+	            Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
+	            if (deptoSeleccionado != null) {
+	            	
+	                seleccionarMaestriaReporte1.removeAllItems();
+	                seleccionarMaestriaReporte1.addItem(verSeleccionarMaestria);
+	                
+	                for (Maestria m : deptoSeleccionado.getMaestrias()) {
+	                    seleccionarMaestriaReporte1.addItem(m);
+	                }
+	                
+	                actualizarTablaMatriculados();
+	            }
+	        }
+	    });
+	    
+	    seleccionarMaestriaReporte1.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            actualizarTablaMatriculados();
+	        }
+	    });
+
+	   
+	    panelFiltros.add(new JLabel("Departamento:"));
+	    panelFiltros.add(seleccionarDeptoReporte1);
+	    panelFiltros.add(new JLabel("Maestría:"));
+	    panelFiltros.add(seleccionarMaestriaReporte1);
+
+	    panelReporte2.add(panelFiltros, BorderLayout.NORTH);
+	    
+	    if (!vicedecanato.getDepartamentos().isEmpty()) {
+	        seleccionarMaestriaReporte1.setSelectedIndex(0);
+	        actualizarTablaMatriculados();
+	    }
+	}
+	
+	private void actualizarTablaMatriculados() {
+	    modeloTabla.setRowCount(0); 
+
+	    Maestria maestriaSeleccionada = (Maestria) seleccionarMaestriaReporte1.getSelectedItem();
+	    if (maestriaSeleccionada != null) {
+	    	
+	        for (Docente d : maestriaSeleccionada.getMatriculados()) {
+	            String condicion =  vicedecanato.darVistoBuenoMaestria(maestriaSeleccionada, d) ? "Si" : "No";
+	            Object[] fila = {
+	                d.getNombre() + " " + d.getApellidos(),
+	                d.creditosObtenidosCursosRecibidos(),
+	                condicion
+	            };
+	            modeloTabla.addRow(fila);
+	        }
+	    }
 	}
 }
