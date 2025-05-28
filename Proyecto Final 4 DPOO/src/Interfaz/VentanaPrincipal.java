@@ -45,6 +45,11 @@ public class VentanaPrincipal extends JFrame{
 	private final Color COLOR_SELECTED = new Color(70, 80, 90);
 	private final Color COLOR_HEADER_BACKGROUND = new Color(45, 55, 65);
 	private JPanel panelReportes; 
+	private JTabbedPane pestañasReportes;
+	private JPanel panelReporte1;
+	private JPanel panelReporte2;
+	private JPanel panelReporte3;
+	private JPanel panelReporte4;
 	
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 		
@@ -236,6 +241,37 @@ public class VentanaPrincipal extends JFrame{
 		lblBienvenida.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInicio.add(lblBienvenida);
+		
+		pestañasReportes = new JTabbedPane();
+		pestañasReportes.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		pestañasReportes.setTabPlacement(JTabbedPane.TOP);
+		panelReportes.add(pestañasReportes, BorderLayout.CENTER);
+		
+		panelReporte1 = new JPanel();
+		panelReporte1.setBackground(Color.LIGHT_GRAY);
+		panelReporte1.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Ranking de los investigadores por puntaje", panelReporte1);
+		
+		panelReporte2 = new JPanel();
+		panelReporte2.setBackground(Color.LIGHT_GRAY);
+		panelReporte2.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Estado de los docentes matriculados en la maestría", panelReporte2);
+		
+		panelReporte3 = new JPanel();
+		panelReporte3.setBackground(Color.LIGHT_GRAY);
+		panelReporte3.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Plan de estudios de la maestría", panelReporte3);
+		
+		panelReporte4 = new JPanel();
+		panelReporte4.setBackground(Color.LIGHT_GRAY);
+		panelReporte4.setLayout(new BorderLayout());
+		pestañasReportes.addTab("Producción científica de los investigadores", panelReporte4);
+
+		for (int i = 0; i < 4; i++) {
+		    JLabel label = new JLabel(pestañasReportes.getTitleAt(i), SwingConstants.CENTER);
+		    label.setPreferredSize(new Dimension(183, 30));
+		    pestañasReportes.setTabComponentAt(i, label);
+		}
 	}
 	
 	private void crearTablaDepartamentos(){
