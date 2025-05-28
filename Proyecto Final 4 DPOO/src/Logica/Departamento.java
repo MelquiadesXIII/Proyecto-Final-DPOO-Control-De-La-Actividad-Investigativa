@@ -181,4 +181,9 @@ public class Departamento {
 
 		maestrias.remove(m);
 	}
+	
+	@Override
+    public String toString() {
+        return this.nombre; 
+    }
 }
