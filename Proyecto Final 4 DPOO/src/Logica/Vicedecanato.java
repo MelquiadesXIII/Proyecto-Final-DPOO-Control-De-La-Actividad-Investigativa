@@ -69,7 +69,7 @@ public class Vicedecanato {
 	public void removerDocente(Docente d){
 
 		if(docentes.isEmpty())
-			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacia");
+			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacía");
 
 		if(!docentes.contains(d))
 			throw new NoExistenciaException("El docente que desea remover no se encuentra registrado en el vicedecanato");
@@ -86,7 +86,7 @@ public class Vicedecanato {
 	public void removerEstudiante(Estudiante e) {
 
 		if(estudiantes.isEmpty())
-			throw new ListaVaciaException("La lista de la que desea remover al estudiante esta vacia");
+			throw new ListaVaciaException("La lista de la que desea remover al estudiante esta vacía");
 
 		if(!estudiantes.contains(e))
 			throw new NoExistenciaException("El estudiante que desea remover no se encuentra registrado en el vicedecanato");
@@ -103,7 +103,7 @@ public class Vicedecanato {
 	public void removerDepartamento(Departamento d) {
 
 		if(departamentos.isEmpty())
-			throw new ListaVaciaException("La lista de la que desea remover el departamento esta vacia");
+			throw new ListaVaciaException("La lista de la que desea remover el departamento esta vacía");
 
 		if(!departamentos.contains(d))
 			throw new NoExistenciaException("El departamento que desea remover no se encuentra registrado en el vicedecanato");
@@ -114,7 +114,7 @@ public class Vicedecanato {
 	public boolean darVistoBuenoMaestria(Maestria m, Docente d) {
 
 		if(!m.getMatriculados().contains(d))
-			throw new NoExistenciaException("El docente no se encuentra matriculado en la maestria");
+			throw new NoExistenciaException("El docente no se encuentra matriculado en la maestría");
 
 		return d.creditosObtenidosCursosRecibidos() == m.getCreditosTotalesCursos();
 	}

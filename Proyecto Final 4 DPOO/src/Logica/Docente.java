@@ -72,7 +72,7 @@ public class Docente extends Investigador{
 	public void setNombre(String nombre) 
 	{
 		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del docente no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre del docente no puede estar vacío");
 		
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del docente solo puede tener letras y espacios");	
@@ -83,13 +83,13 @@ public class Docente extends Investigador{
 	public void setApellidos(String apellidos) 
 	{
 		if(apellidos.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del docente no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre del docente no puede estar vacío");
 
 		if(!apellidos.matches("^[^0-9]*$"))
 			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
 
 		if(!apellidos.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o simbolos");	
+			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o símbolos");	
 
 		this.apellidos = apellidos;
 	}
@@ -97,7 +97,7 @@ public class Docente extends Investigador{
 	public void setCatCientifica(CategoriaCientifica catCientifica) 
 	{
 		if(catCientifica == null)
-			throw new NullPointerException("La categoria cientifica no puede ser null");
+			throw new NullPointerException("La categoria científica no puede ser null");
 			
 		this.catCientifica = catCientifica;
 	}
@@ -116,10 +116,10 @@ public class Docente extends Investigador{
 	public void agregarCursoImpartido(CursoPosgrado c)
 	{
 		if(catCientifica != CategoriaCientifica.DOCTOR)
-			throw new CategoriaCientificaNoValidaException("El docente debe tener categoria cientifica Doctor para poder impartir un curso");
+			throw new CategoriaCientificaNoValidaException("El docente debe tener categoria científica Doctor para poder impartir un curso");
 
 		if(cursosImpartidos.contains(c)){
-			throw new DuplicacionException("El curso que esta intentando agregar ya esta registrado en el docente");
+			throw new DuplicacionException("El curso que esta intentando agregar ya está registrado en el docente");
 		}
 		
 		cursosImpartidos.add(c);
@@ -131,7 +131,7 @@ public class Docente extends Investigador{
 			throw new NullPointerException("No puede remover un null de la lista de cursos impartidos");
 
 		if(cursosImpartidos.isEmpty())
-			throw new ListaVaciaException("La lista de la que desea remover al curso esta vacia");
+			throw new ListaVaciaException("La lista de la que desea remover al curso esta vacía");
 
 		if(!cursosImpartidos.contains(c))
 			throw new NoExistenciaException("El curso que desea remover no se encuentra entre los registros de cursos");

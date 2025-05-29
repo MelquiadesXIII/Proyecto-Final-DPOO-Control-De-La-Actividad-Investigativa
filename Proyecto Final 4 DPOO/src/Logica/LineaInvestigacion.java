@@ -43,10 +43,10 @@ public class LineaInvestigacion {
 	public void setNombre(String nombre) {
 
 		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre de la lï¿½nea de investigaciï¿½n no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre de la línea de investigación no puede estar vacío");
 
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre de la lï¿½nea de investigaciï¿½n solo puede tener letras y espacios");	
+			throw new CadenaNoValidaException("El nombre de la línea de investigación solo puede tener letras y espacios");	
 
 		this.nombre = nombre;
 	}
@@ -63,7 +63,7 @@ public class LineaInvestigacion {
 			throw new NullPointerException("El investigador no puede tener valor null");
 
 		if(!investigadores.contains(i))
-			throw new NoExistenciaException("El investigador no estï¿½ registrado en la lï¿½nea de investigaciï¿½n");
+			throw new NoExistenciaException("El investigador no está registrado en la línea de investigación");
 
 		investigadores.remove(i);
 	}
@@ -74,7 +74,7 @@ public class LineaInvestigacion {
 			throw new NullPointerException("El investigador no puede tener valor null");
 
 		if(investigadores.contains(i))
-			throw new DuplicacionException("El investigador ya estÃ¡ registrado en la lÃ­nea de investigaciÃ³n");
+			throw new DuplicacionException("El investigador ya está registrado en la línea de investigación");
 
 		investigadores.add(i);
 	}

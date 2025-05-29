@@ -38,7 +38,7 @@ public abstract class Investigador {
 	public void removerResultado(ResultadoInvestigativo r){
 
 		if(resultados.isEmpty())
-			throw new ListaVaciaException("El registro de los resultados investigativos esta vacio");
+			throw new ListaVaciaException("El registro de los resultados investigativos esta vacío");
 
 		if(!resultados.contains(r))
 			throw new NoExistenciaException("El resultado investigativo que intenta eliminar no se encuentra registrado");

@@ -84,7 +84,7 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 	public void setLugar(String lugar) {
 
 		if(lugar.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del lugar no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre del lugar no puede estar vacío");
 
 		if(!lugar.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del lugar solo puede tener letras y espacios");

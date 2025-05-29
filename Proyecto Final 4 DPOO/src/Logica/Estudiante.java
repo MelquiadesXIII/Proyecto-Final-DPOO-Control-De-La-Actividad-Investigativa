@@ -44,7 +44,7 @@ public class Estudiante extends Investigador{
 	public void setNombre(String nombre) 
 	{
 		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del estudiante no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre del estudiante no puede estar vacío");
 
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del estudiante solo puede tener letras y espacios");	
@@ -55,7 +55,7 @@ public class Estudiante extends Investigador{
 	public void setApellidos(String apellidos) 
 	{
 		if(apellidos.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del estudiante no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre del estudiante no puede estar vacío");
 
 		if(!apellidos.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre del estudiante solo puede tener letras y espacios");	
@@ -66,7 +66,7 @@ public class Estudiante extends Investigador{
 	public void setGrupo(String grupo)
 	{
 		if(grupo.trim().isEmpty())
-			throw new CadenaNoValidaException("El grupo del estudiante no puede estar vacio");
+			throw new CadenaNoValidaException("El grupo del estudiante no puede estar vacío");
 
 		/*if(!grupo.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El grupo del estudiante solo puede tener letras y espacios");*/

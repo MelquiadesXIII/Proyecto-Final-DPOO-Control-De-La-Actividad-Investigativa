@@ -73,10 +73,10 @@ public class Maestria {
 	public void setNombre(String nombre) {
 		
 		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre de la maestria no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre de la maestría no puede estar vacio");
 
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre de la maestria solo puede tener letras y espacios");	
+			throw new CadenaNoValidaException("El nombre de la maestría solo puede tener letras y espacios");	
 		
 		this.nombre = nombre;
 	}
@@ -84,7 +84,7 @@ public class Maestria {
 	public void setDuracionMeses(int duracionMeses) {
 		
 		if(duracionMeses <= 0)
-			throw new ValorNoValidoException("La duracion por meses de una maestria debe ser una cantidad positiva");
+			throw new ValorNoValidoException("La duración por meses de una maestría debe ser una cantidad positiva");
 		
 		this.duracionMeses = duracionMeses;
 	}
@@ -92,13 +92,13 @@ public class Maestria {
 	public void setCampoEstudio(String campoEstudio) {
 		
 		if(campoEstudio.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre no puede estar vacio");
+			throw new CadenaNoValidaException("El nombre no puede estar vacío");
 
 		if(!campoEstudio.matches("^[^0-9]*$"))
-			throw new CadenaNoValidaException("El nombre no puede tener numeros");
+			throw new CadenaNoValidaException("El nombre no puede tener números");
 
 		if(!campoEstudio.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre no puede tener caracteres especiales o simbolos");	
+			throw new CadenaNoValidaException("El nombre no puede tener caracteres especiales o símbolos");	
 		
 		this.campoEstudio = campoEstudio;
 	}
@@ -115,7 +115,7 @@ public class Maestria {
 			throw new CategoriaCientificaNoValidaException("Solo un profesor sin categoría científica puede matricularse en la maestría");
 			
 		if(matriculados.contains(d))
-			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestria");
+			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestría");
 
 		matriculados.add(d);
 	}
@@ -141,7 +141,7 @@ public class Maestria {
 	public void agregarCursoPosgrado(CursoPosgrado c)
 	{
 		if(cursos.contains(c))
-			throw new DuplicacionException("El curso que intenta agregar ya esta registrado");
+			throw new DuplicacionException("El curso que intenta agregar ya está registrado");
 
 		cursos.add(c);
 	}
