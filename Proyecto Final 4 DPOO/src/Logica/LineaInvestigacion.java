@@ -15,9 +15,10 @@ public class LineaInvestigacion {
 
 
 	//Constructor
-	public LineaInvestigacion(String nombre) {
+	public LineaInvestigacion(String nombre, Docente responsable) {
 
 		setNombre(nombre);
+		setResponsable(responsable);
 		investigadores = new ArrayList<Investigador>();
 	}
 
@@ -30,6 +31,10 @@ public class LineaInvestigacion {
 
 	public ArrayList<Investigador> getInvestigadores() {
 		return investigadores;
+	}
+	
+	public Docente getResponsable() {
+		return responsable;
 	}
 
 
@@ -45,9 +50,12 @@ public class LineaInvestigacion {
 
 		this.nombre = nombre;
 	}
-
-
-
+	
+	public void setResponsable(Docente responsable){
+		
+		this.responsable = responsable;
+	}
+	
 	//Metodos
 	public void removerInvestigador(Investigador i){
 		
@@ -78,6 +86,5 @@ public class LineaInvestigacion {
 				(o instanceof LineaInvestigacion &&
 						nombre.equals(((LineaInvestigacion)o).getNombre())));
 	}
-
 
 }
