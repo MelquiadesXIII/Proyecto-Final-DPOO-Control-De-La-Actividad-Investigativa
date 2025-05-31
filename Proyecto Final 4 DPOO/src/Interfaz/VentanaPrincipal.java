@@ -62,13 +62,16 @@ public class VentanaPrincipal extends JFrame{
 	private DefaultTableModel modeloTablaMatriculados;
 	private JTable tablaRanking;
 	private DefaultTableModel modeloTablaRanking;
+	private JPanel panelBotonesCRUDDocentes;
+	private JPanel panelBotonesCRUDDepartamentos;
+	private JPanel panelBotonesCRUDEstudiantes;
 
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 
 		this.vicedecanato = vicedecanato;
 		inicializarConfiguracionUI();
 		crearPanelPrincipal();
-		crearPanelNavegacion();
+		configurarPanelNavegacion();
 
 		if (this.botonInicio != null) {
 			actualizarAparienciaBotones(this.botonInicio);
@@ -79,13 +82,13 @@ public class VentanaPrincipal extends JFrame{
 		crearTablaDocentes();
 		crearTablaDepartamentos();
 		crearTablaEstudiantes();
-		crearBotones();
+		configurarPanelesCRUD();
 	}
 
 	private void inicializarConfiguracionUI(){
 
 		setBackground(Color.WHITE);
-		setTitle("Vicedecanato: Ventana Principal");
+		setTitle("Sistema Integral de Gestión Investigativa y Posgrado: Ventana Principal");
 		setSize(new Dimension(1080, 720));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
@@ -97,14 +100,14 @@ public class VentanaPrincipal extends JFrame{
 		setVisible(true);
 	}
 
-	private void crearPanelNavegacion(){
+	private void configurarPanelNavegacion(){
 
 		panelNavegacion = new JPanel();
 		panelNavegacion.setBackground(new Color(30, 40, 50));
 		panelNavegacion.setLayout(new BoxLayout(panelNavegacion, BoxLayout.Y_AXIS));
 		panelNavegacion.setPreferredSize(new Dimension(250, getHeight())); 
 
-		JLabel titulo = new JLabel("Vicedecanato");
+		JLabel titulo = new JLabel("SIGIP");
 		titulo.setForeground(Color.WHITE);
 		titulo.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -119,7 +122,7 @@ public class VentanaPrincipal extends JFrame{
 		panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 		panelNavegacion.add(panelBotones);
 
-		botonInicio = crearBoton("Inicio");
+		botonInicio = crearBotonNavegacion("Inicio");
 		botonInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -128,7 +131,7 @@ public class VentanaPrincipal extends JFrame{
 			}
 		});
 
-		botonDepartamentos = crearBoton("Departamentos");
+		botonDepartamentos = crearBotonNavegacion("Departamentos");
 		botonDepartamentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -137,7 +140,7 @@ public class VentanaPrincipal extends JFrame{
 			}
 		});
 
-		botonDocentes = crearBoton("Docentes");
+		botonDocentes = crearBotonNavegacion("Docentes");
 		botonDocentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -146,7 +149,7 @@ public class VentanaPrincipal extends JFrame{
 			}
 		});
 
-		botonEstudiantes = crearBoton("Estudiantes");
+		botonEstudiantes = crearBotonNavegacion("Estudiantes");
 		botonEstudiantes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -155,7 +158,7 @@ public class VentanaPrincipal extends JFrame{
 			}
 		});
 
-		botonReportes = crearBoton("Reportes");
+		botonReportes = crearBotonNavegacion("Reportes");
 		botonReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -164,7 +167,7 @@ public class VentanaPrincipal extends JFrame{
 			}
 		});
 
-		botonAyuda = crearBoton("Ayuda");
+		botonAyuda = crearBotonNavegacion("Ayuda");
 		botonAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -173,7 +176,7 @@ public class VentanaPrincipal extends JFrame{
 			}
 		});
 
-		botonSalir = crearBoton("Salir");
+		botonSalir = crearBotonNavegacion("Salir");
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarAparienciaBotones(botonSalir);
@@ -187,7 +190,7 @@ public class VentanaPrincipal extends JFrame{
 		});
 	}
 
-	private JButton crearBoton(String nombre){
+	private JButton crearBotonNavegacion(String nombre){
 
 		final JButton boton = new JButton(nombre);
 		boton.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -325,15 +328,14 @@ public class VentanaPrincipal extends JFrame{
 		for (Departamento departamento : vicedecanato.getDepartamentos()) {
 			modeloDepartamentos.addElement(departamento.getNombre());
 		}
-		panelDepartamentos.setLayout(null);
 
 		listaDepartamentos = new JList<>(modeloDepartamentos);
 		listaDepartamentos.setForeground(Color.WHITE);
 		listaDepartamentos.setBackground(Color.DARK_GRAY);
-		listaDepartamentos.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		listaDepartamentos.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		JScrollPane scrollDepartamentos = new JScrollPane(listaDepartamentos);
 		scrollDepartamentos.setBounds(0, 1, 650, 685);
-		panelDepartamentos.add(scrollDepartamentos);
+		panelDepartamentos.add(scrollDepartamentos, BorderLayout.CENTER);
 	}
 
 	private void crearTablaEstudiantes(){
@@ -343,16 +345,13 @@ public class VentanaPrincipal extends JFrame{
 		for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
 			modeloEstudiantes.addElement(estudiante.getNombre() + " " + estudiante.getApellidos());
 		}
-		panelEstudiantes.setLayout(null);
 
 		listaEstudiantes = new JList<>(modeloEstudiantes);
 		listaEstudiantes.setForeground(Color.WHITE);
 		listaEstudiantes.setBackground(Color.DARK_GRAY);
-		listaEstudiantes.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		listaEstudiantes.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		JScrollPane scrollEstudiantes = new JScrollPane(listaEstudiantes);
-		scrollEstudiantes.setBounds(0, 1, 650, 685);
-
-		panelEstudiantes.add(scrollEstudiantes);
+		panelEstudiantes.add(scrollEstudiantes, BorderLayout.CENTER);
 	}
 
 	private void crearTablaDocentes(){
@@ -362,44 +361,94 @@ public class VentanaPrincipal extends JFrame{
 		for (Docente docente : vicedecanato.getDocentes()) {
 			modeloDocentes.addElement(docente.getNombre() + " " + docente.getApellidos());
 		}
-		panelDocentes.setLayout(null);
-
+		
 		listaDocentes = new JList<>(modeloDocentes);
 		listaDocentes.setForeground(Color.WHITE);
 		listaDocentes.setBackground(Color.DARK_GRAY);
-		listaDocentes.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		listaDocentes.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		JScrollPane scrollDocentes = new JScrollPane(listaDocentes);
-		scrollDocentes.setBounds(0, 1, 650, 685);
-		panelDocentes.add(scrollDocentes);
+		panelDocentes.add(scrollDocentes, BorderLayout.CENTER);
 	}
 
-	private void crearBotones(){
+	private void configurarPanelesCRUD(){
 
-		JButton btnCrearEst = new JButton("Crear");
-		btnCrearEst.setBounds(660, 13, 140, 25);
-		panelEstudiantes.add(btnCrearEst);
-
-		JButton btnEliminarEst = new JButton("Eliminar");
-		btnEliminarEst.setBounds(660, 60, 140, 25);
-		panelEstudiantes.add(btnEliminarEst);
-
-		JButton btnCrearDoc = new JButton("Crear");
-		btnCrearDoc.setBounds(660, 13, 140, 25);
-		panelDocentes.add(btnCrearDoc);
-
-		JButton btnEliminarDoc = new JButton("Eliminar");
-		btnEliminarDoc.setBounds(660, 60, 140, 25);
-		panelDocentes.add(btnEliminarDoc);
-
-		JButton btnCrearDep = new JButton("Crear");
-		btnCrearDep.setBounds(660, 13, 140, 25);
-		panelDepartamentos.add(btnCrearDep);
-
-		JButton btnEliminarDep = new JButton("Eliminar");
-		btnEliminarDep.setBounds(660, 60, 140, 25);
-		panelDepartamentos.add(btnEliminarDep);
+		configurarPanelCRUDEstudiante();
+		
+		configurarPanelCRUDDocente();
+		
+		configurarPanelCRUDDepartamento();
 	}
+	
+	private JButton crearBotonCRUD(String texto) {
+	    final JButton boton = new JButton(texto);
+	    boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
+	    boton.setBackground(COLOR_DEFAULT);
+	    boton.setForeground(Color.WHITE);
+	    boton.setPreferredSize(new Dimension(120, 35));
+	    boton.setFocusPainted(false);
+	    boton.setBorderPainted(false);
+	    
+	    boton.addMouseListener(new MouseAdapter() {
+	        @Override
+	        public void mouseEntered(MouseEvent e) {
+	            boton.setBackground(COLOR_HOVER);
+	        }
 
+	        @Override
+	        public void mouseExited(MouseEvent e) {
+	            boton.setBackground(COLOR_DEFAULT);
+	        }
+	    });
+	    
+	    return boton;
+	}
+	
+	private void configurarPanelCRUDEstudiante() {
+	    panelBotonesCRUDEstudiantes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+	    panelBotonesCRUDEstudiantes.setBackground(Color.DARK_GRAY);
+	    
+	    JButton btnCrearEst = crearBotonCRUD("Crear");
+	    JButton btnEditarEst = crearBotonCRUD("Editar");
+	    JButton btnEliminarEst = crearBotonCRUD("Eliminar");
+
+	    panelBotonesCRUDEstudiantes.add(btnCrearEst);
+	    panelBotonesCRUDEstudiantes.add(btnEditarEst);
+	    panelBotonesCRUDEstudiantes.add(btnEliminarEst);
+	    
+	    panelEstudiantes.add(panelBotonesCRUDEstudiantes, BorderLayout.SOUTH);
+	}
+	
+	private void configurarPanelCRUDDocente(){
+		
+		panelBotonesCRUDDocentes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDDocentes.setBackground(Color.DARK_GRAY);
+		
+		JButton btnCrearDoc = crearBotonCRUD("Crear");
+	    JButton btnEditarDoc = crearBotonCRUD("Editar");
+	    JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
+
+	    panelBotonesCRUDDocentes.add(btnCrearDoc);
+	    panelBotonesCRUDDocentes.add(btnEditarDoc);
+	    panelBotonesCRUDDocentes.add(btnEliminarDoc);
+	    
+	    panelDocentes.add(panelBotonesCRUDDocentes, BorderLayout.SOUTH);
+	}
+	
+	private void configurarPanelCRUDDepartamento(){
+		
+		panelBotonesCRUDDepartamentos = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDDepartamentos.setBackground(Color.DARK_GRAY);
+		
+		JButton btnCrearDep = crearBotonCRUD("Crear");
+	    JButton btnEditarDep = crearBotonCRUD("Editar");
+	    JButton btnEliminarDep = crearBotonCRUD("Eliminar");
+
+	    panelBotonesCRUDDepartamentos.add(btnCrearDep);
+	    panelBotonesCRUDDepartamentos.add(btnEditarDep);
+	    panelBotonesCRUDDepartamentos.add(btnEliminarDep);
+	    
+	    panelDepartamentos.add(panelBotonesCRUDDepartamentos, BorderLayout.SOUTH);
+	}
 	private void actualizarAparienciaBotones(JButton botonActivo) {
 		botonSeleccionadoActual = botonActivo;
 		for (JButton btn : botonesNavegacion) {
