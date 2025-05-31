@@ -41,12 +41,12 @@ public class Maestria {
 	{
 		return matriculados;
 	}
-	
+
 	public String getNombre() 
 	{
 		return nombre;
 	}
-	
+
 	public int getDuracionMeses() 
 	{
 		return duracionMeses;
@@ -56,7 +56,7 @@ public class Maestria {
 	{
 		return campoEstudio;
 	}
-	
+
 	public int getCreditosTotalesCursos(){
 
 		int total = 0;
@@ -68,29 +68,29 @@ public class Maestria {
 	}
 
 
-	
+
 	//Setters
 	public void setNombre(String nombre) {
-		
+
 		if(nombre.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre de la maestría no puede estar vacio");
 
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre de la maestría solo puede tener letras y espacios");	
-		
+
 		this.nombre = nombre;
 	}
 
 	public void setDuracionMeses(int duracionMeses) {
-		
+
 		if(duracionMeses <= 0)
 			throw new ValorNoValidoException("La duración por meses de una maestría debe ser una cantidad positiva");
-		
+
 		this.duracionMeses = duracionMeses;
 	}
 
 	public void setCampoEstudio(String campoEstudio) {
-		
+
 		if(campoEstudio.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre no puede estar vacío");
 
@@ -99,13 +99,18 @@ public class Maestria {
 
 		if(!campoEstudio.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre no puede tener caracteres especiales o símbolos");	
-		
+
 		this.campoEstudio = campoEstudio;
 	}
-	
-	
-	
+
+
+
 	//Metodos
+	public boolean contieneMatriculado(Docente m){
+
+		return matriculados.contains(m);
+	}
+
 	public void agregarMatriculado(Docente d)
 	{
 		if(d == null)
@@ -113,7 +118,7 @@ public class Maestria {
 
 		if(d.getCatCientifica() != CategoriaCientifica.NINGUNA)
 			throw new CategoriaCientificaNoValidaException("Solo un profesor sin categoría científica puede matricularse en la maestría");
-			
+
 		if(matriculados.contains(d))
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestría");
 
@@ -132,8 +137,8 @@ public class Maestria {
 
 		for(CursoPosgrado c: cursos){
 
-				if(c.getParticipantes().contains(d))
-					c.removerParticipante(d);
+			if(c.getParticipantes().contains(d))
+				c.removerParticipante(d);
 		}
 
 	}
@@ -150,14 +155,14 @@ public class Maestria {
 	public boolean equals(Object o) {
 		return o != null &&
 				(this == o ||
-						(o instanceof Maestria &&
-								nombre.equals(((Maestria)o).getNombre()) &&
-								duracionMeses == ((Maestria)o).getDuracionMeses() &&
-								campoEstudio.equals(((Maestria)o).getCampoEstudio())));
+				(o instanceof Maestria &&
+						nombre.equals(((Maestria)o).getNombre()) &&
+						duracionMeses == ((Maestria)o).getDuracionMeses() &&
+						campoEstudio.equals(((Maestria)o).getCampoEstudio())));
 	}
 
 	@Override
-    public String toString() {
-        return this.nombre; 
-    }
+	public String toString() {
+		return this.nombre; 
+	}
 }
