@@ -164,7 +164,7 @@ public class CursoPosgrado {
 
 		int creditos = nota >= 3 ? cantCreditos : 0; 
 
-		participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, this));
+		participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, tema));
 
 	}
 
