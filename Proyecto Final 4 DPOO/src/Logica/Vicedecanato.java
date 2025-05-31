@@ -35,6 +35,7 @@ public class Vicedecanato {
 
 		return vicedecanato; 
 	}
+	
 	public ArrayList<Docente> getDocentes() 
 	{
 		return docentes;
