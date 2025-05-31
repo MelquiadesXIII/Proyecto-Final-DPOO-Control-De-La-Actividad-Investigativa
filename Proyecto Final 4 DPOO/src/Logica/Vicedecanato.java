@@ -89,7 +89,7 @@ public class Vicedecanato {
 
 		for(Departamento depto: departamentos){
 
-			if(depto.getDocentes().contains(d))
+			if(depto.contieneDocente(d))
 				depto.removerDocente(d);
 		}
 	}
@@ -106,7 +106,7 @@ public class Vicedecanato {
 
 		for(Departamento depto: departamentos) {
 
-			if(depto.getEstudiantes().contains(e))
+			if(depto.contieneEstudiante(e))
 				depto.removerEstudiante(e);
 		}
 	}
