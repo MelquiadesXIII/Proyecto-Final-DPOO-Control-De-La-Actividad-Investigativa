@@ -1,8 +1,6 @@
 package Logica;
 
 import java.util.ArrayList;
-
-import Excepciones.CadenaNoValidaException;
 import Excepciones.CategoriaCientificaNoValidaException;
 import Excepciones.DuplicacionException;
 import Excepciones.ListaVaciaException;
@@ -10,8 +8,6 @@ import Excepciones.NoExistenciaException;
 
 public class Docente extends Investigador{
 
-	private String nombre;
-	private String apellidos;
 	private CategoriaCientifica catCientifica;
 	private CategoriaDocente catDocente;
 	private ArrayList<CursoPosgrado> cursosImpartidos;
@@ -22,10 +18,8 @@ public class Docente extends Investigador{
 	//Constructor
 	public Docente(String nombre, String apellidos, CategoriaCientifica catCientifica, CategoriaDocente catDocente) {
 
-		super();
+		super(nombre, apellidos);
 		
-		setNombre(nombre);
-		setApellidos(apellidos);
 		setCatCientifica(catCientifica);
 		setCatDocente(catDocente);
 
@@ -36,16 +30,6 @@ public class Docente extends Investigador{
 
 
 	//Getters
-	public String getNombre() 
-	{
-		return nombre;
-	}
-	
-	public String getApellidos()
-	{
-		return apellidos;
-	}
-
 	public CategoriaCientifica getCatCientifica() 
 	{
 		return catCientifica;
@@ -66,33 +50,18 @@ public class Docente extends Investigador{
 		return cursosRecibidos;
 	}
 
+	public int getCreditosObtenidosCursosRecibidos(){
 
+		int suma = 0;
+
+		for(CursoRecibido c: cursosRecibidos)
+			suma += c.getCreditosRecibidos();
+
+		return suma;
+	}
 
 	//Setters
-	public void setNombre(String nombre) 
-	{
-		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del docente no puede estar vacío");
-		
-		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre del docente solo puede tener letras y espacios");	
-
-		this.nombre = nombre;
-	}
-
-	public void setApellidos(String apellidos) 
-	{
-		if(apellidos.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del docente no puede estar vacío");
-
-		if(!apellidos.matches("^[^0-9]*$"))
-			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
-
-		if(!apellidos.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o símbolos");	
-
-		this.apellidos = apellidos;
-	}
+	
 
 	public void setCatCientifica(CategoriaCientifica catCientifica) 
 	{
@@ -148,16 +117,6 @@ public class Docente extends Investigador{
 			throw new DuplicacionException("El curso que intenta agregar ya se encuentra presente en el registro");
 			
 		cursosRecibidos.add(c);
-	}
-
-	public int creditosObtenidosCursosRecibidos(){
-
-		int suma = 0;
-
-		for(CursoRecibido c: cursosRecibidos)
-			suma += c.getCreditosRecibidos();
-
-		return suma;
 	}
 	
 	@Override
