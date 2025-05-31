@@ -17,7 +17,7 @@ public class Inicializadora{
 			@SuppressWarnings("serial")
 			public void run() {
 
-				Vicedecanato vicedecanato = new Vicedecanato();
+				Vicedecanato vicedecanato = Vicedecanato.getVicedecanato();
 
 				Departamento depto1 = new Departamento("Departamento de Ciencias Computacionales");
 				Departamento depto2 = new Departamento("Departamento de Ingeniería Eléctrica");
