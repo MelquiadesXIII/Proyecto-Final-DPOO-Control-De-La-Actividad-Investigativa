@@ -181,9 +181,35 @@ public class Departamento {
 
 		maestrias.remove(m);
 	}
-	
+
+	public boolean solicitudValidaIngresoDocenteAMaestria(Docente d){
+
+		boolean noContenido = true;
+
+		int i = 0;
+		while(i < maestrias.size() && noContenido){
+
+			if(maestrias.get(i).contieneMatriculado(d))
+				noContenido = false;
+
+			i++;
+		}
+
+		return noContenido;
+	}
+
+	public boolean contieneDocente(Docente d){
+
+		return docentes.contains(d);
+	}
+
+	public boolean contieneEstudiante(Estudiante e){
+
+		return estudiantes.contains(e);
+	}
+
 	@Override
-    public String toString() {
-        return this.nombre; 
-    }
+	public String toString() {
+		return this.nombre; 
+	}
 }
