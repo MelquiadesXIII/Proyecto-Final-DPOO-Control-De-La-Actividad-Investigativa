@@ -88,7 +88,7 @@ public class VentanaPrincipal extends JFrame{
 	private void inicializarConfiguracionUI(){
 
 		setBackground(Color.WHITE);
-		setTitle("Sistema Integral de Gestión Investigativa y Posgrado: Ventana Principal");
+		setTitle("Sistema Integral de Gestión Investigativa y de Posgrado: Ventana Principal");
 		setSize(new Dimension(1080, 720));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
@@ -246,7 +246,7 @@ public class VentanaPrincipal extends JFrame{
 		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
 		panelEstudiantes.setBackground(Color.DARK_GRAY);
 
-		panelDepartamentos = crearPanelesConEncabezado("Departamentos:");
+		panelDepartamentos = crearPanelesConEncabezado("Departamentos registrados en el vicedecanato:");
 		panelPrincipal.add(panelDepartamentos, "panelDepartamentos");
 		panelDepartamentos.setBackground(Color.DARK_GRAY);
 
