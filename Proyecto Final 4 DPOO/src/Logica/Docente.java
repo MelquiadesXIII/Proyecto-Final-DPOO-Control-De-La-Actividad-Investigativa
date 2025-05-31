@@ -61,8 +61,6 @@ public class Docente extends Investigador{
 	}
 
 	//Setters
-	
-
 	public void setCatCientifica(CategoriaCientifica catCientifica) 
 	{
 		if(catCientifica == null)
