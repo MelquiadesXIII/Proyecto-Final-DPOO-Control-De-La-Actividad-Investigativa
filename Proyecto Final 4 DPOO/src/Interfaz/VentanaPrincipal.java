@@ -11,8 +11,6 @@ import Logica.*;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -252,26 +250,26 @@ public class VentanaPrincipal extends JFrame{
 		panelReportes = crearPanelesConEncabezado("Listado de reportes");
 		panelPrincipal.add(panelReportes, "panelReportes");
 		panelReportes.setBackground(Color.DARK_GRAY);
-		
+
 		panelAyuda = crearPanelesConEncabezado("¿Necesitas Ayuda? Contáctanos");
 		panelPrincipal.add(panelAyuda, "panelAyuda");
 		panelAyuda.setBackground(Color.DARK_GRAY);
 
 		JLabel lblBienvenida = new JLabel("<html>" +
-            "<div style='text-align: center; font-family: Segoe UI;'>" +
-            "<h1>Sistema Integral de Gestión Investigativa y de Posgrado</h1>" +
-            "<p><b>Facultad de Ingeniería Informática" +
-            "<hr>" +
-            "<p style='text-align: left;'>" +
-            "Plataforma oficial del <b>Vicedecanato de Investigaciones y Posgrado</b> para:<br><br>" +
-            "• Registrar y monitorear <b>líneas de investigación</b>.<br>" +
-            "• Gestionar <b>resultados científicos</b> (artículos, capítulos, ponencias).<br>" +
-            "• Administrar <b>cursos de posgrado</b> (impartidos, recibidos, créditos).<br>" +
-            "• Acompañar el progreso en <b>maestrías</b> (matrículas, defensas).<br><br>" +
-            "<i>Optimice la toma de decisiones con reportes automatizados.</i>" +
-            "</p>" +
-            "</div>" +
-            "</html>");
+				"<div style='text-align: center; font-family: Segoe UI;'>" +
+				"<h1>Sistema Integral de Gestión Investigativa y de Posgrado</h1>" +
+				"<p><b>Facultad de Ingeniería Informática" +
+				"<hr>" +
+				"<p style='text-align: left;'>" +
+				"Plataforma oficial del <b>Vicedecanato de Investigaciones y Posgrado</b> para:<br><br>" +
+				"• Registrar y monitorear <b>líneas de investigación</b>.<br>" +
+				"• Gestionar <b>resultados científicos</b> (artículos, capítulos, ponencias).<br>" +
+				"• Administrar <b>cursos de posgrado</b> (impartidos, recibidos, créditos).<br>" +
+				"• Acompañar el progreso en <b>maestrías</b> (matrículas, defensas).<br><br>" +
+				"<i>Optimice la toma de decisiones con reportes automatizados.</i>" +
+				"</p>" +
+				"</div>" +
+				"</html>");
 		lblBienvenida.setBounds(0, 0, 794, 465);
 		lblBienvenida.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		lblBienvenida.setForeground(Color.WHITE);
@@ -279,45 +277,45 @@ public class VentanaPrincipal extends JFrame{
 		panelInicio.add(lblBienvenida);
 
 		JLabel lblInfo = new JLabel(
-	            "<html>" +
-	            "<div style='text-align: center; font-family: Segoe UI;'>" +
-	            "<h2 style='color: #2E86C1;'>Soporte y Contacto</h2>" +
-	            "<hr>" +
-	            "<p style='text-align: left;'>" +
-	            "<b>Para soporte técnico o más información, contacte a:</b><br><br>" +
-	            "• <b>Desarrollador 1:</b> liancarlos365@gmail.com<br>" +
-	            "• <b>Desarrollador 2:</b> llerandimarlon05@gmail.com<br><br>" +
-	            "<b>Repositorio del proyecto:</b><br>" +
-	            "<span style='color: #3498DB; text-decoration: underline; cursor: pointer;'>" +
-	            "https://github.com/MelquiadesXIII/Proyecto-Final-DPOO-Control-De-La-Actividad-Investigativa.git" +
-	            "</span>" +
-	            "</p>" +
-	            "<hr>" +
-	            "<p style='font-size: 10px; color: #7F8C8D;'>Versión 1.0 - Junio 2025</p>" +
-	            "</div>" +
-	            "</html>"
-	        );
-		
+				"<html>" +
+						"<div style='text-align: center; font-family: Segoe UI;'>" +
+						"<h2 style='color: #2E86C1;'>Soporte y Contacto</h2>" +
+						"<hr>" +
+						"<p style='text-align: left;'>" +
+						"<b>Para soporte técnico o más información, contacte a:</b><br><br>" +
+						"• <b>Desarrollador 1:</b> liancarlos365@gmail.com<br>" +
+						"• <b>Desarrollador 2:</b> llerandimarlon05@gmail.com<br><br>" +
+						"<b>Repositorio del proyecto:</b><br>" +
+						"<span style='color: #3498DB; text-decoration: underline; cursor: pointer;'>" +
+						"https://github.com/MelquiadesXIII/Proyecto-Final-DPOO-Control-De-La-Actividad-Investigativa.git" +
+						"</span>" +
+						"</p>" +
+						"<hr>" +
+						"<p style='font-size: 10px; color: #7F8C8D;'>Versión 1.0 - Junio 2025</p>" +
+						"</div>" +
+						"</html>"
+				);
+
 		lblInfo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    if (e.getClickCount() == 1) { // Click simple
-                        Desktop.getDesktop().browse(new URI("https://github.com/MelquiadesXIII/Proyecto-Final-DPOO-Control-De-La-Actividad-Investigativa.git"));
-                    }
-                } catch (Exception ex) {
-                    new MensajeDialog(VentanaPrincipal.this, "Error al abrir el enlace.", Tipo.RETROALIMENTACION);
-                }
-            }
-        });
-		
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					if (e.getClickCount() == 1) { // Click simple
+						Desktop.getDesktop().browse(new URI("https://github.com/MelquiadesXIII/Proyecto-Final-DPOO-Control-De-La-Actividad-Investigativa.git"));
+					}
+				} catch (Exception ex) {
+					new MensajeDialog(VentanaPrincipal.this, "Error al abrir el enlace.", Tipo.RETROALIMENTACION);
+				}
+			}
+		});
+
 		lblInfo.setBounds(0, 0, 794, 465);
 		lblInfo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		lblInfo.setForeground(Color.WHITE);
 		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		panelAyuda.add(lblInfo, BorderLayout.CENTER);
-		
-		
+
+
 	}
 
 	private void crearTablaDepartamentos(){
@@ -443,13 +441,13 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte1.setLayout(new BorderLayout());
 		pestañasReportes.addTab("Ranking de los investigadores", panelReporte1);
 		mostrarReporte1();
-		
+
 		panelReporte2 = new JPanel();
 		panelReporte2.setBackground(Color.LIGHT_GRAY);
 		panelReporte2.setLayout(new BorderLayout());
 		pestañasReportes.addTab("Estado de los matriculados", panelReporte2);
 		mostrarReporte2();
-		
+
 		panelReporte3 = new JPanel();
 		panelReporte3.setBackground(Color.LIGHT_GRAY);
 		panelReporte3.setLayout(new BorderLayout());
@@ -466,233 +464,192 @@ public class VentanaPrincipal extends JFrame{
 			pestañasReportes.setTabComponentAt(i, label);
 		}
 	}
-	
-	private void mostrarReporte2(){
-	   
-	    JPanel panelFiltros = new JPanel();
-	    panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER)); 
-	    panelFiltros.setBackground(Color.LIGHT_GRAY);
 
-	    Departamento verSeleccionarDepto = new Departamento("Seleccionar");
-	    final Maestria verSeleccionarMaestria = new Maestria("Seleccionar", 1, "ninguno");
-	    
-	    String[] columnas = {"Nombre y apellidos", "Créditos Acumulados", "Listo para defender maestría"};
-	    modeloTablaMatriculados = new DefaultTableModel(columnas, 0){
+	private void mostrarReporte2(){
+
+		JPanel panelFiltros = new JPanel();
+		panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER)); 
+		panelFiltros.setBackground(Color.LIGHT_GRAY);
+
+		Departamento verSeleccionarDepto = new Departamento("Seleccionar");
+		final Maestria verSeleccionarMaestria = new Maestria("Seleccionar", 1, "ninguno");
+
+		String[] columnas = {"Nombre y apellidos", "Créditos Acumulados", "Listo para defender maestría"};
+		modeloTablaMatriculados = new DefaultTableModel(columnas, 0){
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
-	    };
-	    tablaMatriculados = new JTable(modeloTablaMatriculados);
-	    tablaMatriculados.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-	    tablaMatriculados.setRowHeight(25);
-	    JTableHeader header = tablaMatriculados.getTableHeader();
-	    header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
-	    header.setBackground(new Color(230, 230, 230));      
-	    header.setForeground(Color.BLACK);
-	    
-	    DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
-	    centrar.setHorizontalAlignment(SwingConstants.CENTER);
-	    for(int i = 0; i < tablaMatriculados.getColumnCount(); i++){
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		tablaMatriculados = new JTable(modeloTablaMatriculados);
+		tablaMatriculados.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		tablaMatriculados.setRowHeight(25);
+		JTableHeader header = tablaMatriculados.getTableHeader();
+		header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
+		header.setBackground(new Color(230, 230, 230));      
+		header.setForeground(Color.BLACK);
+
+		DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+		for(int i = 0; i < tablaMatriculados.getColumnCount(); i++){
 			tablaMatriculados.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
-	    
-	    JScrollPane scrollTabla = new JScrollPane(tablaMatriculados);
-	    scrollTabla.setPreferredSize(new Dimension(800, 400));
-	    panelReporte2.add(scrollTabla, BorderLayout.CENTER);
-	    
-	    
-	    seleccionarDeptoReporte2.addItem(verSeleccionarDepto);
-	    for (Departamento d : vicedecanato.getDepartamentos()) {
-	        seleccionarDeptoReporte2.addItem(d);
-	    }
 
-        seleccionarMaestriaReporte2.addItem(verSeleccionarMaestria);
-	    
-	    seleccionarDeptoReporte2.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	
-	            Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte2.getSelectedItem();
-	            if (deptoSeleccionado != null) {
-	            	
-	                seleccionarMaestriaReporte2.removeAllItems();
-	                seleccionarMaestriaReporte2.addItem(verSeleccionarMaestria);
-	                
-	                for (Maestria m : deptoSeleccionado.getMaestrias()) {
-	                    seleccionarMaestriaReporte2.addItem(m);
-	                }
-	                
-	                actualizarTablaMatriculados();
-	            }
-	        }
-	    });
-	    
-	    seleccionarMaestriaReporte2.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            actualizarTablaMatriculados();
-	        }
-	    });
+		JScrollPane scrollTabla = new JScrollPane(tablaMatriculados);
+		scrollTabla.setPreferredSize(new Dimension(800, 400));
+		panelReporte2.add(scrollTabla, BorderLayout.CENTER);
 
-	   
-	    panelFiltros.add(new JLabel("Departamento:"));
-	    panelFiltros.add(seleccionarDeptoReporte2);
-	    panelFiltros.add(new JLabel("Maestría:"));
-	    panelFiltros.add(seleccionarMaestriaReporte2);
 
-	    panelReporte2.add(panelFiltros, BorderLayout.NORTH);
-	    
-	    if (!vicedecanato.getDepartamentos().isEmpty()) {
-	        seleccionarMaestriaReporte2.setSelectedIndex(0);
-	        actualizarTablaMatriculados();
-	    }
+		seleccionarDeptoReporte2.addItem(verSeleccionarDepto);
+		for (Departamento d : vicedecanato.getDepartamentos()) {
+			seleccionarDeptoReporte2.addItem(d);
+		}
+
+		seleccionarMaestriaReporte2.addItem(verSeleccionarMaestria);
+
+		seleccionarDeptoReporte2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte2.getSelectedItem();
+				if (deptoSeleccionado != null) {
+
+					seleccionarMaestriaReporte2.removeAllItems();
+					seleccionarMaestriaReporte2.addItem(verSeleccionarMaestria);
+
+					for (Maestria m : deptoSeleccionado.getMaestrias()) {
+						seleccionarMaestriaReporte2.addItem(m);
+					}
+
+					actualizarTablaMatriculados();
+				}
+			}
+		});
+
+		seleccionarMaestriaReporte2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actualizarTablaMatriculados();
+			}
+		});
+
+
+		panelFiltros.add(new JLabel("Departamento:"));
+		panelFiltros.add(seleccionarDeptoReporte2);
+		panelFiltros.add(new JLabel("Maestría:"));
+		panelFiltros.add(seleccionarMaestriaReporte2);
+
+		panelReporte2.add(panelFiltros, BorderLayout.NORTH);
+
+		if (!vicedecanato.getDepartamentos().isEmpty()) {
+			seleccionarMaestriaReporte2.setSelectedIndex(0);
+			actualizarTablaMatriculados();
+		}
 	}
-	
+
 	private void actualizarTablaMatriculados() {
-	    modeloTablaMatriculados.setRowCount(0); 
+		modeloTablaMatriculados.setRowCount(0); 
 
-	    Maestria maestriaSeleccionada = (Maestria) seleccionarMaestriaReporte2.getSelectedItem();
-	    if (maestriaSeleccionada != null) {
-	    	
-	        for (Docente d : maestriaSeleccionada.getMatriculados()) {
-	            String condicion =  vicedecanato.darVistoBuenoMaestria(maestriaSeleccionada, d) ? "Si" : "No";
-	            Object[] fila = {
-	                d.getNombre() + " " + d.getApellidos(),
-	                d.creditosObtenidosCursosRecibidos(),
-	                condicion
-	            };
-	            modeloTablaMatriculados.addRow(fila);
-	        }
-	    }
+		Maestria maestriaSeleccionada = (Maestria) seleccionarMaestriaReporte2.getSelectedItem();
+		if (maestriaSeleccionada != null) {
+
+			for (Docente d : maestriaSeleccionada.getMatriculados()) {
+				String condicion =  vicedecanato.darVistoBuenoMaestria(maestriaSeleccionada, d) ? "Si" : "No";
+				Object[] fila = {
+						d.getNombre() + " " + d.getApellidos(),
+						d.getCreditosObtenidosCursosRecibidos(),
+						condicion
+				};
+				modeloTablaMatriculados.addRow(fila);
+			}
+		}
 	}
-	
+
 	private void mostrarReporte1(){
-		
+
 		JPanel panelFiltros = new JPanel();
-	    panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER)); 
-	    panelFiltros.setBackground(Color.LIGHT_GRAY);
-	    
-	    Departamento verSeleccionarDepto = new Departamento("Seleccionar");
-	    seleccionarDeptoReporte1.addItem(verSeleccionarDepto);
-	    for (Departamento d : vicedecanato.getDepartamentos()) {
-	        seleccionarDeptoReporte1.addItem(d);
-	    }
-	    seleccionarDeptoReporte1.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	
-	            Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
-	            if (deptoSeleccionado != null) {
-	                
-	                actualizarTablaRanking();
-	            }
-	        }
-	    });
-	    
+		panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER)); 
+		panelFiltros.setBackground(Color.LIGHT_GRAY);
+
+		Departamento verSeleccionarDepto = new Departamento("Seleccionar");
+		seleccionarDeptoReporte1.addItem(verSeleccionarDepto);
+		
+		for (Departamento d : vicedecanato.getDepartamentos()) {
+			seleccionarDeptoReporte1.addItem(d);
+		}
+		
+		final ArrayList<Investigador> ranking = new ArrayList<Investigador>();
+		seleccionarDeptoReporte1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
+				if (deptoSeleccionado != null) {
+
+					actualizarTablaRanking(ranking);
+				}
+			}
+		});
+
 		String[] columnas = {"Lugar", "Nombre y apellidos", "Puntaje"};
-	    modeloTablaRanking = new DefaultTableModel(columnas, 0){
+		modeloTablaRanking = new DefaultTableModel(columnas, 0){
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
-	    };
-	    tablaRanking = new JTable(modeloTablaRanking);
-	    tablaRanking.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-	    tablaRanking.setRowHeight(25);
-	    JTableHeader header = tablaRanking.getTableHeader();
-	    header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
-	    header.setBackground(new Color(230, 230, 230));      
-	    header.setForeground(Color.BLACK);
-	    
-	    DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
-	    centrar.setHorizontalAlignment(SwingConstants.CENTER);
-	    for(int i = 0; i < tablaRanking.getColumnCount(); i++){
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		tablaRanking = new JTable(modeloTablaRanking);
+		tablaRanking.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		tablaRanking.setRowHeight(25);
+		JTableHeader header = tablaRanking.getTableHeader();
+		header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
+		header.setBackground(new Color(230, 230, 230));      
+		header.setForeground(Color.BLACK);
+
+		DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+		for(int i = 0; i < tablaRanking.getColumnCount(); i++){
 			tablaRanking.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
-	    
-	    JScrollPane scrollTabla = new JScrollPane(tablaRanking);
-	    scrollTabla.setPreferredSize(new Dimension(800, 400));
-	    panelReporte1.add(scrollTabla, BorderLayout.CENTER);
-	    
-	    
-	    
-	    panelFiltros.add(new JLabel("Departamento:"));
-	    panelFiltros.add(seleccionarDeptoReporte1);
-	    panelReporte1.add(panelFiltros, BorderLayout.NORTH);
-	}
-	
-	private void actualizarTablaRanking(){
-		
-		//Crear clase local
-	    class InvestigadorRanking{
-	    	
-	    	String nombre;
-	    	String apellidos;
-	    	int puntos;
-	    	
-	    	InvestigadorRanking(String nombre, int puntos, String apellidos){
-	    		this.nombre = nombre;
-	    		this.puntos = puntos;
-	    		this.apellidos = apellidos;
-	    	}
-	    	
-	    	String getNombre(){
-	    		return nombre;
-	    	}
-	    	
-	    	int getPuntos(){
-	    		return puntos;
-	    	}
 
-			public String getApellidos() {
-				return apellidos;
-			}
-	    }
-	    
-	    ArrayList<InvestigadorRanking> ranking = new ArrayList<InvestigadorRanking>();
-		
+		JScrollPane scrollTabla = new JScrollPane(tablaRanking);
+		scrollTabla.setPreferredSize(new Dimension(800, 400));
+		panelReporte1.add(scrollTabla, BorderLayout.CENTER);
+
+
+
+		panelFiltros.add(new JLabel("Departamento:"));
+		panelFiltros.add(seleccionarDeptoReporte1);
+		panelReporte1.add(panelFiltros, BorderLayout.NORTH);
+	}
+
+	private void actualizarTablaRanking(ArrayList<Investigador> ranking){
+
 		modeloTablaRanking.setRowCount(0);
-		
+
 		Departamento deptoSeleccionado = (Departamento) seleccionarDeptoReporte1.getSelectedItem();
-		
+
 		if(deptoSeleccionado != null){
-			
-			for(LineaInvestigacion l: deptoSeleccionado.getLineasInvestigacion()){
-				for(Investigador i: l.getInvestigadores()){
-					
-					if(i instanceof Docente){
-						ranking.add(new InvestigadorRanking(((Docente)i).getNombre(), i.calcularPuntajeInvestigativo(), ((Docente)i).getApellidos()));
-					}else
-						ranking.add(new InvestigadorRanking(((Estudiante)i).getNombre(), i.calcularPuntajeInvestigativo(), ((Estudiante)i).getApellidos()));
-				}
-			}
-			
-			Collections.sort(ranking, new Comparator<InvestigadorRanking>() {
-	            @Override
-	            public int compare(InvestigadorRanking i1, InvestigadorRanking i2) {
-	                return Integer.compare(i2.getPuntos(), i1.getPuntos());
-	                
-	            }
-	        });
-			
+
+			vicedecanato.generarDatosReporte1(ranking, deptoSeleccionado);
+
 			int i = 1;
-			for(InvestigadorRanking r: ranking){
-				
+			for(Investigador r: ranking){
+
 				Object[] fila = {
-		                i,
-		                r.getNombre() + " " + r.getApellidos(),
-		                r.getPuntos(),
-		            };
-		            modeloTablaRanking.addRow(fila);
-		            i++;
+						i,
+						r.getNombre() + " " + r.getApellidos(),
+						r.calcularPuntajeInvestigativo(),
+				};
+				modeloTablaRanking.addRow(fila);
+				i++;
 			}
 		}
-		
+
 	}
-	
+
 }
