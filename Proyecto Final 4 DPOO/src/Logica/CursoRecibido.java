@@ -4,16 +4,16 @@ public class CursoRecibido {
 
 	private int nota;
 	private int creditosRecibidos;
-	private CursoPosgrado curso;
+	private String temaCurso;
 
 
 
 	//Constructor
-	public CursoRecibido(int nota, int creditosRecibidos, CursoPosgrado curso)
+	public CursoRecibido(int nota, int creditosRecibidos, String temaCurso)
 	{
 		this.nota = nota;
 		this.creditosRecibidos = creditosRecibidos;
-		this.curso = curso;
+		this.temaCurso = temaCurso;
 	}
 
 
@@ -29,9 +29,9 @@ public class CursoRecibido {
 		return creditosRecibidos;
 	}
 
-	public CursoPosgrado getCurso() 
+	public String getTemaCurso() 
 	{
-		return curso;
+		return temaCurso;
 	}
 
 
@@ -43,6 +43,6 @@ public class CursoRecibido {
 						(c instanceof CursoRecibido &&
 								nota == ((CursoRecibido)c).getNota() &&
 								creditosRecibidos == ((CursoRecibido)c).getCreditosRecibidos() &&
-								curso.equals(((CursoRecibido)c).getCurso())));
+								temaCurso.equals(((CursoRecibido)c).getTemaCurso())));
 	}
 }
