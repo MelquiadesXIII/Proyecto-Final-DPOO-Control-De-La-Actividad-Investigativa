@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
@@ -65,6 +66,10 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelBotonesCRUDDocentes;
 	private JPanel panelBotonesCRUDDepartamentos;
 	private JPanel panelBotonesCRUDEstudiantes;
+	private JComboBox<Departamento> seleccionarDeptoReporte3 = new JComboBox<>();
+	private JComboBox<Maestria> seleccionarMaestriaReporte3 = new JComboBox<>();
+	private JTable tablaCursos;
+	private DefaultTableModel modeloTablaCursos;
 
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 
@@ -361,7 +366,7 @@ public class VentanaPrincipal extends JFrame{
 		for (Docente docente : vicedecanato.getDocentes()) {
 			modeloDocentes.addElement(docente.getNombre() + " " + docente.getApellidos());
 		}
-		
+
 		listaDocentes = new JList<>(modeloDocentes);
 		listaDocentes.setForeground(Color.WHITE);
 		listaDocentes.setBackground(Color.DARK_GRAY);
@@ -373,81 +378,81 @@ public class VentanaPrincipal extends JFrame{
 	private void configurarPanelesCRUD(){
 
 		configurarPanelCRUDEstudiante();
-		
+
 		configurarPanelCRUDDocente();
-		
+
 		configurarPanelCRUDDepartamento();
 	}
-	
+
 	private JButton crearBotonCRUD(String texto) {
-	    final JButton boton = new JButton(texto);
-	    boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
-	    boton.setBackground(COLOR_DEFAULT);
-	    boton.setForeground(Color.WHITE);
-	    boton.setPreferredSize(new Dimension(120, 35));
-	    boton.setFocusPainted(false);
-	    boton.setBorderPainted(false);
-	    
-	    boton.addMouseListener(new MouseAdapter() {
-	        @Override
-	        public void mouseEntered(MouseEvent e) {
-	            boton.setBackground(COLOR_HOVER);
-	        }
+		final JButton boton = new JButton(texto);
+		boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
+		boton.setBackground(COLOR_DEFAULT);
+		boton.setForeground(Color.WHITE);
+		boton.setPreferredSize(new Dimension(120, 35));
+		boton.setFocusPainted(false);
+		boton.setBorderPainted(false);
 
-	        @Override
-	        public void mouseExited(MouseEvent e) {
-	            boton.setBackground(COLOR_DEFAULT);
-	        }
-	    });
-	    
-	    return boton;
+		boton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				boton.setBackground(COLOR_HOVER);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				boton.setBackground(COLOR_DEFAULT);
+			}
+		});
+
+		return boton;
 	}
-	
+
 	private void configurarPanelCRUDEstudiante() {
-	    panelBotonesCRUDEstudiantes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-	    panelBotonesCRUDEstudiantes.setBackground(Color.DARK_GRAY);
-	    
-	    JButton btnCrearEst = crearBotonCRUD("Crear");
-	    JButton btnEditarEst = crearBotonCRUD("Editar");
-	    JButton btnEliminarEst = crearBotonCRUD("Eliminar");
+		panelBotonesCRUDEstudiantes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDEstudiantes.setBackground(Color.DARK_GRAY);
 
-	    panelBotonesCRUDEstudiantes.add(btnCrearEst);
-	    panelBotonesCRUDEstudiantes.add(btnEditarEst);
-	    panelBotonesCRUDEstudiantes.add(btnEliminarEst);
-	    
-	    panelEstudiantes.add(panelBotonesCRUDEstudiantes, BorderLayout.SOUTH);
+		JButton btnCrearEst = crearBotonCRUD("Crear");
+		JButton btnEditarEst = crearBotonCRUD("Editar");
+		JButton btnEliminarEst = crearBotonCRUD("Eliminar");
+
+		panelBotonesCRUDEstudiantes.add(btnCrearEst);
+		panelBotonesCRUDEstudiantes.add(btnEditarEst);
+		panelBotonesCRUDEstudiantes.add(btnEliminarEst);
+
+		panelEstudiantes.add(panelBotonesCRUDEstudiantes, BorderLayout.SOUTH);
 	}
-	
+
 	private void configurarPanelCRUDDocente(){
-		
+
 		panelBotonesCRUDDocentes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		panelBotonesCRUDDocentes.setBackground(Color.DARK_GRAY);
-		
-		JButton btnCrearDoc = crearBotonCRUD("Crear");
-	    JButton btnEditarDoc = crearBotonCRUD("Editar");
-	    JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
 
-	    panelBotonesCRUDDocentes.add(btnCrearDoc);
-	    panelBotonesCRUDDocentes.add(btnEditarDoc);
-	    panelBotonesCRUDDocentes.add(btnEliminarDoc);
-	    
-	    panelDocentes.add(panelBotonesCRUDDocentes, BorderLayout.SOUTH);
+		JButton btnCrearDoc = crearBotonCRUD("Crear");
+		JButton btnEditarDoc = crearBotonCRUD("Editar");
+		JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
+
+		panelBotonesCRUDDocentes.add(btnCrearDoc);
+		panelBotonesCRUDDocentes.add(btnEditarDoc);
+		panelBotonesCRUDDocentes.add(btnEliminarDoc);
+
+		panelDocentes.add(panelBotonesCRUDDocentes, BorderLayout.SOUTH);
 	}
-	
+
 	private void configurarPanelCRUDDepartamento(){
-		
+
 		panelBotonesCRUDDepartamentos = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		panelBotonesCRUDDepartamentos.setBackground(Color.DARK_GRAY);
-		
-		JButton btnCrearDep = crearBotonCRUD("Crear");
-	    JButton btnEditarDep = crearBotonCRUD("Editar");
-	    JButton btnEliminarDep = crearBotonCRUD("Eliminar");
 
-	    panelBotonesCRUDDepartamentos.add(btnCrearDep);
-	    panelBotonesCRUDDepartamentos.add(btnEditarDep);
-	    panelBotonesCRUDDepartamentos.add(btnEliminarDep);
-	    
-	    panelDepartamentos.add(panelBotonesCRUDDepartamentos, BorderLayout.SOUTH);
+		JButton btnCrearDep = crearBotonCRUD("Crear");
+		JButton btnEditarDep = crearBotonCRUD("Editar");
+		JButton btnEliminarDep = crearBotonCRUD("Eliminar");
+
+		panelBotonesCRUDDepartamentos.add(btnCrearDep);
+		panelBotonesCRUDDepartamentos.add(btnEditarDep);
+		panelBotonesCRUDDepartamentos.add(btnEliminarDep);
+
+		panelDepartamentos.add(panelBotonesCRUDDepartamentos, BorderLayout.SOUTH);
 	}
 	private void actualizarAparienciaBotones(JButton botonActivo) {
 		botonSeleccionadoActual = botonActivo;
@@ -501,6 +506,7 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte3.setBackground(Color.LIGHT_GRAY);
 		panelReporte3.setLayout(new BorderLayout());
 		pestañasReportes.addTab("Plan de estudios de la maestría", panelReporte3);
+		mostrarReporte3();
 
 		panelReporte4 = new JPanel();
 		panelReporte4.setBackground(Color.LIGHT_GRAY);
@@ -624,11 +630,11 @@ public class VentanaPrincipal extends JFrame{
 
 		Departamento verSeleccionarDepto = new Departamento("Seleccionar");
 		seleccionarDeptoReporte1.addItem(verSeleccionarDepto);
-		
+
 		for (Departamento d : vicedecanato.getDepartamentos()) {
 			seleccionarDeptoReporte1.addItem(d);
 		}
-		
+
 		final ArrayList<Investigador> ranking = new ArrayList<Investigador>();
 		seleccionarDeptoReporte1.addActionListener(new ActionListener() {
 			@Override
@@ -701,4 +707,183 @@ public class VentanaPrincipal extends JFrame{
 
 	}
 
+	private void mostrarReporte3() {
+		JPanel panelFiltros = new JPanel();
+		panelFiltros.setLayout(new FlowLayout(FlowLayout.CENTER));
+		panelFiltros.setBackground(Color.LIGHT_GRAY);
+
+		final Departamento deptoSeleccionar = new Departamento("Seleccionar");
+		final Maestria maestriaSeleccionar = new Maestria("Seleccionar", 1, "ninguno");
+
+		String[] columnas = {"Temas de cursos", "Créditos", "Docente Principal", "Ver Objetivos"};
+		modeloTablaCursos = new DefaultTableModel(columnas, 0) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return column == 3;
+			}
+
+			@Override
+			public Class<?> getColumnClass(int columnIndex) {
+				return (columnIndex == 3) ? JButton.class : Object.class;
+			}
+		};
+
+		tablaCursos = new JTable(modeloTablaCursos);
+		tablaCursos.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		tablaCursos.setRowHeight(30);
+
+		JTableHeader header = tablaCursos.getTableHeader();
+		header.setFont(new Font("Segoe UI", Font.BOLD, 16));
+		header.setBackground(new Color(230, 230, 230));
+		header.setForeground(Color.BLACK);
+
+		DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < tablaCursos.getColumnCount(); i++) {
+			tablaCursos.getColumnModel().getColumn(i).setCellRenderer(centrar);
+		}
+
+		tablaCursos.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+		tablaCursos.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+
+		JScrollPane scrollTabla = new JScrollPane(tablaCursos);
+		scrollTabla.setPreferredSize(new Dimension(800, 400));
+		panelReporte3.add(scrollTabla, BorderLayout.CENTER);
+
+		seleccionarDeptoReporte3.addItem(deptoSeleccionar);
+		for (Departamento d : vicedecanato.getDepartamentos()) {
+			seleccionarDeptoReporte3.addItem(d);
+		}
+
+		seleccionarMaestriaReporte3.addItem(maestriaSeleccionar);
+
+		seleccionarDeptoReporte3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Departamento depto = (Departamento) seleccionarDeptoReporte3.getSelectedItem();
+				if (depto != null) {
+					
+					seleccionarMaestriaReporte3.removeAllItems();
+					seleccionarMaestriaReporte3.addItem(maestriaSeleccionar);
+					
+					for (Maestria m : depto.getMaestrias()) {
+						seleccionarMaestriaReporte3.addItem(m);
+					}
+					actualizarTablaCursos();
+				}
+			}
+		});
+
+		seleccionarMaestriaReporte3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actualizarTablaCursos();
+			}
+		});
+
+		panelFiltros.add(new JLabel("Departamento:"));
+		panelFiltros.add(seleccionarDeptoReporte3);
+		panelFiltros.add(new JLabel("Maestría:"));
+		panelFiltros.add(seleccionarMaestriaReporte3);
+
+		panelReporte3.add(panelFiltros, BorderLayout.NORTH);
+
+		if (!vicedecanato.getDepartamentos().isEmpty()) {
+			seleccionarMaestriaReporte3.setSelectedIndex(0);
+			actualizarTablaCursos();
+		}
+	}
+
+	
+
+	private void mostrarObjetivosCurso(int row) {
+	    Maestria maestria = (Maestria) seleccionarMaestriaReporte3.getSelectedItem();
+	    if (maestria != null && !maestria.getNombre().equals("Seleccionar")) {
+	        ArrayList<CursoPosgrado> cursos = maestria.getCursos();
+	        if (row >= 0 && row < cursos.size()) {
+	            CursoPosgrado curso = cursos.get(row);
+
+	            StringBuilder texto = new StringBuilder("Objetivos:\n");
+	            for (String obj : curso.getObjetivos()) {
+	                texto.append(obj).append("\n");
+	            }
+
+	            JOptionPane.showMessageDialog(this, texto.toString(), "Objetivos del curso: " + curso.getTema(), JOptionPane.INFORMATION_MESSAGE);
+	        }
+	    }
+	}
+
+	private void actualizarTablaCursos() {
+		modeloTablaCursos.setRowCount(0);
+
+		Maestria maestria = (Maestria) seleccionarMaestriaReporte3.getSelectedItem();
+		if (maestria != null){
+
+			for (CursoPosgrado curso : maestria.getCursos()) {
+				Object[] fila = {
+						curso.getTema(),
+						curso.getCantCreditos(),
+						curso.getProfesor() != null ? curso.getProfesor().getNombre() + " " + curso.getProfesor().getApellidos() : "Sin asignar",
+								"Ver Objetivos"
+				};
+				modeloTablaCursos.addRow(fila);
+			}
+		}
+	}
+
+	class ButtonRenderer extends JButton implements TableCellRenderer {
+		private static final long serialVersionUID = 1L;
+
+		public ButtonRenderer() {
+			setOpaque(true);
+			setText("Ver Objetivos");
+			setBackground(new Color(40, 150, 200));
+			setForeground(Color.WHITE);
+			setFont(new Font("Segoe UI", Font.BOLD, 12));
+		}
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			return this;
+		}
+	}
+	
+	class ButtonEditor extends DefaultCellEditor {
+		private static final long serialVersionUID = 1L;
+		private JButton button;
+		private int selectedRow;
+
+		public ButtonEditor(JCheckBox checkBox) {
+			super(checkBox);
+			button = new JButton();
+			button.setOpaque(true);
+			button.setText("Ver Objetivos");
+			button.setBackground(new Color(40, 150, 200));
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Segoe UI", Font.BOLD, 12));
+
+			button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					fireEditingStopped();
+					mostrarObjetivosCurso(selectedRow);
+				}
+			});
+		}
+
+		@Override
+		public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+			selectedRow = row;
+			return button;
+		}
+
+		@Override
+		public Object getCellEditorValue() {
+			return "Ver Objetivos";
+		}
+
+
+	}
 }
