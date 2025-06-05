@@ -412,6 +412,26 @@ public class VentanaPrincipal extends JFrame{
 		panelBotonesCRUDEstudiantes.setBackground(Color.DARK_GRAY);
 
 		JButton btnCrearEst = crearBotonCRUD("Crear");
+		btnCrearEst.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				 CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this);
+				    dialog.setVisible(true);
+
+				    if (dialog.isConfirmado()) {
+				        String nombre = dialog.getNombre();
+				        String apellidos = dialog.getApellidos();
+				        String grupo = dialog.getGrupo();
+
+				        if (!nombre.isEmpty() && !apellidos.isEmpty()) {
+				            Estudiante nuevoEst = new Estudiante(nombre,apellidos,grupo );
+				            vicedecanato.getEstudiantes().add(nuevoEst);
+				            actualizarTablaEst();
+				        }
+				    }
+			}
+			
+		});
+		
 		JButton btnEditarEst = crearBotonCRUD("Editar");
 		JButton btnEliminarEst = crearBotonCRUD("Eliminar");
 
@@ -428,6 +448,8 @@ public class VentanaPrincipal extends JFrame{
 		panelBotonesCRUDDocentes.setBackground(Color.DARK_GRAY);
 
 		JButton btnCrearDoc = crearBotonCRUD("Crear");
+		
+		
 		JButton btnEditarDoc = crearBotonCRUD("Editar");
 		JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
 
@@ -837,7 +859,13 @@ public class VentanaPrincipal extends JFrame{
 		}
 	}
 
-	
+	public void actualizarTablaEst(){
+		modeloEstudiantes.clear();
+		
+		for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
+			modeloEstudiantes.addElement(estudiante.getNombre() + " " + estudiante.getApellidos());
+		}
+	}
 	
 	
 }
