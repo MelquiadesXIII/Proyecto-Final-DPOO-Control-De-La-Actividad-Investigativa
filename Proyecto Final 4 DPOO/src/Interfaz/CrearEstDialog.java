@@ -1,6 +1,10 @@
 package Interfaz;
 
 import javax.swing.*;
+
+import Interfaz.MensajeDialog.Tipo;
+import Logica.Vicedecanato;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -13,7 +17,9 @@ public class CrearEstDialog extends JDialog {
     private Point point = new Point();
     private JTextField campoGrupo;
 
-    public CrearEstDialog(JFrame parent) {
+    
+    public CrearEstDialog(final JFrame parent, final Vicedecanato vicedecanato) {
+    	
         super(parent, "Crear Estudiante", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
@@ -84,6 +90,22 @@ public class CrearEstDialog extends JDialog {
 
         botonCrear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
+            	String nombre = getName();
+            	String apellidos = getApellidos();
+            	String grupo = getGrupo();
+            	
+            	try{
+            		
+            		vicedecanato.crearEstudiante(nombre, apellidos, grupo, depto);
+            		
+            	}catch(RuntimeException r){
+            		
+            		MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+            		d.setVisible(true);
+            	}
+            	
+            	
                 confirmado = true;
                 dispose();
             }

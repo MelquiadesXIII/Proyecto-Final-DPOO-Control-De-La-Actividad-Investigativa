@@ -1,6 +1,7 @@
 package Interfaz;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -16,6 +17,7 @@ public class MensajeDialog extends JDialog {
     }
 
     public MensajeDialog(JFrame parent, String mensaje, final Tipo tipo) {
+    	
         super(parent, "Mensaje", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
