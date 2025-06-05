@@ -246,7 +246,7 @@ public class VentanaPrincipal extends JFrame{
 		panelPrincipal.add(panelDocentes, "panelDocentes");
 		panelDocentes.setBackground(Color.DARK_GRAY);
 
-		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el vicedecanato");
+		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el vicedecanato:");
 		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
 		panelEstudiantes.setBackground(Color.DARK_GRAY);
 
@@ -307,7 +307,7 @@ public class VentanaPrincipal extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					if (e.getClickCount() == 1) { // Click simple
+					if (e.getClickCount() == 1) { 
 						Desktop.getDesktop().browse(new URI("https://github.com/MelquiadesXIII/Proyecto-Final-DPOO-Control-De-La-Actividad-Investigativa.git"));
 					}
 				} catch (Exception ex) {
@@ -746,6 +746,11 @@ public class VentanaPrincipal extends JFrame{
 
 		tablaCursos.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
 		tablaCursos.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox(), this));
+		
+		tablaCursos.getColumnModel().getColumn(1).setWidth(80);
+		tablaCursos.getColumnModel().getColumn(0).setPreferredWidth(300); 
+		tablaCursos.getColumnModel().getColumn(2).setPreferredWidth(200); 
+		tablaCursos.getColumnModel().getColumn(3).setPreferredWidth(120);
 
 		JScrollPane scrollTabla = new JScrollPane(tablaCursos);
 		scrollTabla.setPreferredSize(new Dimension(800, 400));
