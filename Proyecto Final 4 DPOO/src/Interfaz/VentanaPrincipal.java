@@ -5,7 +5,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
@@ -746,7 +745,7 @@ public class VentanaPrincipal extends JFrame{
 		}
 
 		tablaCursos.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-		tablaCursos.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+		tablaCursos.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox(), this));
 
 		JScrollPane scrollTabla = new JScrollPane(tablaCursos);
 		scrollTabla.setPreferredSize(new Dimension(800, 400));
@@ -798,7 +797,7 @@ public class VentanaPrincipal extends JFrame{
 
 	
 
-	private void mostrarObjetivosCurso(int row) {
+	void mostrarObjetivosCurso(int row) {
 	    Maestria maestria = (Maestria) seleccionarMaestriaReporte3.getSelectedItem();
 	    if (maestria != null && !maestria.getNombre().equals("Seleccionar")) {
 	        ArrayList<CursoPosgrado> cursos = maestria.getCursos();
@@ -833,57 +832,7 @@ public class VentanaPrincipal extends JFrame{
 		}
 	}
 
-	class ButtonRenderer extends JButton implements TableCellRenderer {
-		private static final long serialVersionUID = 1L;
-
-		public ButtonRenderer() {
-			setOpaque(true);
-			setText("Ver Objetivos");
-			setBackground(new Color(40, 150, 200));
-			setForeground(Color.WHITE);
-			setFont(new Font("Segoe UI", Font.BOLD, 12));
-		}
-
-		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			return this;
-		}
-	}
 	
-	class ButtonEditor extends DefaultCellEditor {
-		private static final long serialVersionUID = 1L;
-		private JButton button;
-		private int selectedRow;
-
-		public ButtonEditor(JCheckBox checkBox) {
-			super(checkBox);
-			button = new JButton();
-			button.setOpaque(true);
-			button.setText("Ver Objetivos");
-			button.setBackground(new Color(40, 150, 200));
-			button.setForeground(Color.WHITE);
-			button.setFont(new Font("Segoe UI", Font.BOLD, 12));
-
-			button.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					fireEditingStopped();
-					mostrarObjetivosCurso(selectedRow);
-				}
-			});
-		}
-
-		@Override
-		public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-			selectedRow = row;
-			return button;
-		}
-
-		@Override
-		public Object getCellEditorValue() {
-			return "Ver Objetivos";
-		}
-
-
-	}
+	
+	
 }
