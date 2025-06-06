@@ -41,10 +41,10 @@ public abstract class Investigador {
 	public void setNombre(String nombre) 
 	{
 		if(nombre.trim().isEmpty())
-			throw new CadenaNoValidaException("El nombre del docente no puede estar vacío");
+			throw new CadenaNoValidaException("El nombre no puede estar vacío");
 		
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre del docente solo puede tener letras y espacios");	
+			throw new CadenaNoValidaException("El nombre solo puede tener letras y espacios");	
 
 		this.nombre = nombre;
 	}

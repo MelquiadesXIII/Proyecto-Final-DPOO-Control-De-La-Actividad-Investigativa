@@ -343,7 +343,7 @@ public class VentanaPrincipal extends JFrame{
 	}
 
 	private void crearTablaEstudiantes(){
-
+		
 		modeloEstudiantes = new DefaultListModel<>();
 
 		for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
@@ -416,18 +416,9 @@ public class VentanaPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				 CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this, vicedecanato);
 				    dialog.setVisible(true);
-
-				    if (dialog.isConfirmado()) {
-				        String nombre = dialog.getNombre();
-				        String apellidos = dialog.getApellidos();
-				        String grupo = dialog.getGrupo();
-
-				        if (!nombre.isEmpty() && !apellidos.isEmpty()) {
-				            Estudiante nuevoEst = new Estudiante(nombre,apellidos,grupo );
-				            vicedecanato.getEstudiantes().add(nuevoEst);
-				            actualizarTablaEst();
-				        }
-				    }
+				    
+				    if(dialog.isConfirmado())
+				    	actualizarTablaEst();
 			}
 			
 		});
@@ -695,8 +686,6 @@ public class VentanaPrincipal extends JFrame{
 		JScrollPane scrollTabla = new JScrollPane(tablaRanking);
 		scrollTabla.setPreferredSize(new Dimension(800, 400));
 		panelReporte1.add(scrollTabla, BorderLayout.CENTER);
-
-
 
 		panelFiltros.add(new JLabel("Departamento:"));
 		panelFiltros.add(seleccionarDeptoReporte1);

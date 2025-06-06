@@ -1,6 +1,7 @@
 package Interfaz;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -27,6 +28,7 @@ public class MensajeDialog extends JDialog {
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setOpaque(true);
+        panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
         panel.setPreferredSize(new Dimension(400, 200)); 
 
         JLabel mensajeLabel = new JLabel(mensaje);
