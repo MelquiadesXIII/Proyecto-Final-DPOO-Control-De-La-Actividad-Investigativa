@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.swing.JComboBox;
+
 import Excepciones.DuplicacionException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
@@ -53,7 +55,6 @@ public class Vicedecanato {
 
 
 
-	//Metodos
 	public void agregarDocente(Docente d)
 	{
 		if(docentes.contains(d))

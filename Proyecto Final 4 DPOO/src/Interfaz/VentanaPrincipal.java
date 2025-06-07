@@ -439,7 +439,16 @@ public class VentanaPrincipal extends JFrame{
 		panelBotonesCRUDDocentes.setBackground(Color.DARK_GRAY);
 
 		JButton btnCrearDoc = crearBotonCRUD("Crear");
-		
+		btnCrearDoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				 CrearDocDialog dialog = new CrearDocDialog(VentanaPrincipal.this, vicedecanato);
+				    dialog.setVisible(true);
+				    
+				    if(dialog.isConfirmado())
+				    	actualizarTablaDoc();
+			}
+			
+		});
 		
 		JButton btnEditarDoc = crearBotonCRUD("Editar");
 		JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
@@ -457,6 +466,17 @@ public class VentanaPrincipal extends JFrame{
 		panelBotonesCRUDDepartamentos.setBackground(Color.DARK_GRAY);
 
 		JButton btnCrearDep = crearBotonCRUD("Crear");
+		btnCrearDep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				 CrearDepDialog dialog = new CrearDepDialog(VentanaPrincipal.this, vicedecanato);
+				    dialog.setVisible(true);
+				    
+				    if(dialog.isConfirmado())
+				    	actualizarTablaDep();
+			}
+			
+		});
+		
 		JButton btnEditarDep = crearBotonCRUD("Editar");
 		JButton btnEliminarDep = crearBotonCRUD("Eliminar");
 
@@ -856,5 +876,20 @@ public class VentanaPrincipal extends JFrame{
 		}
 	}
 	
+	public void actualizarTablaDoc(){
+		modeloDocentes.clear();
+		
+		for (Docente docente : vicedecanato.getDocentes()) {
+			modeloDocentes.addElement(docente.getNombre() + " " + docente.getApellidos());
+		}
+	}
+	
+	public void actualizarTablaDep(){
+		modeloDepartamentos.clear();
+		
+		for (Departamento departamento : vicedecanato.getDepartamentos()) {
+			modeloDepartamentos.addElement(departamento.getNombre());
+		}
+	}
 	
 }
