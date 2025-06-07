@@ -30,7 +30,6 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.CategoriaCientifica;
@@ -58,11 +57,11 @@ public class CrearDocDialog extends JDialog{
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		panel.setPreferredSize(new Dimension(400, 450));
+		panel.setPreferredSize(new Dimension(400, 490));
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
 
 		JPanel panelCampos = new JPanel();
-		panelCampos.setBounds(20, 65, 360, 300);
+		panelCampos.setBounds(20, 65, 360, 340);
 		panelCampos.setBackground(new Color(30, 40, 50));
 
 		panel.setLayout(null);
@@ -71,12 +70,12 @@ public class CrearDocDialog extends JDialog{
 		panel.add(panelCampos);
 
 		JLabel labelNombre = new JLabel("Nombre:");
-		labelNombre.setBounds(24, 46, 82, 50);
+		labelNombre.setBounds(20, 46, 82, 50);
 		panelCampos.add(labelNombre);
 		estiloLabel(labelNombre);
 
 		JLabel labelApellidos = new JLabel("Apellidos:");
-		labelApellidos.setBounds(24, 112, 82, 50);
+		labelApellidos.setBounds(20, 112, 82, 50);
 		panelCampos.add(labelApellidos);
 		estiloLabel(labelApellidos);
 
@@ -92,7 +91,7 @@ public class CrearDocDialog extends JDialog{
 
 
 		JLabel labelDepartamento = new JLabel("Departamento:");
-		labelDepartamento.setBounds(24, 240, 100, 50);
+		labelDepartamento.setBounds(20, 280, 120, 50);
 		panelCampos.add(labelDepartamento);
 		estiloLabel(labelDepartamento);
 
@@ -105,27 +104,27 @@ public class CrearDocDialog extends JDialog{
 			comboDepartamento.addItem(d);
 		}
 
-		comboDepartamento.setBounds(118, 246, 230, 39);
+		comboDepartamento.setBounds(140, 286, 210, 39);
 		panelCampos.add(comboDepartamento);
 		estiloComboBox(comboDepartamento);
 		
 		JLabel labelCatCientifica = new JLabel("Cat. Científica:");
-		labelCatCientifica.setBounds(24, 172, 100, 50);
+		labelCatCientifica.setBounds(20, 168, 100, 50);
 		panelCampos.add(labelCatCientifica);
 		estiloLabel(labelCatCientifica);
 
 		comboCatCientifica = new JComboBox<>(CategoriaCientifica.values());
-		comboCatCientifica.setBounds(118, 178, 230, 39);
+		comboCatCientifica.setBounds(118, 174, 230, 39);
 		panelCampos.add(comboCatCientifica);
 		estiloComboBoxEnum(comboCatCientifica);
 		
 		JLabel labelCatDocente = new JLabel("Cat. Docente:");
-		labelCatDocente.setBounds(24, 206, 100, 50);
+		labelCatDocente.setBounds(20, 224, 100, 50);
 		panelCampos.add(labelCatDocente);
 		estiloLabel(labelCatDocente);
 
 		comboCatDocente = new JComboBox<>(CategoriaDocente.values());
-		comboCatDocente.setBounds(118, 212, 230, 39);
+		comboCatDocente.setBounds(118, 230, 230, 39);
 		panelCampos.add(comboCatDocente);
 		estiloComboBoxEnum(comboCatDocente);
 
@@ -196,7 +195,7 @@ public class CrearDocDialog extends JDialog{
 
 
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-		panelBotones.setBounds(20, 380, 360, 60);
+		panelBotones.setBounds(20, 400, 360, 60);
 		panelBotones.setBackground(new Color(30, 40, 50));
 
 		JButton botonCrear = new JButton("Crear");
@@ -215,7 +214,7 @@ public class CrearDocDialog extends JDialog{
 				CategoriaCientifica catCientifica = (CategoriaCientifica) comboCatCientifica.getSelectedItem();
 				CategoriaDocente catDocente = (CategoriaDocente) comboCatDocente.getSelectedItem();
 
-				if(!depto.equals(verSeleccionarDepto)){
+				if(!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty()){
 					String nombre = getNombre();
 					String apellidos = getApellidos();
 
@@ -233,6 +232,22 @@ public class CrearDocDialog extends JDialog{
 						d.setVisible(true);
 						confirmado = false;
 					}
+					
+				}else{
+					
+					MensajeDialog d;
+					
+					if(campoNombre.getText().trim().isEmpty())
+						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
+					
+					else if(campoApellidos.getText().trim().isEmpty())
+						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
+					
+					else
+						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
+					
+					d.setVisible(true);
+					
 				}
 			}
 		});

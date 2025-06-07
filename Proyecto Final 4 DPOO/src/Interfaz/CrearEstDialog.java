@@ -215,7 +215,7 @@ public class CrearEstDialog extends JDialog {
 
 				Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
 
-				if(!depto.equals(verSeleccionarDepto)){
+				if(!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
 					String nombre = getNombre();
 					String apellidos = getApellidos();
 					String grupo = getGrupo();
@@ -234,6 +234,24 @@ public class CrearEstDialog extends JDialog {
 						d.setVisible(true);
 						confirmado = false;
 					}
+				
+				}else{
+					
+					MensajeDialog d;
+					
+					if(campoNombre.getText().trim().isEmpty())
+						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
+					
+					else if(campoApellidos.getText().trim().isEmpty())
+						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
+					
+					else if(campoGrupo.getText().trim().isEmpty())
+						d = new MensajeDialog(parent, "Rellene el campo del grupo", Tipo.RETROALIMENTACION);
+					
+					else
+						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
+					
+					d.setVisible(true);
 				}
 			}
 		});
