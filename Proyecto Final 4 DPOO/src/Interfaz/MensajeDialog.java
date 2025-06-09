@@ -29,7 +29,7 @@ public class MensajeDialog extends JDialog {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setOpaque(true);
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(400, 200)); 
+        panel.setPreferredSize(new Dimension(600, 200)); 
 
         JLabel mensajeLabel = new JLabel(mensaje);
         mensajeLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
