@@ -517,7 +517,7 @@ public class VentanaPrincipal extends JFrame{
 		            confirmacion.setVisible(true);
 
 		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.getEstudiantes().remove(seleccionado);
+		                vicedecanato.removerEstudiante(estudiante);
 
 		                modeloEstudiantes.remove(seleccionado);
 
@@ -605,7 +605,7 @@ public class VentanaPrincipal extends JFrame{
 		            confirmacion.setVisible(true);
 
 		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.getDocentes().remove(seleccionado);
+		                vicedecanato.removerDocente(docente);
 
 		                modeloDocentes.remove(seleccionado);
 
@@ -683,7 +683,7 @@ public class VentanaPrincipal extends JFrame{
 		            confirmacion.setVisible(true);
 
 		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.getDocentes().remove(seleccionado);
+		                vicedecanato.removerDepartamento(departamento);
 
 		                modeloDepartamentos.remove(seleccionado);
 
