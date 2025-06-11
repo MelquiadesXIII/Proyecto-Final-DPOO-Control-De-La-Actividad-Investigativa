@@ -123,6 +123,11 @@ public class Maestria {
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestría");
 
 		matriculados.add(d);
+		
+		for(CursoPosgrado c: cursos){
+			
+			c.agregarParticipante(d);
+		}
 	}
 
 	public void removerMatriculado(Docente d)
