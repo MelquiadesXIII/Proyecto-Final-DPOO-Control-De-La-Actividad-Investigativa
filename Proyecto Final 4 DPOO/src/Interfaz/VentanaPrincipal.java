@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import Interfaz.*;
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
@@ -556,7 +557,7 @@ public class VentanaPrincipal extends JFrame{
 		});
 		
 		JButton btnEditarDoc = crearBotonCRUD("Editar");
-		/*btnEditarDoc.addActionListener(new ActionListener(){
+		btnEditarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int seleccionado = listaDocentes.getSelectedIndex();
 				
@@ -590,7 +591,7 @@ public class VentanaPrincipal extends JFrame{
 		            mensajeRetroalimentacion.setVisible(true);
 				}
 			}
-		});*/
+		});
 		
 		JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
 		btnEliminarDoc.addActionListener(new ActionListener(){
