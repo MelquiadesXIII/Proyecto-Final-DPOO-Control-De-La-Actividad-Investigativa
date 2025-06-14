@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URI;
 import java.util.ArrayList;
 
 import Interfaz.MensajeDialog.Tipo;
@@ -40,6 +42,11 @@ public class VentanaGestionDepartamento extends JDialog{
 	private JButton botonDocentes;
 	private JButton botonInicio;
 	private JButton botonSalir;
+	private JPanel panelInicio;
+	private JPanel panelLineas;
+	private JPanel panelMaestrias;
+	private JPanel panelEstudiantes;
+	private JPanel panelDocentes;
 	
 	
 	
@@ -225,4 +232,51 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelPrincipal.setBackground(Color.DARK_GRAY);
 		getContentPane().add(panelPrincipal, BorderLayout.CENTER);
 	}
+	
+	private void crearPaneles(){
+
+		panelInicio = crearPanelesConEncabezado("Bienvenido");
+		panelPrincipal.add(panelInicio, "panelInicio");
+		panelInicio.setBackground(Color.DARK_GRAY);
+
+		panelDocentes = crearPanelesConEncabezado("Docentes registrados en el vicedecanato:");
+		panelPrincipal.add(panelDocentes, "panelDocentes");
+		panelDocentes.setBackground(Color.DARK_GRAY);
+
+		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el vicedecanato:");
+		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
+		panelEstudiantes.setBackground(Color.DARK_GRAY);
+
+		panelMaestrias= crearPanelesConEncabezado("Departamentos registrados en el vicedecanato:");
+		panelPrincipal.add(panelMaestrias, "panelDepartamentos");
+		panelMaestrias.setBackground(Color.DARK_GRAY);
+		
+		panelLineas = crearPanelesConEncabezado("Departamentos registrados en el vicedecanato:");
+		panelPrincipal.add(panelLineas, "panelDepartamentos");
+		panelLineas.setBackground(Color.DARK_GRAY);
+
+		JLabel lblBienvenida = new JLabel("<html>" +
+				"<div style='text-align: center; font-family: Segoe UI;'>" +
+				"<h1>Sistema Integral de Gestión Investigativa y de Posgrado</h1>" +
+				"<p><b>Facultad de Ingeniería Informática" +
+				"<hr>" +
+				"<p style='text-align: left;'>" +
+				"Actualmente se encuentra en la gestión de <b>" + dptoActual.getNombre() + " </b> para:<br><br>" +
+				"• Registrar y monitorear <b>líneas de investigación</b>.<br>" +
+				"• Gestionar <b>resultados científicos</b> (artículos, capítulos, ponencias).<br>" +
+				"• Administrar <b>cursos de posgrado</b> (impartidos, recibidos, créditos).<br>" +
+				"• Acompañar el progreso en <b>maestrías</b> (matrículas, defensas).<br><br>" +
+				"<i>Optimice la toma de decisiones con reportes automatizados.</i>" +
+				"</p>" +
+				"</div>" +
+				"</html>");
+		lblBienvenida.setBounds(0, 0, 794, 465);
+		lblBienvenida.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		lblBienvenida.setForeground(Color.WHITE);
+		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInicio.add(lblBienvenida);
+
+
+	}
 }
+
