@@ -735,5 +735,21 @@ public class VentanaGestionDepartamento extends JDialog{
 			modeloDocentes.addElement(docente);
 		}
 	}
+	
+	public void actualizarTablaMaestrias(){
+		modeloMaestrias.clear();
+		
+		for (Maestria m: dptoActual.getMaestrias()) {
+			modeloMaestrias.addElement(m);
+		}
+	}
+	
+	public void actualizarTablaLineas(){
+		modeloLineas.clear();
+		
+		for (LineaInvestigacion l : dptoActual.getLineasInvestigacion()) {
+			modeloLineas.addElement(l);
+		}
+	}
 }
 
