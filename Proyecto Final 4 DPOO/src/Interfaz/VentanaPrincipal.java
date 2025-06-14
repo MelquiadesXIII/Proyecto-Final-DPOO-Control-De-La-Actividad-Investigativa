@@ -88,6 +88,8 @@ public class VentanaPrincipal extends JFrame{
 		crearTablaDepartamentos();
 		crearTablaEstudiantes();
 		configurarPanelesCRUD();
+		
+		setVisible(true);
 	}
 
 	private void inicializarConfiguracionUI(){
@@ -101,8 +103,6 @@ public class VentanaPrincipal extends JFrame{
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		this.botonesNavegacion = new ArrayList<JButton>();
-
-		setVisible(true);
 	}
 
 	private void configurarPanelNavegacion(){
