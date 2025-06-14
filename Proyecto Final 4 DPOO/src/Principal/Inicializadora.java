@@ -1861,7 +1861,8 @@ public class Inicializadora{
 				c4m5d3.emitirNota(d252, d295, 5);
 				c4m5d3.emitirNota(d252, d298, 3);
 
-				new VentanaPrincipal(vicedecanato);
+				VentanaPrincipal v = new VentanaPrincipal(vicedecanato);
+				new VentanaGestionDepartamento(v, depto1, vicedecanato);
 			}
 		});
 	}
