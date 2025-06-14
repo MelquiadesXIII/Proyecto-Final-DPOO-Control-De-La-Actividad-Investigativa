@@ -59,6 +59,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	private JList<Object> listaLineas;
 	private JPanel panelBotonesCRUDEstudiantes;
 	private JPanel panelBotonesCRUDDocentes;
+	private JPanel panelBotonesCRUDMaestria;
 
 
 
@@ -432,9 +433,9 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		configurarPanelCRUDDocente();
 
-		/*configurarPanelCRUDMaestria();
+		configurarPanelCRUDMaestria();
 		
-		configurarPanelCRUDLineas();*/
+		/*configurarPanelCRUDLineas();*/
 	}
 	
 	private JButton crearBotonCRUD(String texto) {
@@ -631,6 +632,92 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelBotonesCRUDDocentes.add(btnEliminarDoc);
 
 		panelDocentes.add(panelBotonesCRUDDocentes, BorderLayout.SOUTH);
+	}
+	
+	private void configurarPanelCRUDMaestria(){
+		
+		panelBotonesCRUDMaestria = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDMaestria.setBackground(Color.DARK_GRAY);
+
+		JButton btnCrearMaestria = crearBotonCRUD("Crear");
+		btnCrearMaestria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				 CrearMaestriaDialog dialog = new CrearMaestriaDialog(parent, vicedecanato);
+				    dialog.setVisible(true);
+				    
+				    if(dialog.isConfirmado())
+				    	actualizarTablaMaestrias();
+			}
+			
+		});
+		
+		JButton btnEditarMaestria = crearBotonCRUD("Editar");
+		btnEditarMaestria.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				int seleccionado = listaMaestrias.getSelectedIndex();
+				
+				if(seleccionado != -1){
+					EditarMaestriaDialog dialog = new EditarMaestriaDialog(parent,vicedecanato);
+					dialog.setVisible(true);
+					
+					if (dialog.isConfirmado()){
+						String nuevoNombre = dialog.getNombre();
+						String campoEstudio = dialog.getCampoEstudio();
+						int duracionMeses = dialog.getDuracionMeses();
+						
+					    
+					    int indexMaestria = listaMaestrias.getSelectedIndex();
+						Maestria maestria = (Maestria) modeloMaestrias.get(indexMaestria);
+						
+						maestria.setNombre(nuevoNombre);
+						maestria.setDuracionMeses(duracionMeses);
+						maestria.setCampoEstudio(campoEstudio);
+						dptoActual.agregarMaestria(maestria);
+						
+						modeloMaestrias.set(indexMaestria, maestria);
+						
+						actualizarTablaMaestrias();
+					    
+					}
+				}else{
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestria para editar",Tipo.RETROALIMENTACION);
+		            mensajeRetroalimentacion.setVisible(true);
+				}
+			}
+		});
+		
+		JButton btnEliminarMaestria = crearBotonCRUD("Eliminar");
+		btnEliminarMaestria.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+		        int seleccionado = listaMaestrias.getSelectedIndex();
+
+		        if (seleccionado != -1) {
+		            Maestria maestria = (Maestria) modeloMaestrias.getElementAt(seleccionado);
+
+		            MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a:"+ " " + maestria.getNombre() + "?",Tipo.CONFIRMACION);
+
+		            confirmacion.setVisible(true);
+
+		            if (confirmacion.isConfirmado()) {
+		                dptoActual.removerMaestria(maestria);
+
+		                modeloMaestrias.remove(seleccionado);
+
+		                MensajeDialog mensaje = new MensajeDialog(parent,"Maestría eliminada correctamente",Tipo.RETROALIMENTACION);
+		                mensaje.setVisible(true);
+		            }
+		        } else {
+		            MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para eliminar",Tipo.RETROALIMENTACION);
+		            mensajeRetroalimentacion.setVisible(true);
+		        }
+		    }
+		});
+
+		panelBotonesCRUDMaestria.add(btnCrearMaestria);
+		panelBotonesCRUDMaestria.add(btnEditarMaestria);
+		panelBotonesCRUDMaestria.add(btnEliminarMaestria);
+
+		panelMaestrias.add(panelBotonesCRUDMaestria, BorderLayout.SOUTH);
 	}
 	
 	public void actualizarTablaEst(){
