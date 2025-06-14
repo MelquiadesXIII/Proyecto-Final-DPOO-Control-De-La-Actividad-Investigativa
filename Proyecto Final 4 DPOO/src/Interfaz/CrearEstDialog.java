@@ -26,7 +26,7 @@ public class CrearEstDialog extends JDialog {
 	private JComboBox<Departamento> comboDepartamento;
 
 
-	public CrearEstDialog(final JFrame parent, final Vicedecanato vicedecanato) {
+	public CrearEstDialog(final JFrame parent, final Vicedecanato vicedecanato, final Departamento dptoActual) {
 
 		super(parent, "Crear Estudiante", true);
 		setUndecorated(true);
@@ -94,7 +94,9 @@ public class CrearEstDialog extends JDialog {
 		}
 
 		comboDepartamento.setBounds(118, 246, 230, 39);
-		panelCampos.add(comboDepartamento);
+
+		if(dptoActual == null)
+			panelCampos.add(comboDepartamento);
 		estiloComboBox(comboDepartamento);
 
 		AbstractDocument docNombre = (AbstractDocument) campoNombre.getDocument();
@@ -213,8 +215,13 @@ public class CrearEstDialog extends JDialog {
 		botonCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
-
+				Departamento depto;
+				
+				if(dptoActual == null)
+					depto = (Departamento) comboDepartamento.getSelectedItem();
+				else
+					depto = dptoActual;
+				
 				if(!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
 					String nombre = getNombre();
 					String apellidos = getApellidos();
@@ -234,23 +241,23 @@ public class CrearEstDialog extends JDialog {
 						d.setVisible(true);
 						confirmado = false;
 					}
-				
+
 				}else{
-					
+
 					MensajeDialog d;
-					
+
 					if(campoNombre.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-					
+
 					else if(campoApellidos.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-					
+
 					else if(campoGrupo.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo del grupo", Tipo.RETROALIMENTACION);
-					
+
 					else
 						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-					
+
 					d.setVisible(true);
 				}
 			}

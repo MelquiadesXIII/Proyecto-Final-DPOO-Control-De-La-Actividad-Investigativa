@@ -5,8 +5,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
-import Interfaz.*;
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
@@ -462,7 +460,7 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnCrearEst = crearBotonCRUD("Crear");
 		btnCrearEst.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this, vicedecanato);
+				 CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this, vicedecanato, null);
 				    dialog.setVisible(true);
 				    
 				    if(dialog.isConfirmado())
