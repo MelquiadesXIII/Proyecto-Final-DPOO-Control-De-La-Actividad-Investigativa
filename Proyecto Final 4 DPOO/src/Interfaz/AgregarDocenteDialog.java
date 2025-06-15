@@ -22,8 +22,7 @@ public class AgregarDocenteDialog extends JDialog {
 	private Departamento departamentoActual;
 
 	@SuppressWarnings("serial")
-	public AgregarDocenteDialog(final JFrame parent, final Vicedecanato vicedecanato, 
-			final Departamento departamentoActual) {
+	public AgregarDocenteDialog(final JFrame parent, final Vicedecanato vicedecanato, final Departamento departamentoActual) {
 
 		super(parent, "Agregar Docente", true);
 		this.parent = parent;
@@ -142,7 +141,7 @@ public class AgregarDocenteDialog extends JDialog {
 				try {
 					departamentoActual.agregarDocente(seleccion);
 
-					MensajeDialog d = new MensajeDialog(parent, "Elemento agregado correctamente", Tipo.RETROALIMENTACION);
+					MensajeDialog d = new MensajeDialog(parent, "Docente agregado correctamente", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
 					confirmado = true;
 					dispose();
@@ -152,7 +151,7 @@ public class AgregarDocenteDialog extends JDialog {
 				}
 			}
 		} else {
-			MensajeDialog d = new MensajeDialog(parent, "Seleccione un elemento de la lista", Tipo.RETROALIMENTACION);
+			MensajeDialog d = new MensajeDialog(parent, "Seleccione un docente de la lista", Tipo.RETROALIMENTACION);
 			d.setVisible(true);
 		}
 	}
