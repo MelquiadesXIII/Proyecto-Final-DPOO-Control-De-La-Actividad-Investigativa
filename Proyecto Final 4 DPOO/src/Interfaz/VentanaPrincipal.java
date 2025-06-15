@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
@@ -68,6 +69,10 @@ public class VentanaPrincipal extends JFrame{
 	private JComboBox<Maestria> seleccionarMaestriaReporte3 = new JComboBox<>();
 	private JTable tablaCursos;
 	private DefaultTableModel modeloTablaCursos;
+	private JTable tablaDocentes;
+	private JScrollPane scrollTablaDocentes;
+	private DefaultTableModel modeloTablaDocentes;
+	private ArrayList<Docente> docentesEnTabla = new ArrayList<>();
 
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 
@@ -86,7 +91,7 @@ public class VentanaPrincipal extends JFrame{
 		crearTablaDepartamentos();
 		crearTablaEstudiantes();
 		configurarPanelesCRUD();
-		
+
 		setVisible(true);
 	}
 
@@ -328,96 +333,141 @@ public class VentanaPrincipal extends JFrame{
 
 		modeloDepartamentos = new DefaultListModel<>();
 
-	    for (Departamento departamento : vicedecanato.getDepartamentos()) {
-	        modeloDepartamentos.addElement(departamento);
-	    }
+		for (Departamento departamento : vicedecanato.getDepartamentos()) {
+			modeloDepartamentos.addElement(departamento);
+		}
 
-	    listaDepartamentos = new JList<>(modeloDepartamentos);
+		listaDepartamentos = new JList<>(modeloDepartamentos);
 
-	    listaDepartamentos.setCellRenderer(new DefaultListCellRenderer() {
+		listaDepartamentos.setCellRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public Component getListCellRendererComponent(JList<?> list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
-	            Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-	            if (value instanceof Departamento) {
-	            	Departamento departamento = (Departamento) value;
-	                setText(departamento.getNombre());
-	            }
-	            return c;
-	        }
-	    });
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
+				Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (value instanceof Departamento) {
+					Departamento departamento = (Departamento) value;
+					setText(departamento.getNombre());
+				}
+				return c;
+			}
+		});
 
-	    listaDepartamentos.setForeground(Color.WHITE);
-	    listaDepartamentos.setBackground(Color.DARK_GRAY);
-	    listaDepartamentos.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		listaDepartamentos.setForeground(Color.WHITE);
+		listaDepartamentos.setBackground(Color.DARK_GRAY);
+		listaDepartamentos.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
-	    JScrollPane scrollDepartamentos = new JScrollPane(listaDepartamentos);
-	    panelDepartamentos.add(scrollDepartamentos, BorderLayout.CENTER);
+		JScrollPane scrollDepartamentos = new JScrollPane(listaDepartamentos);
+		panelDepartamentos.add(scrollDepartamentos, BorderLayout.CENTER);
 	}
 
 	private void crearTablaEstudiantes(){
-		
+
 		modeloEstudiantes = new DefaultListModel<>();
 
-	    for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
-	        modeloEstudiantes.addElement(estudiante);
-	    }
+		for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
+			modeloEstudiantes.addElement(estudiante);
+		}
 
-	    listaEstudiantes = new JList<>(modeloEstudiantes);
+		listaEstudiantes = new JList<>(modeloEstudiantes);
 
-	    listaEstudiantes.setCellRenderer(new DefaultListCellRenderer() {
+		listaEstudiantes.setCellRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public Component getListCellRendererComponent(JList<?> list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
-	            Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-	            if (value instanceof Estudiante) {
-	                Estudiante estudiante = (Estudiante) value;
-	                setText(estudiante.getNombre() + " " + estudiante.getApellidos());
-	            }
-	            return c;
-	        }
-	    });
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
+				Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (value instanceof Estudiante) {
+					Estudiante estudiante = (Estudiante) value;
+					setText(estudiante.getNombre() + " " + estudiante.getApellidos());
+				}
+				return c;
+			}
+		});
 
-	    listaEstudiantes.setForeground(Color.WHITE);
-	    listaEstudiantes.setBackground(Color.DARK_GRAY);
-	    listaEstudiantes.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		listaEstudiantes.setForeground(Color.WHITE);
+		listaEstudiantes.setBackground(Color.DARK_GRAY);
+		listaEstudiantes.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
-	    JScrollPane scrollEstudiantes = new JScrollPane(listaEstudiantes);
-	    panelEstudiantes.add(scrollEstudiantes, BorderLayout.CENTER);
+		JScrollPane scrollEstudiantes = new JScrollPane(listaEstudiantes);
+		panelEstudiantes.add(scrollEstudiantes, BorderLayout.CENTER);
 	}
 
 	private void crearTablaDocentes(){
 
-		modeloDocentes = new DefaultListModel<>();
+		docentesEnTabla.clear();
+		
+		String[] columnas = {"Nombre y apellidos", "Categoría Científica", "Categoría Docente", "Departamento"};
 
-	    for (Docente docente : vicedecanato.getDocentes()) {
-	        modeloDocentes.addElement(docente);
-	    }
-
-	    listaDocentes = new JList<>(modeloDocentes);
-
-	    listaDocentes.setCellRenderer(new DefaultListCellRenderer() {
+		modeloTablaDocentes = new DefaultTableModel(columnas, 0) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public Component getListCellRendererComponent(JList<?> list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
-	            Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-	            if (value instanceof Docente) {
-	            	Docente docente = (Docente) value;
-	                setText(docente.getNombre() + " " + docente.getApellidos());
-	            }
-	            return c;
-	        }
-	    });
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
-	    listaDocentes.setForeground(Color.WHITE);
-	    listaDocentes.setBackground(Color.DARK_GRAY);
-	    listaDocentes.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		for (Docente docente : vicedecanato.getDocentes()) {
+			Departamento departamento = vicedecanato.obtenerDepartamentoDeUnDocente(docente);
+			String nombreDepartamento = (departamento != null) ? departamento.getNombre() : "Sin departamento";
 
-	    JScrollPane scrollEstudiantes = new JScrollPane(listaDocentes);
-	    panelDocentes.add(scrollEstudiantes, BorderLayout.CENTER);
+			Object[] fila = {
+					docente.getNombre() + " " + docente.getApellidos(),
+					docente.getCatCientifica(),
+					docente.getCatDocente(),
+					nombreDepartamento
+			};
+			
+			docentesEnTabla.add(docente); //Se agregan los docentes al array list coincidiendo con el indice del docente en la tabla
+			modeloTablaDocentes.addRow(fila);
+		}
+
+		tablaDocentes = new JTable(modeloTablaDocentes);
+
+		tablaDocentes.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		tablaDocentes.setRowHeight(30);
+		tablaDocentes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tablaDocentes.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
+		tablaDocentes.getTableHeader().setForeground(Color.WHITE);
+
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < tablaDocentes.getColumnCount(); i++) {
+			tablaDocentes.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+		}
+
+		tablaDocentes.getColumnModel().getColumn(0).setPreferredWidth(200);
+		tablaDocentes.getColumnModel().getColumn(1).setPreferredWidth(150);
+		tablaDocentes.getColumnModel().getColumn(2).setPreferredWidth(150);
+		tablaDocentes.getColumnModel().getColumn(3).setPreferredWidth(200);
+
+		scrollTablaDocentes = new JScrollPane(tablaDocentes);
+		scrollTablaDocentes.setBorder(BorderFactory.createEmptyBorder());
+
+		panelDocentes.add(scrollTablaDocentes, BorderLayout.CENTER);
+
+	}
+
+	public void actualizarTablaDoc() {
+		
+		panelDocentes.removeAll();
+
+		JPanel encabezado = new JPanel();
+		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+		encabezado.setPreferredSize(new Dimension(0, 50));
+		JLabel lblTitulo = new JLabel("Docentes registrados en el vicedecanato:");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		encabezado.add(lblTitulo);
+		panelDocentes.add(encabezado, BorderLayout.NORTH);
+
+		crearTablaDocentes();
+
+		panelDocentes.add(panelBotonesCRUDDocentes, BorderLayout.SOUTH);
+
+		panelDocentes.revalidate();
+		panelDocentes.repaint();
 	}
 
 	private void configurarPanelesCRUD(){
@@ -460,74 +510,64 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnCrearEst = crearBotonCRUD("Crear");
 		btnCrearEst.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this, vicedecanato);
-				    dialog.setVisible(true);
-				    
-				    if(dialog.isConfirmado())
-				    	actualizarTablaEst();
+				CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this, vicedecanato);
+				dialog.setVisible(true);
+
+				if(dialog.isConfirmado())
+					actualizarTablaEst();
 			}
-			
+
 		});
-		
+
 		JButton btnEditarEst = crearBotonCRUD("Editar");
 		btnEditarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int seleccionado = listaEstudiantes.getSelectedIndex();
-				
+
 				if(seleccionado != -1){
-					EditarEstDialog dialog = new EditarEstDialog(VentanaPrincipal.this,vicedecanato);
+
+					Estudiante estudiante = (Estudiante) modeloEstudiantes.getElementAt(seleccionado);
+					EditarEstDialog dialog = new EditarEstDialog(VentanaPrincipal.this,vicedecanato,estudiante);
 					dialog.setVisible(true);
-					
+
 					if (dialog.isConfirmado()){
-						String nuevoNombre = dialog.getNombre();
-					    String nuevosApellidos = dialog.getApellidos();
-					    String nuevoGrupo = dialog.getGrupo();
-					    Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
-					    
-					    int estudianteSeleccionado = listaEstudiantes.getSelectedIndex();
-						Estudiante estudiante = modeloEstudiantes.get(estudianteSeleccionado);
-						
-						estudiante.setNombre(nuevoNombre);
-						estudiante.setApellidos(nuevosApellidos);
-						estudiante.setGrupo(nuevoGrupo);
-						nuevoDepartamento.agregarEstudiante(estudiante);
-						
-						modeloEstudiantes.set(estudianteSeleccionado, estudiante);
-					    
+
+						modeloEstudiantes.set(seleccionado, estudiante);
+						actualizarTablaEst();
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
+					mensajeRetroalimentacion.setVisible(true);
 				}
-				
+
 			}
 		});
-		
+
 		JButton btnEliminarEst = crearBotonCRUD("Eliminar");
 		btnEliminarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-		        int seleccionado = listaEstudiantes.getSelectedIndex();
+				int seleccionado = listaEstudiantes.getSelectedIndex();
 
-		        if (seleccionado != -1) {
-		            Estudiante estudiante = modeloEstudiantes.getElementAt(seleccionado);
+				if (seleccionado != -1) {
+					Estudiante estudiante = modeloEstudiantes.getElementAt(seleccionado);
 
-		            MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar a:"+ " " + estudiante.getNombre() + "?",Tipo.CONFIRMACION);
+					MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar a"+ " " + estudiante.getNombre() + "?",Tipo.CONFIRMACION);
 
-		            confirmacion.setVisible(true);
+					confirmacion.setVisible(true);
 
-		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.removerEstudiante(estudiante);
+					if (confirmacion.isConfirmado()) {
+						vicedecanato.removerEstudiante(estudiante);
 
-		                modeloEstudiantes.remove(seleccionado);
+						modeloEstudiantes.remove(seleccionado);
 
-		                MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Estudiante eliminado correctamente",Tipo.RETROALIMENTACION);
-		                mensaje.setVisible(true);
-		            }
-		        } else {
-		            MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
-		        }
-		    }
+						MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Estudiante eliminado correctamente",Tipo.RETROALIMENTACION);
+						mensaje.setVisible(true);
+					}
+				} else {
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
+				}
+			}
 		});
 
 		panelBotonesCRUDEstudiantes.add(btnCrearEst);
@@ -545,77 +585,66 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnCrearDoc = crearBotonCRUD("Crear");
 		btnCrearDoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearDocDialog dialog = new CrearDocDialog(VentanaPrincipal.this, vicedecanato);
-				    dialog.setVisible(true);
-				    
-				    if(dialog.isConfirmado())
-				    	actualizarTablaDoc();
+				
+				CrearDocDialog dialog = new CrearDocDialog(VentanaPrincipal.this, vicedecanato);
+				dialog.setVisible(true);
+
+				if(dialog.isConfirmado())
+					actualizarTablaDoc();
 			}
-			
+
 		});
-		
+
 		JButton btnEditarDoc = crearBotonCRUD("Editar");
 		btnEditarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				int seleccionado = listaDocentes.getSelectedIndex();
 				
+				int seleccionado = tablaDocentes.getSelectedRow();
+
 				if(seleccionado != -1){
-					EditarDocDialog dialog = new EditarDocDialog(VentanaPrincipal.this,vicedecanato);
+					Docente docente = docentesEnTabla.get(seleccionado);
+					EditarDocDialog dialog = new EditarDocDialog(VentanaPrincipal.this, vicedecanato, docente);
 					dialog.setVisible(true);
-					
+
 					if (dialog.isConfirmado()){
-						String nuevoNombre = dialog.getNombre();
-					    String nuevosApellidos = dialog.getApellidos();
-					    CategoriaCientifica nuevaCatCientifica = (CategoriaCientifica)dialog.getCatCientifica();
-					    CategoriaDocente nuevaCatDocente = (CategoriaDocente) dialog.getCatDocente();
-					    Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
-					    
-					    int docenteSeleccionado = listaDocentes.getSelectedIndex();
-						Docente docente = modeloDocentes.get(docenteSeleccionado);
-						
-						docente.setNombre(nuevoNombre);
-						docente.setApellidos(nuevosApellidos);
-						docente.setCatCientifica(nuevaCatCientifica);
-						docente.setCatDocente(nuevaCatDocente);
-						nuevoDepartamento.agregarDocente(docente);
-						
-						modeloDocentes.set(docenteSeleccionado, docente);
-						
+
 						actualizarTablaDoc();
-					    
+
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
-		
+
 		JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
 		btnEliminarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-		        int seleccionado = listaDocentes.getSelectedIndex();
+				
+				int seleccionado = tablaDocentes.getSelectedRow();
 
-		        if (seleccionado != -1) {
-		            Docente docente = modeloDocentes.getElementAt(seleccionado);
+				if (seleccionado != -1) {
+					
+					Docente docente = docentesEnTabla.get(seleccionado);
 
-		            MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar a:"+ " " + docente.getNombre() + "?",Tipo.CONFIRMACION);
+					MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar a"+ " " + docente.getNombre() + "?",Tipo.CONFIRMACION);
 
-		            confirmacion.setVisible(true);
+					confirmacion.setVisible(true);
 
-		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.removerDocente(docente);
+					if (confirmacion.isConfirmado()) {
+						vicedecanato.removerDocente(docente);
 
-		                modeloDocentes.remove(seleccionado);
+						actualizarTablaDoc();
 
-		                MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Docente eliminado correctamente",Tipo.RETROALIMENTACION);
-		                mensaje.setVisible(true);
-		            }
-		        } else {
-		            MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
-		        }
-		    }
+						MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Docente eliminado correctamente",Tipo.RETROALIMENTACION);
+						mensaje.setVisible(true);
+					}
+				} else {
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
+				}
+			}
 		});
 
 		panelBotonesCRUDDocentes.add(btnCrearDoc);
@@ -633,67 +662,68 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnCrearDep = crearBotonCRUD("Crear");
 		btnCrearDep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearDepDialog dialog = new CrearDepDialog(VentanaPrincipal.this, vicedecanato);
-				    dialog.setVisible(true);
-				    
-				    if(dialog.isConfirmado())
-				    	actualizarTablaDep();
+				CrearDepDialog dialog = new CrearDepDialog(VentanaPrincipal.this, vicedecanato);
+				dialog.setVisible(true);
+
+				if(dialog.isConfirmado())
+					actualizarTablaDep();
 			}
-			
+
 		});
-		
+
 		JButton btnEditarDep = crearBotonCRUD("Editar");
 		btnEditarDep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				int seleccionado = listaDepartamentos.getSelectedIndex();
 				
+				int seleccionado = tablaDocentes.getSelectedRow();
+
 				if(seleccionado != -1){
 					EditarDepDialog dialog = new EditarDepDialog(VentanaPrincipal.this,vicedecanato);
 					dialog.setVisible(true);
-					
+
 					if (dialog.isConfirmado()){
 						String nuevoNombre = dialog.getNombre();
-					    
-					    int departamentoSeleccionado = listaDepartamentos.getSelectedIndex();
+
+						int departamentoSeleccionado = listaDepartamentos.getSelectedIndex();
 						Departamento departamento = modeloDepartamentos.get(departamentoSeleccionado);
-						
+
 						departamento.setNombre(nuevoNombre);
-						
+
 						modeloDepartamentos.set(departamentoSeleccionado, departamento);
-					    
-					    actualizarTablaDep();
+
+						actualizarTablaDep();
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
 		JButton btnEliminarDep = crearBotonCRUD("Eliminar");
 		btnEliminarDep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-		        int seleccionado = listaDepartamentos.getSelectedIndex();
+				int seleccionado = listaDepartamentos.getSelectedIndex();
 
-		        if (seleccionado != -1) {
-		            Departamento departamento = modeloDepartamentos.getElementAt(seleccionado);
+				if (seleccionado != -1) {
+					Departamento departamento = modeloDepartamentos.getElementAt(seleccionado);
 
-		            MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar el departamento:"+ " " + departamento.getNombre() + "?",Tipo.CONFIRMACION);
+					MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar el departamento:"+ " " + departamento.getNombre() + "?",Tipo.CONFIRMACION);
 
-		            confirmacion.setVisible(true);
+					confirmacion.setVisible(true);
 
-		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.removerDepartamento(departamento);
+					if (confirmacion.isConfirmado()) {
+						vicedecanato.removerDepartamento(departamento);
 
-		                modeloDepartamentos.remove(seleccionado);
+						modeloDepartamentos.remove(seleccionado);
 
-		                MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Departamento eliminado correctamente",Tipo.RETROALIMENTACION);
-		                mensaje.setVisible(true);
-		            }
-		        } else {
-		            MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un departamento para eliminar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
-		        }
-		    }
+						MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Departamento eliminado correctamente",Tipo.RETROALIMENTACION);
+						mensaje.setVisible(true);
+					}
+				} else {
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un departamento para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
+				}
+			}
 		});
 
 		panelBotonesCRUDDepartamentos.add(btnCrearDep);
@@ -993,7 +1023,7 @@ public class VentanaPrincipal extends JFrame{
 
 		tablaCursos.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
 		tablaCursos.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox(), this));
-		
+
 		tablaCursos.getColumnModel().getColumn(1).setWidth(80);
 		tablaCursos.getColumnModel().getColumn(0).setPreferredWidth(300); 
 		tablaCursos.getColumnModel().getColumn(2).setPreferredWidth(200); 
@@ -1015,10 +1045,10 @@ public class VentanaPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Departamento depto = (Departamento) seleccionarDeptoReporte3.getSelectedItem();
 				if (depto != null) {
-					
+
 					seleccionarMaestriaReporte3.removeAllItems();
 					seleccionarMaestriaReporte3.addItem(maestriaSeleccionar);
-					
+
 					for (Maestria m : depto.getMaestrias()) {
 						seleccionarMaestriaReporte3.addItem(m);
 					}
@@ -1047,23 +1077,23 @@ public class VentanaPrincipal extends JFrame{
 		}
 	}
 
-	
+
 
 	void mostrarObjetivosCurso(int row) {
-	    Maestria maestria = (Maestria) seleccionarMaestriaReporte3.getSelectedItem();
-	    if (maestria != null && !maestria.getNombre().equals("Seleccionar")) {
-	        ArrayList<CursoPosgrado> cursos = maestria.getCursos();
-	        if (row >= 0 && row < cursos.size()) {
-	            CursoPosgrado curso = cursos.get(row);
+		Maestria maestria = (Maestria) seleccionarMaestriaReporte3.getSelectedItem();
+		if (maestria != null && !maestria.getNombre().equals("Seleccionar")) {
+			ArrayList<CursoPosgrado> cursos = maestria.getCursos();
+			if (row >= 0 && row < cursos.size()) {
+				CursoPosgrado curso = cursos.get(row);
 
-	            StringBuilder texto = new StringBuilder("Objetivos:\n");
-	            for (String obj : curso.getObjetivos()) {
-	                texto.append(obj).append("\n");
-	            }
+				StringBuilder texto = new StringBuilder("Objetivos:\n");
+				for (String obj : curso.getObjetivos()) {
+					texto.append(obj).append("\n");
+				}
 
-	            JOptionPane.showMessageDialog(this, texto.toString(), "Objetivos del curso: " + curso.getTema(), JOptionPane.INFORMATION_MESSAGE);
-	        }
-	    }
+				JOptionPane.showMessageDialog(this, texto.toString(), "Objetivos del curso: " + curso.getTema(), JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
 	}
 
 	private void actualizarTablaCursos() {
@@ -1086,26 +1116,18 @@ public class VentanaPrincipal extends JFrame{
 
 	public void actualizarTablaEst(){
 		modeloEstudiantes.clear();
-		
+
 		for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
 			modeloEstudiantes.addElement(estudiante);
 		}
 	}
-	
-	public void actualizarTablaDoc(){
-		modeloDocentes.clear();
-		
-		for (Docente docente : vicedecanato.getDocentes()) {
-			modeloDocentes.addElement(docente);
-		}
-	}
-	
+
 	public void actualizarTablaDep(){
 		modeloDepartamentos.clear();
-		
+
 		for (Departamento departamento : vicedecanato.getDepartamentos()) {
-	        modeloDepartamentos.addElement(departamento);
-	    }
+			modeloDepartamentos.addElement(departamento);
+		}
 	}
-	
+
 }

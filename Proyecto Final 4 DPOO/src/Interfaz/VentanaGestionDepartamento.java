@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,8 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.URI;
 import java.util.ArrayList;
+
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 import Excepciones.*;
@@ -61,6 +60,8 @@ public class VentanaGestionDepartamento extends JDialog{
 	private JPanel panelBotonesCRUDMaestria;
 	private JButton botonCursos;
 	private JButton botonResultados;
+	private JPanel panelCursos;
+	private JPanel panelResultados;
 
 
 
@@ -288,13 +289,21 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
 		panelEstudiantes.setBackground(Color.DARK_GRAY);
 
-		panelMaestrias= crearPanelesConEncabezado("Maestrías registradas en el departamento:");
+		panelMaestrias = crearPanelesConEncabezado("Maestrías registradas en el departamento:");
 		panelPrincipal.add(panelMaestrias, "panelMaestrias");
 		panelMaestrias.setBackground(Color.DARK_GRAY);
-
+		
+		panelCursos = crearPanelesConEncabezado("Cursos de las maestrías del departamento:");
+		panelPrincipal.add(panelCursos, "panelCursos");
+		panelMaestrias.setBackground(Color.DARK_GRAY);
+		
 		panelLineas = crearPanelesConEncabezado("Líneas de investigación registradas en el departamento:");
 		panelPrincipal.add(panelLineas, "panelLineas");
 		panelLineas.setBackground(Color.DARK_GRAY);
+		
+		panelResultados = crearPanelesConEncabezado("Resultados investigativos de los investigadores del departamento:");
+		panelPrincipal.add(panelResultados, "panelResultados");
+		panelMaestrias.setBackground(Color.DARK_GRAY);
 
 		JLabel lblBienvenida = new JLabel("<html>" +
 				"<div style='text-align: center; font-family: Segoe UI;'>" +
@@ -453,6 +462,8 @@ public class VentanaGestionDepartamento extends JDialog{
 		configurarPanelCRUDDocente();
 
 		configurarPanelCRUDMaestria();
+		
+		//configurarPanelCRUDCursos();
 
 		/*configurarPanelCRUDLineas();*/
 	}
@@ -493,41 +504,30 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 
 		});
-
+		
 		JButton btnEditarEst = crearBotonCRUD("Editar");
 		btnEditarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int seleccionado = listaEstudiantes.getSelectedIndex();
-
+				
 				if(seleccionado != -1){
-					EditarEstDialog dialog = new EditarEstDialog(parent,vicedecanato);
+					Estudiante estudiante = (Estudiante) modeloEstudiantes.get(seleccionado);
+					EditarEstDialog dialog = new EditarEstDialog(parent,vicedecanato,estudiante);
 					dialog.setVisible(true);
-
+					
 					if (dialog.isConfirmado()){
-						String nuevoNombre = dialog.getNombre();
-						String nuevosApellidos = dialog.getApellidos();
-						String nuevoGrupo = dialog.getGrupo();
-						Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
-
-						int estudianteSeleccionado = listaEstudiantes.getSelectedIndex();
-						Estudiante estudiante = (Estudiante) modeloEstudiantes.get(estudianteSeleccionado);
-
-						estudiante.setNombre(nuevoNombre);
-						estudiante.setApellidos(nuevosApellidos);
-						estudiante.setGrupo(nuevoGrupo);
-						nuevoDepartamento.agregarEstudiante(estudiante);
-
-						modeloEstudiantes.set(estudianteSeleccionado, estudiante);
-
+						
+						modeloEstudiantes.set(seleccionado, estudiante);
+						actualizarTablaEst();
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
-					mensajeRetroalimentacion.setVisible(true);
+		            mensajeRetroalimentacion.setVisible(true);
 				}
-
+				
 			}
 		});
-
+		
 		JButton btnEliminarEst = crearBotonCRUD("Eliminar");
 		btnEliminarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -556,8 +556,8 @@ public class VentanaGestionDepartamento extends JDialog{
 		});
 
 		panelBotonesCRUDEstudiantes.add(btnAgregarEst);
-		panelBotonesCRUDEstudiantes.add(btnEliminarEst);
 		panelBotonesCRUDEstudiantes.add(btnEditarEst);
+		panelBotonesCRUDEstudiantes.add(btnEliminarEst);
 
 		panelEstudiantes.add(panelBotonesCRUDEstudiantes, BorderLayout.SOUTH);
 	}
@@ -591,35 +591,22 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnEditarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int seleccionado = listaDocentes.getSelectedIndex();
-
+				
 				if(seleccionado != -1){
-					EditarDocDialog dialog = new EditarDocDialog(parent,vicedecanato);
+					Docente docente = (Docente) modeloDocentes.get(seleccionado);
+					EditarDocDialog dialog = new EditarDocDialog(parent, vicedecanato, docente);
 					dialog.setVisible(true);
-
+					
 					if (dialog.isConfirmado()){
-						String nuevoNombre = dialog.getNombre();
-						String nuevosApellidos = dialog.getApellidos();
-						CategoriaCientifica nuevaCatCientifica = (CategoriaCientifica)dialog.getCatCientifica();
-						CategoriaDocente nuevaCatDocente = (CategoriaDocente) dialog.getCatDocente();
-						Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
-
-						int docenteSeleccionado = listaDocentes.getSelectedIndex();
-						Docente docente = (Docente) modeloDocentes.get(docenteSeleccionado);
-
-						docente.setNombre(nuevoNombre);
-						docente.setApellidos(nuevosApellidos);
-						docente.setCatCientifica(nuevaCatCientifica);
-						docente.setCatDocente(nuevaCatDocente);
-						nuevoDepartamento.agregarDocente(docente);
-
-						modeloDocentes.set(docenteSeleccionado, docente);
-
+						
+						modeloDocentes.set(seleccionado, docente);
+						
 						actualizarTablaDoc();
-
+					    
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
-					mensajeRetroalimentacion.setVisible(true);
+		            mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});

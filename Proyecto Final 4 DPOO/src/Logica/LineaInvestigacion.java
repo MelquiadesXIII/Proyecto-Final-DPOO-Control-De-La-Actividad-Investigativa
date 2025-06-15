@@ -87,4 +87,11 @@ public class LineaInvestigacion {
 						nombre.equals(((LineaInvestigacion)o).getNombre())));
 	}
 
+
+
+	public boolean contieneInvestigador(Investigador inv) {
+		
+		return investigadores.contains(inv);
+	}
+
 }

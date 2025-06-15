@@ -9,8 +9,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 import Interfaz.MensajeDialog.Tipo;
-import Logica.CategoriaCientifica;
 import Logica.Departamento;
+import Logica.Estudiante;
 import Logica.Vicedecanato;
 
 import java.awt.*;
@@ -25,9 +25,10 @@ public class EditarEstDialog extends JDialog {
 	private Point point = new Point();
 	private JTextField campoGrupo;
 	private JComboBox<Departamento> comboDepartamento;
+	private Departamento antiguoDepartamento;
 
 
-	public EditarEstDialog(final JFrame parent, final Vicedecanato vicedecanato) {
+	public EditarEstDialog(final JFrame parent, final Vicedecanato vicedecanato, final Estudiante estudiante) {
 
 		super(parent, "Editar Estudiante", true);
 		setUndecorated(true);
@@ -87,9 +88,6 @@ public class EditarEstDialog extends JDialog {
 
 		comboDepartamento = new JComboBox<>();
 
-		final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
-		comboDepartamento.addItem(verSeleccionarDepto);
-
 		for (Departamento d : vicedecanato.getDepartamentos()) {
 			comboDepartamento.addItem(d);
 		}
@@ -97,6 +95,24 @@ public class EditarEstDialog extends JDialog {
 		comboDepartamento.setBounds(118, 246, 230, 39);
 		panelCampos.add(comboDepartamento);
 		estiloComboBox(comboDepartamento);
+		
+		campoNombre.setText(estudiante.getNombre());
+		campoApellidos.setText(estudiante.getApellidos());
+		campoGrupo.setText(estudiante.getGrupo());
+		comboDepartamento.setSelectedItem(antiguoDepartamento);
+		
+		int i = 0;
+		boolean encontrado = false;
+		while(i < vicedecanato.getDepartamentos().size() && !encontrado){
+
+			Departamento d = vicedecanato.getDepartamentos().get(i);
+
+			if(d.contieneEstudiante(estudiante)){
+				comboDepartamento.setSelectedItem(d);
+				encontrado = true;
+				antiguoDepartamento = d;
+			}
+		}
 
 		AbstractDocument docNombre = (AbstractDocument) campoNombre.getDocument();
 		docNombre.setDocumentFilter(new DocumentFilter() {
@@ -212,13 +228,26 @@ public class EditarEstDialog extends JDialog {
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
+				Departamento nuevoDepartamento = (Departamento) comboDepartamento.getSelectedItem();
 
-				if(!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
-					
+				if(!campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
 
 					try{
 						
+						String nuevoNombre = getNombre();
+					    String nuevosApellidos = getApellidos();
+					    String nuevoGrupo = getGrupo();
+					    
+						estudiante.setNombre(nuevoNombre);
+						estudiante.setApellidos(nuevosApellidos);
+						estudiante.setGrupo(nuevoGrupo);
+						
+						if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
+						    antiguoDepartamento.removerEstudiante(estudiante);  
+						    nuevoDepartamento.agregarEstudiante(estudiante);   
+						} else if (antiguoDepartamento == null) {
+						    nuevoDepartamento.agregarEstudiante(estudiante);;    
+						}
 						MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 						d.setVisible(true);
 						confirmado = true;

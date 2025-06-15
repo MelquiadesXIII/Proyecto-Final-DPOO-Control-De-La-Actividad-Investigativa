@@ -82,7 +82,7 @@ public class Departamento {
 			throw new ListaVaciaException("La lista de la que desea remover al docente esta vacía");
 
 		if(!docentes.contains(d))
-			throw new NoExistenciaException("El docente que desea remover no se encuentra registrado en el vicedecanato");
+			throw new NoExistenciaException("El docente que desea remover no se encuentra registrado");
 
 		docentes.remove(d);
 
@@ -105,7 +105,7 @@ public class Departamento {
 			throw new NullPointerException("El docente matriculado no puede tener valor null");
 
 		if(docentes.contains(d))
-			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra presente en el departamento");
+			throw new DuplicacionException("El profesor ya se encuentra presente en el departamento");
 
 		docentes.add(d);
 	}
@@ -116,7 +116,7 @@ public class Departamento {
 			throw new ListaVaciaException("La lista de la que desea remover al estudiante esta vacía");
 
 		if(!estudiantes.contains(e))
-			throw new NoExistenciaException("El estudiante que desea remover no se encuentra registrado en el departamento");
+			throw new NoExistenciaException("El estudiante que desea remover no se encuentra registrado");
 
 		estudiantes.remove(e);
 
@@ -133,7 +133,7 @@ public class Departamento {
 			throw new NullPointerException("El estudiante no puede tener valor null");
 
 		if(estudiantes.contains(e))
-			throw new DuplicacionException("El estudiante no se puede agregar porque ya se encuentra presente en el departamento");
+			throw new DuplicacionException("El estudiante ya se encuentra presente en el departamento");
 
 		estudiantes.add(e);
 	}
@@ -144,7 +144,7 @@ public class Departamento {
 			throw new NullPointerException("La maestría no puede tener valor null");
 
 		if(maestrias.contains(m))
-			throw new DuplicacionException("La maestría no se puede agregar porque ya se encuentra registrada en el vicedecanato");
+			throw new DuplicacionException("La maestría ya se encuentra registrada en el departamento");
 
 		maestrias.add(m);
 	}
@@ -155,7 +155,7 @@ public class Departamento {
 			throw new NullPointerException("La línea de investigación no puede tener valor null");
 
 		if(lineasInvestigacion.contains(l))
-			throw new DuplicacionException("La línea de investigación no se puede agregar porque ya se encuentra registrada en el vicedecanato");
+			throw new DuplicacionException("La línea de investigación ya se encuentra registrada en el departamento");
 
 		lineasInvestigacion.add(l);
 	}
@@ -225,5 +225,58 @@ public class Departamento {
 		LineaInvestigacion l = new LineaInvestigacion(nombre, responsable);
 		
 		agregarLineaInvestigacion(l);
+	}
+	
+	public boolean solicitudValidaIngresoInvestigadorALineaDeInvestigacion(Investigador inv){
+		
+		boolean noContenido = true;
+
+		int i = 0;
+		while(i < lineasInvestigacion.size() && noContenido){
+
+			if(lineasInvestigacion.get(i).contieneInvestigador(inv))
+				noContenido = false;
+
+			i++;
+		}
+
+		return noContenido;
+	}
+	
+	public ArrayList<Investigador> obtenerInvestigadoresNoRegistradosLineasDeInvestigacion(){
+		
+		ArrayList<Investigador> noRegistrados = new ArrayList<>();
+		
+		for(Docente d: docentes){
+			
+			if(solicitudValidaIngresoInvestigadorALineaDeInvestigacion(d)){
+				noRegistrados.add(d);
+			}
+		}
+		
+		for(Estudiante e: estudiantes){
+			
+			if(solicitudValidaIngresoInvestigadorALineaDeInvestigacion(e)){
+				noRegistrados.add(e);
+			}
+		}
+		
+		return noRegistrados;
+	}
+	
+	public boolean solicitudValidaMatriculaMaestria(Docente d){
+		
+		boolean noContenido = true;
+
+		int i = 0;
+		while(i < maestrias.size() && noContenido){
+
+			if(maestrias.get(i).contieneMatriculado(d))
+				noContenido = false;
+
+			i++;
+		}
+
+		return noContenido;
 	}
 }

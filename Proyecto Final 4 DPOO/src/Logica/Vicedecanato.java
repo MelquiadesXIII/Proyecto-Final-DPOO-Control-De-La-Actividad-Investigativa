@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import javax.swing.JComboBox;
-
 import Excepciones.DuplicacionException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
@@ -37,7 +35,7 @@ public class Vicedecanato {
 
 		return vicedecanato; 
 	}
-	
+
 	public ArrayList<Docente> getDocentes() 
 	{
 		return docentes;
@@ -207,42 +205,64 @@ public class Vicedecanato {
 
 		return noContenido;
 	}
-	
+
 	public ArrayList<Docente> obtenerDocentesNoRegistradosEnDepartamentos(){
-		
+
 		ArrayList<Docente> noRegistrados = new ArrayList<>();
-		
+
 		for(Docente d: docentes){
-			
+
 			if(solicitudValidaIngresoDocenteADepartamento(d)){
 				noRegistrados.add(d);
 			}
 		}
-		
+
 		return noRegistrados;
 	}
-	
+
 	public int getCantDocentesNoRegistradosDepartamento(){
-		
+
 		return obtenerDocentesNoRegistradosEnDepartamentos().size();
 	}
-	
-public ArrayList<Estudiante> obtenerEstudiantesNoRegistradosEnDepartamentos(){
-		
+
+	public ArrayList<Estudiante> obtenerEstudiantesNoRegistradosEnDepartamentos(){
+
 		ArrayList<Estudiante> noRegistrados = new ArrayList<>();
-		
+
 		for(Estudiante e: estudiantes){
-			
+
 			if(solicitudValidaIngresoEstudianteADepartamento(e)){
 				noRegistrados.add(e);
 			}
 		}
-		
+
 		return noRegistrados;
 	}
-	
+
 	public int getCantEstudiantessNoRegistradosDepartamento(){
-		
+
 		return obtenerEstudiantesNoRegistradosEnDepartamentos().size();
+	}
+	
+	public Departamento obtenerDepartamentoDeUnDocente(Docente d){
+		
+		Departamento deptoRetorno = null;
+		boolean encontrado = false;
+		
+		int i = 0;
+		while(i < departamentos.size() && !encontrado){
+			
+			Departamento deptoActual = departamentos.get(i);
+			
+			if(deptoActual.contieneDocente(d)){
+				encontrado = true;
+				deptoRetorno = deptoActual;
+			}
+			
+			i++;
+				
+		}
+		
+		return deptoRetorno;
 	}
 }

@@ -35,6 +35,7 @@ import Interfaz.MensajeDialog.Tipo;
 import Logica.CategoriaCientifica;
 import Logica.CategoriaDocente;
 import Logica.Departamento;
+import Logica.Docente;
 import Logica.Vicedecanato;
 
 public class EditarDocDialog extends JDialog{
@@ -46,14 +47,15 @@ public class EditarDocDialog extends JDialog{
 	private JComboBox<Departamento> comboDepartamento;
 	private JComboBox<CategoriaCientifica> comboCatCientifica;
 	private JComboBox<CategoriaDocente> comboCatDocente;
-	
-	public EditarDocDialog(final JFrame parent, final Vicedecanato vicedecanato){
-		
+	private Departamento antiguoDepartamento;
+
+	public EditarDocDialog(final JFrame parent, final Vicedecanato vicedecanato, final Docente docente){
+
 		super(parent, "Editar Docente", true);
 		setUndecorated(true);
 		setBackground(new Color(30, 40, 50));
 		getContentPane().setLayout(new BorderLayout());
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -89,7 +91,6 @@ public class EditarDocDialog extends JDialog{
 		panelCampos.add(campoApellidos);
 		estiloCampo(campoApellidos);
 
-
 		JLabel labelDepartamento = new JLabel("Departamento:");
 		labelDepartamento.setBounds(20, 280, 120, 50);
 		panelCampos.add(labelDepartamento);
@@ -107,7 +108,7 @@ public class EditarDocDialog extends JDialog{
 		comboDepartamento.setBounds(140, 286, 210, 39);
 		panelCampos.add(comboDepartamento);
 		estiloComboBox(comboDepartamento);
-		
+
 		JLabel labelCatCientifica = new JLabel("Cat. Científica:");
 		labelCatCientifica.setBounds(20, 168, 100, 50);
 		panelCampos.add(labelCatCientifica);
@@ -117,7 +118,7 @@ public class EditarDocDialog extends JDialog{
 		comboCatCientifica.setBounds(118, 174, 230, 39);
 		panelCampos.add(comboCatCientifica);
 		estiloComboBoxEnum(comboCatCientifica);
-		
+
 		JLabel labelCatDocente = new JLabel("Cat. Docente:");
 		labelCatDocente.setBounds(20, 224, 100, 50);
 		panelCampos.add(labelCatDocente);
@@ -127,6 +128,25 @@ public class EditarDocDialog extends JDialog{
 		comboCatDocente.setBounds(118, 230, 230, 39);
 		panelCampos.add(comboCatDocente);
 		estiloComboBoxEnum(comboCatDocente);
+		
+		campoNombre.setText(docente.getNombre());
+		campoApellidos.setText(docente.getApellidos());
+		comboCatCientifica.setSelectedItem(docente.getCatCientifica());
+		comboCatDocente.setSelectedItem(docente.getCatDocente());
+		comboDepartamento.setSelectedItem(antiguoDepartamento);
+		
+		int i = 0;
+		boolean encontrado = false;
+		while(i < vicedecanato.getDepartamentos().size() && !encontrado){
+
+			Departamento d = vicedecanato.getDepartamentos().get(i);
+
+			if(d.contieneDocente(docente)){
+				comboDepartamento.setSelectedItem(d);
+				encontrado = true;
+				antiguoDepartamento = d;
+			}
+		}
 
 		AbstractDocument docNombre = (AbstractDocument) campoNombre.getDocument();
 		docNombre.setDocumentFilter(new DocumentFilter() {
@@ -159,8 +179,8 @@ public class EditarDocDialog extends JDialog{
 				}
 			}
 		});
-		
-		
+
+
 		AbstractDocument docApellidos = (AbstractDocument) campoApellidos.getDocument();
 		docApellidos.setDocumentFilter(new DocumentFilter() {
 			private int maxChars = 100;
@@ -210,12 +230,28 @@ public class EditarDocDialog extends JDialog{
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
+				Departamento nuevoDepartamento = (Departamento) comboDepartamento.getSelectedItem();
 
-				if(!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty()){
+				if(!nuevoDepartamento.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty()){
 
 					try{
-
+						String nuevoNombre = getNombre();
+					    String nuevosApellidos = getApellidos();
+					    CategoriaCientifica nuevaCatCientifica = getCatCientifica();
+					    CategoriaDocente nuevaCatDocente = getCatDocente();
+					    
+						docente.setNombre(nuevoNombre);
+						docente.setApellidos(nuevosApellidos);
+						docente.setCatCientifica(nuevaCatCientifica);
+						docente.setCatDocente(nuevaCatDocente);
+						
+						if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
+						    antiguoDepartamento.removerDocente(docente);  
+						    nuevoDepartamento.agregarDocente(docente);   
+						} else if (antiguoDepartamento == null) {
+						    nuevoDepartamento.agregarDocente(docente);    
+						}
+						
 						MensajeDialog d = new MensajeDialog(parent, "El docente ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 						d.setVisible(true);
 						confirmado = true;
@@ -227,22 +263,22 @@ public class EditarDocDialog extends JDialog{
 						d.setVisible(true);
 						confirmado = false;
 					}
-					
+
 				}else{
-					
+
 					MensajeDialog d;
-					
+
 					if(campoNombre.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-					
+
 					else if(campoApellidos.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-					
+
 					else
 						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-					
+
 					d.setVisible(true);
-					
+
 				}
 			}
 		});
@@ -279,15 +315,15 @@ public class EditarDocDialog extends JDialog{
 
 		getContentPane().add(panel);
 
-		JLabel lblCrearDocente = new JLabel("Crear Docente");
-		lblCrearDocente.setForeground(Color.WHITE);
-		lblCrearDocente.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblCrearDocente.setBounds(127, 28, 164, 50);
-		panel.add(lblCrearDocente);
+		JLabel lblEditarDocente = new JLabel("Editar Docente");
+		lblEditarDocente.setForeground(Color.WHITE);
+		lblEditarDocente.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblEditarDocente.setBounds(127, 28, 164, 50);
+		panel.add(lblEditarDocente);
 		pack();
 		setLocationRelativeTo(parent);
 	}
-	
+
 	private void estiloBoton(JButton boton) {
 		boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		boton.setBackground(new Color(50, 60, 70));
@@ -353,7 +389,7 @@ public class EditarDocDialog extends JDialog{
 
 		comboBox.setSelectedIndex(0);
 	}
-	
+
 	private void estiloComboBoxEnum(JComboBox<?> comboBox) {
 		comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		comboBox.setBackground(new Color(60, 70, 80));
@@ -381,11 +417,11 @@ public class EditarDocDialog extends JDialog{
 	public void setComboDepartamento(JComboBox<Departamento> comboDepartamento) {
 		this.comboDepartamento = comboDepartamento;
 	}
-	
+
 	public CategoriaCientifica getCatCientifica(){
 		return (CategoriaCientifica) comboCatCientifica.getSelectedItem();
 	}
-	
+
 	public CategoriaDocente getCatDocente(){
 		return (CategoriaDocente) comboCatDocente.getSelectedItem();
 	}
