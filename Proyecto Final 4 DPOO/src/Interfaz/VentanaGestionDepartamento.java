@@ -571,10 +571,18 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnCrearDoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 
-				AgregarDocenteDialog dialog = new AgregarDocenteDialog(parent, vicedecanato, dptoActual);
+				if(vicedecanato.getCantDocentesNoRegistradosDepartamento() > 0){
+					AgregarDocenteDialog dialog = new AgregarDocenteDialog(parent, vicedecanato, dptoActual);
 
-				if(dialog.isConfirmado())
-					actualizarTablaDoc();
+					if(dialog.isConfirmado())
+						actualizarTablaDoc();
+
+				}else{
+
+					MensajeDialog d = new MensajeDialog(parent, "Todos los docentes están en un dpto, no se puede agregar a ninguno", Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+
+				}
 			}
 
 		});
@@ -624,7 +632,7 @@ public class VentanaGestionDepartamento extends JDialog{
 				if (seleccionado != -1) {
 					Docente docente = (Docente) modeloDocentes.getElementAt(seleccionado);
 
-					MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a: " + docente.getNombre() + "?",Tipo.CONFIRMACION);
+					MensajeDialog confirmacion = new MensajeDialog(parent,"¿Está seguro que desea eliminar a " + docente.getNombre() + " del departamento?",Tipo.CONFIRMACION);
 
 					confirmacion.setVisible(true);
 
@@ -633,11 +641,11 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						modeloDocentes.remove(seleccionado);
 
-						MensajeDialog mensaje = new MensajeDialog(parent,"Docente eliminado correctamente",Tipo.RETROALIMENTACION);
+						MensajeDialog mensaje = new MensajeDialog(parent,"Docente eliminar correctamente",Tipo.RETROALIMENTACION);
 						mensaje.setVisible(true);
 					}
 				} else {
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 				}
 			}

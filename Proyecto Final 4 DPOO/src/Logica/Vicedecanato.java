@@ -221,4 +221,28 @@ public class Vicedecanato {
 		
 		return noRegistrados;
 	}
+	
+	public int getCantDocentesNoRegistradosDepartamento(){
+		
+		return obtenerDocentesNoRegistradosEnDepartamentos().size();
+	}
+	
+public ArrayList<Estudiante> obtenerEstudiantesNoRegistradosEnDepartamentos(){
+		
+		ArrayList<Estudiante> noRegistrados = new ArrayList<>();
+		
+		for(Estudiante e: estudiantes){
+			
+			if(solicitudValidaIngresoEstudianteADepartamento(e)){
+				noRegistrados.add(e);
+			}
+		}
+		
+		return noRegistrados;
+	}
+	
+	public int getCantEstudiantessNoRegistradosDepartamento(){
+		
+		return obtenerEstudiantesNoRegistradosEnDepartamentos().size();
+	}
 }
