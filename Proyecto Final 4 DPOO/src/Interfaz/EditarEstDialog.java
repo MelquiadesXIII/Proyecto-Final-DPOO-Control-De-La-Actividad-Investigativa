@@ -316,7 +316,9 @@ public class EditarEstDialog extends JDialog {
 		JLabel lblCrearEstudiante = new JLabel("Editar Estudiante");
 		lblCrearEstudiante.setForeground(Color.WHITE);
 		lblCrearEstudiante.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblCrearEstudiante.setBounds(127, 28, 164, 50);
+		int labelWidth = 200;
+		int xPosition = (475 - labelWidth) / 2;;
+		lblCrearEstudiante.setBounds(xPosition, 28, labelWidth, 50);
 		panel.add(lblCrearEstudiante);
 		pack();
 		setLocationRelativeTo(parent);
