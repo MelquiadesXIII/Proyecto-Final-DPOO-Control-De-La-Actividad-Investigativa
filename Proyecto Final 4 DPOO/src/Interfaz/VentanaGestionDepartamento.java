@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
-import Excepciones.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -57,6 +56,9 @@ public class VentanaGestionDepartamento extends JDialog{
 	private JPanel panelBotonesCRUDEstudiantes;
 	private JPanel panelBotonesCRUDDocentes;
 	private JPanel panelBotonesCRUDMaestria;
+	private JPanel panelBotonesCRUDCursos;
+	private JPanel panelBotonesCRUDLineas;
+	private JPanel panelBotonesCRUDResultados;
 	private JButton botonCursos;
 	private JButton botonResultados;
 	private JPanel panelCursos;
@@ -69,6 +71,16 @@ public class VentanaGestionDepartamento extends JDialog{
 	private ArrayList<Estudiante> estudiantesEnTabla = new ArrayList<>();
 	private DefaultTableModel modeloTablaEstudiantes;
 	private JScrollPane scrollTablaEstudiantes;
+	private JTable tablaMaestrias;
+	private ArrayList<Maestria> maestriasEnTabla = new ArrayList<>();
+	private JScrollPane scrollTablaMaestrias;
+	private DefaultTableModel modeloTablaMaestrias;
+	private DefaultTableModel modeloTablaCursos;
+	private JTable tablaCursos;
+	private JScrollPane scrollTablaCursos;
+	private ArrayList<CursoPosgrado> cursosEnTabla = new ArrayList<>();
+	private ArrayList<LineaInvestigacion> lineasEnTabla = new ArrayList<>();
+	private ArrayList<ResultadoInvestigativo> resultadosEnTabla = new ArrayList<>();
 
 
 
@@ -88,10 +100,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		}
 
 		crearPaneles();
-		crearTablaDocentes();
-		crearTablaEstudiantes();
-		crearTablaMaestrias();
-		crearTablaLineasInv();
+		crearTablas();
 		configurarPanelesCRUD();
 
 		this.parent.setVisible(false);
@@ -299,18 +308,18 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelMaestrias = crearPanelesConEncabezado("Maestrías registradas en el departamento:");
 		panelPrincipal.add(panelMaestrias, "panelMaestrias");
 		panelMaestrias.setBackground(Color.DARK_GRAY);
-		
+
 		panelCursos = crearPanelesConEncabezado("Cursos de las maestrías del departamento:");
 		panelPrincipal.add(panelCursos, "panelCursos");
-		panelMaestrias.setBackground(Color.DARK_GRAY);
-		
+		panelCursos.setBackground(Color.DARK_GRAY);
+
 		panelLineas = crearPanelesConEncabezado("Líneas de investigación registradas en el departamento:");
 		panelPrincipal.add(panelLineas, "panelLineas");
 		panelLineas.setBackground(Color.DARK_GRAY);
-		
+
 		panelResultados = crearPanelesConEncabezado("Resultados investigativos de los investigadores del departamento:");
 		panelPrincipal.add(panelResultados, "panelResultados");
-		panelMaestrias.setBackground(Color.DARK_GRAY);
+		panelResultados.setBackground(Color.DARK_GRAY);
 
 		JLabel lblBienvenida = new JLabel("<html>" +
 				"<div style='text-align: center; font-family: Segoe UI;'>" +
@@ -333,6 +342,20 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelInicio.add(lblBienvenida);
 	}
 
+	private void crearTablas() {
+
+		crearTablaDocentes();
+		
+		crearTablaEstudiantes();
+		
+		crearTablaMaestrias();
+		
+		crearTablaCursos();
+		
+		crearTablaLineasInv();
+
+	}
+
 	private void crearTablaDocentes(){
 
 		docentesEnTabla.clear();
@@ -349,7 +372,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		};
 
 		for (Docente docente : dptoActual.getDocentes()) {
-			
+
 
 			Object[] fila = {
 					docente.getNombre() + " " + docente.getApellidos(),
@@ -485,36 +508,139 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelEstudiantes.repaint();
 	}
 
-	private void crearTablaMaestrias(){
+	private void crearTablaMaestrias() {
 
-		modeloMaestrias = new DefaultListModel<>();
+		maestriasEnTabla.clear();
+		String[] columnas = {"Nombre", "Campo de estudio", "Duración (meses)", "Matriculados", "Cursos"};
 
-		for (Maestria m : dptoActual.getMaestrias()) {
-			modeloMaestrias.addElement(m);
+		modeloTablaMaestrias = new DefaultTableModel(columnas, 0) {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		for (Maestria maestria : dptoActual.getMaestrias()) {
+			Object[] fila = {
+					maestria.getNombre(),
+					maestria.getCampoEstudio(),
+					maestria.getDuracionMeses(),
+					maestria.getMatriculados().size(),
+					maestria.getCursos().size()
+			};
+			maestriasEnTabla.add(maestria);
+			modeloTablaMaestrias.addRow(fila);
 		}
 
-		listaMaestrias = new JList<>(modeloMaestrias);
+		tablaMaestrias = new JTable(modeloTablaMaestrias);
+		tablaMaestrias.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		tablaMaestrias.setRowHeight(30);
+		tablaMaestrias.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tablaMaestrias.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
+		tablaMaestrias.getTableHeader().setForeground(Color.WHITE);
 
-		listaMaestrias.setCellRenderer(new DefaultListCellRenderer() {
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < tablaMaestrias.getColumnCount(); i++) {
+			tablaMaestrias.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+		}
+
+		tablaMaestrias.getColumnModel().getColumn(0).setPreferredWidth(230);
+		tablaMaestrias.getColumnModel().getColumn(1).setPreferredWidth(200);
+		tablaMaestrias.getColumnModel().getColumn(2).setPreferredWidth(150);
+		tablaMaestrias.getColumnModel().getColumn(3).setPreferredWidth(100);
+		tablaMaestrias.getColumnModel().getColumn(4).setPreferredWidth(100);
+
+		scrollTablaMaestrias = new JScrollPane(tablaMaestrias);
+		scrollTablaMaestrias.setBorder(BorderFactory.createEmptyBorder());
+		panelMaestrias.add(scrollTablaMaestrias, BorderLayout.CENTER);
+	}
+
+	public void actualizarTablaMaestrias() {
+		panelMaestrias.removeAll();
+
+		JPanel encabezado = new JPanel();
+		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+		encabezado.setPreferredSize(new Dimension(0, 50));
+		JLabel lblTitulo = new JLabel("Maestrías registradas en el vicedecanato:");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		encabezado.add(lblTitulo);
+		panelMaestrias.add(encabezado, BorderLayout.NORTH);
+
+		crearTablaMaestrias();
+
+		panelMaestrias.add(panelBotonesCRUDMaestria, BorderLayout.SOUTH);
+		panelMaestrias.revalidate();
+		panelMaestrias.repaint();
+	}
+
+	private void crearTablaCursos() {
+		cursosEnTabla.clear();
+		String[] columnas = {"Tema del curso", "Créditos", "Profesor", "Maestría"};
+
+		modeloTablaCursos = new DefaultTableModel(columnas, 0) {
 			private static final long serialVersionUID = 1L;
-
 			@Override
-			public Component getListCellRendererComponent(JList<?> list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
-				Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-				if (value instanceof Maestria) {
-					Maestria maestria = (Maestria) value;
-					setText(maestria.getNombre());
-				}
-				return c;
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
-		});
+		};
 
-		listaMaestrias.setForeground(Color.WHITE);
-		listaMaestrias.setBackground(Color.DARK_GRAY);
-		listaMaestrias.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		for (Maestria maestria : dptoActual.getMaestrias()) {
+			for (CursoPosgrado curso : maestria.getCursos()) {
+				Object[] fila = {
+						curso.getTema(),
+						curso.getCantCreditos(),
+						curso.getProfesor().getNombre() + " " + curso.getProfesor().getApellidos(),
+						maestria.getNombre()
+				};
+				cursosEnTabla.add(curso);
+				modeloTablaCursos.addRow(fila);
+			}
+		}
 
-		JScrollPane scrollMaestrias = new JScrollPane(listaMaestrias);
-		panelMaestrias.add(scrollMaestrias, BorderLayout.CENTER);
+		tablaCursos = new JTable(modeloTablaCursos);
+		tablaCursos.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		tablaCursos.setRowHeight(30);
+		tablaCursos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tablaCursos.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
+		tablaCursos.getTableHeader().setForeground(Color.WHITE);
+
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < tablaCursos.getColumnCount(); i++) {
+			tablaCursos.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+		}
+
+		tablaCursos.getColumnModel().getColumn(0).setPreferredWidth(250);
+		tablaCursos.getColumnModel().getColumn(1).setPreferredWidth(50);
+		tablaCursos.getColumnModel().getColumn(2).setPreferredWidth(200);
+		tablaCursos.getColumnModel().getColumn(3).setPreferredWidth(250);
+
+		scrollTablaCursos = new JScrollPane(tablaCursos);
+		scrollTablaCursos.setBorder(BorderFactory.createEmptyBorder());
+		panelCursos.add(scrollTablaCursos, BorderLayout.CENTER);
+	}
+
+	public void actualizarTablaCursos() {
+		panelCursos.removeAll();
+
+		JPanel encabezado = new JPanel();
+		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+		encabezado.setPreferredSize(new Dimension(0, 50));
+		JLabel lblTitulo = new JLabel("Cursos de posgrado registrados:");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		encabezado.add(lblTitulo);
+		panelCursos.add(encabezado, BorderLayout.NORTH);
+
+		crearTablaCursos();
+
+		panelCursos.add(panelBotonesCRUDCursos, BorderLayout.SOUTH);
+		panelCursos.revalidate();
+		panelCursos.repaint();
 	}
 
 	private void crearTablaLineasInv(){
@@ -557,8 +683,8 @@ public class VentanaGestionDepartamento extends JDialog{
 		configurarPanelCRUDDocente();
 
 		configurarPanelCRUDMaestria();
-		
-		//configurarPanelCRUDCursos();
+
+		configurarPanelCRUDCursos();
 
 		/*configurarPanelCRUDLineas();*/
 	}
@@ -594,10 +720,10 @@ public class VentanaGestionDepartamento extends JDialog{
 		JButton btnAgregarEst = crearBotonCRUD("Agregar");
 		btnAgregarEst.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				
-				
+
+
 				/*if(dialog.isConfirmado())
-					
+
 				actualizarTablaEst();*/
 			}
 
@@ -645,7 +771,7 @@ public class VentanaGestionDepartamento extends JDialog{
 						confirmacion.setVisible(true);
 
 						if (confirmacion.isConfirmado()) {
-							vicedecanato.removerEstudiante(estudiante);
+							dptoActual.removerEstudiante(estudiante);
 
 							actualizarTablaEst();
 
@@ -726,7 +852,7 @@ public class VentanaGestionDepartamento extends JDialog{
 						confirmacion.setVisible(true);
 
 						if (confirmacion.isConfirmado()) {
-							vicedecanato.removerDocente(docente);
+							dptoActual.removerDocente(docente);
 
 							actualizarTablaDoc();
 
@@ -834,12 +960,36 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelMaestrias.add(panelBotonesCRUDMaestria, BorderLayout.SOUTH);
 	}
 
-	public void actualizarTablaMaestrias(){
-		modeloMaestrias.clear();
+	private void configurarPanelCRUDCursos() {
+		panelBotonesCRUDCursos = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDCursos.setBackground(Color.DARK_GRAY);
 
-		for (Maestria m: dptoActual.getMaestrias()) {
-			modeloMaestrias.addElement(m);
-		}
+		JButton btnCrearCurso = crearBotonCRUD("Crear");
+		btnCrearCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		JButton btnEditarCurso = crearBotonCRUD("Editar");
+		btnEditarCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		JButton btnEliminarCurso = crearBotonCRUD("Eliminar");
+		btnEliminarCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		panelBotonesCRUDCursos.add(btnCrearCurso);
+		panelBotonesCRUDCursos.add(btnEditarCurso);
+		panelBotonesCRUDCursos.add(btnEliminarCurso);
+
+		panelCursos.add(panelBotonesCRUDCursos, BorderLayout.SOUTH);
 	}
 
 	public void actualizarTablaLineas(){
