@@ -23,7 +23,7 @@ public class EditarDepDialog extends JDialog {
 	private Point point = new Point();
 
 
-	public EditarDepDialog(final JFrame parent, final Vicedecanato vicedecanato) {
+	public EditarDepDialog(final JFrame parent, final Vicedecanato vicedecanato, final Departamento departamento) {
 
 		super(parent, "Editar Departamento", true);
 		setUndecorated(true);
@@ -108,6 +108,10 @@ public class EditarDepDialog extends JDialog {
 
 					try{
 						
+						String nuevoNombre = getNombre();
+
+						departamento.setNombre(nuevoNombre);
+						
 						MensajeDialog d = new MensajeDialog(parent, "El departamento ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 						d.setVisible(true);
 						confirmado = true;
@@ -165,11 +169,13 @@ public class EditarDepDialog extends JDialog {
 
 		getContentPane().add(panel);
 
-		JLabel lblCrearEstudiante = new JLabel("Editar Departamento");
-		lblCrearEstudiante.setForeground(Color.WHITE);
-		lblCrearEstudiante.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblCrearEstudiante.setBounds(127, 28, 164, 50);
-		panel.add(lblCrearEstudiante);
+		JLabel lbltitulo = new JLabel("Editar Departamento");
+		lbltitulo.setForeground(Color.WHITE);
+		lbltitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		int labelWidth = 200;
+		int xPosition = (425 - labelWidth) / 2;
+		lbltitulo.setBounds(xPosition, 28, labelWidth, 50);
+		panel.add(lbltitulo);
 		pack();
 		setLocationRelativeTo(parent);
 	}
