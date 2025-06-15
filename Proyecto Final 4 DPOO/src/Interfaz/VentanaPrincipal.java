@@ -396,7 +396,7 @@ public class VentanaPrincipal extends JFrame{
 	private void crearTablaDocentes(){
 
 		docentesEnTabla.clear();
-		
+
 		String[] columnas = {"Nombre y apellidos", "Categoría Científica", "Categoría Docente", "Departamento"};
 
 		modeloTablaDocentes = new DefaultTableModel(columnas, 0) {
@@ -414,11 +414,11 @@ public class VentanaPrincipal extends JFrame{
 
 			Object[] fila = {
 					docente.getNombre() + " " + docente.getApellidos(),
-					docente.getCatCientifica(),
-					docente.getCatDocente(),
+					docente.getCatCientifica().getCategoria(),
+					docente.getCatDocente().getCategoria(),
 					nombreDepartamento
 			};
-			
+
 			docentesEnTabla.add(docente); //Se agregan los docentes al array list coincidiendo con el indice del docente en la tabla
 			modeloTablaDocentes.addRow(fila);
 		}
@@ -450,7 +450,7 @@ public class VentanaPrincipal extends JFrame{
 	}
 
 	public void actualizarTablaDoc() {
-		
+
 		panelDocentes.removeAll();
 
 		JPanel encabezado = new JPanel();
@@ -585,7 +585,7 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnCrearDoc = crearBotonCRUD("Crear");
 		btnCrearDoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				
+
 				CrearDocDialog dialog = new CrearDocDialog(VentanaPrincipal.this, vicedecanato);
 				dialog.setVisible(true);
 
@@ -598,22 +598,24 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnEditarDoc = crearBotonCRUD("Editar");
 		btnEditarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
-				int seleccionado = tablaDocentes.getSelectedRow();
 
-				if(seleccionado != -1){
-					Docente docente = docentesEnTabla.get(seleccionado);
-					EditarDocDialog dialog = new EditarDocDialog(VentanaPrincipal.this, vicedecanato, docente);
-					dialog.setVisible(true);
+				if(tablaDocentes.getSelectedRows().length == 1){
+					int seleccionado = tablaDocentes.getSelectedRow();
 
-					if (dialog.isConfirmado()){
+					if(seleccionado != -1){
+						Docente docente = docentesEnTabla.get(seleccionado);
+						EditarDocDialog dialog = new EditarDocDialog(VentanaPrincipal.this, vicedecanato, docente);
+						dialog.setVisible(true);
 
-						actualizarTablaDoc();
+						if (dialog.isConfirmado()){
 
+							actualizarTablaDoc();
+
+						}
+					}else{
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
+						mensajeRetroalimentacion.setVisible(true);
 					}
-				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
-					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
@@ -621,11 +623,11 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
 		btnEliminarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int seleccionado = tablaDocentes.getSelectedRow();
 
 				if (seleccionado != -1) {
-					
+
 					Docente docente = docentesEnTabla.get(seleccionado);
 
 					MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar a"+ " " + docente.getNombre() + "?",Tipo.CONFIRMACION);
@@ -674,7 +676,7 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnEditarDep = crearBotonCRUD("Editar");
 		btnEditarDep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
+
 				int seleccionado = tablaDocentes.getSelectedRow();
 
 				if(seleccionado != -1){
