@@ -1862,7 +1862,7 @@ public class Inicializadora{
 				c4m5d3.emitirNota(d252, d298, 3);
 
 				VentanaPrincipal v = new VentanaPrincipal(vicedecanato);
-				//new VentanaGestionDepartamento(v, depto1, vicedecanato);
+				new VentanaGestionDepartamento(v, depto1, vicedecanato);
 			}
 		});
 	}
