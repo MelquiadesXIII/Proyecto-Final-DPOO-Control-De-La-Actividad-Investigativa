@@ -265,4 +265,26 @@ public class Vicedecanato {
 		
 		return deptoRetorno;
 	}
+	
+	public Departamento obtenerDepartamentoDeUnEstudiante(Estudiante e){
+		
+		Departamento deptoRetorno = null;
+		boolean encontrado = false;
+		
+		int i = 0;
+		while(i < departamentos.size() && !encontrado){
+			
+			Departamento deptoActual = departamentos.get(i);
+			
+			if(deptoActual.contieneEstudiante(e)){
+				encontrado = true;
+				deptoRetorno = deptoActual;
+			}
+			
+			i++;
+				
+		}
+		
+		return deptoRetorno;
+	}
 }
