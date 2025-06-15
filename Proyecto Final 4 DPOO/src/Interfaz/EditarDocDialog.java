@@ -318,7 +318,9 @@ public class EditarDocDialog extends JDialog{
 		JLabel lblEditarDocente = new JLabel("Editar Docente");
 		lblEditarDocente.setForeground(Color.WHITE);
 		lblEditarDocente.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblEditarDocente.setBounds(127, 28, 164, 50);
+		int labelWidth = 200;
+		int xPosition = (475 - labelWidth) / 2;
+		lblEditarDocente.setBounds(xPosition, 28, labelWidth, 50);
 		panel.add(lblEditarDocente);
 		pack();
 		setLocationRelativeTo(parent);
