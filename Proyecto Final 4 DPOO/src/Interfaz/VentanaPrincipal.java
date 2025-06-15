@@ -37,10 +37,6 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelDocentes;
 	private JPanel panelAyuda;
 	private JPanel panelInicio;
-	private JList<Departamento> listaDepartamentos;
-	private DefaultListModel<Departamento> modeloDepartamentos;
-	private JList<Estudiante> listaEstudiantes;
-	private DefaultListModel<Estudiante> modeloEstudiantes;
 	private ArrayList<JButton> botonesNavegacion;
 	private JButton botonSeleccionadoActual;
 	private final Color COLOR_DEFAULT = new Color(30, 40, 50);
@@ -338,7 +334,6 @@ public class VentanaPrincipal extends JFrame{
 	private void crearTablaDepartamentos() {
 		departamentosEnTabla.clear();
 
-		// Definir columnas con los nuevos campos requeridos
 		String[] columnas = {
 				"Nombre del departamento", 
 				"Cant. Docentes", 
@@ -371,26 +366,24 @@ public class VentanaPrincipal extends JFrame{
 
 		tablaDepartamentos = new JTable(modeloTablaDepartamentos);
 
-		// Aplicar mismo estilo que tabla docentes
 		tablaDepartamentos.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		tablaDepartamentos.setRowHeight(30);
 		tablaDepartamentos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaDepartamentos.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaDepartamentos.getTableHeader().setForeground(Color.WHITE);
-
-		// Centrar contenido en todas las celdas
+		
+	
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < tablaDepartamentos.getColumnCount(); i++) {
 			tablaDepartamentos.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 		}
 
-		// Ajustar anchos de columnas (optimizado para los nuevos datos)
-		tablaDepartamentos.getColumnModel().getColumn(0).setPreferredWidth(250);  // Nombre
-		tablaDepartamentos.getColumnModel().getColumn(1).setPreferredWidth(100);  // Docentes
-		tablaDepartamentos.getColumnModel().getColumn(2).setPreferredWidth(100);  // Estudiantes
-		tablaDepartamentos.getColumnModel().getColumn(3).setPreferredWidth(100);  // Líneas Inv.
-		tablaDepartamentos.getColumnModel().getColumn(4).setPreferredWidth(100);  // Maestrías
+		tablaDepartamentos.getColumnModel().getColumn(0).setPreferredWidth(250); 
+		tablaDepartamentos.getColumnModel().getColumn(1).setPreferredWidth(100); 
+		tablaDepartamentos.getColumnModel().getColumn(2).setPreferredWidth(100);  
+		tablaDepartamentos.getColumnModel().getColumn(3).setPreferredWidth(100); 
+		tablaDepartamentos.getColumnModel().getColumn(4).setPreferredWidth(100); 
 
 		scrollTablaDepartamentos = new JScrollPane(tablaDepartamentos);
 		scrollTablaDepartamentos.setBorder(BorderFactory.createEmptyBorder());
@@ -398,10 +391,9 @@ public class VentanaPrincipal extends JFrame{
 		panelDepartamentos.add(scrollTablaDepartamentos, BorderLayout.CENTER);
 	}
 
-	public void actualizarTablaDep() {
+	private void actualizarTablaDep() {
 		panelDepartamentos.removeAll();
 
-		// Crear encabezado con mismo estilo que docentes
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
@@ -411,10 +403,8 @@ public class VentanaPrincipal extends JFrame{
 		encabezado.add(lblTitulo);
 		panelDepartamentos.add(encabezado, BorderLayout.NORTH);
 
-		// Reconstruir la tabla
 		crearTablaDepartamentos();
 
-		// Agregar botones CRUD si existen
 		panelDepartamentos.add(panelBotonesCRUDDepartamentos, BorderLayout.SOUTH);
 
 		panelDepartamentos.revalidate();
@@ -474,7 +464,7 @@ public class VentanaPrincipal extends JFrame{
 
 	}
 
-	public void actualizarTablaEst() {
+	private void actualizarTablaEst() {
 
 		panelEstudiantes.removeAll();
 
@@ -551,7 +541,7 @@ public class VentanaPrincipal extends JFrame{
 
 	}
 
-	public void actualizarTablaDoc() {
+	private void actualizarTablaDoc() {
 
 		panelDocentes.removeAll();
 
@@ -1226,6 +1216,13 @@ public class VentanaPrincipal extends JFrame{
 				modeloTablaCursos.addRow(fila);
 			}
 		}
+	}
+	
+	public void actualizarTodasLasTablas(){
+		
+		actualizarTablaDep();
+		actualizarTablaDoc();
+		actualizarTablaEst();
 	}
 
 
