@@ -14,7 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
 import java.util.ArrayList;
-
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 import Excepciones.*;
@@ -60,6 +59,8 @@ public class VentanaGestionDepartamento extends JDialog{
 	private JPanel panelBotonesCRUDEstudiantes;
 	private JPanel panelBotonesCRUDDocentes;
 	private JPanel panelBotonesCRUDMaestria;
+	private JButton botonCursos;
+	private JButton botonResultados;
 
 
 
@@ -159,12 +160,30 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 		});
 
+		botonCursos = crearBotonNavegacion("Cursos");
+		botonCursos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
+				cl.show(panelPrincipal, "panelCursos");
+				actualizarAparienciaBotones(botonCursos);
+			}
+		});
+
 		botonLineas = crearBotonNavegacion("Lineas Inv.");
 		botonLineas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
 				cl.show(panelPrincipal, "panelLineas");
 				actualizarAparienciaBotones(botonLineas);
+			}
+		});
+
+		botonResultados = crearBotonNavegacion("Resultados");
+		botonResultados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
+				cl.show(panelPrincipal, "panelResultados");
+				actualizarAparienciaBotones(botonResultados);
 			}
 		});
 
@@ -210,7 +229,7 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 		});
 
-		panelBotones.add(Box.createRigidArea(new Dimension(0, 53)));
+		panelBotones.add(Box.createRigidArea(new Dimension(0, 33)));
 		panelBotones.add(boton);
 		this.botonesNavegacion.add(boton);
 
@@ -426,7 +445,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelLineas.add(scrollLineas, BorderLayout.CENTER);
 
 	}
-	
+
 	private void configurarPanelesCRUD(){
 
 		configurarPanelCRUDEstudiante();
@@ -434,10 +453,10 @@ public class VentanaGestionDepartamento extends JDialog{
 		configurarPanelCRUDDocente();
 
 		configurarPanelCRUDMaestria();
-		
+
 		/*configurarPanelCRUDLineas();*/
 	}
-	
+
 	private JButton crearBotonCRUD(String texto) {
 		final JButton boton = new JButton(texto);
 		boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -461,85 +480,82 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		return boton;
 	}
-	
+
 	private void configurarPanelCRUDEstudiante() {
 		panelBotonesCRUDEstudiantes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		panelBotonesCRUDEstudiantes.setBackground(Color.DARK_GRAY);
 
-		JButton btnCrearEst = crearBotonCRUD("Crear");
-		btnCrearEst.addActionListener(new ActionListener() {
+		JButton btnAgregarEst = crearBotonCRUD("Agregar");
+		btnAgregarEst.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearEstDialog dialog = new CrearEstDialog(parent, vicedecanato, dptoActual);
-				    dialog.setVisible(true);
-				    
-				    if(dialog.isConfirmado())
-				    	actualizarTablaEst();
+
+				actualizarTablaEst();
 			}
-			
+
 		});
-		
+
 		JButton btnEditarEst = crearBotonCRUD("Editar");
 		btnEditarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int seleccionado = listaEstudiantes.getSelectedIndex();
-				
+
 				if(seleccionado != -1){
 					EditarEstDialog dialog = new EditarEstDialog(parent,vicedecanato);
 					dialog.setVisible(true);
-					
+
 					if (dialog.isConfirmado()){
 						String nuevoNombre = dialog.getNombre();
-					    String nuevosApellidos = dialog.getApellidos();
-					    String nuevoGrupo = dialog.getGrupo();
-					    Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
-					    
-					    int estudianteSeleccionado = listaEstudiantes.getSelectedIndex();
+						String nuevosApellidos = dialog.getApellidos();
+						String nuevoGrupo = dialog.getGrupo();
+						Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
+
+						int estudianteSeleccionado = listaEstudiantes.getSelectedIndex();
 						Estudiante estudiante = (Estudiante) modeloEstudiantes.get(estudianteSeleccionado);
-						
+
 						estudiante.setNombre(nuevoNombre);
 						estudiante.setApellidos(nuevosApellidos);
 						estudiante.setGrupo(nuevoGrupo);
 						nuevoDepartamento.agregarEstudiante(estudiante);
-						
+
 						modeloEstudiantes.set(estudianteSeleccionado, estudiante);
-					    
+
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
+					mensajeRetroalimentacion.setVisible(true);
 				}
-				
+
 			}
 		});
-		
+
 		JButton btnEliminarEst = crearBotonCRUD("Eliminar");
 		btnEliminarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-		        int seleccionado = listaEstudiantes.getSelectedIndex();
+				int seleccionado = listaEstudiantes.getSelectedIndex();
 
-		        if (seleccionado != -1) {
-		            Estudiante estudiante = (Estudiante) modeloEstudiantes.getElementAt(seleccionado);
+				if (seleccionado != -1) {
+					Estudiante estudiante = (Estudiante) modeloEstudiantes.getElementAt(seleccionado);
 
-		            MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a:"+ " " + estudiante.getNombre() + "?",Tipo.CONFIRMACION);
+					MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a:"+ " " + estudiante.getNombre() + "?",Tipo.CONFIRMACION);
 
-		            confirmacion.setVisible(true);
+					confirmacion.setVisible(true);
 
-		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.removerEstudiante(estudiante);
+					if (confirmacion.isConfirmado()) {
+						dptoActual.removerEstudiante(estudiante);
 
-		                modeloEstudiantes.remove(seleccionado);
+						modeloEstudiantes.remove(seleccionado);
 
-		                MensajeDialog mensaje = new MensajeDialog(parent,"Estudiante eliminado correctamente",Tipo.RETROALIMENTACION);
-		                mensaje.setVisible(true);
-		            }
-		        } else {
-		            MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
-		        }
-		    }
+						MensajeDialog mensaje = new MensajeDialog(parent,"Estudiante eliminado correctamente",Tipo.RETROALIMENTACION);
+						mensaje.setVisible(true);
+					}
+				} else {
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
+				}
+			}
 		});
 
-		panelBotonesCRUDEstudiantes.add(btnCrearEst);
+		panelBotonesCRUDEstudiantes.add(btnAgregarEst);
 		panelBotonesCRUDEstudiantes.add(btnEliminarEst);
 		panelBotonesCRUDEstudiantes.add(btnEditarEst);
 
@@ -551,80 +567,80 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelBotonesCRUDDocentes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		panelBotonesCRUDDocentes.setBackground(Color.DARK_GRAY);
 
-		JButton btnCrearDoc = crearBotonCRUD("Crear");
+		JButton btnCrearDoc = crearBotonCRUD("Agregar");
 		btnCrearDoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearDocDialog dialog = new CrearDocDialog(parent, vicedecanato);
-				    dialog.setVisible(true);
-				    
-				    if(dialog.isConfirmado())
-				    	actualizarTablaDoc();
+
+				AgregarDocenteDialog dialog = new AgregarDocenteDialog(parent, vicedecanato, dptoActual);
+
+				if(dialog.isConfirmado())
+					actualizarTablaDoc();
 			}
-			
+
 		});
-		
+
 		JButton btnEditarDoc = crearBotonCRUD("Editar");
 		btnEditarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int seleccionado = listaDocentes.getSelectedIndex();
-				
+
 				if(seleccionado != -1){
 					EditarDocDialog dialog = new EditarDocDialog(parent,vicedecanato);
 					dialog.setVisible(true);
-					
+
 					if (dialog.isConfirmado()){
 						String nuevoNombre = dialog.getNombre();
-					    String nuevosApellidos = dialog.getApellidos();
-					    CategoriaCientifica nuevaCatCientifica = (CategoriaCientifica)dialog.getCatCientifica();
-					    CategoriaDocente nuevaCatDocente = (CategoriaDocente) dialog.getCatDocente();
-					    Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
-					    
-					    int docenteSeleccionado = listaDocentes.getSelectedIndex();
+						String nuevosApellidos = dialog.getApellidos();
+						CategoriaCientifica nuevaCatCientifica = (CategoriaCientifica)dialog.getCatCientifica();
+						CategoriaDocente nuevaCatDocente = (CategoriaDocente) dialog.getCatDocente();
+						Departamento nuevoDepartamento = (Departamento) dialog.getComboDepartamento().getSelectedItem();
+
+						int docenteSeleccionado = listaDocentes.getSelectedIndex();
 						Docente docente = (Docente) modeloDocentes.get(docenteSeleccionado);
-						
+
 						docente.setNombre(nuevoNombre);
 						docente.setApellidos(nuevosApellidos);
 						docente.setCatCientifica(nuevaCatCientifica);
 						docente.setCatDocente(nuevaCatDocente);
 						nuevoDepartamento.agregarDocente(docente);
-						
+
 						modeloDocentes.set(docenteSeleccionado, docente);
-						
+
 						actualizarTablaDoc();
-					    
+
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
-		
+
 		JButton btnEliminarDoc = crearBotonCRUD("Eliminar");
 		btnEliminarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-		        int seleccionado = listaDocentes.getSelectedIndex();
+				int seleccionado = listaDocentes.getSelectedIndex();
 
-		        if (seleccionado != -1) {
-		            Docente docente = (Docente) modeloDocentes.getElementAt(seleccionado);
+				if (seleccionado != -1) {
+					Docente docente = (Docente) modeloDocentes.getElementAt(seleccionado);
 
-		            MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a:"+ " " + docente.getNombre() + "?",Tipo.CONFIRMACION);
+					MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a: " + docente.getNombre() + "?",Tipo.CONFIRMACION);
 
-		            confirmacion.setVisible(true);
+					confirmacion.setVisible(true);
 
-		            if (confirmacion.isConfirmado()) {
-		                vicedecanato.removerDocente(docente);
+					if (confirmacion.isConfirmado()) {
+						dptoActual.removerDocente(docente);
 
-		                modeloDocentes.remove(seleccionado);
+						modeloDocentes.remove(seleccionado);
 
-		                MensajeDialog mensaje = new MensajeDialog(parent,"Docente eliminado correctamente",Tipo.RETROALIMENTACION);
-		                mensaje.setVisible(true);
-		            }
-		        } else {
-		            MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
-		        }
-		    }
+						MensajeDialog mensaje = new MensajeDialog(parent,"Docente eliminado correctamente",Tipo.RETROALIMENTACION);
+						mensaje.setVisible(true);
+					}
+				} else {
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
+				}
+			}
 		});
 
 		panelBotonesCRUDDocentes.add(btnCrearDoc);
@@ -633,84 +649,84 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		panelDocentes.add(panelBotonesCRUDDocentes, BorderLayout.SOUTH);
 	}
-	
+
 	private void configurarPanelCRUDMaestria(){
-		
+
 		panelBotonesCRUDMaestria = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		panelBotonesCRUDMaestria.setBackground(Color.DARK_GRAY);
 
 		JButton btnCrearMaestria = crearBotonCRUD("Crear");
 		btnCrearMaestria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearMaestriaDialog dialog = new CrearMaestriaDialog(parent, vicedecanato);
-				    dialog.setVisible(true);
-				    
-				    if(dialog.isConfirmado())
-				    	actualizarTablaMaestrias();
+				CrearMaestriaDialog dialog = new CrearMaestriaDialog(parent, vicedecanato);
+				dialog.setVisible(true);
+
+				if(dialog.isConfirmado())
+					actualizarTablaMaestrias();
 			}
-			
+
 		});
-		
+
 		JButton btnEditarMaestria = crearBotonCRUD("Editar");
 		btnEditarMaestria.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int seleccionado = listaMaestrias.getSelectedIndex();
-				
+
 				if(seleccionado != -1){
 					EditarMaestriaDialog dialog = new EditarMaestriaDialog(parent,vicedecanato);
 					dialog.setVisible(true);
-					
+
 					if (dialog.isConfirmado()){
 						String nuevoNombre = dialog.getNombre();
 						String campoEstudio = dialog.getCampoEstudio();
 						int duracionMeses = dialog.getDuracionMeses();
-						
-					    
-					    int indexMaestria = listaMaestrias.getSelectedIndex();
+
+
+						int indexMaestria = listaMaestrias.getSelectedIndex();
 						Maestria maestria = (Maestria) modeloMaestrias.get(indexMaestria);
-						
+
 						maestria.setNombre(nuevoNombre);
 						maestria.setDuracionMeses(duracionMeses);
 						maestria.setCampoEstudio(campoEstudio);
 						dptoActual.agregarMaestria(maestria);
-						
+
 						modeloMaestrias.set(indexMaestria, maestria);
-						
+
 						actualizarTablaMaestrias();
-					    
+
 					}
 				}else{
 					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestria para editar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
-		
+
 		JButton btnEliminarMaestria = crearBotonCRUD("Eliminar");
 		btnEliminarMaestria.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-		        int seleccionado = listaMaestrias.getSelectedIndex();
+				int seleccionado = listaMaestrias.getSelectedIndex();
 
-		        if (seleccionado != -1) {
-		            Maestria maestria = (Maestria) modeloMaestrias.getElementAt(seleccionado);
+				if (seleccionado != -1) {
+					Maestria maestria = (Maestria) modeloMaestrias.getElementAt(seleccionado);
 
-		            MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a:"+ " " + maestria.getNombre() + "?",Tipo.CONFIRMACION);
+					MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a:"+ " " + maestria.getNombre() + "?",Tipo.CONFIRMACION);
 
-		            confirmacion.setVisible(true);
+					confirmacion.setVisible(true);
 
-		            if (confirmacion.isConfirmado()) {
-		                dptoActual.removerMaestria(maestria);
+					if (confirmacion.isConfirmado()) {
+						dptoActual.removerMaestria(maestria);
 
-		                modeloMaestrias.remove(seleccionado);
+						modeloMaestrias.remove(seleccionado);
 
-		                MensajeDialog mensaje = new MensajeDialog(parent,"Maestría eliminada correctamente",Tipo.RETROALIMENTACION);
-		                mensaje.setVisible(true);
-		            }
-		        } else {
-		            MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para eliminar",Tipo.RETROALIMENTACION);
-		            mensajeRetroalimentacion.setVisible(true);
-		        }
-		    }
+						MensajeDialog mensaje = new MensajeDialog(parent,"Maestría eliminada correctamente",Tipo.RETROALIMENTACION);
+						mensaje.setVisible(true);
+					}
+				} else {
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
+				}
+			}
 		});
 
 		panelBotonesCRUDMaestria.add(btnCrearMaestria);
@@ -719,34 +735,34 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		panelMaestrias.add(panelBotonesCRUDMaestria, BorderLayout.SOUTH);
 	}
-	
+
 	public void actualizarTablaEst(){
 		modeloEstudiantes.clear();
-		
-		for (Estudiante estudiante : vicedecanato.getEstudiantes()) {
+
+		for (Estudiante estudiante : dptoActual.getEstudiantes()) {
 			modeloEstudiantes.addElement(estudiante);
 		}
 	}
-	
+
 	public void actualizarTablaDoc(){
 		modeloDocentes.clear();
-		
-		for (Docente docente : vicedecanato.getDocentes()) {
+
+		for (Docente docente : dptoActual.getDocentes()) {
 			modeloDocentes.addElement(docente);
 		}
 	}
-	
+
 	public void actualizarTablaMaestrias(){
 		modeloMaestrias.clear();
-		
+
 		for (Maestria m: dptoActual.getMaestrias()) {
 			modeloMaestrias.addElement(m);
 		}
 	}
-	
+
 	public void actualizarTablaLineas(){
 		modeloLineas.clear();
-		
+
 		for (LineaInvestigacion l : dptoActual.getLineasInvestigacion()) {
 			modeloLineas.addElement(l);
 		}

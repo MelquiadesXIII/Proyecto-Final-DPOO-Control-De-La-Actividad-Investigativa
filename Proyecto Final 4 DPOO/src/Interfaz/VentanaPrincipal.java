@@ -460,7 +460,7 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnCrearEst = crearBotonCRUD("Crear");
 		btnCrearEst.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				 CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this, vicedecanato, null);
+				 CrearEstDialog dialog = new CrearEstDialog(VentanaPrincipal.this, vicedecanato);
 				    dialog.setVisible(true);
 				    
 				    if(dialog.isConfirmado())

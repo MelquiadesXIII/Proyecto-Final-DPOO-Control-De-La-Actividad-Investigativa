@@ -212,4 +212,18 @@ public class Departamento {
 	public String toString() {
 		return this.nombre; 
 	}
+	
+	public void crearMaestria(String nombre, String campoEstudio, int duracionMeses){
+		
+		Maestria m = new Maestria(nombre, duracionMeses, campoEstudio);
+		
+		agregarMaestria(m);
+	}
+	
+	public void crearLineaInvestigacion(String nombre, Docente responsable){
+		
+		LineaInvestigacion l = new LineaInvestigacion(nombre, responsable);
+		
+		agregarLineaInvestigacion(l);
+	}
 }

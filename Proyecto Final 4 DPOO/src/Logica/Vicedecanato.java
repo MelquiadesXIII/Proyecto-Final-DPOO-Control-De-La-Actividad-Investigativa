@@ -207,4 +207,18 @@ public class Vicedecanato {
 
 		return noContenido;
 	}
+	
+	public ArrayList<Docente> obtenerDocentesNoRegistradosEnDepartamentos(){
+		
+		ArrayList<Docente> noRegistrados = new ArrayList<>();
+		
+		for(Docente d: docentes){
+			
+			if(solicitudValidaIngresoDocenteADepartamento(d)){
+				noRegistrados.add(d);
+			}
+		}
+		
+		return noRegistrados;
+	}
 }

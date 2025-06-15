@@ -155,6 +155,13 @@ public class Maestria {
 
 		cursos.add(c);
 	}
+	
+	public void crearCursoPosgrado(String tema, ArrayList<String> objetivos, int cantCreditos, Docente profesor){
+		
+		CursoPosgrado c = new CursoPosgrado(tema, objetivos, cantCreditos, profesor);
+		
+		agregarCursoPosgrado(c);
+	}
 
 	@Override
 	public boolean equals(Object o) {

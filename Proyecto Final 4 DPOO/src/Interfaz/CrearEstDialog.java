@@ -26,7 +26,7 @@ public class CrearEstDialog extends JDialog {
 	private JComboBox<Departamento> comboDepartamento;
 
 
-	public CrearEstDialog(final JFrame parent, final Vicedecanato vicedecanato, final Departamento dptoActual) {
+	public CrearEstDialog(final JFrame parent, final Vicedecanato vicedecanato) {
 
 		super(parent, "Crear Estudiante", true);
 		setUndecorated(true);
@@ -86,17 +86,17 @@ public class CrearEstDialog extends JDialog {
 
 		comboDepartamento = new JComboBox<>();
 
+
 		final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
 		comboDepartamento.addItem(verSeleccionarDepto);
 
-		for (Departamento d : vicedecanato.getDepartamentos()) {
+		for (Departamento d : vicedecanato.getDepartamentos()) 
 			comboDepartamento.addItem(d);
-		}
 
 		comboDepartamento.setBounds(118, 246, 230, 39);
 
-		if(dptoActual == null)
-			panelCampos.add(comboDepartamento);
+
+		panelCampos.add(comboDepartamento);
 		estiloComboBox(comboDepartamento);
 
 		AbstractDocument docNombre = (AbstractDocument) campoNombre.getDocument();
@@ -215,13 +215,8 @@ public class CrearEstDialog extends JDialog {
 		botonCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento depto;
-				
-				if(dptoActual == null)
-					depto = (Departamento) comboDepartamento.getSelectedItem();
-				else
-					depto = dptoActual;
-				
+				Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
+
 				if(!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
 					String nombre = getNombre();
 					String apellidos = getApellidos();
