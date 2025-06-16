@@ -32,11 +32,17 @@ public class Articulo extends ResultadoInvestigativo{
 
 
 	//Getters
+	@Override
+	public String getTipo() {
+		
+		return "Artículo";
+	}
+	
 	public GrupoImpacto getGrupo() {
 		return grupo;
 	}
 
-	public String getTitulo() {
+	public String getNombrePublicacion() {
 		return titulo;
 	}
 
@@ -132,7 +138,7 @@ public class Articulo extends ResultadoInvestigativo{
 		return o != null &&
 				(this == o ||
 				(o instanceof Articulo &&
-						titulo.equals(((Articulo)o).getTitulo()) &&
+						titulo.equals(((Articulo)o).getNombrePublicacion()) &&
 						numero == ((Articulo)o).getNumero()) &&
 						volumen == (((Articulo)o).getVolumen()) &&
 						anioPublicacion.equals(((Articulo)o).getAnioPublicacion()) &&
