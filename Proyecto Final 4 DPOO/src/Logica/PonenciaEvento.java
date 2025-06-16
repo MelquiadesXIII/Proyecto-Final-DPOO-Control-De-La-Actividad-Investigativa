@@ -30,6 +30,15 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 
 
 	//Getters
+	public String getTipo(){
+
+		return "Ponencia de Evento";
+	}
+
+	public String getNombrePublicacion() {
+		return nombre;
+	}
+
 	public String getISBN() {
 		return ISBN;
 	}
@@ -109,7 +118,7 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 		return o != null &&
 				(this == o ||
 				(o instanceof PonenciaEvento &&
-						nombre.equals(((PonenciaEvento)o).getNombre()) &&
+						nombre.equals(((PonenciaEvento)o).getNombrePublicacion()) &&
 						anio.equals(((PonenciaEvento)o).getAnio()) &&
 						fecha.equals(((PonenciaEvento)o).getFecha()) &&
 						lugar.equals(((PonenciaEvento)o).getLugar()) &&
