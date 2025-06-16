@@ -51,8 +51,6 @@ public class VentanaGestionDepartamento extends JDialog{
 	private JPanel panelDocentes;
 	private DefaultListModel<Object> modeloMaestrias;
 	private JList<Object> listaMaestrias;
-	private DefaultListModel<Object> modeloLineas;
-	private JList<Object> listaLineas;
 	private JPanel panelBotonesCRUDEstudiantes;
 	private JPanel panelBotonesCRUDDocentes;
 	private JPanel panelBotonesCRUDMaestria;
@@ -81,6 +79,12 @@ public class VentanaGestionDepartamento extends JDialog{
 	private ArrayList<CursoPosgrado> cursosEnTabla = new ArrayList<>();
 	private ArrayList<LineaInvestigacion> lineasEnTabla = new ArrayList<>();
 	private ArrayList<ResultadoInvestigativo> resultadosEnTabla = new ArrayList<>();
+	private DefaultTableModel modeloTablaLineas;
+	private JTable tablaLineas;
+	private JScrollPane scrollTablaLineas;
+	private DefaultTableModel modeloTablaResultados;
+	private JTable tablaResultados;
+	private JScrollPane scrollTablaResultados;
 
 
 
@@ -186,7 +190,7 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 		});
 
-		botonLineas = crearBotonNavegacion("Lineas Inv.");
+		botonLineas = crearBotonNavegacion("Líneas de Inv.");
 		botonLineas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -352,8 +356,9 @@ public class VentanaGestionDepartamento extends JDialog{
 		
 		crearTablaCursos();
 		
-		crearTablaLineasInv();
-
+		crearTablaLineasInvestigacion();
+		
+		crearTablaResultados();
 	}
 
 	private void crearTablaDocentes(){
@@ -643,37 +648,149 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelCursos.repaint();
 	}
 
-	private void crearTablaLineasInv(){
+	private void crearTablaLineasInvestigacion() {
+		
+		lineasEnTabla.clear();
+	    String[] columnas = {"Nombre de la línea", "Investigadores", "Resultados publicados", "Responsable"};
+	    
+	    modeloTablaLineas = new DefaultTableModel(columnas, 0) {
+	        private static final long serialVersionUID = 1L;
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+	    
+	    for (LineaInvestigacion linea : dptoActual.getLineasInvestigacion()) {
+	        int totalResultados = 0;
+	        for (Investigador investigador : linea.getInvestigadores()) {
+	            totalResultados += investigador.getResultados().size();
+	        }
+	        
+	        Object[] fila = {
+	            linea.getNombre(),
+	            linea.getInvestigadores().size(),
+	            totalResultados,
+	            linea.getResponsable().getNombre() + " " + linea.getResponsable().getApellidos()
+	        };
+	        
+	        lineasEnTabla.add(linea);
+	        modeloTablaLineas.addRow(fila);
+	    }
+	    
+	    tablaLineas = new JTable(modeloTablaLineas);
+	    tablaLineas.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+	    tablaLineas.setRowHeight(30);
+	    tablaLineas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+	    tablaLineas.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
+	    tablaLineas.getTableHeader().setForeground(Color.WHITE);
+	    
+	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+	    for (int i = 0; i < tablaLineas.getColumnCount(); i++) {
+	        tablaLineas.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    }
+	    
+	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(280);
+	    tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(120);
+	    tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(130);
+	    tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(170);
+	    
+	    scrollTablaLineas = new JScrollPane(tablaLineas);
+	    scrollTablaLineas.setBorder(BorderFactory.createEmptyBorder());
+	    panelLineas.add(scrollTablaLineas, BorderLayout.CENTER);
+	}
 
-		modeloLineas = new DefaultListModel<>();
-
-		for (LineaInvestigacion l : dptoActual.getLineasInvestigacion()) {
-			modeloLineas.addElement(l);
-		}
-
-		listaLineas = new JList<>(modeloLineas);
-
-		listaLineas.setCellRenderer(new DefaultListCellRenderer() {
+	public void actualizarTablaLineas() {
+	    panelLineas.removeAll();
+	    
+	    JPanel encabezado = new JPanel();
+	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+	    encabezado.setPreferredSize(new Dimension(0, 50));
+	    JLabel lblTitulo = new JLabel("Líneas de investigación registradas:");
+	    lblTitulo.setForeground(Color.WHITE);
+	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+	    encabezado.add(lblTitulo);
+	    panelLineas.add(encabezado, BorderLayout.NORTH);
+	    
+	    crearTablaLineasInvestigacion();
+	    
+	    panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
+	    panelLineas.revalidate();
+	    panelLineas.repaint();
+	}
+	
+	private void crearTablaResultados() {
+		
+		resultadosEnTabla.clear();
+		
+	    String[] columnas = {"Nombre", "Tipo", "Investigador", "Línea de investigación"};
+	    
+	    modeloTablaResultados = new DefaultTableModel(columnas, 0) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public Component getListCellRendererComponent(JList<?> list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
-				Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-				if (value instanceof LineaInvestigacion) {
-					LineaInvestigacion linea = (LineaInvestigacion) value;
-					setText(linea.getNombre());
-				}
-				return c;
-			}
-		});
-
-		listaLineas.setForeground(Color.WHITE);
-		listaLineas.setBackground(Color.DARK_GRAY);
-		listaLineas.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-
-		JScrollPane scrollLineas = new JScrollPane(listaLineas);
-		panelLineas.add(scrollLineas, BorderLayout.CENTER);
-
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+	    
+	    for(LineaInvestigacion l: dptoActual.getLineasInvestigacion()){
+	    	for(Investigador i: l.getInvestigadores()){
+	    		for(ResultadoInvestigativo r: i.getResultados()){
+	    			
+	    			String nombre = r.getNombrePublicacion();
+	    	        String tipo = r.getTipo();
+	    	        Investigador inv = i;
+	    	        LineaInvestigacion linea = l;
+	    	        
+	    	        modeloTablaResultados.addRow(new Object[]{nombre, tipo, inv.getNombre() + " " + inv.getApellidos(), linea.getNombre()});
+	    	        resultadosEnTabla.add(r);
+	    		}
+	    		
+	    	}
+	    }
+	    
+	    
+	    tablaResultados = new JTable(modeloTablaResultados);
+	    tablaResultados.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+	    tablaResultados.setRowHeight(30);
+	    
+	    tablaResultados.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+	    tablaResultados.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
+	    tablaResultados.getTableHeader().setForeground(Color.WHITE);
+	    
+	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+	    for (int i = 0; i < tablaResultados.getColumnCount(); i++) {
+	        tablaResultados.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    }
+	   
+	    tablaResultados.getColumnModel().getColumn(0).setPreferredWidth(200);
+	    tablaResultados.getColumnModel().getColumn(1).setPreferredWidth(120);
+	    tablaResultados.getColumnModel().getColumn(2).setPreferredWidth(180);
+	    tablaResultados.getColumnModel().getColumn(3).setPreferredWidth(200);
+	    
+	    scrollTablaResultados = new JScrollPane(tablaResultados);
+	    panelResultados.add(scrollTablaResultados, BorderLayout.CENTER);
+	}
+	
+	public void actualizarTablaResultados() {
+	    panelResultados.removeAll();
+	    
+	    JPanel encabezado = new JPanel();
+	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+	    encabezado.setPreferredSize(new Dimension(0, 50));
+	    
+	    JLabel lblTitulo = new JLabel("Resultados Investigativos");
+	    lblTitulo.setForeground(Color.WHITE);
+	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+	    encabezado.add(lblTitulo);
+	    
+	    panelResultados.add(encabezado, BorderLayout.NORTH);
+	    crearTablaResultados();
+	    panelResultados.revalidate();
+	    panelResultados.repaint();
 	}
 
 	private void configurarPanelesCRUD(){
@@ -990,14 +1107,6 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelBotonesCRUDCursos.add(btnEliminarCurso);
 
 		panelCursos.add(panelBotonesCRUDCursos, BorderLayout.SOUTH);
-	}
-
-	public void actualizarTablaLineas(){
-		modeloLineas.clear();
-
-		for (LineaInvestigacion l : dptoActual.getLineasInvestigacion()) {
-			modeloLineas.addElement(l);
-		}
 	}
 }
 
