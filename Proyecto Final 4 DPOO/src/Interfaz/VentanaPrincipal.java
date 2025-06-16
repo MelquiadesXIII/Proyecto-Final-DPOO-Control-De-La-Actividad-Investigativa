@@ -108,7 +108,13 @@ public class VentanaPrincipal extends JFrame{
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		this.botonesNavegacion = new ArrayList<JButton>();
-	}
+		try{
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Iconos\\gratis-png-beca-de-la-escuela-de-iconos-informaticos-de-la-universidad-de-baran-invertir-educacion.png"));
+		}catch(Exception e){
+			System.out.println("aguacate");
+		}
+		
+		}
 
 	private void configurarPanelNavegacion(){
 
@@ -248,15 +254,15 @@ public class VentanaPrincipal extends JFrame{
 		panelPrincipal.add(panelInicio, "panelInicio");
 		panelInicio.setBackground(Color.DARK_GRAY);
 
-		panelDocentes = crearPanelesConEncabezado("Docentes registrados en el vicedecanato:");
+		panelDocentes = crearPanelesConEncabezado("Docentes registrados en el vicedecanato");
 		panelPrincipal.add(panelDocentes, "panelDocentes");
 		panelDocentes.setBackground(Color.DARK_GRAY);
 
-		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el vicedecanato:");
+		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el vicedecanato");
 		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
 		panelEstudiantes.setBackground(Color.DARK_GRAY);
 
-		panelDepartamentos = crearPanelesConEncabezado("Departamentos registrados en el vicedecanato:");
+		panelDepartamentos = crearPanelesConEncabezado("Departamentos registrados en el vicedecanato");
 		panelPrincipal.add(panelDepartamentos, "panelDepartamentos");
 		panelDepartamentos.setBackground(Color.DARK_GRAY);
 
@@ -371,6 +377,7 @@ public class VentanaPrincipal extends JFrame{
 		tablaDepartamentos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaDepartamentos.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaDepartamentos.getTableHeader().setForeground(Color.WHITE);
+		tablaDepartamentos.getTableHeader().setReorderingAllowed(false);
 		
 	
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -447,6 +454,7 @@ public class VentanaPrincipal extends JFrame{
 		tablaEstudiantes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaEstudiantes.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaEstudiantes.getTableHeader().setForeground(Color.WHITE);
+		tablaEstudiantes.getTableHeader().setReorderingAllowed(false);
 
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -522,6 +530,7 @@ public class VentanaPrincipal extends JFrame{
 		tablaDocentes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaDocentes.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaDocentes.getTableHeader().setForeground(Color.WHITE);
+		tablaDocentes.getTableHeader().setReorderingAllowed(false);
 
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -548,7 +557,7 @@ public class VentanaPrincipal extends JFrame{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Docentes registrados en el vicedecanato:");
+		JLabel lblTitulo = new JLabel("Docentes registrados en el vicedecanato");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -762,6 +771,24 @@ public class VentanaPrincipal extends JFrame{
 		panelBotonesCRUDDepartamentos = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		panelBotonesCRUDDepartamentos.setBackground(Color.DARK_GRAY);
 
+		JButton btnVerDetalles = crearBotonCRUD("Ver Detalles");
+		btnVerDetalles.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(tablaDepartamentos.getSelectedRows().length == 1){
+					int seleccionado = tablaDepartamentos.getSelectedRow();
+					
+					if(seleccionado != -1){
+						
+						Departamento deptoSeleccionado = departamentosEnTabla.get(seleccionado);
+						new VentanaGestionDepartamento(VentanaPrincipal.this, deptoSeleccionado, vicedecanato);
+					}
+				}
+				
+			}
+		});
 		JButton btnCrearDep = crearBotonCRUD("Crear");
 		btnCrearDep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -793,7 +820,7 @@ public class VentanaPrincipal extends JFrame{
 							actualizarTablaDep();
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un departamento para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 

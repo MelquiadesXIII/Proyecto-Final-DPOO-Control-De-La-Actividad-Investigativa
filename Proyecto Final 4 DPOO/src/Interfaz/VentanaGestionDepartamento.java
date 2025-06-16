@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import Interfaz.MensajeDialog.Tipo;
@@ -37,7 +39,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	protected JButton botonSeleccionadoActual;
 	private CardLayout cardLayout;
 	private JPanel panelPrincipal;
-	private JFrame parent;
+	private VentanaPrincipal parent;
 	private JButton botonLineas;
 	private JButton botonMaestrias;
 	private JButton botonEstudiantes;
@@ -88,7 +90,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 
 
-	public VentanaGestionDepartamento(JFrame parent, final Departamento dptoActual, final Vicedecanato vicedecanato){
+	public VentanaGestionDepartamento(VentanaPrincipal parent, final Departamento dptoActual, final Vicedecanato vicedecanato){
 
 		super(parent, "Gestión de " + dptoActual.getNombre(), true);
 		this.dptoActual = dptoActual;
@@ -121,6 +123,15 @@ public class VentanaGestionDepartamento extends JDialog{
 		setLocationRelativeTo(this.parent);
 		getContentPane().setLayout(new BorderLayout());
 		this.botonesNavegacion = new ArrayList<JButton>();
+		
+		this.addWindowListener(new WindowAdapter() {
+			
+			public void windowClosing(WindowEvent e){
+				
+				parent.actualizarTodasLasTablas();
+			}
+			
+		});
 	}
 
 	private void configurarPanelNavegacion(){
@@ -218,6 +229,7 @@ public class VentanaGestionDepartamento extends JDialog{
 				if (dialog.isConfirmado()) {
 					dispose();
 					parent.setVisible(true);
+					parent.actualizarTodasLasTablas();
 				}
 			}
 		});
@@ -301,19 +313,19 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelPrincipal.add(panelInicio, "panelInicio");
 		panelInicio.setBackground(Color.DARK_GRAY);
 
-		panelDocentes = crearPanelesConEncabezado("Docentes registrados en el departamento:");
+		panelDocentes = crearPanelesConEncabezado("Docentes registrados en el departamento");
 		panelPrincipal.add(panelDocentes, "panelDocentes");
 		panelDocentes.setBackground(Color.DARK_GRAY);
 
-		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el departamento:");
+		panelEstudiantes = crearPanelesConEncabezado("Estudiantes registrados en el departamento");
 		panelPrincipal.add(panelEstudiantes, "panelEstudiantes");
 		panelEstudiantes.setBackground(Color.DARK_GRAY);
 
-		panelMaestrias = crearPanelesConEncabezado("Maestrías registradas en el departamento:");
+		panelMaestrias = crearPanelesConEncabezado("Maestrías registradas en el departamento");
 		panelPrincipal.add(panelMaestrias, "panelMaestrias");
 		panelMaestrias.setBackground(Color.DARK_GRAY);
 
-		panelCursos = crearPanelesConEncabezado("Cursos de las maestrías del departamento:");
+		panelCursos = crearPanelesConEncabezado("Cursos de las maestrías del departamento");
 		panelPrincipal.add(panelCursos, "panelCursos");
 		panelCursos.setBackground(Color.DARK_GRAY);
 
@@ -321,7 +333,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelPrincipal.add(panelLineas, "panelLineas");
 		panelLineas.setBackground(Color.DARK_GRAY);
 
-		panelResultados = crearPanelesConEncabezado("Resultados investigativos de los investigadores del departamento:");
+		panelResultados = crearPanelesConEncabezado("Resultados investigativos de los investigadores del departamento");
 		panelPrincipal.add(panelResultados, "panelResultados");
 		panelResultados.setBackground(Color.DARK_GRAY);
 
@@ -399,6 +411,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		tablaDocentes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaDocentes.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaDocentes.getTableHeader().setForeground(Color.WHITE);
+		tablaDocentes.getTableHeader().setReorderingAllowed(false);
 
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -475,6 +488,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		tablaEstudiantes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaEstudiantes.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaEstudiantes.getTableHeader().setForeground(Color.WHITE);
+		tablaEstudiantes.getTableHeader().setReorderingAllowed(false);
 
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -544,6 +558,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		tablaMaestrias.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaMaestrias.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaMaestrias.getTableHeader().setForeground(Color.WHITE);
+		tablaMaestrias.getTableHeader().setReorderingAllowed(false);
 
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -612,6 +627,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		tablaCursos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		tablaCursos.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaCursos.getTableHeader().setForeground(Color.WHITE);
+		tablaCursos.getTableHeader().setReorderingAllowed(false);
 
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -684,6 +700,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	    tablaLineas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 	    tablaLineas.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 	    tablaLineas.getTableHeader().setForeground(Color.WHITE);
+	    tablaLineas.getTableHeader().setReorderingAllowed(false);
 	    
 	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -759,6 +776,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	    tablaResultados.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 	    tablaResultados.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 	    tablaResultados.getTableHeader().setForeground(Color.WHITE);
+	    tablaResultados.getTableHeader().setReorderingAllowed(false);
 	    
 	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
