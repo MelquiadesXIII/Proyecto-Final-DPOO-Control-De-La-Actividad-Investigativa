@@ -31,7 +31,12 @@ public class CapituloLibro extends ResultadoInvestigativo{
 
 
 	//Getters
-	public String getTitulo() {
+	public String getTipo(){
+		
+		return "Capítulo de Libro";
+	}
+	
+	public String getNombrePublicacion() {
 		return titulo;
 	}
 
@@ -147,7 +152,7 @@ public class CapituloLibro extends ResultadoInvestigativo{
 		return o != null &&
 				(this == o ||
 				(o instanceof CapituloLibro &&
-						titulo.equals(((CapituloLibro)o).getTitulo()) &&
+						titulo.equals(((CapituloLibro)o).getNombrePublicacion()) &&
 						editorial.equals(((CapituloLibro)o).getEditorial()) &&
 						ISSN.equals(((CapituloLibro)o).getISSN()) &&
 						volumen.equals(((CapituloLibro)o).getVolumen())));
