@@ -89,10 +89,8 @@ public class VentanaPrincipal extends JFrame{
 
 		crearPaneles();
 		crearPanelesReportes();
-		crearTablaDocentes();
-		crearTablaDepartamentos();
-		crearTablaEstudiantes();
 		configurarPanelesCRUD();
+		actualizarTodasLasTablas();		
 
 		setVisible(true);
 	}
@@ -109,12 +107,12 @@ public class VentanaPrincipal extends JFrame{
 		getContentPane().setLayout(new BorderLayout());
 		this.botonesNavegacion = new ArrayList<JButton>();
 		try{
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Iconos\\gratis-png-beca-de-la-escuela-de-iconos-informaticos-de-la-universidad-de-baran-invertir-educacion.png"));
+			setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Iconos\\IconoSIGIP.png"));
 		}catch(Exception e){
 			System.out.println("aguacate");
 		}
-		
-		}
+
+	}
 
 	private void configurarPanelNavegacion(){
 
@@ -378,8 +376,8 @@ public class VentanaPrincipal extends JFrame{
 		tablaDepartamentos.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
 		tablaDepartamentos.getTableHeader().setForeground(Color.WHITE);
 		tablaDepartamentos.getTableHeader().setReorderingAllowed(false);
-		
-	
+
+
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < tablaDepartamentos.getColumnCount(); i++) {
@@ -404,7 +402,7 @@ public class VentanaPrincipal extends JFrame{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Departamentos registrados en el vicedecanato:");
+		JLabel lblTitulo = new JLabel("Departamentos registrados en el vicedecanato");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -480,7 +478,7 @@ public class VentanaPrincipal extends JFrame{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Estudiantes registrados en el vicedecanato:");
+		JLabel lblTitulo = new JLabel("Estudiantes registrados en el vicedecanato");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -615,7 +613,7 @@ public class VentanaPrincipal extends JFrame{
 				dialog.setVisible(true);
 
 				if(dialog.isConfirmado())
-					actualizarTablaEst();
+					actualizarTodasLasTablas();
 			}
 
 		});
@@ -636,10 +634,10 @@ public class VentanaPrincipal extends JFrame{
 
 						if (dialog.isConfirmado()){
 
-							actualizarTablaEst();
+							actualizarTodasLasTablas();
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
@@ -657,20 +655,20 @@ public class VentanaPrincipal extends JFrame{
 					if (seleccionado != -1) {
 						Estudiante estudiante = estudiantesEnTabla.get(seleccionado);
 
-						MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar a"+ " " + estudiante.getNombre() + "?",Tipo.CONFIRMACION);
+						MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Está seguro que desea eliminar al estudiante seleccionado?",Tipo.CONFIRMACION);
 
 						confirmacion.setVisible(true);
 
 						if (confirmacion.isConfirmado()) {
 							vicedecanato.removerEstudiante(estudiante);
 
-							actualizarTablaEst();
+							actualizarTodasLasTablas();
 
 							MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Estudiante eliminado correctamente",Tipo.RETROALIMENTACION);
 							mensaje.setVisible(true);
 						}
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 
@@ -698,7 +696,7 @@ public class VentanaPrincipal extends JFrame{
 				dialog.setVisible(true);
 
 				if(dialog.isConfirmado())
-					actualizarTablaDoc();
+					actualizarTodasLasTablas();
 			}
 
 		});
@@ -717,11 +715,11 @@ public class VentanaPrincipal extends JFrame{
 
 						if (dialog.isConfirmado()){
 
-							actualizarTablaDoc();
+							actualizarTodasLasTablas();
 
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un docente para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
@@ -739,20 +737,20 @@ public class VentanaPrincipal extends JFrame{
 
 						Docente docente = docentesEnTabla.get(seleccionado);
 
-						MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar a"+ " " + docente.getNombre() + "?",Tipo.CONFIRMACION);
+						MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Está seguro que desea eliminar al docente seleccionado?",Tipo.CONFIRMACION);
 
 						confirmacion.setVisible(true);
 
 						if (confirmacion.isConfirmado()) {
 							vicedecanato.removerDocente(docente);
 
-							actualizarTablaDoc();
+							actualizarTodasLasTablas();
 
 							MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Docente eliminado correctamente",Tipo.RETROALIMENTACION);
 							mensaje.setVisible(true);
 						}
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
@@ -771,22 +769,30 @@ public class VentanaPrincipal extends JFrame{
 		panelBotonesCRUDDepartamentos = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		panelBotonesCRUDDepartamentos.setBackground(Color.DARK_GRAY);
 
-		JButton btnVerDetalles = crearBotonCRUD("Ver Detalles");
+		JButton btnVerDetalles = crearBotonCRUD("Acceder");
 		btnVerDetalles.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				if(tablaDepartamentos.getSelectedRows().length == 1){
 					int seleccionado = tablaDepartamentos.getSelectedRow();
-					
+
 					if(seleccionado != -1){
-						
+
 						Departamento deptoSeleccionado = departamentosEnTabla.get(seleccionado);
 						new VentanaGestionDepartamento(VentanaPrincipal.this, deptoSeleccionado, vicedecanato);
+					
+					}else{
+						MensajeDialog m = new MensajeDialog(VentanaPrincipal.this, "Debe seleccionar un departamento", Tipo.RETROALIMENTACION);
+						m.setVisible(true);
 					}
+
+				}else{
+
+					MensajeDialog m = new MensajeDialog(VentanaPrincipal.this, "Solo puede acceder a un solo departamento", Tipo.RETROALIMENTACION);
+					m.setVisible(true);
 				}
-				
 			}
 		});
 		JButton btnCrearDep = crearBotonCRUD("Crear");
@@ -796,7 +802,7 @@ public class VentanaPrincipal extends JFrame{
 				dialog.setVisible(true);
 
 				if(dialog.isConfirmado())
-					actualizarTablaDep();
+					actualizarTodasLasTablas();
 			}
 
 		});
@@ -817,10 +823,10 @@ public class VentanaPrincipal extends JFrame{
 
 						if (dialog.isConfirmado()){
 
-							actualizarTablaDep();
+							actualizarTodasLasTablas();
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un departamento para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un departamento para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 
@@ -837,26 +843,27 @@ public class VentanaPrincipal extends JFrame{
 					if (seleccionado != -1) {
 						Departamento departamento = departamentosEnTabla.get(seleccionado);
 
-						MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Estás seguro que deseas eliminar el departamento:"+ " " + departamento.getNombre() + "?",Tipo.CONFIRMACION);
+						MensajeDialog confirmacion = new MensajeDialog(VentanaPrincipal.this,"¿Está seguro que desea eliminar el departamento seleccionado?",Tipo.CONFIRMACION);
 
 						confirmacion.setVisible(true);
 
 						if (confirmacion.isConfirmado()) {
 							vicedecanato.removerDepartamento(departamento);
 
-							actualizarTablaDep();
-							
+							actualizarTodasLasTablas();
+
 							MensajeDialog mensaje = new MensajeDialog(VentanaPrincipal.this,"Departamento eliminado correctamente",Tipo.RETROALIMENTACION);
 							mensaje.setVisible(true);
 						}
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debes seleccionar un departamento para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un departamento para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
 			}
 		});
 
+		panelBotonesCRUDDepartamentos.add(btnVerDetalles);
 		panelBotonesCRUDDepartamentos.add(btnCrearDep);
 		panelBotonesCRUDDepartamentos.add(btnEditarDep);
 		panelBotonesCRUDDepartamentos.add(btnEliminarDep);
@@ -1244,15 +1251,11 @@ public class VentanaPrincipal extends JFrame{
 			}
 		}
 	}
-	
+
 	public void actualizarTodasLasTablas(){
-		
+
 		actualizarTablaDep();
 		actualizarTablaDoc();
 		actualizarTablaEst();
 	}
-
-
-
-
 }

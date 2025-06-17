@@ -106,8 +106,8 @@ public class VentanaGestionDepartamento extends JDialog{
 		}
 
 		crearPaneles();
-		crearTablas();
 		configurarPanelesCRUD();
+		actualizarTodasLasTablas();
 
 		this.parent.setVisible(false);
 		setVisible(true);
@@ -358,21 +358,6 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelInicio.add(lblBienvenida);
 	}
 
-	private void crearTablas() {
-
-		crearTablaDocentes();
-		
-		crearTablaEstudiantes();
-		
-		crearTablaMaestrias();
-		
-		crearTablaCursos();
-		
-		crearTablaLineasInvestigacion();
-		
-		crearTablaResultados();
-	}
-
 	private void crearTablaDocentes(){
 
 		docentesEnTabla.clear();
@@ -440,7 +425,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Docentes registrados en el vicedecanato:");
+		JLabel lblTitulo = new JLabel("Docentes registrados en el vicedecanato");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -514,7 +499,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Estudiantes registrados en el vicedecanato:");
+		JLabel lblTitulo = new JLabel("Estudiantes registrados en el vicedecanato");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -583,7 +568,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Maestrías registradas en el vicedecanato:");
+		JLabel lblTitulo = new JLabel("Maestrías registradas en el vicedecanato");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -651,7 +636,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Cursos de posgrado registrados:");
+		JLabel lblTitulo = new JLabel("Cursos de posgrado registrados");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -724,7 +709,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JPanel encabezado = new JPanel();
 	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 	    encabezado.setPreferredSize(new Dimension(0, 50));
-	    JLabel lblTitulo = new JLabel("Líneas de investigación registradas:");
+	    JLabel lblTitulo = new JLabel("Líneas de investigación registradas");
 	    lblTitulo.setForeground(Color.WHITE);
 	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 	    encabezado.add(lblTitulo);
@@ -821,7 +806,9 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		configurarPanelCRUDCursos();
 
-		/*configurarPanelCRUDLineas();*/
+		configurarPanelCRUDLineas();
+		
+		configurarPanelCRUDResultados();
 	}
 
 	private JButton crearBotonCRUD(String texto) {
@@ -856,10 +843,10 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnAgregarEst.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 
+				AgregarEstudianteDialog dialog = new AgregarEstudianteDialog(parent, vicedecanato, dptoActual);
 
-				/*if(dialog.isConfirmado())
-
-				actualizarTablaEst();*/
+				if(dialog.isConfirmado())
+					actualizarTodasLasTablas();
 			}
 
 		});
@@ -880,10 +867,10 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						if (dialog.isConfirmado()){
 
-							actualizarTablaEst();
+							actualizarTodasLasTablas();
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
@@ -901,14 +888,14 @@ public class VentanaGestionDepartamento extends JDialog{
 					if (seleccionado != -1) {
 						Estudiante estudiante = estudiantesEnTabla.get(seleccionado);
 
-						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a"+ " " + estudiante.getNombre() + "?",Tipo.CONFIRMACION);
+						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Está seguro que desea eliminar al estudiante seleccionado?",Tipo.CONFIRMACION);
 
 						confirmacion.setVisible(true);
 
 						if (confirmacion.isConfirmado()) {
 							dptoActual.removerEstudiante(estudiante);
 
-							actualizarTablaEst();
+							actualizarTodasLasTablas();
 
 							MensajeDialog mensaje = new MensajeDialog(parent,"Estudiante eliminado correctamente",Tipo.RETROALIMENTACION);
 							mensaje.setVisible(true);
@@ -1017,7 +1004,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JButton btnCrearMaestria = crearBotonCRUD("Crear");
 		btnCrearMaestria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				CrearMaestriaDialog dialog = new CrearMaestriaDialog(parent, vicedecanato);
+				CrearMaestriaDialog dialog = new CrearMaestriaDialog(parent, dptoActual);
 				dialog.setVisible(true);
 
 				if(dialog.isConfirmado())
@@ -1125,6 +1112,79 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelBotonesCRUDCursos.add(btnEliminarCurso);
 
 		panelCursos.add(panelBotonesCRUDCursos, BorderLayout.SOUTH);
+	}
+	
+	private void configurarPanelCRUDLineas() {
+	    panelBotonesCRUDLineas = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+	    panelBotonesCRUDLineas.setBackground(Color.DARK_GRAY);
+
+	    JButton btnCrearLinea = crearBotonCRUD("Crear");
+	    btnCrearLinea.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            
+	        }
+	    });
+
+	    JButton btnEditarLinea = crearBotonCRUD("Editar");
+	    btnEditarLinea.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	          
+	        }
+	    });
+
+	    JButton btnEliminarLinea = crearBotonCRUD("Eliminar");
+	    btnEliminarLinea.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	           
+	        }
+	    });
+
+	    panelBotonesCRUDLineas.add(btnCrearLinea);
+	    panelBotonesCRUDLineas.add(btnEditarLinea);
+	    panelBotonesCRUDLineas.add(btnEliminarLinea);
+
+	    panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
+	}
+	
+	private void configurarPanelCRUDResultados() {
+	    panelBotonesCRUDResultados = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+	    panelBotonesCRUDResultados.setBackground(Color.DARK_GRAY);
+
+	    JButton btnCrearResultado = crearBotonCRUD("Crear");
+	    btnCrearResultado.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            
+	        }
+	    });
+
+	    JButton btnEditarResultado = crearBotonCRUD("Editar");
+	    btnEditarResultado.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	           
+	        }
+	    });
+
+	    JButton btnEliminarResultado = crearBotonCRUD("Eliminar");
+	    btnEliminarResultado.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	           
+	        }
+	    });
+
+	    panelBotonesCRUDResultados.add(btnCrearResultado);
+	    panelBotonesCRUDResultados.add(btnEditarResultado);
+	    panelBotonesCRUDResultados.add(btnEliminarResultado);
+
+	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
+	}
+	
+	private void actualizarTodasLasTablas(){
+		actualizarTablaCursos();
+		actualizarTablaDoc();
+		actualizarTablaEst();
+		actualizarTablaLineas();
+		actualizarTablaMaestrias();
+		actualizarTablaResultados();
 	}
 }
 
