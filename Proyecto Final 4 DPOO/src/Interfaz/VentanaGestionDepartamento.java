@@ -789,6 +789,8 @@ public class VentanaGestionDepartamento extends JDialog{
 	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 	    encabezado.add(lblTitulo);
 	    
+	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
+	    
 	    panelResultados.add(encabezado, BorderLayout.NORTH);
 	    crearTablaResultados();
 	    panelResultados.revalidate();
@@ -1182,6 +1184,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	private void configurarPanelCRUDResultados() {
 	    panelBotonesCRUDResultados = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 	    panelBotonesCRUDResultados.setBackground(Color.DARK_GRAY);
+	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
 
 	    JButton btnCrearResultado = crearBotonCRUD("Crear");
 	    btnCrearResultado.addActionListener(new ActionListener() {
@@ -1207,8 +1210,6 @@ public class VentanaGestionDepartamento extends JDialog{
 	    panelBotonesCRUDResultados.add(btnCrearResultado);
 	    panelBotonesCRUDResultados.add(btnEditarResultado);
 	    panelBotonesCRUDResultados.add(btnEliminarResultado);
-
-	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
 	}
 	
 	private void actualizarTodasLasTablas(){
