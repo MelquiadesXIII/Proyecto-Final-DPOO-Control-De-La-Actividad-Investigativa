@@ -27,7 +27,6 @@ import javax.swing.text.DocumentFilter;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.Departamento;
-import Logica.Maestria;
 
 public class CrearMaestriaDialog extends JDialog {
     private static final long serialVersionUID = 1L;
