@@ -82,6 +82,8 @@ public class VentanaGestionDepartamento extends JDialog{
 	private ArrayList<ResultadoInvestigativo> resultadosEnTabla = new ArrayList<>();
 	private DefaultTableModel modeloTablaLineas;
 	private JTable tablaLineas;
+	private DefaultListModel<Object> modeloLineas;
+	private JList<Object> listaLineas;
 	private JScrollPane scrollTablaLineas;
 	private DefaultTableModel modeloTablaResultados;
 	private JTable tablaResultados;
@@ -1020,7 +1022,7 @@ public class VentanaGestionDepartamento extends JDialog{
 				int seleccionado = listaMaestrias.getSelectedIndex();
 
 				if(seleccionado != -1){
-					EditarMaestriaDialog dialog = new EditarMaestriaDialog(parent,vicedecanato);
+					EditarMaestriaDialog dialog = new EditarMaestriaDialog(parent, dptoActual);
 					dialog.setVisible(true);
 
 					if (dialog.isConfirmado()){
@@ -1156,21 +1158,66 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JButton btnCrearLinea = crearBotonCRUD("Crear");
 	    btnCrearLinea.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            
+	        	CrearLineaInvestigacionDialog dialog = new CrearLineaInvestigacionDialog(parent, vicedecanato, dptoActual);
+				dialog.setVisible(true);
+
+				if(dialog.isConfirmado())
+					actualizarTodasLasTablas();
 	        }
 	    });
 
 	    JButton btnEditarLinea = crearBotonCRUD("Editar");
 	    btnEditarLinea.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	          
-	        }
+	    	public void actionPerformed(ActionEvent e){
+
+				if(tablaLineas.getSelectedRows().length == 1){
+					int seleccionado = tablaLineas.getSelectedRow();
+
+					if(seleccionado != -1){
+						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+						EditarLineaInvestigacionDialog dialog = new EditarLineaInvestigacionDialog(parent, vicedecanato, dptoActual, linea);
+						dialog.setVisible(true);
+
+						if (dialog.isConfirmado()){
+
+							actualizarTablaLineas();
+
+						}
+					}else{
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
+						mensajeRetroalimentacion.setVisible(true);
+					}
+				}
+			}
 	    });
 
 	    JButton btnEliminarLinea = crearBotonCRUD("Eliminar");
 	    btnEliminarLinea.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	           
+	        	if(tablaLineas.getSelectedRows().length == 1){
+					int seleccionado = tablaLineas.getSelectedRow();
+
+					if (seleccionado != -1) {
+
+						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+
+						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar "+ " " + linea.getNombre() + "?",Tipo.CONFIRMACION);
+
+						confirmacion.setVisible(true);
+
+						if (confirmacion.isConfirmado()) {
+							dptoActual.removerLineaInvestigacion(linea);
+
+							actualizarTablaLineas();
+
+							MensajeDialog mensaje = new MensajeDialog(parent,"Línea eliminada correctamente",Tipo.RETROALIMENTACION);
+							mensaje.setVisible(true);
+						}
+					} else {
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una línea de investigación para eliminar",Tipo.RETROALIMENTACION);
+						mensajeRetroalimentacion.setVisible(true);
+					}
+				}
 	        }
 	    });
 
