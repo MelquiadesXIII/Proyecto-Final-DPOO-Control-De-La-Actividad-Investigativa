@@ -1,7 +1,6 @@
 package Login;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RegistroUsuarios {
 	
@@ -12,7 +11,7 @@ public class RegistroUsuarios {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_USUARIOS, true))) {
         	
             writer.write(usuario.getNombre() + "," + usuario.getContrasenia());
-            writer.newLine();
+            writer.write("\n");
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,5 +60,28 @@ public class RegistroUsuarios {
             i++;
         }
         return credencialesValidas;
+    }
+    
+    public boolean clavesIguales(String contrasenia, String confirmarContrasenia){
+    		
+    	return contrasenia.equals(confirmarContrasenia);
+    }
+    
+    public boolean nuevoUsuarioValido(Usuario nuevoUsuario){
+    	
+    	boolean valido = true;
+    	ArrayList<Usuario> usuarios = cargarUsuarios();
+    	
+    	int i = 0;
+    	while(i < usuarios.size() && valido){
+    		
+    		Usuario usuarioExistente = usuarios.get(i);
+    		if(usuarioExistente.equals(nuevoUsuario))
+    			valido = false;
+    		
+    		i++;
+    	}
+    	
+    	return valido;
     }
 }
