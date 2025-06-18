@@ -39,7 +39,7 @@ public class Usuario {
 	@Override
 	public boolean equals(Object o){
 		
-		return o != null && (this == o || nombre.equals(((Usuario)o).getNombre()) || contrasenia.equals(((Usuario)o).getContrasenia()));
+		return o != null && (this == o && nombre.equals(((Usuario)o).getNombre()) && contrasenia.equals(((Usuario)o).getContrasenia()));
 	}
 	
 }

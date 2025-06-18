@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.Departamento;
@@ -120,29 +121,31 @@ public class EditarEstDialog extends JDialog {
 
 			@Override
 			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string == null) {
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+				if (string != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-					super.insertString(fb, offset, string, attr);
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+
 				}
 			}
 
 			@Override
 			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text == null) {
-					super.replace(fb, offset, length, text, attrs);
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+				if (text != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+
+				}else
 					super.replace(fb, offset, length, text, attrs);
-				}
 			}
 		});
 
@@ -152,29 +155,31 @@ public class EditarEstDialog extends JDialog {
 
 			@Override
 			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string == null) {
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+				if (string != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-					super.insertString(fb, offset, string, attr);
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+
 				}
 			}
 
 			@Override
 			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text == null) {
-					super.replace(fb, offset, length, text, attrs);
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+				if (text != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+
+				}else
 					super.replace(fb, offset, length, text, attrs);
-				}
 			}
 		});
 
@@ -185,29 +190,31 @@ public class EditarEstDialog extends JDialog {
 
 			@Override
 			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string == null) {
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+				if (string != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-Z0-9]*$")) {
-					super.insertString(fb, offset, string, attr);
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+
 				}
 			}
 
 			@Override
 			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text == null) {
-					super.replace(fb, offset, length, text, attrs);
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+				if (text != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-Z0-9]*$")) { 
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+
+				}else
 					super.replace(fb, offset, length, text, attrs);
-				}
 			}
 		});
 

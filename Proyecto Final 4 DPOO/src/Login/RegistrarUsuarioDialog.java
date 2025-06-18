@@ -35,7 +35,7 @@ public class RegistrarUsuarioDialog extends JDialog {
 
 	private void inicializarConfiguracionUI() {
 		setSize(800, 550); 
-		setLocationRelativeTo(getParent()); 
+		setLocationRelativeTo(parent); 
 		setResizable(false);
 		setLayout(new BorderLayout());
 		getContentPane().setBackground(Color.WHITE);
@@ -201,15 +201,12 @@ public class RegistrarUsuarioDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.CENTER;
 		panelIzquierdo.add(panelBotonesRegistro, gbc);
 
-		// Remove the "¿No tienes cuenta? Regístrate" section as it's not relevant for registration dialog
-		// gbc.gridy = 9; // Adjust gridy if you had more elements below
-
 		JPanel panelDerecho = new JPanel();
 		panelDerecho.setBackground(COLOR_PRIMARY);
 		panelDerecho.setLayout(new GridBagLayout());
 		add(panelDerecho, BorderLayout.CENTER);
 
-		JLabel labelNombreEmpresa = new JLabel("SIGIP"); // Kept "SIGIP" from the login window
+		JLabel labelNombreEmpresa = new JLabel("SIGIP");
 		labelNombreEmpresa.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		labelNombreEmpresa.setForeground(Color.WHITE);
 		GridBagConstraints gbcRight = new GridBagConstraints();
@@ -219,15 +216,4 @@ public class RegistrarUsuarioDialog extends JDialog {
 		panelDerecho.add(labelNombreEmpresa, gbcRight);
 	}
 
-	// You will need to integrate this dialog into your VentanaLogin.
-	// In VentanaLogin, when "Regístrate" button is clicked:
-	/*
-        botonRegistrarse.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Assuming `registro` is accessible from VentanaLogin
-                RegistrarUsuarioDialog registroDialog = new RegistrarUsuarioDialog(VentanaLogin.this, registro);
-                registroDialog.setVisible(true);
-            }
-        });
-	 */
 }

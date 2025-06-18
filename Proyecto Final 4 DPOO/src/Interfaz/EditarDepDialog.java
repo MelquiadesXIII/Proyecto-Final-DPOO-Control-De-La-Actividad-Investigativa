@@ -61,29 +61,31 @@ public class EditarDepDialog extends JDialog {
 
 			@Override
 			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string == null) {
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+				if (string != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-					super.insertString(fb, offset, string, attr);
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+
 				}
 			}
 
 			@Override
 			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text == null) {
-					super.replace(fb, offset, length, text, attrs);
-					return;
-				}
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+				if (text != null) {
 
-				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+
+					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+
+				}else
 					super.replace(fb, offset, length, text, attrs);
-				}
 			}
 		});
 
@@ -107,11 +109,11 @@ public class EditarDepDialog extends JDialog {
 				if(!campoNombre.getText().isEmpty()){
 
 					try{
-						
+
 						String nuevoNombre = getNombre();
 
 						departamento.setNombre(nuevoNombre);
-						
+
 						MensajeDialog d = new MensajeDialog(parent, "El departamento ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 						d.setVisible(true);
 						confirmado = true;
@@ -123,16 +125,16 @@ public class EditarDepDialog extends JDialog {
 						d.setVisible(true);
 						confirmado = false;
 					}
-				
+
 				}else{
-					
+
 					MensajeDialog d;
-					
+
 					if(campoNombre.getText().trim().isEmpty()){
 						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
 						d.setVisible(true);
 					}
-					
+
 				}
 			}
 		});
