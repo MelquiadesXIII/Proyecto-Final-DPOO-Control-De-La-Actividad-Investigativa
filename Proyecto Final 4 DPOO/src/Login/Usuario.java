@@ -6,7 +6,10 @@ public class Usuario {
 	private String contrasenia;
 	
 	
-	
+	public Usuario(String nombre, String contrasenia) {
+		setNombre(nombre);
+		setContrasenia(contrasenia);
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -19,6 +22,5 @@ public class Usuario {
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-	
 	
 }
