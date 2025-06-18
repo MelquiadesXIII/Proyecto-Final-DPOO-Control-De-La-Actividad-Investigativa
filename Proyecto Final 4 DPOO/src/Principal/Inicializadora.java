@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import Interfaz.*;
 import Logica.*;
+import Login.VentanaLogin;
 
 
 public class Inicializadora{
@@ -1861,8 +1862,8 @@ public class Inicializadora{
 				c4m5d3.emitirNota(d252, d295, 5);
 				c4m5d3.emitirNota(d252, d298, 3);
 
-				new VentanaPrincipal(vicedecanato);
-				
+				VentanaLogin v = new VentanaLogin(vicedecanato);	
+				v.setVisible(true);
 			}
 		});
 	}
