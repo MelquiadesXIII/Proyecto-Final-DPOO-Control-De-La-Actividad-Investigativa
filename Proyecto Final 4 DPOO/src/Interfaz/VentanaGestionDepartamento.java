@@ -21,7 +21,6 @@ import Logica.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 
 public class VentanaGestionDepartamento extends JDialog{
@@ -109,7 +108,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		configurarPanelesCRUD();
 		actualizarTodasLasTablas();
 
-		this.parent.setVisible(false);
+		//this.parent.setVisible(false);
 		setVisible(true);
 	}
 
@@ -425,7 +424,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Docentes registrados en el vicedecanato");
+		JLabel lblTitulo = new JLabel("Docentes registrados en el departamento");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -499,7 +498,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Estudiantes registrados en el vicedecanato");
+		JLabel lblTitulo = new JLabel("Estudiantes registrados en el departamento");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -568,7 +567,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Maestrías registradas en el vicedecanato");
+		JLabel lblTitulo = new JLabel("Maestrías registradas en el departamento");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -636,7 +635,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JPanel encabezado = new JPanel();
 		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 		encabezado.setPreferredSize(new Dimension(0, 50));
-		JLabel lblTitulo = new JLabel("Cursos de posgrado registrados");
+		JLabel lblTitulo = new JLabel("Cursos registrados en las maestrías del departamento");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 		encabezado.add(lblTitulo);
@@ -709,7 +708,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JPanel encabezado = new JPanel();
 	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
 	    encabezado.setPreferredSize(new Dimension(0, 50));
-	    JLabel lblTitulo = new JLabel("Líneas de investigación registradas");
+	    JLabel lblTitulo = new JLabel("Líneas de investigación registradas en el departamento");
 	    lblTitulo.setForeground(Color.WHITE);
 	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 	    encabezado.add(lblTitulo);
@@ -816,7 +815,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		boton.setBackground(COLOR_DEFAULT);
 		boton.setForeground(Color.WHITE);
-		boton.setPreferredSize(new Dimension(120, 35));
+		boton.setPreferredSize(new Dimension(130, 35));
 		boton.setFocusPainted(false);
 		boton.setBorderPainted(false);
 
@@ -998,9 +997,9 @@ public class VentanaGestionDepartamento extends JDialog{
 
 	private void configurarPanelCRUDMaestria(){
 
-		panelBotonesCRUDMaestria = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDMaestria = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 		panelBotonesCRUDMaestria.setBackground(Color.DARK_GRAY);
-
+		
 		JButton btnCrearMaestria = crearBotonCRUD("Crear");
 		btnCrearMaestria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -1008,7 +1007,7 @@ public class VentanaGestionDepartamento extends JDialog{
 				dialog.setVisible(true);
 
 				if(dialog.isConfirmado())
-					actualizarTablaMaestrias();
+					actualizarTodasLasTablas();
 			}
 
 		});
@@ -1038,7 +1037,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						modeloMaestrias.set(indexMaestria, maestria);
 
-						actualizarTablaMaestrias();
+						actualizarTodasLasTablas();
 
 					}
 				}else{
@@ -1064,6 +1063,8 @@ public class VentanaGestionDepartamento extends JDialog{
 						dptoActual.removerMaestria(maestria);
 
 						modeloMaestrias.remove(seleccionado);
+						
+						actualizarTodasLasTablas();
 
 						MensajeDialog mensaje = new MensajeDialog(parent,"Maestría eliminada correctamente",Tipo.RETROALIMENTACION);
 						mensaje.setVisible(true);
@@ -1075,9 +1076,31 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 		});
 
+		JButton btnMatricular = crearBotonCRUD("Matricular");
+		btnMatricular.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
+		
+		JButton btnBaja = crearBotonCRUD("Dar baja");
+		btnBaja.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
+		
 		panelBotonesCRUDMaestria.add(btnCrearMaestria);
 		panelBotonesCRUDMaestria.add(btnEditarMaestria);
 		panelBotonesCRUDMaestria.add(btnEliminarMaestria);
+		panelBotonesCRUDMaestria.add(btnMatricular);
+		panelBotonesCRUDMaestria.add(btnBaja);
 
 		panelMaestrias.add(panelBotonesCRUDMaestria, BorderLayout.SOUTH);
 	}
@@ -1104,6 +1127,16 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnEliminarCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+			}
+		});
+		
+		JButton btnNota = crearBotonCRUD("Dar Nota");
+		btnNota.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
 			}
 		});
 
