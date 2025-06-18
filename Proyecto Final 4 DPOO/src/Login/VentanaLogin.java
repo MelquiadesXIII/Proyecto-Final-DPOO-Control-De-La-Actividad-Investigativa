@@ -118,7 +118,7 @@ public class VentanaLogin extends JFrame {
         botonEntrar.setForeground(Color.WHITE);
         botonEntrar.setFocusPainted(false);
         botonEntrar.setBorderPainted(false);
-        botonEntrar.setPreferredSize(new Dimension(120, 40)); // Made smaller
+        botonEntrar.setPreferredSize(new Dimension(120, 40));
         botonEntrar.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 botonEntrar.setBackground(COLOR_ACCENT);
@@ -139,7 +139,16 @@ public class VentanaLogin extends JFrame {
                     m.setVisible(true);
                     dispose();
                     new VentanaPrincipal(vicedecanato);
-                } else {
+                    
+                } else if(nombreUsuario.trim().isEmpty() && contrasena.trim().isEmpty()){
+                	m = new MensajeDialog(VentanaLogin.this, "Todos los campos están vacíos", Tipo.RETROALIMENTACION);
+                    m.setVisible(true);
+                	
+                }else if(nombreUsuario.trim().isEmpty() || contrasena.trim().isEmpty()){
+                	m = new MensajeDialog(VentanaLogin.this, "Termine de rellenar los campos", Tipo.RETROALIMENTACION);
+                    m.setVisible(true);
+                	
+                }else {
                     m = new MensajeDialog(VentanaLogin.this, "El usuario no existe", Tipo.RETROALIMENTACION);
                     m.setVisible(true);
                 }
@@ -210,8 +219,8 @@ public class VentanaLogin extends JFrame {
         botonRegistrarse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
-            	
-                JOptionPane.showMessageDialog(VentanaLogin.this, "Abriendo ventana de registro...", "Registro", JOptionPane.INFORMATION_MESSAGE);
+            	RegistrarUsuarioDialog r = new RegistrarUsuarioDialog(VentanaLogin.this, registro);
+            	r.setVisible(true);
             }
         });
         
