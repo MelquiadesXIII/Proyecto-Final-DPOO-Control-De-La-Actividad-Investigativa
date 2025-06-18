@@ -2,6 +2,9 @@ package Login;
 
 import javax.swing.*;
 
+import Interfaz.MensajeDialog;
+import Interfaz.MensajeDialog.Tipo;
+import Interfaz.VentanaPrincipal;
 import Logica.Vicedecanato;
 
 import java.awt.*;
@@ -19,10 +22,13 @@ public class VentanaLogin extends JFrame {
     private final Color COLOR_ACCENT = new Color(70, 80, 90); 
     private final Color COLOR_TEXT_FIELD_BORDER = new Color(150, 150, 150);
     private Vicedecanato vicedecanato;
+    private RegistroUsuarios registro;
 
     public VentanaLogin(Vicedecanato vicedecanato) {
     	
     	this.vicedecanato = vicedecanato;
+    	registro = new RegistroUsuarios();
+    	
         inicializarConfiguracionUI();
         crearPanelLogin();
     }
@@ -103,13 +109,16 @@ public class VentanaLogin extends JFrame {
         gbc.gridy = 6;
         panelIzquierdo.add(campoContrasena, gbc);
 
+        JPanel panelBotonesLogin = new JPanel(new GridBagLayout()); // Use a new panel for the buttons
+        panelBotonesLogin.setBackground(Color.WHITE); // Match background with parent panel
+        
         final JButton botonEntrar = new JButton("ENTRAR");
         botonEntrar.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        botonEntrar.setBackground(COLOR_PRIMARY); // Use the primary color for buttons
+        botonEntrar.setBackground(COLOR_PRIMARY);
         botonEntrar.setForeground(Color.WHITE);
         botonEntrar.setFocusPainted(false);
         botonEntrar.setBorderPainted(false);
-        botonEntrar.setPreferredSize(new Dimension(150, 40));
+        botonEntrar.setPreferredSize(new Dimension(120, 40)); // Made smaller
         botonEntrar.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 botonEntrar.setBackground(COLOR_ACCENT);
@@ -121,18 +130,63 @@ public class VentanaLogin extends JFrame {
         });
         botonEntrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               
-                String usuario = campoUsuario.getText();
+                String nombreUsuario = campoUsuario.getText();
                 String contrasena = new String(campoContrasena.getPassword());
-                JOptionPane.showMessageDialog(VentanaLogin.this, "Usuario: " + usuario + "\nContraseña: " + contrasena, "Datos de Login", JOptionPane.INFORMATION_MESSAGE);
-               //Validar aqui
+                MensajeDialog m;
+
+                if (registro.verificarCredenciales(nombreUsuario, contrasena)) {
+                    m = new MensajeDialog(VentanaLogin.this, "Ha iniciado sesión correctamente", Tipo.RETROALIMENTACION);
+                    m.setVisible(true);
+                    dispose();
+                    new VentanaPrincipal(vicedecanato);
+                } else {
+                    m = new MensajeDialog(VentanaLogin.this, "El usuario no existe", Tipo.RETROALIMENTACION);
+                    m.setVisible(true);
+                }
             }
         });
+        
+        GridBagConstraints gbcButtons = new GridBagConstraints();
+        gbcButtons.insets = new Insets(0, 5, 0, 5);
+        gbcButtons.gridx = 0;
+        gbcButtons.gridy = 0;
+        panelBotonesLogin.add(botonEntrar, gbcButtons);
+
+        final JButton botonSalir = new JButton("SALIR");
+        botonSalir.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        botonSalir.setBackground(COLOR_PRIMARY);
+        botonSalir.setForeground(Color.WHITE);
+        botonSalir.setFocusPainted(false);
+        botonSalir.setBorderPainted(false);
+        botonSalir.setPreferredSize(new Dimension(120, 40));
+        botonSalir.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                botonSalir.setBackground(COLOR_ACCENT);
+            }
+
+            public void mouseExited(MouseEvent e) {
+                botonSalir.setBackground(COLOR_PRIMARY);
+            }
+        });
+        botonSalir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+                MensajeDialog dialog = new MensajeDialog(VentanaLogin.this, "¿Desea salir de la aplicación?", Tipo.CONFIRMACION);
+                dialog.setVisible(true);
+                if (dialog.isConfirmado()) {
+                    System.exit(0);
+                }
+            }
+        });
+        gbcButtons.gridx = 1;
+        gbcButtons.gridy = 0;
+        panelBotonesLogin.add(botonSalir, gbcButtons);
+
         gbc.gridy = 7;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(30, 10, 10, 10);
-        panelIzquierdo.add(botonEntrar, gbc);
-       
+        gbc.anchor = GridBagConstraints.CENTER; 
+        panelIzquierdo.add(panelBotonesLogin, gbc);
         JLabel labelNoCuenta = new JLabel("¿No tienes cuenta? ");
         labelNoCuenta.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         labelNoCuenta.setForeground(Color.BLACK);
@@ -155,6 +209,8 @@ public class VentanaLogin extends JFrame {
         });
         botonRegistrarse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
+            	
                 JOptionPane.showMessageDialog(VentanaLogin.this, "Abriendo ventana de registro...", "Registro", JOptionPane.INFORMATION_MESSAGE);
             }
         });
