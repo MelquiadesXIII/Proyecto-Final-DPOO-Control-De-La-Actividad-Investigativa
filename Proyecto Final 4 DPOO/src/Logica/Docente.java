@@ -128,5 +128,10 @@ public class Docente extends Investigador{
 								catCientifica == ((Docente)d).getCatCientifica() &&
 								catDocente == ((Docente)d).getCatDocente()));
 	}
+	
+	@Override
+	public String toString() {
+	    return nombre + " " + apellidos;
+	}
 
 }

@@ -82,6 +82,8 @@ public class VentanaGestionDepartamento extends JDialog{
 	private ArrayList<ResultadoInvestigativo> resultadosEnTabla = new ArrayList<>();
 	private DefaultTableModel modeloTablaLineas;
 	private JTable tablaLineas;
+	private DefaultListModel<Object> modeloLineas;
+	private JList<Object> listaLineas;
 	private JScrollPane scrollTablaLineas;
 	private DefaultTableModel modeloTablaResultados;
 	private JTable tablaResultados;
@@ -789,6 +791,8 @@ public class VentanaGestionDepartamento extends JDialog{
 	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
 	    encabezado.add(lblTitulo);
 	    
+	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
+	    
 	    panelResultados.add(encabezado, BorderLayout.NORTH);
 	    crearTablaResultados();
 	    panelResultados.revalidate();
@@ -1018,7 +1022,7 @@ public class VentanaGestionDepartamento extends JDialog{
 				int seleccionado = listaMaestrias.getSelectedIndex();
 
 				if(seleccionado != -1){
-					EditarMaestriaDialog dialog = new EditarMaestriaDialog(parent,vicedecanato);
+					EditarMaestriaDialog dialog = new EditarMaestriaDialog(parent, dptoActual);
 					dialog.setVisible(true);
 
 					if (dialog.isConfirmado()){
@@ -1154,21 +1158,66 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JButton btnCrearLinea = crearBotonCRUD("Crear");
 	    btnCrearLinea.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            
+	        	CrearLineaInvestigacionDialog dialog = new CrearLineaInvestigacionDialog(parent, vicedecanato, dptoActual);
+				dialog.setVisible(true);
+
+				if(dialog.isConfirmado())
+					actualizarTodasLasTablas();
 	        }
 	    });
 
 	    JButton btnEditarLinea = crearBotonCRUD("Editar");
 	    btnEditarLinea.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	          
-	        }
+	    	public void actionPerformed(ActionEvent e){
+
+				if(tablaLineas.getSelectedRows().length == 1){
+					int seleccionado = tablaLineas.getSelectedRow();
+
+					if(seleccionado != -1){
+						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+						EditarLineaInvestigacionDialog dialog = new EditarLineaInvestigacionDialog(parent, vicedecanato, dptoActual, linea);
+						dialog.setVisible(true);
+
+						if (dialog.isConfirmado()){
+
+							actualizarTablaLineas();
+
+						}
+					}else{
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
+						mensajeRetroalimentacion.setVisible(true);
+					}
+				}
+			}
 	    });
 
 	    JButton btnEliminarLinea = crearBotonCRUD("Eliminar");
 	    btnEliminarLinea.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	           
+	        	if(tablaLineas.getSelectedRows().length == 1){
+					int seleccionado = tablaLineas.getSelectedRow();
+
+					if (seleccionado != -1) {
+
+						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+
+						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar "+ " " + linea.getNombre() + "?",Tipo.CONFIRMACION);
+
+						confirmacion.setVisible(true);
+
+						if (confirmacion.isConfirmado()) {
+							dptoActual.removerLineaInvestigacion(linea);
+
+							actualizarTablaLineas();
+
+							MensajeDialog mensaje = new MensajeDialog(parent,"Línea eliminada correctamente",Tipo.RETROALIMENTACION);
+							mensaje.setVisible(true);
+						}
+					} else {
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una línea de investigación para eliminar",Tipo.RETROALIMENTACION);
+						mensajeRetroalimentacion.setVisible(true);
+					}
+				}
 	        }
 	    });
 
@@ -1182,11 +1231,51 @@ public class VentanaGestionDepartamento extends JDialog{
 	private void configurarPanelCRUDResultados() {
 	    panelBotonesCRUDResultados = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 	    panelBotonesCRUDResultados.setBackground(Color.DARK_GRAY);
+	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
 
 	    JButton btnCrearResultado = crearBotonCRUD("Crear");
 	    btnCrearResultado.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            
+	        	SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent , estudiantesEnTabla);
+	            seleccionDialog.setVisible(true);
+
+	            if (seleccionDialog.isConfirmado()) {
+	                String tipo = seleccionDialog.getTipoSeleccionado();
+	                Investigador autor = seleccionDialog.getEstudianteSeleccionado();
+
+	                ResultadoInvestigativo resultado = null;
+
+	                switch (tipo) {
+	                    case "Ponencia de Evento":
+	                        CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
+	                        ponenciaDialog.setVisible(true);
+	                        if (ponenciaDialog.isConfirmado()) {
+	                            resultado = ponenciaDialog.getPonencia();
+	                        }
+	                        break;
+
+	                    case "Artículo":
+	                        CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent);
+	                        articuloDialog.setVisible(true);
+	                        if (articuloDialog.isConfirmado()) {
+	                            resultado = articuloDialog.getArticulo();
+	                        }
+	                        break;
+
+	                    case "Capítulo de Libro":
+	                        CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent);
+	                        capituloDialog.setVisible(true);
+	                        if (capituloDialog.isConfirmado()) {
+	                            resultado = capituloDialog.getCapitulo();
+	                        }
+	                        break;
+	                }
+
+	                if (resultado != null) {
+	                    autor.agregarResultado(resultado);
+	                    actualizarTablaResultados();
+	                }
+	            }
 	        }
 	    });
 
@@ -1207,8 +1296,6 @@ public class VentanaGestionDepartamento extends JDialog{
 	    panelBotonesCRUDResultados.add(btnCrearResultado);
 	    panelBotonesCRUDResultados.add(btnEditarResultado);
 	    panelBotonesCRUDResultados.add(btnEliminarResultado);
-
-	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
 	}
 	
 	private void actualizarTodasLasTablas(){

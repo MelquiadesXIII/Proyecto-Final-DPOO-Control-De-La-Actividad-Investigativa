@@ -3,6 +3,7 @@ package Interfaz;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
+import Logica.Departamento;
 import Logica.Vicedecanato;
 
 public class EditarMaestriaDialog extends JDialog{
@@ -12,7 +13,7 @@ public class EditarMaestriaDialog extends JDialog{
 	private String campoEstudio;
 	private String nombre;
 
-	public EditarMaestriaDialog(JFrame parent, Vicedecanato vicedecanato) {
+	public EditarMaestriaDialog(JFrame parent, Departamento dptoActual) {
 	}
 
 	public boolean isConfirmado() {
