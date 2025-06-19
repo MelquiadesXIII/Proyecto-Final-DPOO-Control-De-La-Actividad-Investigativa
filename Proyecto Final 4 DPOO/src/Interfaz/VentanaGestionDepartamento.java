@@ -82,8 +82,6 @@ public class VentanaGestionDepartamento extends JDialog{
 	private ArrayList<ResultadoInvestigativo> resultadosEnTabla = new ArrayList<>();
 	private DefaultTableModel modeloTablaLineas;
 	private JTable tablaLineas;
-	private DefaultListModel<Object> modeloLineas;
-	private JList<Object> listaLineas;
 	private JScrollPane scrollTablaLineas;
 	private DefaultTableModel modeloTablaResultados;
 	private JTable tablaResultados;
