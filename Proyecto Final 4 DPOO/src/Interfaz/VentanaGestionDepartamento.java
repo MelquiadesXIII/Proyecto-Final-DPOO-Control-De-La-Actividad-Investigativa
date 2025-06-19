@@ -1236,7 +1236,46 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JButton btnCrearResultado = crearBotonCRUD("Crear");
 	    btnCrearResultado.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            
+	        	SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent , estudiantesEnTabla);
+	            seleccionDialog.setVisible(true);
+
+	            if (seleccionDialog.isConfirmado()) {
+	                String tipo = seleccionDialog.getTipoSeleccionado();
+	                Investigador autor = seleccionDialog.getEstudianteSeleccionado();
+
+	                ResultadoInvestigativo resultado = null;
+
+	                switch (tipo) {
+	                    case "Ponencia de Evento":
+	                        CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
+	                        ponenciaDialog.setVisible(true);
+	                        if (ponenciaDialog.isConfirmado()) {
+	                            resultado = ponenciaDialog.getPonencia();
+	                        }
+	                        break;
+
+	                    case "Artículo":
+	                        CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent);
+	                        articuloDialog.setVisible(true);
+	                        if (articuloDialog.isConfirmado()) {
+	                            resultado = articuloDialog.getArticulo();
+	                        }
+	                        break;
+
+	                    case "Capítulo de Libro":
+	                        CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent);
+	                        capituloDialog.setVisible(true);
+	                        if (capituloDialog.isConfirmado()) {
+	                            resultado = capituloDialog.getCapitulo();
+	                        }
+	                        break;
+	                }
+
+	                if (resultado != null) {
+	                    autor.agregarResultado(resultado);
+	                    actualizarTablaResultados();
+	                }
+	            }
 	        }
 	    });
 
