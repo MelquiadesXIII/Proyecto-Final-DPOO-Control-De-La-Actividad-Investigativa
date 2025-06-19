@@ -33,8 +33,8 @@ import Logica.Estudiante;
 
 public class SeleccionTipoResultadoDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
-	private JComboBox<String> comboTipo;
-    private JComboBox<Estudiante> comboEstudiantes;
+	private JComboBox<String> comboTipo = new JComboBox<>();
+    private JComboBox<Estudiante> comboEstudiantes = new JComboBox<>();;
     private boolean confirmado = false;
     private Point point = new Point();
 
@@ -71,9 +71,6 @@ public class SeleccionTipoResultadoDialog extends JDialog {
         panel.add(lblAutor);
         estiloLabel(lblAutor);
 
-        comboEstudiantes.setBounds(180, 80, 180, 30);
-        panel.add(comboEstudiantes);
-        
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
         panelBotones.setBounds(20, 130, 360, 60);
         panelBotones.setBackground(new Color(30, 40, 50));
@@ -82,7 +79,8 @@ public class SeleccionTipoResultadoDialog extends JDialog {
         comboTipo = new JComboBox<>(tipos);
         estiloComboBox(comboTipo);
 
-        comboEstudiantes = new JComboBox<>();
+        comboEstudiantes.setBounds(180, 80, 180, 30);
+        panel.add(comboEstudiantes);
         for (Estudiante e : listaEstudiantes) {
             comboEstudiantes.addItem(e);
         }
