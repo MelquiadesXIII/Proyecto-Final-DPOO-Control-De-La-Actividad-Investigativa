@@ -50,4 +50,8 @@ public class Estudiante extends Investigador{
 								apellidos.equals(((Estudiante)o).getApellidos()) &&
 								grupo.equals(((Estudiante)o).getGrupo())));
 	}
+	
+	public String toString() {
+	    return nombre + " " + apellidos;
+	}
 }

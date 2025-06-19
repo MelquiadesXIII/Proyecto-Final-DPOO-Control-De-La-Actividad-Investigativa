@@ -9,7 +9,7 @@ import javax.swing.border.LineBorder;
 
 import Logica.CapituloLibro;
 
-public class CrearCapituloDialog extends JDialog {
+public class EditarCapituloDialog extends JDialog {
     private static final long serialVersionUID = 1L;
 
     private JTextField campoTitulo, campoAutores, campoEditores, campoEditorial, campoISSN, campoVolumen;
@@ -18,7 +18,7 @@ public class CrearCapituloDialog extends JDialog {
     private CapituloLibro capitulo;
     private Point point = new Point();
 
-    public CrearCapituloDialog(final JFrame parent) {
+    public EditarCapituloDialog(final JFrame parent) {
         super(parent, "Crear Capítulo de Libro", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
@@ -99,20 +99,20 @@ public class CrearCapituloDialog extends JDialog {
         panelBotones.setBounds(20, 380, 380, 50);
         panelBotones.setBackground(new Color(30, 40, 50));
 
-        JButton btnCrear = new JButton("Crear");
-        estiloBoton(btnCrear);
-        btnCrear.setPreferredSize(new Dimension(120, 40));
+        JButton btnAceptar = new JButton("Aceptar");
+        estiloBoton(btnAceptar);
+        btnAceptar.setPreferredSize(new Dimension(120, 40));
 
         JButton btnCancelar = new JButton("Cancelar");
         estiloBoton(btnCancelar);
         btnCancelar.setPreferredSize(new Dimension(120, 40));
 
-        panelBotones.add(btnCrear);
+        panelBotones.add(btnAceptar);
         panelBotones.add(btnCancelar);
         panel.add(panelBotones);
 
         
-        btnCrear.addActionListener(new ActionListener() {
+        btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String titulo = campoTitulo.getText().trim();

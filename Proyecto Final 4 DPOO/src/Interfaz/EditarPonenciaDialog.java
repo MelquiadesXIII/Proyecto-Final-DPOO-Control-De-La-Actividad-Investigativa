@@ -12,7 +12,7 @@ import javax.swing.border.LineBorder;
 import Logica.PonenciaEvento;
 import com.toedter.calendar.JDateChooser;
 
-public class CrearPonenciaDialog extends JDialog {
+public class EditarPonenciaDialog extends JDialog {
     private static final long serialVersionUID = 1L;
 
     private JTextField txtNombre, txtLugar, txtISBN;
@@ -22,8 +22,8 @@ public class CrearPonenciaDialog extends JDialog {
     private PonenciaEvento ponencia;
     private Point point = new Point();
 
-    public CrearPonenciaDialog(final JFrame parent) {
-        super(parent, "Crear Ponencia", true);
+    public EditarPonenciaDialog(final JFrame parent) {
+        super(parent, "Editar Ponencia", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
         setSize(420, 300);
@@ -36,7 +36,7 @@ public class CrearPonenciaDialog extends JDialog {
         panel.setBounds(0, 0, 420, 300);
         setContentPane(panel);
 
-        JLabel lblTitulo = new JLabel("Crear Ponencia");
+        JLabel lblTitulo = new JLabel("Editar Ponencia");
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setBounds(140, 10, 200, 30);
@@ -83,18 +83,18 @@ public class CrearPonenciaDialog extends JDialog {
         estiloDateChooser(fecha);
         panel.add(fecha);
 
-        JButton btnCrear = new JButton("Crear");
-        btnCrear.setBounds(80, 230, 110, 40);
-        estiloBoton(btnCrear);
-        panel.add(btnCrear);
+        JButton btnAceptar = new JButton("Crear");
+        btnAceptar.setBounds(80, 230, 110, 40);
+        estiloBoton(btnAceptar);
+        panel.add(btnAceptar);
 
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(230, 230, 110, 40);
         estiloBoton(btnCancelar);
         panel.add(btnCancelar);
 
-        btnCrear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        btnAceptar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
                 try {
                     String nombre = txtNombre.getText();
                     String lugar = txtLugar.getText();
@@ -106,10 +106,19 @@ public class CrearPonenciaDialog extends JDialog {
                         return;
                     }
 
-                    LocalDate fecha = convertirDateALocalDate(fechaSeleccionada);
-                    ponencia = new PonenciaEvento(nombre, fecha, lugar, isbn);
+                    LocalDate fechaLocal = convertirDateALocalDate(fechaSeleccionada);
+
+                    
+                    if (ponencia != null) {
+                        ponencia.setNombre(nombre);
+                        ponencia.setLugar(lugar);
+                        ponencia.setISBN(isbn);
+                        ponencia.setFecha(fechaLocal);
+                    }
+
                     confirmado = true;
                     dispose();
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(parent, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }

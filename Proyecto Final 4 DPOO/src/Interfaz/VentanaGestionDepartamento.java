@@ -86,6 +86,7 @@ public class VentanaGestionDepartamento extends JDialog{
 	private DefaultTableModel modeloTablaResultados;
 	private JTable tablaResultados;
 	private JScrollPane scrollTablaResultados;
+	private Investigador investigadorActual;
 
 
 
@@ -1234,42 +1235,38 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JButton btnCrearResultado = crearBotonCRUD("Crear");
 	    btnCrearResultado.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	        	SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent , estudiantesEnTabla);
+	            SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent, estudiantesEnTabla, docentesEnTabla);
 	            seleccionDialog.setVisible(true);
 
 	            if (seleccionDialog.isConfirmado()) {
 	                String tipo = seleccionDialog.getTipoSeleccionado();
-	                Investigador autor = seleccionDialog.getEstudianteSeleccionado();
+	                Investigador autor = seleccionDialog.getInvestigadorSeleccionado(); // <-- CORREGIDO
 
 	                ResultadoInvestigativo resultado = null;
 
-	                switch (tipo) {
-	                    case "Ponencia de Evento":
-	                        CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
-	                        ponenciaDialog.setVisible(true);
-	                        if (ponenciaDialog.isConfirmado()) {
-	                            resultado = ponenciaDialog.getPonencia();
-	                        }
-	                        break;
+	                if (tipo.equals("Ponencia de Evento")) {
+	                    CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
+	                    ponenciaDialog.setVisible(true);
+	                    if (ponenciaDialog.isConfirmado()) {
+	                        resultado = ponenciaDialog.getPonencia();
+	                    }
 
-	                    case "Artículo":
-	                        CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent);
-	                        articuloDialog.setVisible(true);
-	                        if (articuloDialog.isConfirmado()) {
-	                            resultado = articuloDialog.getArticulo();
-	                        }
-	                        break;
+	                } else if (tipo.equals("Artículo")) {
+	                    CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent);
+	                    articuloDialog.setVisible(true);
+	                    if (articuloDialog.isConfirmado()) {
+	                        resultado = articuloDialog.getArticulo();
+	                    }
 
-	                    case "Capítulo de Libro":
-	                        CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent);
-	                        capituloDialog.setVisible(true);
-	                        if (capituloDialog.isConfirmado()) {
-	                            resultado = capituloDialog.getCapitulo();
-	                        }
-	                        break;
+	                } else if (tipo.equals("Capítulo de Libro")) {
+	                    CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent);
+	                    capituloDialog.setVisible(true);
+	                    if (capituloDialog.isConfirmado()) {
+	                        resultado = capituloDialog.getCapitulo();
+	                    }
 	                }
 
-	                if (resultado != null) {
+	                if (resultado != null && autor != null) {
 	                    autor.agregarResultado(resultado);
 	                    actualizarTablaResultados();
 	                }
@@ -1280,14 +1277,124 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JButton btnEditarResultado = crearBotonCRUD("Editar");
 	    btnEditarResultado.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	           
+	        	SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent, estudiantesEnTabla, docentesEnTabla);
+	            seleccionDialog.setVisible(true);
+
+	            if (seleccionDialog.isConfirmado()) {
+	                String tipo = seleccionDialog.getTipoSeleccionado();
+	                Investigador autor = seleccionDialog.getInvestigadorSeleccionado();
+
+	                ResultadoInvestigativo resultado = null;
+
+	                if (tipo.equals("Ponencia de Evento")) {
+	                    CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
+	                    ponenciaDialog.setVisible(true);
+	                    if (ponenciaDialog.isConfirmado()) {
+	                        resultado = ponenciaDialog.getPonencia();
+	                    }
+
+	                } else if (tipo.equals("Artículo")) {
+	                    CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent);
+	                    articuloDialog.setVisible(true);
+	                    if (articuloDialog.isConfirmado()) {
+	                        resultado = articuloDialog.getArticulo();
+	                    }
+
+	                } else if (tipo.equals("Capítulo de Libro")) {
+	                    CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent);
+	                    capituloDialog.setVisible(true);
+	                    if (capituloDialog.isConfirmado()) {
+	                        resultado = capituloDialog.getCapitulo();
+	                    }
+	                }
+
+	                if (resultado != null && autor != null) {
+	                    autor.agregarResultado(resultado);
+	                    actualizarTablaResultados();
+	                }
+	            }
 	        }
 	    });
 
 	    JButton btnEliminarResultado = crearBotonCRUD("Eliminar");
 	    btnEliminarResultado.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	           
+	            int seleccionado = tablaResultados.getSelectedRow();
+
+	            if (seleccionado != -1) {
+	                ResultadoInvestigativo resultado = resultadosEnTabla.get(seleccionado);
+
+	                MensajeDialog confirmacion = new MensajeDialog(
+	                    parent,
+	                    "¿Estás seguro que deseas eliminar \"" + resultado.getNombrePublicacion() + "\"?",
+	                    Tipo.CONFIRMACION
+	                );
+	                confirmacion.setVisible(true);
+
+	                if (confirmacion.isConfirmado()) {
+	                    try {
+	                        Investigador autor = null;
+
+	                        
+	                        for (int i = 0; i < estudiantesEnTabla.size(); i++) {
+	                            Estudiante est = estudiantesEnTabla.get(i);
+	                            if (est.getResultados().contains(resultado)) {
+	                                autor = est;
+	                                break;
+	                            }
+	                        }
+
+	                        
+	                        if (autor == null) {
+	                            for (int i = 0; i < docentesEnTabla.size(); i++) {
+	                                Docente doc = docentesEnTabla.get(i);
+	                                if (doc.getResultados().contains(resultado)) {
+	                                    autor = doc;
+	                                    break;
+	                                }
+	                            }
+	                        }
+
+	                        
+	                        if (autor != null) {
+	                            autor.removerResultado(resultado);
+
+	                            resultadosEnTabla.remove(seleccionado);
+	                            actualizarTablaResultados();
+
+	                            MensajeDialog mensaje = new MensajeDialog(
+	                                parent,
+	                                "Resultado eliminado correctamente.",
+	                                Tipo.RETROALIMENTACION
+	                            );
+	                            mensaje.setVisible(true);
+	                        } else {
+	                            MensajeDialog error = new MensajeDialog(
+	                                parent,
+	                                "No se encontró al autor del resultado. No se pudo eliminar.",
+	                                Tipo.RETROALIMENTACION
+	                            );
+	                            error.setVisible(true);
+	                        }
+
+	                    } catch (Exception ex) {
+	                        MensajeDialog mensajeError = new MensajeDialog(
+	                            parent,
+	                            ex.getMessage(),
+	                            Tipo.RETROALIMENTACION
+	                        );
+	                        mensajeError.setVisible(true);
+	                    }
+	                }
+
+	            } else {
+	                MensajeDialog mensaje = new MensajeDialog(
+	                    parent,
+	                    "Debes seleccionar un resultado investigativo para eliminar.",
+	                    Tipo.RETROALIMENTACION
+	                );
+	                mensaje.setVisible(true);
+	            }
 	        }
 	    });
 
