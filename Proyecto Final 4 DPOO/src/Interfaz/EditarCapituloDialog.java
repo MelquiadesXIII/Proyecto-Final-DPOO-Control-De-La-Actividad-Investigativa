@@ -13,13 +13,14 @@ public class EditarCapituloDialog extends JDialog {
     private static final long serialVersionUID = 1L;
 
     private JTextField campoTitulo, campoAutores, campoEditores, campoEditorial, campoISSN, campoVolumen;
-
     private boolean confirmado = false;
     private CapituloLibro capitulo;
     private Point point = new Point();
 
-    public EditarCapituloDialog(final JFrame parent) {
-        super(parent, "Crear Capítulo de Libro", true);
+    public EditarCapituloDialog(final JFrame parent, CapituloLibro capituloEditar) {
+        super(parent, "Editar Capítulo de Libro", true);
+        this.capitulo = capituloEditar;
+
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
         getContentPane().setLayout(new BorderLayout());
@@ -27,12 +28,12 @@ public class EditarCapituloDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(420, 450));
+        panel.setPreferredSize(new Dimension(420, 410));
         panel.setLayout(null);
 
         JPanel panelCampos = new JPanel(null);
         panelCampos.setBackground(new Color(30, 40, 50));
-        panelCampos.setBounds(20, 60, 380, 310);
+        panelCampos.setBounds(20, 60, 380, 263);
         panel.add(panelCampos);
 
         JLabel lblTitulo = new JLabel("Título:");
@@ -40,7 +41,7 @@ public class EditarCapituloDialog extends JDialog {
         estiloLabel(lblTitulo);
         panelCampos.add(lblTitulo);
 
-        campoTitulo = new JTextField();
+        campoTitulo = new JTextField(capitulo.getNombrePublicacion());
         campoTitulo.setBounds(150, 10, 200, 30);
         estiloCampo(campoTitulo);
         panelCampos.add(campoTitulo);
@@ -50,7 +51,7 @@ public class EditarCapituloDialog extends JDialog {
         estiloLabel(lblAutores);
         panelCampos.add(lblAutores);
 
-        campoAutores = new JTextField();
+        campoAutores = new JTextField(String.join(", ", capitulo.getAutores()));
         campoAutores.setBounds(150, 50, 200, 30);
         estiloCampo(campoAutores);
         panelCampos.add(campoAutores);
@@ -60,7 +61,7 @@ public class EditarCapituloDialog extends JDialog {
         estiloLabel(lblEditores);
         panelCampos.add(lblEditores);
 
-        campoEditores = new JTextField();
+        campoEditores = new JTextField(String.join(", ", capitulo.getNombresEditores()));
         campoEditores.setBounds(150, 90, 200, 30);
         estiloCampo(campoEditores);
         panelCampos.add(campoEditores);
@@ -70,7 +71,7 @@ public class EditarCapituloDialog extends JDialog {
         estiloLabel(lblEditorial);
         panelCampos.add(lblEditorial);
 
-        campoEditorial = new JTextField();
+        campoEditorial = new JTextField(capitulo.getEditorial());
         campoEditorial.setBounds(150, 130, 200, 30);
         estiloCampo(campoEditorial);
         panelCampos.add(campoEditorial);
@@ -80,7 +81,7 @@ public class EditarCapituloDialog extends JDialog {
         estiloLabel(lblISSN);
         panelCampos.add(lblISSN);
 
-        campoISSN = new JTextField();
+        campoISSN = new JTextField(capitulo.getISSN());
         campoISSN.setBounds(150, 170, 200, 30);
         estiloCampo(campoISSN);
         panelCampos.add(campoISSN);
@@ -90,13 +91,14 @@ public class EditarCapituloDialog extends JDialog {
         estiloLabel(lblVolumen);
         panelCampos.add(lblVolumen);
 
-        campoVolumen = new JTextField();
+        campoVolumen = new JTextField(capitulo.getVolumen());
         campoVolumen.setBounds(150, 210, 200, 30);
         estiloCampo(campoVolumen);
         panelCampos.add(campoVolumen);
 
+        
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panelBotones.setBounds(20, 380, 380, 50);
+        panelBotones.setBounds(20, 336, 380, 50);
         panelBotones.setBackground(new Color(30, 40, 50));
 
         JButton btnAceptar = new JButton("Aceptar");
@@ -123,13 +125,19 @@ public class EditarCapituloDialog extends JDialog {
                     String[] autoresArray = campoAutores.getText().trim().split(",");
                     String[] editoresArray = campoEditores.getText().trim().split(",");
 
-                    ArrayList<String> autores = new ArrayList<String>();
+                    ArrayList<String> autores = new ArrayList<>();
                     for (String a : autoresArray) autores.add(a.trim());
 
-                    ArrayList<String> editores = new ArrayList<String>();
-                    for (String e1 : editoresArray) editores.add(e1.trim());
+                    ArrayList<String> editores = new ArrayList<>();
+                    for (String ed : editoresArray) editores.add(ed.trim());
 
-                    capitulo = new CapituloLibro(titulo, autores, editores, editorial, issn, volumen);
+                    capitulo.setTitulo(titulo);
+                    capitulo.setAutores(autores);
+                    capitulo.setNombresEditores(editores);
+                    capitulo.setEditorial(editorial);
+                    capitulo.setISSN(issn);
+                    capitulo.setVolumen(volumen);
+
                     confirmado = true;
                     dispose();
                 } catch (Exception ex) {
@@ -138,14 +146,14 @@ public class EditarCapituloDialog extends JDialog {
             }
         });
 
-        
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
+
+        btnCancelar.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		dispose();
+        	}
         });
 
-        JLabel tituloLabel = new JLabel("Crear Capítulo de Libro");
+        JLabel tituloLabel = new JLabel("Editar Capítulo de Libro");
         tituloLabel.setForeground(Color.WHITE);
         tituloLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         tituloLabel.setBounds(100, 15, 250, 30);
@@ -192,6 +200,18 @@ public class EditarCapituloDialog extends JDialog {
         boton.setBorderPainted(false);
         boton.setOpaque(true);
     }
+    
+    public void setCapitulo(CapituloLibro capitulo) {
+        this.capitulo = capitulo;
+
+        campoTitulo.setText(capitulo.getNombrePublicacion());
+        campoEditorial.setText(capitulo.getEditorial());
+        campoISSN.setText(capitulo.getISSN());
+        campoVolumen.setText(capitulo.getVolumen());
+
+        campoAutores.setText(String.join(", ", capitulo.getAutores()));
+        campoEditores.setText(String.join(", ", capitulo.getNombresEditores()));
+    }
 
     public boolean isConfirmado() {
         return confirmado;
@@ -200,8 +220,4 @@ public class EditarCapituloDialog extends JDialog {
     public CapituloLibro getCapitulo() {
         return capitulo;
     }
-
-	public void setCapitulo(CapituloLibro resultado) {
-		
-	}
 }

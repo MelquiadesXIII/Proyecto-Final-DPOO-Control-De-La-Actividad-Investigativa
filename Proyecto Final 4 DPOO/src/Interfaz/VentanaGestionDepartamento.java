@@ -1235,49 +1235,8 @@ public class VentanaGestionDepartamento extends JDialog{
 	    JButton btnCrearResultado = crearBotonCRUD("Crear");
 	    btnCrearResultado.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
+	            
 	            SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent, estudiantesEnTabla, docentesEnTabla);
-	            seleccionDialog.setVisible(true);
-
-	            if (seleccionDialog.isConfirmado()) {
-	                String tipo = seleccionDialog.getTipoSeleccionado();
-	                Investigador autor = seleccionDialog.getInvestigadorSeleccionado(); // <-- CORREGIDO
-
-	                ResultadoInvestigativo resultado = null;
-
-	                if (tipo.equals("Ponencia de Evento")) {
-	                    CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
-	                    ponenciaDialog.setVisible(true);
-	                    if (ponenciaDialog.isConfirmado()) {
-	                        resultado = ponenciaDialog.getPonencia();
-	                    }
-
-	                } else if (tipo.equals("Artículo")) {
-	                    CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent);
-	                    articuloDialog.setVisible(true);
-	                    if (articuloDialog.isConfirmado()) {
-	                        resultado = articuloDialog.getArticulo();
-	                    }
-
-	                } else if (tipo.equals("Capítulo de Libro")) {
-	                    CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent);
-	                    capituloDialog.setVisible(true);
-	                    if (capituloDialog.isConfirmado()) {
-	                        resultado = capituloDialog.getCapitulo();
-	                    }
-	                }
-
-	                if (resultado != null && autor != null) {
-	                    autor.agregarResultado(resultado);
-	                    actualizarTablaResultados();
-	                }
-	            }
-	        }
-	    });
-
-	    JButton btnEditarResultado = crearBotonCRUD("Editar");
-	    btnEditarResultado.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	        	SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent, estudiantesEnTabla, docentesEnTabla);
 	            seleccionDialog.setVisible(true);
 
 	            if (seleccionDialog.isConfirmado()) {
@@ -1286,6 +1245,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 	                ResultadoInvestigativo resultado = null;
 
+	                
 	                if (tipo.equals("Ponencia de Evento")) {
 	                    CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
 	                    ponenciaDialog.setVisible(true);
@@ -1308,13 +1268,61 @@ public class VentanaGestionDepartamento extends JDialog{
 	                    }
 	                }
 
+	                
 	                if (resultado != null && autor != null) {
 	                    autor.agregarResultado(resultado);
-	                    actualizarTablaResultados();
+	                    actualizarTablaResultados(); 
 	                }
 	            }
 	        }
 	    });
+
+
+	    JButton btnEditarResultado = crearBotonCRUD("Editar");
+	    btnEditarResultado.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            int filaSeleccionada = tablaResultados.getSelectedRow();
+
+	            if (filaSeleccionada == -1) {
+	                JOptionPane.showMessageDialog(parent, "Seleccione un resultado para editar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	                return;
+	            }
+
+	            ResultadoInvestigativo seleccionado = resultadosEnTabla.get(filaSeleccionada);
+
+	            
+	            if (seleccionado instanceof Articulo) {
+	                EditarArticuloDialog dialog = new EditarArticuloDialog(parent, (Articulo) seleccionado);
+	                dialog.setVisible(true);
+	                if (dialog.isConfirmado()) {
+	                    
+	                    actualizarTablaResultados();
+	                }
+
+	            } else if (seleccionado instanceof PonenciaEvento) {
+	                EditarPonenciaDialog dialog = new EditarPonenciaDialog(parent, (PonenciaEvento) seleccionado);
+	                dialog.setVisible(true);
+	                if (dialog.isConfirmado()) {
+	                    actualizarTablaResultados();
+	                }
+
+	            } else if (seleccionado instanceof CapituloLibro) {
+	                EditarCapituloDialog dialog = new EditarCapituloDialog(parent, (CapituloLibro) seleccionado);
+	                dialog.setVisible(true);
+	                if (dialog.isConfirmado()) {
+	                    actualizarTablaResultados();
+	                }
+
+	            } else {
+	                JOptionPane.showMessageDialog(parent, "Tipo de resultado no reconocido.", "Error", JOptionPane.ERROR_MESSAGE);
+	            }
+	        }
+	    });
+
+
+
+
+
 
 	    JButton btnEliminarResultado = crearBotonCRUD("Eliminar");
 	    btnEliminarResultado.addActionListener(new ActionListener() {

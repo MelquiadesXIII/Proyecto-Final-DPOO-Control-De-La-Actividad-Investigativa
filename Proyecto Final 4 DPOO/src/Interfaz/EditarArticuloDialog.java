@@ -16,8 +16,10 @@ public class EditarArticuloDialog extends JDialog {
     private Articulo articulo;
     private Point point = new Point();
 
-    public EditarArticuloDialog(JFrame parent) {
-        super(parent, "Nuevo Artículo", true);
+    public EditarArticuloDialog(JFrame parent, Articulo articuloEditar) {
+        super(parent, "Editar Artículo", true);
+        this.articulo = articuloEditar;
+
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
         getContentPane().setLayout(new BorderLayout());
@@ -25,7 +27,7 @@ public class EditarArticuloDialog extends JDialog {
         JPanel panel = new JPanel(null);
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(400, 450));
+        panel.setPreferredSize(new Dimension(400, 430));
 
         
         JLabel lblTitulo = new JLabel("Título:");
@@ -33,7 +35,7 @@ public class EditarArticuloDialog extends JDialog {
         estiloLabel(lblTitulo);
         panel.add(lblTitulo);
 
-        campoTitulo = new JTextField();
+        campoTitulo = new JTextField(articulo.getNombrePublicacion());
         campoTitulo.setBounds(140, 40, 220, 30);
         estiloCampo(campoTitulo);
         panel.add(campoTitulo);
@@ -43,7 +45,7 @@ public class EditarArticuloDialog extends JDialog {
         estiloLabel(lblNumero);
         panel.add(lblNumero);
 
-        campoNumero = new JTextField();
+        campoNumero = new JTextField(String.valueOf(articulo.getNumero()));
         campoNumero.setBounds(140, 90, 220, 30);
         estiloCampo(campoNumero);
         panel.add(campoNumero);
@@ -53,7 +55,7 @@ public class EditarArticuloDialog extends JDialog {
         estiloLabel(lblVolumen);
         panel.add(lblVolumen);
 
-        campoVolumen = new JTextField();
+        campoVolumen = new JTextField(String.valueOf(articulo.getVolumen()));
         campoVolumen.setBounds(140, 140, 220, 30);
         estiloCampo(campoVolumen);
         panel.add(campoVolumen);
@@ -63,7 +65,7 @@ public class EditarArticuloDialog extends JDialog {
         estiloLabel(lblAnio);
         panel.add(lblAnio);
 
-        campoAnio = new JTextField();
+        campoAnio = new JTextField(articulo.getAnioPublicacion());
         campoAnio.setBounds(140, 190, 220, 30);
         estiloCampo(campoAnio);
         panel.add(campoAnio);
@@ -73,7 +75,7 @@ public class EditarArticuloDialog extends JDialog {
         estiloLabel(lblPaginas);
         panel.add(lblPaginas);
 
-        campoPaginas = new JTextField();
+        campoPaginas = new JTextField(String.valueOf(articulo.getPaginas()));
         campoPaginas.setBounds(140, 240, 220, 30);
         estiloCampo(campoPaginas);
         panel.add(campoPaginas);
@@ -86,6 +88,7 @@ public class EditarArticuloDialog extends JDialog {
         comboGrupo = new JComboBox<>(GrupoImpacto.values());
         comboGrupo.setBounds(140, 290, 220, 30);
         estiloComboBox(comboGrupo);
+        comboGrupo.setSelectedItem(articulo.getGrupo());
         panel.add(comboGrupo);
 
         
@@ -114,21 +117,29 @@ public class EditarArticuloDialog extends JDialog {
                     int paginas = Integer.parseInt(campoPaginas.getText().trim());
                     GrupoImpacto grupo = (GrupoImpacto) comboGrupo.getSelectedItem();
 
-                    articulo = new Articulo(titulo, numero, volumen, anio, paginas, grupo);
+                    
+                    articulo.setTitulo(titulo);
+                    articulo.setNumero(numero);
+                    articulo.setVolumen(volumen);
+                    articulo.setAnioPublicacion(anio);
+                    articulo.setPaginas(paginas);
+                    articulo.setGrupo(grupo);
+
                     confirmado = true;
                     dispose();
                 } catch (Exception ex) {
-                	JOptionPane.showMessageDialog(EditarArticuloDialog.this, "Datos inválidos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(EditarArticuloDialog.this, "Datos inválidos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
 
+
+        btnCancelar.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		dispose();
+        	}
+        });
         
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -177,6 +188,17 @@ public class EditarArticuloDialog extends JDialog {
         boton.setBorderPainted(false);
         boton.setOpaque(true);
         boton.setPreferredSize(new Dimension(120, 40));
+    }
+    
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+
+        campoTitulo.setText(articulo.getNombrePublicacion());
+        campoNumero.setText(String.valueOf(articulo.getNumero()));
+        campoVolumen.setText(String.valueOf(articulo.getVolumen()));
+        campoAnio.setText(articulo.getAnioPublicacion());
+        campoPaginas.setText(String.valueOf(articulo.getPaginas()));
+        comboGrupo.setSelectedItem(articulo.getGrupo());
     }
 
     public boolean isConfirmado() {

@@ -22,8 +22,10 @@ public class EditarPonenciaDialog extends JDialog {
     private PonenciaEvento ponencia;
     private Point point = new Point();
 
-    public EditarPonenciaDialog(final JFrame parent) {
+    public EditarPonenciaDialog(final JFrame parent, PonenciaEvento ponenciaExistente) {
         super(parent, "Editar Ponencia", true);
+        this.ponencia = ponenciaExistente;
+
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
         setSize(420, 300);
@@ -83,7 +85,7 @@ public class EditarPonenciaDialog extends JDialog {
         estiloDateChooser(fecha);
         panel.add(fecha);
 
-        JButton btnAceptar = new JButton("Crear");
+        JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(80, 230, 110, 40);
         estiloBoton(btnAceptar);
         panel.add(btnAceptar);
@@ -93,12 +95,15 @@ public class EditarPonenciaDialog extends JDialog {
         estiloBoton(btnCancelar);
         panel.add(btnCancelar);
 
+        
+        precargarDatos();
+
         btnAceptar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
-                    String nombre = txtNombre.getText();
-                    String lugar = txtLugar.getText();
-                    String isbn = txtISBN.getText();
+                    String nombre = txtNombre.getText().trim();
+                    String lugar = txtLugar.getText().trim();
+                    String isbn = txtISBN.getText().trim();
                     Date fechaSeleccionada = fecha.getDate();
 
                     if (fechaSeleccionada == null) {
@@ -109,21 +114,19 @@ public class EditarPonenciaDialog extends JDialog {
                     LocalDate fechaLocal = convertirDateALocalDate(fechaSeleccionada);
 
                     
-                    if (ponencia != null) {
-                        ponencia.setNombre(nombre);
-                        ponencia.setLugar(lugar);
-                        ponencia.setISBN(isbn);
-                        ponencia.setFecha(fechaLocal);
-                    }
+                    ponencia.setNombre(nombre);
+                    ponencia.setLugar(lugar);
+                    ponencia.setISBN(isbn);
+                    ponencia.setFecha(fechaLocal);
 
                     confirmado = true;
                     dispose();
-
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(parent, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+
 
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -146,7 +149,16 @@ public class EditarPonenciaDialog extends JDialog {
         });
     }
 
-    
+    private void precargarDatos() {
+        if (ponencia != null) {
+            txtNombre.setText(ponencia.getNombre());
+            txtLugar.setText(ponencia.getLugar());
+            txtISBN.setText(ponencia.getISBN());
+            if (ponencia.getFecha() != null) {
+                fecha.setDate(Date.from(ponencia.getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            }
+        }
+    }
 
     private void estiloCampo(JTextField campo) {
         campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -171,9 +183,9 @@ public class EditarPonenciaDialog extends JDialog {
     }
 
     private void estiloDateChooser(JDateChooser fecha) {
-    	fecha.setBackground(new Color(60, 70, 80));
-    	fecha.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-    	fecha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        fecha.setBackground(new Color(60, 70, 80));
+        fecha.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        fecha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         JTextField editor = (JTextField) fecha.getDateEditor().getUiComponent();
         editor.setBackground(new Color(60, 70, 80));
@@ -194,8 +206,23 @@ public class EditarPonenciaDialog extends JDialog {
             }
         }
     }
-
     
+    public void setPonencia(PonenciaEvento ponencia) {
+        this.ponencia = ponencia;
+
+        txtNombre.setText(ponencia.getNombre());
+        txtLugar.setText(ponencia.getLugar());
+        txtISBN.setText(ponencia.getISBN());
+
+        if (ponencia.getFecha() != null) {
+            Date fechaDate = Date.from(ponencia.getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            fecha.setDate(fechaDate);
+        }
+    }
+
+    private LocalDate convertirDateALocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
 
     public boolean isConfirmado() {
         return confirmado;
@@ -203,11 +230,5 @@ public class EditarPonenciaDialog extends JDialog {
 
     public PonenciaEvento getPonencia() {
         return ponencia;
-    }
-
-    
-
-    private LocalDate convertirDateALocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }
