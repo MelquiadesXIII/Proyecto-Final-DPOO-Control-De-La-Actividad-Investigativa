@@ -282,7 +282,6 @@ public class Departamento {
 		
 		boolean encontrado = false;
 		int i = 0;
-		int j = 0;
 		Investigador autor = null;
 		
 		while(i < lineasInvestigacion.size() && !encontrado){

@@ -30,7 +30,6 @@ import Interfaz.MensajeDialog.Tipo;
 import Logica.Departamento;
 import Logica.Docente;
 import Logica.Maestria;
-import Logica.Vicedecanato;
 
 public class MatricularDocenteDialog extends JDialog{
 
@@ -41,7 +40,6 @@ public class MatricularDocenteDialog extends JDialog{
 	private JButton btnAgregar;
 	private JButton btnCancelar;
 	private JFrame parent;
-	private Departamento departamentoActual;
 	private Maestria maestria;
 
 	@SuppressWarnings("serial")
@@ -49,7 +47,6 @@ public class MatricularDocenteDialog extends JDialog{
 
 		super(parent, "Matricular Docente", true);
 		this.parent = parent;
-		this.departamentoActual = departamentoActual;
 		this.maestria = maestria;
 
 		setUndecorated(true);
