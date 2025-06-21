@@ -27,26 +27,31 @@ public class EditarArticuloDialog extends JDialog {
         JPanel panel = new JPanel(null);
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(400, 430));
+        panel.setPreferredSize(new Dimension(420, 410));
 
-        
+        JLabel lblTituloGeneral = new JLabel("Editar Artículo");
+        lblTituloGeneral.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        lblTituloGeneral.setForeground(Color.WHITE);
+        lblTituloGeneral.setBounds(140, 10, 200, 30);
+        panel.add(lblTituloGeneral);
+
         JLabel lblTitulo = new JLabel("Título:");
-        lblTitulo.setBounds(30, 40, 100, 30);
+        lblTitulo.setBounds(30, 60, 100, 30);
         estiloLabel(lblTitulo);
         panel.add(lblTitulo);
 
         campoTitulo = new JTextField(articulo.getNombrePublicacion());
-        campoTitulo.setBounds(140, 40, 220, 30);
+        campoTitulo.setBounds(140, 60, 240, 30);
         estiloCampo(campoTitulo);
         panel.add(campoTitulo);
 
         JLabel lblNumero = new JLabel("Número:");
-        lblNumero.setBounds(30, 90, 100, 30);
+        lblNumero.setBounds(30, 100, 100, 30);
         estiloLabel(lblNumero);
         panel.add(lblNumero);
 
         campoNumero = new JTextField(String.valueOf(articulo.getNumero()));
-        campoNumero.setBounds(140, 90, 220, 30);
+        campoNumero.setBounds(140, 100, 240, 30);
         estiloCampo(campoNumero);
         panel.add(campoNumero);
 
@@ -56,44 +61,43 @@ public class EditarArticuloDialog extends JDialog {
         panel.add(lblVolumen);
 
         campoVolumen = new JTextField(String.valueOf(articulo.getVolumen()));
-        campoVolumen.setBounds(140, 140, 220, 30);
+        campoVolumen.setBounds(140, 140, 240, 30);
         estiloCampo(campoVolumen);
         panel.add(campoVolumen);
 
         JLabel lblAnio = new JLabel("Año:");
-        lblAnio.setBounds(30, 190, 100, 30);
+        lblAnio.setBounds(30, 180, 100, 30);
         estiloLabel(lblAnio);
         panel.add(lblAnio);
 
         campoAnio = new JTextField(articulo.getAnioPublicacion());
-        campoAnio.setBounds(140, 190, 220, 30);
+        campoAnio.setBounds(140, 180, 240, 30);
         estiloCampo(campoAnio);
         panel.add(campoAnio);
 
         JLabel lblPaginas = new JLabel("Páginas:");
-        lblPaginas.setBounds(30, 240, 100, 30);
+        lblPaginas.setBounds(30, 220, 100, 30);
         estiloLabel(lblPaginas);
         panel.add(lblPaginas);
 
         campoPaginas = new JTextField(String.valueOf(articulo.getPaginas()));
-        campoPaginas.setBounds(140, 240, 220, 30);
+        campoPaginas.setBounds(140, 220, 240, 30);
         estiloCampo(campoPaginas);
         panel.add(campoPaginas);
 
         JLabel lblGrupo = new JLabel("Grupo Impacto:");
-        lblGrupo.setBounds(30, 290, 120, 30);
+        lblGrupo.setBounds(30, 260, 120, 30);
         estiloLabel(lblGrupo);
         panel.add(lblGrupo);
 
         comboGrupo = new JComboBox<>(GrupoImpacto.values());
-        comboGrupo.setBounds(140, 290, 220, 30);
+        comboGrupo.setBounds(140, 260, 240, 30);
         estiloComboBox(comboGrupo);
         comboGrupo.setSelectedItem(articulo.getGrupo());
         panel.add(comboGrupo);
 
-        
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        panelBotones.setBounds(20, 350, 360, 60);
+        panelBotones.setBounds(30, 320, 360, 60);
         panelBotones.setBackground(new Color(30, 40, 50));
 
         JButton btnAceptar = new JButton("Aceptar");
@@ -106,7 +110,6 @@ public class EditarArticuloDialog extends JDialog {
         panelBotones.add(btnCancelar);
         panel.add(panelBotones);
 
-        
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -117,7 +120,6 @@ public class EditarArticuloDialog extends JDialog {
                     int paginas = Integer.parseInt(campoPaginas.getText().trim());
                     GrupoImpacto grupo = (GrupoImpacto) comboGrupo.getSelectedItem();
 
-                    
                     articulo.setTitulo(titulo);
                     articulo.setNumero(numero);
                     articulo.setVolumen(volumen);
@@ -128,25 +130,29 @@ public class EditarArticuloDialog extends JDialog {
                     confirmado = true;
                     dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(EditarArticuloDialog.this, "Datos inválidos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        EditarArticuloDialog.this,
+                        "Datos inválidos: " + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
                 }
             }
         });
 
-
-
-        btnCancelar.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		dispose();
-        	}
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
         });
-        
+
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 point.x = e.getX();
                 point.y = e.getY();
             }
         });
+
         panel.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
                 Point p = getLocation();
@@ -189,7 +195,7 @@ public class EditarArticuloDialog extends JDialog {
         boton.setOpaque(true);
         boton.setPreferredSize(new Dimension(120, 40));
     }
-    
+
     public void setArticulo(Articulo articulo) {
         this.articulo = articulo;
 

@@ -1,6 +1,5 @@
 package Interfaz;
 
-import Interfaz.MensajeDialog.Tipo;
 import Logica.Articulo;
 import Logica.GrupoImpacto;
 import Logica.Investigador;
@@ -19,7 +18,7 @@ public class CrearArticuloDialog extends JDialog {
     private Articulo articulo;
     private Point point = new Point();
 
-    public CrearArticuloDialog(final JFrame parent, final Investigador autor) {
+    public CrearArticuloDialog(JFrame parent, final Investigador autor) {
         super(parent, "Nuevo Artículo", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
@@ -28,26 +27,31 @@ public class CrearArticuloDialog extends JDialog {
         JPanel panel = new JPanel(null);
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(400, 450));
+        panel.setPreferredSize(new Dimension(420, 410));
 
-        
-        JLabel lblTitulo = new JLabel("Título:");
-        lblTitulo.setBounds(30, 40, 100, 30);
-        estiloLabel(lblTitulo);
+        JLabel lblTitulo = new JLabel("Crear Artículo");
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        lblTitulo.setForeground(Color.WHITE);
+        lblTitulo.setBounds(140, 10, 200, 30);
         panel.add(lblTitulo);
 
+        JLabel lblTituloArt = new JLabel("Título:");
+        lblTituloArt.setBounds(30, 60, 100, 30);
+        estiloLabel(lblTituloArt);
+        panel.add(lblTituloArt);
+
         campoTitulo = new JTextField();
-        campoTitulo.setBounds(140, 40, 220, 30);
+        campoTitulo.setBounds(140, 60, 240, 30);
         estiloCampo(campoTitulo);
         panel.add(campoTitulo);
 
         JLabel lblNumero = new JLabel("Número:");
-        lblNumero.setBounds(30, 90, 100, 30);
+        lblNumero.setBounds(30, 100, 100, 30);
         estiloLabel(lblNumero);
         panel.add(lblNumero);
 
         campoNumero = new JTextField();
-        campoNumero.setBounds(140, 90, 220, 30);
+        campoNumero.setBounds(140, 100, 240, 30);
         estiloCampo(campoNumero);
         panel.add(campoNumero);
 
@@ -57,43 +61,42 @@ public class CrearArticuloDialog extends JDialog {
         panel.add(lblVolumen);
 
         campoVolumen = new JTextField();
-        campoVolumen.setBounds(140, 140, 220, 30);
+        campoVolumen.setBounds(140, 140, 240, 30);
         estiloCampo(campoVolumen);
         panel.add(campoVolumen);
 
         JLabel lblAnio = new JLabel("Año:");
-        lblAnio.setBounds(30, 190, 100, 30);
+        lblAnio.setBounds(30, 180, 100, 30);
         estiloLabel(lblAnio);
         panel.add(lblAnio);
 
         campoAnio = new JTextField();
-        campoAnio.setBounds(140, 190, 220, 30);
+        campoAnio.setBounds(140, 180, 240, 30);
         estiloCampo(campoAnio);
         panel.add(campoAnio);
 
         JLabel lblPaginas = new JLabel("Páginas:");
-        lblPaginas.setBounds(30, 240, 100, 30);
+        lblPaginas.setBounds(30, 220, 100, 30);
         estiloLabel(lblPaginas);
         panel.add(lblPaginas);
 
         campoPaginas = new JTextField();
-        campoPaginas.setBounds(140, 240, 220, 30);
+        campoPaginas.setBounds(140, 220, 240, 30);
         estiloCampo(campoPaginas);
         panel.add(campoPaginas);
 
         JLabel lblGrupo = new JLabel("Grupo Impacto:");
-        lblGrupo.setBounds(30, 290, 120, 30);
+        lblGrupo.setBounds(30, 260, 120, 30);
         estiloLabel(lblGrupo);
         panel.add(lblGrupo);
 
         comboGrupo = new JComboBox<>(GrupoImpacto.values());
-        comboGrupo.setBounds(140, 290, 220, 30);
+        comboGrupo.setBounds(140, 260, 240, 30);
         estiloComboBox(comboGrupo);
         panel.add(comboGrupo);
 
-        
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        panelBotones.setBounds(20, 350, 360, 60);
+        panelBotones.setBounds(30, 320, 360, 60);
         panelBotones.setBackground(new Color(30, 40, 50));
 
         JButton btnCrear = new JButton("Crear");
@@ -106,7 +109,6 @@ public class CrearArticuloDialog extends JDialog {
         panelBotones.add(btnCancelar);
         panel.add(panelBotones);
 
-        
         btnCrear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -117,13 +119,16 @@ public class CrearArticuloDialog extends JDialog {
                     int paginas = Integer.parseInt(campoPaginas.getText().trim());
                     GrupoImpacto grupo = (GrupoImpacto) comboGrupo.getSelectedItem();
 
-                    autor.crearArticulo(titulo, numero, volumen, anio, paginas, grupo);
+                    articulo = new Articulo(titulo, numero, volumen, anio, paginas, grupo);
                     confirmado = true;
                     dispose();
-                } catch (RuntimeException r) {
-                	MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-                	m.setVisible(true);
-                	
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(
+                        CrearArticuloDialog.this,
+                        "Datos inválidos: " + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
                 }
             }
         });
@@ -134,13 +139,13 @@ public class CrearArticuloDialog extends JDialog {
             }
         });
 
-        
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 point.x = e.getX();
                 point.y = e.getY();
             }
         });
+
         panel.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
                 Point p = getLocation();
