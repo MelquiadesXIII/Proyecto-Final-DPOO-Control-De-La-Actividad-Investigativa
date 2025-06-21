@@ -1,10 +1,13 @@
 package Interfaz;
 
+import Interfaz.MensajeDialog.Tipo;
 import Logica.Articulo;
 import Logica.GrupoImpacto;
+import Logica.Investigador;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -16,7 +19,7 @@ public class CrearArticuloDialog extends JDialog {
     private Articulo articulo;
     private Point point = new Point();
 
-    public CrearArticuloDialog(JFrame parent) {
+    public CrearArticuloDialog(final JFrame parent, final Investigador autor) {
         super(parent, "Nuevo Artículo", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
@@ -114,11 +117,13 @@ public class CrearArticuloDialog extends JDialog {
                     int paginas = Integer.parseInt(campoPaginas.getText().trim());
                     GrupoImpacto grupo = (GrupoImpacto) comboGrupo.getSelectedItem();
 
-                    articulo = new Articulo(titulo, numero, volumen, anio, paginas, grupo);
+                    autor.crearArticulo(titulo, numero, volumen, anio, paginas, grupo);
                     confirmado = true;
                     dispose();
-                } catch (Exception ex) {
-                	JOptionPane.showMessageDialog(CrearArticuloDialog.this, "Datos inválidos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (RuntimeException r) {
+                	MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+                	m.setVisible(true);
+                	
                 }
             }
         });
