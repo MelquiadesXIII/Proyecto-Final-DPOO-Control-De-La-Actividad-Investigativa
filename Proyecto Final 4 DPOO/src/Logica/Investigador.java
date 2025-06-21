@@ -5,6 +5,7 @@ import Excepciones.DuplicacionException;
 import Excepciones.ListaVaciaException;
 import Excepciones.NoExistenciaException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public abstract class Investigador {
@@ -93,6 +94,32 @@ public abstract class Investigador {
 		}
 
 		return puntaje;
+	}
+	
+	public void crearArticulo(String titulo, int numero, int volumen, String anioPublicacion, int paginas, GrupoImpacto grupo){
+		
+		Articulo a = new Articulo(titulo, numero, volumen, anioPublicacion, paginas, grupo);
+		
+		agregarResultado(a);
+	}
+	
+	public void crearPonenciaEvento(String nombre, LocalDate fecha, String lugar, String ISBN){
+		
+		PonenciaEvento p = new PonenciaEvento(nombre, fecha, lugar, ISBN);
+		
+		agregarResultado(p);
+	}
+	
+	public void crearCapituloLibro(String titulo, ArrayList<String> autores, ArrayList<String> nombresEditores, String editorial, String iSSN, String volumen){
+		
+		CapituloLibro c = new CapituloLibro(titulo, autores, nombresEditores, editorial, iSSN, volumen);
+		
+		agregarResultado(c);
+	}
+	
+	public boolean contieneResultado(ResultadoInvestigativo r){
+		
+		return resultados.contains(r);
 	}
 	
 }
