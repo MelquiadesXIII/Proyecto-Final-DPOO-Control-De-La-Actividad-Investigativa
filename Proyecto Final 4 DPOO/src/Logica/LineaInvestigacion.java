@@ -93,5 +93,26 @@ public class LineaInvestigacion {
 		
 		return investigadores.contains(inv);
 	}
+	
+	public Investigador buscarInvestigadorDelResultado(ResultadoInvestigativo r){
+		
+		boolean encontrado = false;
+		Investigador autor = null;
+		int i = 0;
+		
+		while(i < investigadores.size() && !encontrado){
+			
+			Investigador inv = investigadores.get(i);
+			
+			if(inv.contieneResultado(r)){
+				autor = inv;
+				encontrado = true;
+			}
+			
+			i++;
+		}
+		
+		return autor;
+	}
 
 }
