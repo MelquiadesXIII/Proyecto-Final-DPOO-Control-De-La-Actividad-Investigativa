@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import Interfaz.MensajeDialog.Tipo;
 import Logica.CapituloLibro;
+import Logica.Investigador;
 
 public class CrearCapituloDialog extends JDialog {
     private static final long serialVersionUID = 1L;
@@ -18,7 +20,7 @@ public class CrearCapituloDialog extends JDialog {
     private CapituloLibro capitulo;
     private Point point = new Point();
 
-    public CrearCapituloDialog(final JFrame parent) {
+    public CrearCapituloDialog(final JFrame parent, final Investigador autor) {
         super(parent, "Crear Capítulo de Libro", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
@@ -129,11 +131,12 @@ public class CrearCapituloDialog extends JDialog {
                     ArrayList<String> editores = new ArrayList<String>();
                     for (String e1 : editoresArray) editores.add(e1.trim());
 
-                    capitulo = new CapituloLibro(titulo, autores, editores, editorial, issn, volumen);
+                    autor.crearCapituloLibro(titulo, autores, editores, editorial, issn, volumen);
                     confirmado = true;
                     dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(parent, "Datos inválidos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (RuntimeException r) {
+                	MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+                	m.setVisible(true);
                 }
             }
         });
