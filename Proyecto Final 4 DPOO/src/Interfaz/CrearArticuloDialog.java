@@ -1,199 +1,267 @@
 package Interfaz;
 
+import Interfaz.MensajeDialog.Tipo;
 import Logica.Articulo;
 import Logica.GrupoImpacto;
 import Logica.Investigador;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 import java.awt.*;
 import java.awt.event.*;
 
 public class CrearArticuloDialog extends JDialog {
-    private static final long serialVersionUID = 1L;
-    private JTextField campoTitulo, campoNumero, campoVolumen, campoAnio, campoPaginas;
-    private JComboBox<GrupoImpacto> comboGrupo;
-    private boolean confirmado = false;
-    private Articulo articulo;
-    private Point point = new Point();
+	private static final long serialVersionUID = 1L;
+	private JTextField campoTitulo, campoNumero, campoVolumen, campoAnio, campoPaginas;
+	private JComboBox<GrupoImpacto> comboGrupo;
+	private boolean confirmado = false;
+	private Articulo articulo;
+	private Point point = new Point();
 
-    public CrearArticuloDialog(JFrame parent, final Investigador autor) {
-        super(parent, "Nuevo Artículo", true);
-        setUndecorated(true);
-        setBackground(new Color(30, 40, 50));
-        getContentPane().setLayout(new BorderLayout());
+	public CrearArticuloDialog(final JFrame parent, final Investigador autor) {
+		super(parent, "Nuevo Artículo", true);
+		setUndecorated(true);
+		setBackground(new Color(30, 40, 50));
+		getContentPane().setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel(null);
-        panel.setBackground(new Color(30, 40, 50));
-        panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(420, 410));
+		JPanel panel = new JPanel(null);
+		panel.setBackground(new Color(30, 40, 50));
+		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
+		panel.setPreferredSize(new Dimension(420, 410));
 
-        JLabel lblTitulo = new JLabel("Crear Artículo");
-        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblTitulo.setForeground(Color.WHITE);
-        lblTitulo.setBounds(140, 10, 200, 30);
-        panel.add(lblTitulo);
+		JLabel lblTitulo = new JLabel("Crear Artículo");
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setBounds(140, 10, 200, 30);
+		panel.add(lblTitulo);
 
-        JLabel lblTituloArt = new JLabel("Título:");
-        lblTituloArt.setBounds(30, 60, 100, 30);
-        estiloLabel(lblTituloArt);
-        panel.add(lblTituloArt);
+		JLabel lblTituloArt = new JLabel("Título:");
+		lblTituloArt.setBounds(30, 60, 100, 30);
+		estiloLabel(lblTituloArt);
+		panel.add(lblTituloArt);
 
-        campoTitulo = new JTextField();
-        campoTitulo.setBounds(140, 60, 240, 30);
-        estiloCampo(campoTitulo);
-        panel.add(campoTitulo);
+		campoTitulo = new JTextField();
+		campoTitulo.setBounds(140, 60, 240, 30);
+		estiloCampo(campoTitulo);
+		panel.add(campoTitulo);
 
-        JLabel lblNumero = new JLabel("Número:");
-        lblNumero.setBounds(30, 100, 100, 30);
-        estiloLabel(lblNumero);
-        panel.add(lblNumero);
+		JLabel lblNumero = new JLabel("Número:");
+		lblNumero.setBounds(30, 100, 100, 30);
+		estiloLabel(lblNumero);
+		panel.add(lblNumero);
 
-        campoNumero = new JTextField();
-        campoNumero.setBounds(140, 100, 240, 30);
-        estiloCampo(campoNumero);
-        panel.add(campoNumero);
+		campoNumero = new JTextField();
+		campoNumero.setBounds(140, 100, 240, 30);
+		estiloCampo(campoNumero);
+		panel.add(campoNumero);
 
-        JLabel lblVolumen = new JLabel("Volumen:");
-        lblVolumen.setBounds(30, 140, 100, 30);
-        estiloLabel(lblVolumen);
-        panel.add(lblVolumen);
+		JLabel lblVolumen = new JLabel("Volumen:");
+		lblVolumen.setBounds(30, 140, 100, 30);
+		estiloLabel(lblVolumen);
+		panel.add(lblVolumen);
 
-        campoVolumen = new JTextField();
-        campoVolumen.setBounds(140, 140, 240, 30);
-        estiloCampo(campoVolumen);
-        panel.add(campoVolumen);
+		campoVolumen = new JTextField();
+		campoVolumen.setBounds(140, 140, 240, 30);
+		estiloCampo(campoVolumen);
+		panel.add(campoVolumen);
 
-        JLabel lblAnio = new JLabel("Año:");
-        lblAnio.setBounds(30, 180, 100, 30);
-        estiloLabel(lblAnio);
-        panel.add(lblAnio);
+		JLabel lblAnio = new JLabel("Año:");
+		lblAnio.setBounds(30, 180, 100, 30);
+		estiloLabel(lblAnio);
+		panel.add(lblAnio);
 
-        campoAnio = new JTextField();
-        campoAnio.setBounds(140, 180, 240, 30);
-        estiloCampo(campoAnio);
-        panel.add(campoAnio);
+		campoAnio = new JTextField();
+		campoAnio.setBounds(140, 180, 240, 30);
+		estiloCampo(campoAnio);
+		panel.add(campoAnio);
 
-        JLabel lblPaginas = new JLabel("Páginas:");
-        lblPaginas.setBounds(30, 220, 100, 30);
-        estiloLabel(lblPaginas);
-        panel.add(lblPaginas);
+		JLabel lblPaginas = new JLabel("Páginas:");
+		lblPaginas.setBounds(30, 220, 100, 30);
+		estiloLabel(lblPaginas);
+		panel.add(lblPaginas);
 
-        campoPaginas = new JTextField();
-        campoPaginas.setBounds(140, 220, 240, 30);
-        estiloCampo(campoPaginas);
-        panel.add(campoPaginas);
+		campoPaginas = new JTextField();
+		campoPaginas.setBounds(140, 220, 240, 30);
+		estiloCampo(campoPaginas);
+		panel.add(campoPaginas);
 
-        JLabel lblGrupo = new JLabel("Grupo Impacto:");
-        lblGrupo.setBounds(30, 260, 120, 30);
-        estiloLabel(lblGrupo);
-        panel.add(lblGrupo);
+		JLabel lblGrupo = new JLabel("Grupo Impacto:");
+		lblGrupo.setBounds(30, 260, 120, 30);
+		estiloLabel(lblGrupo);
+		panel.add(lblGrupo);
 
-        comboGrupo = new JComboBox<>(GrupoImpacto.values());
-        comboGrupo.setBounds(140, 260, 240, 30);
-        estiloComboBox(comboGrupo);
-        panel.add(comboGrupo);
+		comboGrupo = new JComboBox<>(GrupoImpacto.values());
+		comboGrupo.setBounds(140, 260, 240, 30);
+		estiloComboBox(comboGrupo);
+		panel.add(comboGrupo);
 
-        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        panelBotones.setBounds(30, 320, 360, 60);
-        panelBotones.setBackground(new Color(30, 40, 50));
+		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+		panelBotones.setBounds(30, 320, 360, 60);
+		panelBotones.setBackground(new Color(30, 40, 50));
 
-        JButton btnCrear = new JButton("Crear");
-        JButton btnCancelar = new JButton("Cancelar");
+		JButton btnCrear = new JButton("Crear");
+		JButton btnCancelar = new JButton("Cancelar");
 
-        estiloBoton(btnCrear);
-        estiloBoton(btnCancelar);
+		estiloBoton(btnCrear);
+		estiloBoton(btnCancelar);
 
-        panelBotones.add(btnCrear);
-        panelBotones.add(btnCancelar);
-        panel.add(panelBotones);
+		panelBotones.add(btnCrear);
+		panelBotones.add(btnCancelar);
+		panel.add(panelBotones);
 
-        btnCrear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    String titulo = campoTitulo.getText().trim();
-                    int numero = Integer.parseInt(campoNumero.getText().trim());
-                    int volumen = Integer.parseInt(campoVolumen.getText().trim());
-                    String anio = campoAnio.getText().trim();
-                    int paginas = Integer.parseInt(campoPaginas.getText().trim());
-                    GrupoImpacto grupo = (GrupoImpacto) comboGrupo.getSelectedItem();
+		aplicarFiltroTexto(campoTitulo, 50);
+		aplicarFiltroNumerico(campoAnio, 4);
+		aplicarFiltroNumerico(campoNumero, 5);
+		aplicarFiltroNumerico(campoPaginas, 4);
+		aplicarFiltroNumerico(campoVolumen, 5);
 
-                    articulo = new Articulo(titulo, numero, volumen, anio, paginas, grupo);
-                    confirmado = true;
-                    dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(
-                        CrearArticuloDialog.this,
-                        "Datos inválidos: " + ex.getMessage(),
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
-                    );
-                }
-            }
-        });
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String titulo = campoTitulo.getText().trim();
+					int numero = Integer.parseInt(campoNumero.getText().trim());
+					int volumen = Integer.parseInt(campoVolumen.getText().trim());
+					String anio = campoAnio.getText().trim();
+					int paginas = Integer.parseInt(campoPaginas.getText().trim());
+					GrupoImpacto grupo = (GrupoImpacto) comboGrupo.getSelectedItem();
 
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+					articulo = new Articulo(titulo, numero, volumen, anio, paginas, grupo);
+					confirmado = true;
+					dispose();
+				} catch (Exception ex) {
+					MensajeDialog m = new MensajeDialog(parent, ex.getMessage(), Tipo.RETROALIMENTACION);
+                    m.setVisible(true);
+				}
+			}
+		});
 
-        panel.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                point.x = e.getX();
-                point.y = e.getY();
-            }
-        });
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
-        panel.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent e) {
-                Point p = getLocation();
-                setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
-            }
-        });
+		panel.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				point.x = e.getX();
+				point.y = e.getY();
+			}
+		});
 
-        getContentPane().add(panel);
-        pack();
-        setLocationRelativeTo(parent);
-    }
+		panel.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent e) {
+				Point p = getLocation();
+				setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+			}
+		});
 
-    private void estiloLabel(JLabel label) {
-        label.setForeground(Color.WHITE);
-        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
-    }
+		getContentPane().add(panel);
+		pack();
+		setLocationRelativeTo(parent);
+	}
 
-    private void estiloCampo(JTextField campo) {
-        campo.setBackground(new Color(60, 70, 80));
-        campo.setForeground(Color.WHITE);
-        campo.setCaretColor(Color.WHITE);
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    }
+	private void estiloLabel(JLabel label) {
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+	}
 
-    private void estiloComboBox(JComboBox<?> comboBox) {
-        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        comboBox.setBackground(new Color(60, 70, 80));
-        comboBox.setForeground(Color.WHITE);
-        comboBox.setOpaque(false);
-        comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    }
+	private void estiloCampo(JTextField campo) {
+		campo.setBackground(new Color(60, 70, 80));
+		campo.setForeground(Color.WHITE);
+		campo.setCaretColor(Color.WHITE);
+		campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	}
 
-    private void estiloBoton(JButton boton) {
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        boton.setBackground(new Color(50, 60, 70));
-        boton.setForeground(Color.WHITE);
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setOpaque(true);
-        boton.setPreferredSize(new Dimension(120, 40));
-    }
+	private void estiloComboBox(JComboBox<?> comboBox) {
+		comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		comboBox.setBackground(new Color(60, 70, 80));
+		comboBox.setForeground(Color.WHITE);
+		comboBox.setOpaque(false);
+		comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	}
 
-    public boolean isConfirmado() {
-        return confirmado;
-    }
+	private void estiloBoton(JButton boton) {
+		boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		boton.setBackground(new Color(50, 60, 70));
+		boton.setForeground(Color.WHITE);
+		boton.setFocusPainted(false);
+		boton.setBorderPainted(false);
+		boton.setOpaque(true);
+		boton.setPreferredSize(new Dimension(120, 40));
+	}
 
-    public Articulo getArticulo() {
-        return articulo;
-    }
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+
+	public Articulo getArticulo() {
+		return articulo;
+	}
+
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				if (text != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+				} else {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
+	}
+
+	public void aplicarFiltroNumerico(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+
+					String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+					if (newText.length() <= maxChars && string.matches("\\d*")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+				String newText = currentText.substring(0, offset) + 
+						(text != null ? text : "") + 
+						currentText.substring(offset + length);
+
+				if (newText.length() <= maxChars && newText.matches("\\d*")) {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
+	}
 }

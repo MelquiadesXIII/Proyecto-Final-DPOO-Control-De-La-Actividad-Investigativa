@@ -63,9 +63,6 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 
 	//Setters
 	public void setFecha(LocalDate fecha) {
-		// LocalDate fechaLocal = fechaSeleccionada.toInstant()
-		//            .atZone(ZoneId.systemDefault())
-		//            .toLocalDate();  -> esto se va a usar en la interfaz para convertir la fecha seleccionada en un LocalDate
 		int anyoMaximo = Year.now().getValue() - 1;
 		int anyoMinimo = 1900;
 
@@ -103,7 +100,7 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 
 	public void setISBN(String ISBN) {
 
-		if(ISBN.length() < 13 || ISBN.length() > 13)
+		if(ISBN.length() != 13)
 			throw new CadenaNoValidaException("El ISBN solo puede tener una longitud de 13 dígitos, la longitud de lo que usted ingresó es " +ISBN.length());
 
 		if(!ISBN.matches("^\\d+$"))

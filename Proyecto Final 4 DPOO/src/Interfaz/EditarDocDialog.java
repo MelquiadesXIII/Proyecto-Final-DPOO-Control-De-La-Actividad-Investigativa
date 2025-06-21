@@ -146,6 +146,8 @@ public class EditarDocDialog extends JDialog{
 				encontrado = true;
 				antiguoDepartamento = d;
 			}
+			
+			i++;
 		}
 
 		aplicarFiltroTexto(campoNombre, 25);

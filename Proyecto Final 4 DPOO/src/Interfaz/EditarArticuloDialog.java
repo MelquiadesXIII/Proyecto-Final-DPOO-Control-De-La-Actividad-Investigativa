@@ -1,10 +1,17 @@
 package Interfaz;
 
+import Interfaz.MensajeDialog.Tipo;
 import Logica.Articulo;
 import Logica.GrupoImpacto;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -16,7 +23,7 @@ public class EditarArticuloDialog extends JDialog {
     private Articulo articulo;
     private Point point = new Point();
 
-    public EditarArticuloDialog(JFrame parent, Articulo articuloEditar) {
+    public EditarArticuloDialog(final JFrame parent, Articulo articuloEditar) {
         super(parent, "Editar Artículo", true);
         this.articulo = articuloEditar;
 
@@ -109,6 +116,12 @@ public class EditarArticuloDialog extends JDialog {
         panelBotones.add(btnAceptar);
         panelBotones.add(btnCancelar);
         panel.add(panelBotones);
+        
+        aplicarFiltroTexto(campoTitulo, 50);
+		aplicarFiltroNumerico(campoAnio, 4);
+		aplicarFiltroNumerico(campoNumero, 5);
+		aplicarFiltroNumerico(campoPaginas, 4);
+		aplicarFiltroNumerico(campoVolumen, 5);
 
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -130,12 +143,8 @@ public class EditarArticuloDialog extends JDialog {
                     confirmado = true;
                     dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(
-                        EditarArticuloDialog.this,
-                        "Datos inválidos: " + ex.getMessage(),
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
-                    );
+                    MensajeDialog m = new MensajeDialog(parent, ex.getMessage(), Tipo.RETROALIMENTACION);
+                    m.setVisible(true);
                 }
             }
         });
@@ -214,4 +223,65 @@ public class EditarArticuloDialog extends JDialog {
     public Articulo getArticulo() {
         return articulo;
     }
+    
+    public void aplicarFiltroTexto(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				if (text != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+				} else {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
+	}
+
+	public void aplicarFiltroNumerico(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+
+					String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+					if (newText.length() <= maxChars && string.matches("\\d*")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+				String newText = currentText.substring(0, offset) + 
+						(text != null ? text : "") + 
+						currentText.substring(offset + length);
+
+				if (newText.length() <= maxChars && newText.matches("\\d*")) {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
+	}
 }

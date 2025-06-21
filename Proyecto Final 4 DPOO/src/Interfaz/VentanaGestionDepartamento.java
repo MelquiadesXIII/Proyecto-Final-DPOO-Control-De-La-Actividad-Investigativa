@@ -1238,6 +1238,13 @@ public class VentanaGestionDepartamento extends JDialog{
 
 					if (seleccionado != -1) {
 						CursoPosgrado cursoSeleccionado = cursosEnTabla.get(seleccionado);
+						Docente evaluador = cursoSeleccionado.getProfesor();
+						
+						VentanaEmitirNota dialog = new VentanaEmitirNota(parent, cursoSeleccionado, evaluador);
+						dialog.setVisible(true);
+						
+						if(dialog.isConfirmado())
+							actualizarTodasLasTablas();
 
 					} else {
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un curso para dar una nota",Tipo.RETROALIMENTACION);
@@ -1255,6 +1262,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelBotonesCRUDCursos.add(btnCrearCurso);
 		panelBotonesCRUDCursos.add(btnEditarCurso);
 		panelBotonesCRUDCursos.add(btnEliminarCurso);
+		panelBotonesCRUDCursos.add(btnNota);
 
 		panelCursos.add(panelBotonesCRUDCursos, BorderLayout.SOUTH);
 	}

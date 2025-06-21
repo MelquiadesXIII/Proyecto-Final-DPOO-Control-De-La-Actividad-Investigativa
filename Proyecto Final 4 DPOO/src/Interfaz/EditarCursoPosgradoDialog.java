@@ -46,12 +46,10 @@ public class EditarCursoPosgradoDialog extends JDialog {
     private boolean confirmado = false;
     private Point point = new Point();
     private Departamento depto;
-    private CursoPosgrado curso;
 
     public EditarCursoPosgradoDialog(final JFrame parent, final Departamento depto, final CursoPosgrado curso) {
         super(parent, "Editar Curso de Posgrado", true);
         this.depto = depto;
-        this.curso = curso;
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
         getContentPane().setLayout(new BorderLayout());

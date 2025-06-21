@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.CapituloLibro;
@@ -113,7 +118,12 @@ public class CrearCapituloDialog extends JDialog {
         panelBotones.add(btnCancelar);
         panel.add(panelBotones);
 
-        
+        aplicarFiltroNumerico(campoISSN, 8);
+        aplicarFiltroNumerico(campoVolumen, 4);
+        aplicarFiltroTexto(campoAutores, 3000);
+        aplicarFiltroTexto(campoEditores, 3000);
+        aplicarFiltroTexto(campoEditorial, 50);
+        aplicarFiltroTexto(campoTitulo, 40);
         btnCrear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -206,5 +216,66 @@ public class CrearCapituloDialog extends JDialog {
 
 	public void setCapitulo(CapituloLibro resultado) {
 		
+	}
+	
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				if (text != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+				} else {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
+	}
+
+	public void aplicarFiltroNumerico(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+
+					String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+					if (newText.length() <= maxChars && string.matches("\\d*")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+				String newText = currentText.substring(0, offset) + 
+						(text != null ? text : "") + 
+						currentText.substring(offset + length);
+
+				if (newText.length() <= maxChars && newText.matches("\\d*")) {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
 	}
 }

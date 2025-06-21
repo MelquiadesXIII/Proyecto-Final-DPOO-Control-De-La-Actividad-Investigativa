@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.Departamento;
@@ -112,10 +113,12 @@ public class EditarEstDialog extends JDialog {
 				encontrado = true;
 				antiguoDepartamento = d;
 			}
+			
+			i++;
 		}
 
-		aplicarFiltroSinNumerosCampoTexto(campoNombre);
-		aplicarFiltroSinNumerosCampoTexto(campoApellidos);
+		aplicarFiltroTexto(campoNombre, 25);
+		aplicarFiltroTexto(campoApellidos, 100);
 
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 		panelBotones.setBounds(20, 380, 360, 60);
@@ -319,11 +322,10 @@ public class EditarEstDialog extends JDialog {
 		this.comboDepartamento = comboDepartamento;
 	}
 	
-	public void aplicarFiltroSinNumerosCampoTexto(JTextField campo){
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
 
 		AbstractDocument doc = (AbstractDocument) campo.getDocument();
 		doc.setDocumentFilter(new DocumentFilter() {
-			private int maxChars = 50;
 
 			@Override
 			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {

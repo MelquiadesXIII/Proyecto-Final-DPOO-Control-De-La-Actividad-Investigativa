@@ -100,112 +100,9 @@ public class CrearEstDialog extends JDialog {
 		panelCampos.add(comboDepartamento);
 		estiloComboBox(comboDepartamento);
 
-		AbstractDocument docNombre = (AbstractDocument) campoNombre.getDocument();
-		docNombre.setDocumentFilter(new DocumentFilter() {
-			private int maxChars = 25;
-
-			@Override
-			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.insertString(fb, offset, string, attr);
-					}
-
-				}
-			}
-
-			@Override
-			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.replace(fb, offset, length, text, attrs);
-					}
-
-				}else
-					super.replace(fb, offset, length, text, attrs);
-			}
-		});
-
-		//Filtrar los nombres para no permitir numeros ni exceso de caracteres en los apellidos
-		AbstractDocument docApellidos = (AbstractDocument) campoApellidos.getDocument();
-		docApellidos.setDocumentFilter(new DocumentFilter() {
-			private int maxChars = 100;
-
-			@Override
-			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.insertString(fb, offset, string, attr);
-					}
-
-				}
-			}
-
-			@Override
-			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.replace(fb, offset, length, text, attrs);
-					}
-
-				}else
-					super.replace(fb, offset, length, text, attrs);
-			}
-		});
-
-
-		//Filtrar los nombres para no permitir exceso de caracteres en el grupo ya q aqui si se pueden aceptar numeros
-		AbstractDocument docGrupo = (AbstractDocument) campoGrupo.getDocument();
-		docGrupo.setDocumentFilter(new DocumentFilter() {
-			private int maxChars = 10;
-
-			@Override
-			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.insertString(fb, offset, string, attr);
-					}
-
-				}
-			}
-
-			@Override
-			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.replace(fb, offset, length, text, attrs);
-					}
-
-				}else
-					super.replace(fb, offset, length, text, attrs);
-			}
-		});
-
-
+		aplicarFiltroTexto(campoNombre, 25);
+		aplicarFiltroTexto(campoApellidos, 100);
+		
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 		panelBotones.setBounds(20, 380, 360, 60);
 		panelBotones.setBackground(new Color(30, 40, 50));
@@ -386,5 +283,36 @@ public class CrearEstDialog extends JDialog {
 
 	public boolean isConfirmado() {
 		return confirmado;
+	}
+	
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				if (text != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+				} else {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
 	}
 }
