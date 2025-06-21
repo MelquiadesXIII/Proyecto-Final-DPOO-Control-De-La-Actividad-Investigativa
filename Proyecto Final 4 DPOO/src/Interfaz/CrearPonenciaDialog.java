@@ -9,7 +9,10 @@ import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import Interfaz.MensajeDialog.Tipo;
+import Logica.Investigador;
 import Logica.PonenciaEvento;
+
 import com.toedter.calendar.JDateChooser;
 
 public class CrearPonenciaDialog extends JDialog {
@@ -22,7 +25,7 @@ public class CrearPonenciaDialog extends JDialog {
     private PonenciaEvento ponencia;
     private Point point = new Point();
 
-    public CrearPonenciaDialog(final JFrame parent) {
+    public CrearPonenciaDialog(final JFrame parent, final Investigador autor) {
         super(parent, "Crear Ponencia", true);
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
@@ -107,11 +110,12 @@ public class CrearPonenciaDialog extends JDialog {
                     }
 
                     LocalDate fecha = convertirDateALocalDate(fechaSeleccionada);
-                    ponencia = new PonenciaEvento(nombre, fecha, lugar, isbn);
+                    autor.crearPonenciaEvento(nombre, fecha, lugar, isbn);
                     confirmado = true;
                     dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(parent, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (RuntimeException r) {
+                	MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+                	m.setVisible(true);
                 }
             }
         });
