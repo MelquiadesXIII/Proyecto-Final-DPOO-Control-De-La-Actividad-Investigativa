@@ -123,14 +123,14 @@ public class VentanaGestionDepartamento extends JDialog{
 		setLocationRelativeTo(this.parent);
 		getContentPane().setLayout(new BorderLayout());
 		this.botonesNavegacion = new ArrayList<JButton>();
-		
+
 		this.addWindowListener(new WindowAdapter() {
-			
+
 			public void windowClosing(WindowEvent e){
-				
+
 				parent.actualizarTodasLasTablas();
 			}
-			
+
 		});
 	}
 
@@ -650,152 +650,152 @@ public class VentanaGestionDepartamento extends JDialog{
 	}
 
 	private void crearTablaLineasInvestigacion() {
-		
+
 		lineasEnTabla.clear();
-	    String[] columnas = {"Nombre de la línea", "Investigadores", "Resultados publicados", "Responsable"};
-	    
-	    modeloTablaLineas = new DefaultTableModel(columnas, 0) {
-	        private static final long serialVersionUID = 1L;
-	        @Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
-	    };
-	    
-	    for (LineaInvestigacion linea : dptoActual.getLineasInvestigacion()) {
-	        int totalResultados = 0;
-	        for (Investigador investigador : linea.getInvestigadores()) {
-	            totalResultados += investigador.getResultados().size();
-	        }
-	        
-	        Object[] fila = {
-	            linea.getNombre(),
-	            linea.getInvestigadores().size(),
-	            totalResultados,
-	            linea.getResponsable().getNombre() + " " + linea.getResponsable().getApellidos()
-	        };
-	        
-	        lineasEnTabla.add(linea);
-	        modeloTablaLineas.addRow(fila);
-	    }
-	    
-	    tablaLineas = new JTable(modeloTablaLineas);
-	    tablaLineas.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-	    tablaLineas.setRowHeight(30);
-	    tablaLineas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
-	    tablaLineas.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
-	    tablaLineas.getTableHeader().setForeground(Color.WHITE);
-	    tablaLineas.getTableHeader().setReorderingAllowed(false);
-	    
-	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-	    for (int i = 0; i < tablaLineas.getColumnCount(); i++) {
-	        tablaLineas.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-	    }
-	    
-	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(280);
-	    tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(120);
-	    tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(130);
-	    tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(170);
-	    
-	    scrollTablaLineas = new JScrollPane(tablaLineas);
-	    scrollTablaLineas.setBorder(BorderFactory.createEmptyBorder());
-	    panelLineas.add(scrollTablaLineas, BorderLayout.CENTER);
+		String[] columnas = {"Nombre de la línea", "Investigadores", "Resultados publicados", "Responsable"};
+
+		modeloTablaLineas = new DefaultTableModel(columnas, 0) {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		for (LineaInvestigacion linea : dptoActual.getLineasInvestigacion()) {
+			int totalResultados = 0;
+			for (Investigador investigador : linea.getInvestigadores()) {
+				totalResultados += investigador.getResultados().size();
+			}
+
+			Object[] fila = {
+					linea.getNombre(),
+					linea.getInvestigadores().size(),
+					totalResultados,
+					linea.getResponsable().getNombre() + " " + linea.getResponsable().getApellidos()
+			};
+
+			lineasEnTabla.add(linea);
+			modeloTablaLineas.addRow(fila);
+		}
+
+		tablaLineas = new JTable(modeloTablaLineas);
+		tablaLineas.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		tablaLineas.setRowHeight(30);
+		tablaLineas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tablaLineas.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
+		tablaLineas.getTableHeader().setForeground(Color.WHITE);
+		tablaLineas.getTableHeader().setReorderingAllowed(false);
+
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < tablaLineas.getColumnCount(); i++) {
+			tablaLineas.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+		}
+
+		tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(280);
+		tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(120);
+		tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(130);
+		tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(170);
+
+		scrollTablaLineas = new JScrollPane(tablaLineas);
+		scrollTablaLineas.setBorder(BorderFactory.createEmptyBorder());
+		panelLineas.add(scrollTablaLineas, BorderLayout.CENTER);
 	}
 
 	public void actualizarTablaLineas() {
-	    panelLineas.removeAll();
-	    
-	    JPanel encabezado = new JPanel();
-	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
-	    encabezado.setPreferredSize(new Dimension(0, 50));
-	    JLabel lblTitulo = new JLabel("Líneas de investigación registradas en el departamento");
-	    lblTitulo.setForeground(Color.WHITE);
-	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-	    encabezado.add(lblTitulo);
-	    panelLineas.add(encabezado, BorderLayout.NORTH);
-	    
-	    crearTablaLineasInvestigacion();
-	    
-	    panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
-	    panelLineas.revalidate();
-	    panelLineas.repaint();
+		panelLineas.removeAll();
+
+		JPanel encabezado = new JPanel();
+		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+		encabezado.setPreferredSize(new Dimension(0, 50));
+		JLabel lblTitulo = new JLabel("Líneas de investigación registradas en el departamento");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		encabezado.add(lblTitulo);
+		panelLineas.add(encabezado, BorderLayout.NORTH);
+
+		crearTablaLineasInvestigacion();
+
+		panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
+		panelLineas.revalidate();
+		panelLineas.repaint();
 	}
-	
+
 	private void crearTablaResultados() {
-		
+
 		resultadosEnTabla.clear();
-		
-	    String[] columnas = {"Nombre", "Tipo", "Investigador", "Línea de investigación"};
-	    
-	    modeloTablaResultados = new DefaultTableModel(columnas, 0) {
+
+		String[] columnas = {"Nombre", "Tipo", "Investigador", "Línea de investigación"};
+
+		modeloTablaResultados = new DefaultTableModel(columnas, 0) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
-	    };
-	    
-	    for(LineaInvestigacion l: dptoActual.getLineasInvestigacion()){
-	    	for(Investigador i: l.getInvestigadores()){
-	    		for(ResultadoInvestigativo r: i.getResultados()){
-	    			
-	    			String nombre = r.getNombrePublicacion();
-	    	        String tipo = r.getTipo();
-	    	        Investigador inv = i;
-	    	        LineaInvestigacion linea = l;
-	    	        
-	    	        modeloTablaResultados.addRow(new Object[]{nombre, tipo, inv.getNombre() + " " + inv.getApellidos(), linea.getNombre()});
-	    	        resultadosEnTabla.add(r);
-	    		}
-	    		
-	    	}
-	    }
-	    
-	    
-	    tablaResultados = new JTable(modeloTablaResultados);
-	    tablaResultados.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-	    tablaResultados.setRowHeight(30);
-	    
-	    tablaResultados.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
-	    tablaResultados.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
-	    tablaResultados.getTableHeader().setForeground(Color.WHITE);
-	    tablaResultados.getTableHeader().setReorderingAllowed(false);
-	    
-	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-	    for (int i = 0; i < tablaResultados.getColumnCount(); i++) {
-	        tablaResultados.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-	    }
-	   
-	    tablaResultados.getColumnModel().getColumn(0).setPreferredWidth(200);
-	    tablaResultados.getColumnModel().getColumn(1).setPreferredWidth(120);
-	    tablaResultados.getColumnModel().getColumn(2).setPreferredWidth(180);
-	    tablaResultados.getColumnModel().getColumn(3).setPreferredWidth(200);
-	    
-	    scrollTablaResultados = new JScrollPane(tablaResultados);
-	    panelResultados.add(scrollTablaResultados, BorderLayout.CENTER);
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		for(LineaInvestigacion l: dptoActual.getLineasInvestigacion()){
+			for(Investigador i: l.getInvestigadores()){
+				for(ResultadoInvestigativo r: i.getResultados()){
+
+					String nombre = r.getNombrePublicacion();
+					String tipo = r.getTipo();
+					Investigador inv = i;
+					LineaInvestigacion linea = l;
+
+					modeloTablaResultados.addRow(new Object[]{nombre, tipo, inv.getNombre() + " " + inv.getApellidos(), linea.getNombre()});
+					resultadosEnTabla.add(r);
+				}
+
+			}
+		}
+
+
+		tablaResultados = new JTable(modeloTablaResultados);
+		tablaResultados.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		tablaResultados.setRowHeight(30);
+
+		tablaResultados.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tablaResultados.getTableHeader().setBackground(COLOR_HEADER_BACKGROUND);
+		tablaResultados.getTableHeader().setForeground(Color.WHITE);
+		tablaResultados.getTableHeader().setReorderingAllowed(false);
+
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < tablaResultados.getColumnCount(); i++) {
+			tablaResultados.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+		}
+
+		tablaResultados.getColumnModel().getColumn(0).setPreferredWidth(200);
+		tablaResultados.getColumnModel().getColumn(1).setPreferredWidth(120);
+		tablaResultados.getColumnModel().getColumn(2).setPreferredWidth(180);
+		tablaResultados.getColumnModel().getColumn(3).setPreferredWidth(200);
+
+		scrollTablaResultados = new JScrollPane(tablaResultados);
+		panelResultados.add(scrollTablaResultados, BorderLayout.CENTER);
 	}
-	
+
 	public void actualizarTablaResultados() {
-	    panelResultados.removeAll();
-	    
-	    JPanel encabezado = new JPanel();
-	    encabezado.setBackground(COLOR_HEADER_BACKGROUND);
-	    encabezado.setPreferredSize(new Dimension(0, 50));
-	    
-	    JLabel lblTitulo = new JLabel("Resultados Investigativos");
-	    lblTitulo.setForeground(Color.WHITE);
-	    lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-	    encabezado.add(lblTitulo);
-	    
-	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
-	    
-	    panelResultados.add(encabezado, BorderLayout.NORTH);
-	    crearTablaResultados();
-	    panelResultados.revalidate();
-	    panelResultados.repaint();
+		panelResultados.removeAll();
+
+		JPanel encabezado = new JPanel();
+		encabezado.setBackground(COLOR_HEADER_BACKGROUND);
+		encabezado.setPreferredSize(new Dimension(0, 50));
+
+		JLabel lblTitulo = new JLabel("Resultados Investigativos");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		encabezado.add(lblTitulo);
+
+		panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
+
+		panelResultados.add(encabezado, BorderLayout.NORTH);
+		crearTablaResultados();
+		panelResultados.revalidate();
+		panelResultados.repaint();
 	}
 
 	private void configurarPanelesCRUD(){
@@ -809,7 +809,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		configurarPanelCRUDCursos();
 
 		configurarPanelCRUDLineas();
-		
+
 		configurarPanelCRUDResultados();
 	}
 
@@ -1002,7 +1002,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		panelBotonesCRUDMaestria = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 		panelBotonesCRUDMaestria.setBackground(Color.DARK_GRAY);
-		
+
 		JButton btnCrearMaestria = crearBotonCRUD("Crear");
 		btnCrearMaestria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -1066,7 +1066,7 @@ public class VentanaGestionDepartamento extends JDialog{
 						dptoActual.removerMaestria(maestria);
 
 						modeloMaestrias.remove(seleccionado);
-						
+
 						actualizarTodasLasTablas();
 
 						MensajeDialog mensaje = new MensajeDialog(parent,"Maestría eliminada correctamente",Tipo.RETROALIMENTACION);
@@ -1081,24 +1081,24 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		JButton btnMatricular = crearBotonCRUD("Matricular");
 		btnMatricular.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+
+
 			}
 		});
-		
+
 		JButton btnBaja = crearBotonCRUD("Dar baja");
 		btnBaja.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+
+
 			}
 		});
-		
+
 		panelBotonesCRUDMaestria.add(btnCrearMaestria);
 		panelBotonesCRUDMaestria.add(btnEditarMaestria);
 		panelBotonesCRUDMaestria.add(btnEliminarMaestria);
@@ -1132,14 +1132,14 @@ public class VentanaGestionDepartamento extends JDialog{
 
 			}
 		});
-		
+
 		JButton btnNota = crearBotonCRUD("Dar Nota");
 		btnNota.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+
+
 			}
 		});
 
@@ -1149,25 +1149,25 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		panelCursos.add(panelBotonesCRUDCursos, BorderLayout.SOUTH);
 	}
-	
-	private void configurarPanelCRUDLineas() {
-	    panelBotonesCRUDLineas = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-	    panelBotonesCRUDLineas.setBackground(Color.DARK_GRAY);
 
-	    JButton btnCrearLinea = crearBotonCRUD("Crear");
-	    btnCrearLinea.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	        	CrearLineaInvestigacionDialog dialog = new CrearLineaInvestigacionDialog(parent, vicedecanato, dptoActual);
+	private void configurarPanelCRUDLineas() {
+		panelBotonesCRUDLineas = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDLineas.setBackground(Color.DARK_GRAY);
+
+		JButton btnCrearLinea = crearBotonCRUD("Crear");
+		btnCrearLinea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearLineaInvestigacionDialog dialog = new CrearLineaInvestigacionDialog(parent, vicedecanato, dptoActual);
 				dialog.setVisible(true);
 
 				if(dialog.isConfirmado())
 					actualizarTodasLasTablas();
-	        }
-	    });
+			}
+		});
 
-	    JButton btnEditarLinea = crearBotonCRUD("Editar");
-	    btnEditarLinea.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e){
+		JButton btnEditarLinea = crearBotonCRUD("Editar");
+		btnEditarLinea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
 
 				if(tablaLineas.getSelectedRows().length == 1){
 					int seleccionado = tablaLineas.getSelectedRow();
@@ -1188,12 +1188,12 @@ public class VentanaGestionDepartamento extends JDialog{
 					}
 				}
 			}
-	    });
+		});
 
-	    JButton btnEliminarLinea = crearBotonCRUD("Eliminar");
-	    btnEliminarLinea.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	        	if(tablaLineas.getSelectedRows().length == 1){
+		JButton btnEliminarLinea = crearBotonCRUD("Eliminar");
+		btnEliminarLinea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tablaLineas.getSelectedRows().length == 1){
 					int seleccionado = tablaLineas.getSelectedRow();
 
 					if (seleccionado != -1) {
@@ -1217,200 +1217,179 @@ public class VentanaGestionDepartamento extends JDialog{
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
-	        }
-	    });
+			}
+		});
 
-	    panelBotonesCRUDLineas.add(btnCrearLinea);
-	    panelBotonesCRUDLineas.add(btnEditarLinea);
-	    panelBotonesCRUDLineas.add(btnEliminarLinea);
+		panelBotonesCRUDLineas.add(btnCrearLinea);
+		panelBotonesCRUDLineas.add(btnEditarLinea);
+		panelBotonesCRUDLineas.add(btnEliminarLinea);
 
-	    panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
+		panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
 	}
-	
+
 	private void configurarPanelCRUDResultados() {
-	    panelBotonesCRUDResultados = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-	    panelBotonesCRUDResultados.setBackground(Color.DARK_GRAY);
-	    panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
+		panelBotonesCRUDResultados = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		panelBotonesCRUDResultados.setBackground(Color.DARK_GRAY);
+		panelResultados.add(panelBotonesCRUDResultados, BorderLayout.SOUTH);
 
-	    JButton btnCrearResultado = crearBotonCRUD("Crear");
-	    btnCrearResultado.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	            
-	            SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent, estudiantesEnTabla, docentesEnTabla);
-	            seleccionDialog.setVisible(true);
+		JButton btnCrearResultado = crearBotonCRUD("Crear");
+		btnCrearResultado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-	            if (seleccionDialog.isConfirmado()) {
-	                String tipo = seleccionDialog.getTipoSeleccionado();
-	                Investigador autor = seleccionDialog.getInvestigadorSeleccionado();
+				SeleccionTipoResultadoDialog seleccionDialog = new SeleccionTipoResultadoDialog(parent, estudiantesEnTabla, docentesEnTabla);
+				seleccionDialog.setVisible(true);
 
-	                ResultadoInvestigativo resultado = null;
+				if (seleccionDialog.isConfirmado()) {
+					String tipo = seleccionDialog.getTipoSeleccionado();
+					Investigador autor = seleccionDialog.getInvestigadorSeleccionado();
 
-	                
-	                if (tipo.equals("Ponencia de Evento")) {
-	                    CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent);
-	                    ponenciaDialog.setVisible(true);
-	                    if (ponenciaDialog.isConfirmado()) {
-	                        resultado = ponenciaDialog.getPonencia();
-	                    }
+					if (tipo.equals("Ponencia de Evento")) {
+						CrearPonenciaDialog ponenciaDialog = new CrearPonenciaDialog(parent, autor);
+						ponenciaDialog.setVisible(true);
+						if (ponenciaDialog.isConfirmado()) {
+							actualizarTodasLasTablas();
+						}
 
-	                } else if (tipo.equals("Artículo")) {
-	                    CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent);
-	                    articuloDialog.setVisible(true);
-	                    if (articuloDialog.isConfirmado()) {
-	                        resultado = articuloDialog.getArticulo();
-	                    }
+					} else if (tipo.equals("Artículo")) {
+						CrearArticuloDialog articuloDialog = new CrearArticuloDialog(parent, autor);
+						articuloDialog.setVisible(true);
+						if (articuloDialog.isConfirmado()) {
+							actualizarTodasLasTablas();
+						}
 
-	                } else if (tipo.equals("Capítulo de Libro")) {
-	                    CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent);
-	                    capituloDialog.setVisible(true);
-	                    if (capituloDialog.isConfirmado()) {
-	                        resultado = capituloDialog.getCapitulo();
-	                    }
-	                }
-
-	                
-	                if (resultado != null && autor != null) {
-	                    autor.agregarResultado(resultado);
-	                    actualizarTablaResultados(); 
-	                }
-	            }
-	        }
-	    });
+					} else if (tipo.equals("Capítulo de Libro")) {
+						CrearCapituloDialog capituloDialog = new CrearCapituloDialog(parent, autor);
+						capituloDialog.setVisible(true);
+						if (capituloDialog.isConfirmado()) {
+							actualizarTodasLasTablas();
+						}
+					}
 
 
-	    JButton btnEditarResultado = crearBotonCRUD("Editar");
-	    btnEditarResultado.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	            int filaSeleccionada = tablaResultados.getSelectedRow();
+				}
+			}
+		});
 
-	            if (filaSeleccionada == -1) {
-	                JOptionPane.showMessageDialog(parent, "Seleccione un resultado para editar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-	                return;
-	            }
 
-	            ResultadoInvestigativo seleccionado = resultadosEnTabla.get(filaSeleccionada);
+		JButton btnEditarResultado = crearBotonCRUD("Editar");
+		btnEditarResultado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int filaSeleccionada = tablaResultados.getSelectedRow();
 
-	            
-	            if (seleccionado instanceof Articulo) {
-	                EditarArticuloDialog dialog = new EditarArticuloDialog(parent, (Articulo) seleccionado);
-	                dialog.setVisible(true);
-	                if (dialog.isConfirmado()) {
-	                    
-	                    actualizarTablaResultados();
-	                }
+				if (filaSeleccionada >= 0) {
+					ResultadoInvestigativo seleccionado = resultadosEnTabla.get(filaSeleccionada);
 
-	            } else if (seleccionado instanceof PonenciaEvento) {
-	                EditarPonenciaDialog dialog = new EditarPonenciaDialog(parent, (PonenciaEvento) seleccionado);
-	                dialog.setVisible(true);
-	                if (dialog.isConfirmado()) {
-	                    actualizarTablaResultados();
-	                }
 
-	            } else if (seleccionado instanceof CapituloLibro) {
-	                EditarCapituloDialog dialog = new EditarCapituloDialog(parent, (CapituloLibro) seleccionado);
-	                dialog.setVisible(true);
-	                if (dialog.isConfirmado()) {
-	                    actualizarTablaResultados();
-	                }
+					if (seleccionado instanceof Articulo) {
+						EditarArticuloDialog dialog = new EditarArticuloDialog(parent, (Articulo) seleccionado);
+						dialog.setVisible(true);
+						if (dialog.isConfirmado()) {
+							actualizarTodasLasTablas();
+						}
 
-	            } else {
-	                JOptionPane.showMessageDialog(parent, "Tipo de resultado no reconocido.", "Error", JOptionPane.ERROR_MESSAGE);
-	            }
-	        }
-	    });
+					} else if (seleccionado instanceof PonenciaEvento) {
+						EditarPonenciaDialog dialog = new EditarPonenciaDialog(parent, (PonenciaEvento) seleccionado);
+						dialog.setVisible(true);
+						if (dialog.isConfirmado()) {
+							actualizarTodasLasTablas();
+						}
+
+					} else if (seleccionado instanceof CapituloLibro) {
+						EditarCapituloDialog dialog = new EditarCapituloDialog(parent, (CapituloLibro) seleccionado);
+						dialog.setVisible(true);
+						if (dialog.isConfirmado()) {
+							actualizarTodasLasTablas();
+						}
+
+					} else {
+						MensajeDialog m = new MensajeDialog(parent, "Tipo de resultado no reconocido", Tipo.RETROALIMENTACION);
+						m.setVisible(true);
+					}
+
+
+				}else{
+					MensajeDialog m = new MensajeDialog(parent, "Seleccione un resultado para editar", Tipo.RETROALIMENTACION);
+					m.setVisible(true);
+				}
+
+
+			}
+		});
 
 
 
 
 
 
-	    JButton btnEliminarResultado = crearBotonCRUD("Eliminar");
-	    btnEliminarResultado.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	            int seleccionado = tablaResultados.getSelectedRow();
+		JButton btnEliminarResultado = crearBotonCRUD("Eliminar");
+		btnEliminarResultado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-	            if (seleccionado != -1) {
-	                ResultadoInvestigativo resultado = resultadosEnTabla.get(seleccionado);
 
-	                MensajeDialog confirmacion = new MensajeDialog(
-	                    parent,
-	                    "¿Estás seguro que deseas eliminar \"" + resultado.getNombrePublicacion() + "\"?",
-	                    Tipo.CONFIRMACION
-	                );
-	                confirmacion.setVisible(true);
+				if(tablaResultados.getSelectedRows().length == 1){
 
-	                if (confirmacion.isConfirmado()) {
-	                    try {
-	                        Investigador autor = null;
+					int seleccionado = tablaResultados.getSelectedRow();
 
-	                        
-	                        for (int i = 0; i < estudiantesEnTabla.size(); i++) {
-	                            Estudiante est = estudiantesEnTabla.get(i);
-	                            if (est.getResultados().contains(resultado)) {
-	                                autor = est;
-	                                break;
-	                            }
-	                        }
+					if (seleccionado != -1) {
+						ResultadoInvestigativo resultado = resultadosEnTabla.get(seleccionado);
 
-	                        
-	                        if (autor == null) {
-	                            for (int i = 0; i < docentesEnTabla.size(); i++) {
-	                                Docente doc = docentesEnTabla.get(i);
-	                                if (doc.getResultados().contains(resultado)) {
-	                                    autor = doc;
-	                                    break;
-	                                }
-	                            }
-	                        }
+						MensajeDialog confirmacion = new MensajeDialog(
+								parent,
+								"¿Estás seguro que deseas eliminar \"" + resultado.getNombrePublicacion() + "\"?",
+								Tipo.CONFIRMACION
+								);
+						confirmacion.setVisible(true);
 
-	                        
-	                        if (autor != null) {
-	                            autor.removerResultado(resultado);
+						if (confirmacion.isConfirmado()) {
 
-	                            resultadosEnTabla.remove(seleccionado);
-	                            actualizarTablaResultados();
+							Investigador autor = dptoActual.buscarInvestigadorDelResultado(resultado);
 
-	                            MensajeDialog mensaje = new MensajeDialog(
-	                                parent,
-	                                "Resultado eliminado correctamente.",
-	                                Tipo.RETROALIMENTACION
-	                            );
-	                            mensaje.setVisible(true);
-	                        } else {
-	                            MensajeDialog error = new MensajeDialog(
-	                                parent,
-	                                "No se encontró al autor del resultado. No se pudo eliminar.",
-	                                Tipo.RETROALIMENTACION
-	                            );
-	                            error.setVisible(true);
-	                        }
+							if(autor != null){
 
-	                    } catch (Exception ex) {
-	                        MensajeDialog mensajeError = new MensajeDialog(
-	                            parent,
-	                            ex.getMessage(),
-	                            Tipo.RETROALIMENTACION
-	                        );
-	                        mensajeError.setVisible(true);
-	                    }
-	                }
+								autor.removerResultado(resultado);
+								resultadosEnTabla.remove(seleccionado);
 
-	            } else {
-	                MensajeDialog mensaje = new MensajeDialog(
-	                    parent,
-	                    "Debes seleccionar un resultado investigativo para eliminar.",
-	                    Tipo.RETROALIMENTACION
-	                );
-	                mensaje.setVisible(true);
-	            }
-	        }
-	    });
+							}
 
-	    panelBotonesCRUDResultados.add(btnCrearResultado);
-	    panelBotonesCRUDResultados.add(btnEditarResultado);
-	    panelBotonesCRUDResultados.add(btnEliminarResultado);
+							actualizarTodasLasTablas();
+
+							MensajeDialog mensaje = new MensajeDialog(
+									parent,
+									"Resultado eliminado correctamente.",
+									Tipo.RETROALIMENTACION
+									);
+							mensaje.setVisible(true);
+
+
+
+
+						}
+
+					} else {
+						MensajeDialog mensaje = new MensajeDialog(
+								parent,
+								"Debes seleccionar un resultado investigativo para eliminar.",
+								Tipo.RETROALIMENTACION
+								);
+						mensaje.setVisible(true);
+					}
+
+				}else{
+					MensajeDialog mensaje = new MensajeDialog(
+							parent,
+							"Debe seleccionar solo un resultado investigativo para eliminar.",
+							Tipo.RETROALIMENTACION
+							);
+					mensaje.setVisible(true);
+				}
+			}
+		});
+
+		panelBotonesCRUDResultados.add(btnCrearResultado);
+		panelBotonesCRUDResultados.add(btnEditarResultado);
+		panelBotonesCRUDResultados.add(btnEliminarResultado);
 	}
-	
+
 	private void actualizarTodasLasTablas(){
 		actualizarTablaCursos();
 		actualizarTablaDoc();
