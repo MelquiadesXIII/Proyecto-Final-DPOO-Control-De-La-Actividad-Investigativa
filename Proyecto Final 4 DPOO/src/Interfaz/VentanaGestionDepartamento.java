@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -1166,6 +1167,11 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnCrearCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				CrearCursoPosgradoDialog dialog = new CrearCursoPosgradoDialog(parent, dptoActual);
+				
+				if(dialog.isConfirmado()){
+					actualizarTodasLasTablas();
+				}
 			}
 		});
 
@@ -1178,6 +1184,12 @@ public class VentanaGestionDepartamento extends JDialog{
 
 					if (seleccionado != -1) {
 						CursoPosgrado cursoSeleccionado = cursosEnTabla.get(seleccionado);
+						
+						EditarCursoPosgradoDialog dialog = new EditarCursoPosgradoDialog(parent, dptoActual, cursoSeleccionado);
+						
+						if(dialog.isConfirmado()){
+							actualizarTodasLasTablas();
+						}
 
 					} else {
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un curso para editar",Tipo.RETROALIMENTACION);

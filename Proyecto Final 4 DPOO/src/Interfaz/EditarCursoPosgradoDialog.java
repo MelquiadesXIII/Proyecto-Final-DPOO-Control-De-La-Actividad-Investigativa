@@ -30,26 +30,28 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+
 import Interfaz.MensajeDialog.Tipo;
 import Logica.CategoriaCientifica;
+import Logica.CursoPosgrado;
 import Logica.Departamento;
 import Logica.Docente;
-import Logica.Maestria;
 
-public class CrearCursoPosgradoDialog extends JDialog {
+public class EditarCursoPosgradoDialog extends JDialog {
     private static final long serialVersionUID = 1L;
     private JTextField campoTema;
     private JTextArea areaObjetivos;
     private JTextField campoCreditos;
     private JComboBox<Docente> comboProfesores;
-    private JComboBox<Maestria> comboMaestrias;
     private boolean confirmado = false;
     private Point point = new Point();
     private Departamento depto;
+    private CursoPosgrado curso;
 
-    public CrearCursoPosgradoDialog(final JFrame parent, final Departamento depto) {
-        super(parent, "Crear Curso de Posgrado", true);
+    public EditarCursoPosgradoDialog(final JFrame parent, final Departamento depto, final CursoPosgrado curso) {
+        super(parent, "Editar Curso de Posgrado", true);
         this.depto = depto;
+        this.curso = curso;
         setUndecorated(true);
         setBackground(new Color(30, 40, 50));
         getContentPane().setLayout(new BorderLayout());
@@ -57,12 +59,12 @@ public class CrearCursoPosgradoDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setPreferredSize(new Dimension(500, 520)); 
+        panel.setPreferredSize(new Dimension(500, 450)); 
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
         panel.setLayout(null);
 
         JPanel panelCampos = new JPanel();
-        panelCampos.setBounds(20, 80, 460, 350); 
+        panelCampos.setBounds(20, 80, 460, 250); 
         panelCampos.setBackground(new Color(30, 40, 50));
         panelCampos.setLayout(null);
         panel.add(panelCampos);
@@ -76,7 +78,7 @@ public class CrearCursoPosgradoDialog extends JDialog {
         panelCampos.add(labelTema);
         estiloLabel(labelTema);
 
-        campoTema = new JTextField();
+        campoTema = new JTextField(curso.getTema());
         campoTema.setBounds(fieldX, 20, fieldWidth, 30);
         panelCampos.add(campoTema);
         estiloCampo(campoTema);
@@ -87,7 +89,7 @@ public class CrearCursoPosgradoDialog extends JDialog {
         panelCampos.add(labelObjetivos);
         estiloLabel(labelObjetivos);
 
-        areaObjetivos = new JTextArea();
+        areaObjetivos = new JTextArea(String.join("\n", curso.getObjetivos()));
         areaObjetivos.setLineWrap(true);
         areaObjetivos.setWrapStyleWord(true);
         JScrollPane scrollObjetivos = new JScrollPane(areaObjetivos);
@@ -97,68 +99,61 @@ public class CrearCursoPosgradoDialog extends JDialog {
         estiloCampo(areaObjetivos);
         aplicarFiltroTextoArea(areaObjetivos, 200);
 
-        JLabel labelMaestria = new JLabel("Maestría:");
-        labelMaestria.setBounds(20, 150, maxLabelWidth, 30);
-        panelCampos.add(labelMaestria);
-        estiloLabel(labelMaestria);
-
-        comboMaestrias = new JComboBox<>();
-        comboMaestrias.setBounds(fieldX, 150, fieldWidth, 30);
-        cargarMaestrias();
-        panelCampos.add(comboMaestrias);
-        estiloComboBoxMaestria(comboMaestrias);
-
         JLabel labelCreditos = new JLabel("Créditos:");
-        labelCreditos.setBounds(20, 190, maxLabelWidth, 30);
+        labelCreditos.setBounds(20, 150, maxLabelWidth, 30);
         panelCampos.add(labelCreditos);
         estiloLabel(labelCreditos);
 
-        campoCreditos = new JTextField();
-        campoCreditos.setBounds(fieldX, 190, fieldWidth, 30);
+        campoCreditos = new JTextField(String.valueOf(curso.getCantCreditos()));
+        campoCreditos.setBounds(fieldX, 150, fieldWidth, 30);
         panelCampos.add(campoCreditos);
         estiloCampo(campoCreditos);
         aplicarFiltroNumerico(campoCreditos, 2);
 
         JLabel labelProfesor = new JLabel("Profesor (Doctor):");
-        labelProfesor.setBounds(20, 230, maxLabelWidth, 30);
+        labelProfesor.setBounds(20, 190, maxLabelWidth, 30);
         panelCampos.add(labelProfesor);
         estiloLabel(labelProfesor);
 
         comboProfesores = new JComboBox<>();
-        comboProfesores.setBounds(fieldX, 230, fieldWidth, 30);
+        comboProfesores.setBounds(fieldX, 190, fieldWidth, 30);
         cargarProfesoresDoctores();
+        comboProfesores.setSelectedItem(curso.getProfesor());
         panelCampos.add(comboProfesores);
         estiloComboBoxDocente(comboProfesores);
 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        panelBotones.setBounds(20, 440, 460, 60); 
+        panelBotones.setBounds(20, 340, 460, 60);
         panelBotones.setBackground(new Color(30, 40, 50));
 
-        JButton botonCrear = new JButton("Crear");
+        JButton botonGuardar = new JButton("Guardar");
         JButton botonCancelar = new JButton("Cancelar");
-        estiloBoton(botonCrear);
+        estiloBoton(botonGuardar);
         estiloBoton(botonCancelar);
-        botonCrear.setPreferredSize(new Dimension(120, 40));
+        botonGuardar.setPreferredSize(new Dimension(120, 40));
         botonCancelar.setPreferredSize(new Dimension(120, 40));
 
-        botonCrear.addActionListener(new ActionListener() {
+        botonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String tema = getTema();
-                    String objetivosTexto = getObjetivos();
-                    int creditos = Integer.parseInt(getCreditos());
+                    String tema = campoTema.getText();
+                    String objetivosTexto = areaObjetivos.getText();
+                    int creditos = Integer.parseInt(campoCreditos.getText());
                     Docente profesor = (Docente) comboProfesores.getSelectedItem();
-                    Maestria maestria = (Maestria) comboMaestrias.getSelectedItem();
 
                     ArrayList<String> objetivosList = new ArrayList<>();
                     for (String objetivo : objetivosTexto.split("\\n")) {
+                        if (!objetivo.trim().isEmpty()) {
                             objetivosList.add(objetivo);
-                        
+                        }
                     }
 
-                    maestria.crearCursoPosgrado(tema, objetivosList, creditos, profesor);
+                    curso.setTema(tema);
+                    curso.setObjetivos(objetivosList);
+                    curso.setCantCreditos(creditos);
+                    curso.setProfesor(profesor);
                     
-                    MensajeDialog d = new MensajeDialog(parent, "Curso creado exitosamente", Tipo.RETROALIMENTACION);
+                    MensajeDialog d = new MensajeDialog(parent, "Curso actualizado exitosamente", Tipo.RETROALIMENTACION);
                     d.setVisible(true);
                     confirmado = true;
                     dispose();
@@ -176,7 +171,7 @@ public class CrearCursoPosgradoDialog extends JDialog {
             }
         });
 
-        panelBotones.add(botonCrear);
+        panelBotones.add(botonGuardar);
         panelBotones.add(botonCancelar);
         panel.add(panelBotones);
 
@@ -198,15 +193,12 @@ public class CrearCursoPosgradoDialog extends JDialog {
         panel.addMouseListener(mouseAdapter);
         panel.addMouseMotionListener(motionListener);
 
-        JLabel lblTitulo = new JLabel("Crear Curso de Posgrado");
+        JLabel lblTitulo = new JLabel("Editar Curso de Posgrado");
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        int tituloWidth = 300; 
-        int tituloX = (500 - tituloWidth) / 2; 
-        
+        int tituloWidth = 300;
+        int tituloX = (500 - tituloWidth) / 2;
         lblTitulo.setBounds(tituloX, 35, tituloWidth, 50);
         panel.add(lblTitulo);
 
@@ -221,12 +213,6 @@ public class CrearCursoPosgradoDialog extends JDialog {
             if (docente.getCatCientifica() == CategoriaCientifica.DOCTOR) {
                 comboProfesores.addItem(docente);
             }
-        }
-    }
-    
-    private void cargarMaestrias(){
-        for(Maestria m: depto.getMaestrias()){
-            comboMaestrias.addItem(m);
         }
     }
 
@@ -276,13 +262,6 @@ public class CrearCursoPosgradoDialog extends JDialog {
         combo.setBackground(new Color(60, 70, 80));
         combo.setForeground(Color.WHITE);
         combo.setRenderer(new DocenteComboBoxRenderer());
-    }
-    
-    private void estiloComboBoxMaestria(JComboBox<Maestria> combo) {
-        combo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        combo.setBackground(new Color(60, 70, 80));
-        combo.setForeground(Color.WHITE);
-        combo.setRenderer(new MaestriaComboBoxRenderer());
     }
 
     public void aplicarFiltroTextoArea(JTextArea area, final int maxChars) {
@@ -378,17 +357,5 @@ public class CrearCursoPosgradoDialog extends JDialog {
 
     public boolean isConfirmado() {
         return confirmado;
-    }
-    
-    public String getTema(){
-        return campoTema.getText();
-    }
-    
-    public String getCreditos(){
-        return campoCreditos.getText();
-    }
-    
-    public String getObjetivos(){
-        return areaObjetivos.getText();
     }
 }

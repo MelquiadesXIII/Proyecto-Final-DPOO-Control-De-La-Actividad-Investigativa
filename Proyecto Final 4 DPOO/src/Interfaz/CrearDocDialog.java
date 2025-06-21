@@ -30,7 +30,6 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.CategoriaCientifica;
@@ -129,75 +128,8 @@ public class CrearDocDialog extends JDialog{
 		panelCampos.add(comboCatDocente);
 		estiloComboBoxEnum(comboCatDocente);
 
-		AbstractDocument docNombre = (AbstractDocument) campoNombre.getDocument();
-		docNombre.setDocumentFilter(new DocumentFilter() {
-			private int maxChars = 25;
-
-			@Override
-			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.insertString(fb, offset, string, attr);
-					}
-
-				}
-			}
-
-			@Override
-			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.replace(fb, offset, length, text, attrs);
-					}
-
-				}else
-					super.replace(fb, offset, length, text, attrs);
-			}
-		});
-		
-		
-		AbstractDocument docApellidos = (AbstractDocument) campoApellidos.getDocument();
-		docApellidos.setDocumentFilter(new DocumentFilter() {
-			private int maxChars = 100;
-
-			@Override
-			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.insertString(fb, offset, string, attr);
-					}
-
-				}
-			}
-
-			@Override
-			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text != null) {
-
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-
-					if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-						super.replace(fb, offset, length, text, attrs);
-					}
-
-				}else
-					super.replace(fb, offset, length, text, attrs);
-			}
-		});
-
+		aplicarFiltroTexto(campoNombre, 25);
+		aplicarFiltroTexto(campoApellidos, 100);
 
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 		panelBotones.setBounds(20, 400, 360, 60);
@@ -382,5 +314,36 @@ public class CrearDocDialog extends JDialog{
 
 	public boolean isConfirmado() {
 		return confirmado;
+	}
+	
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
+
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				if (text != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+				} else {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
 	}
 }
