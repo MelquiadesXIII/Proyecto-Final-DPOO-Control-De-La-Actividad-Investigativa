@@ -279,4 +279,28 @@ public class Departamento {
 
 		return noContenido;
 	}
+	
+	public Investigador buscarInvestigadorDelResultado(ResultadoInvestigativo r){
+		
+		boolean encontrado = false;
+		int i = 0;
+		int j = 0;
+		Investigador autor = null;
+		
+		while(i < lineasInvestigacion.size() && !encontrado){
+			
+			LineaInvestigacion l = lineasInvestigacion.get(i);
+			
+			if(l.buscarInvestigadorDelResultado(r) != null){
+				
+				autor = l.buscarInvestigadorDelResultado(r);
+				encontrado = true;
+			}
+			
+			i++;
+		}
+		
+		return autor;
+		
+	}
 }
