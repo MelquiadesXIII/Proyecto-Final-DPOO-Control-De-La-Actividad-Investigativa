@@ -1100,6 +1100,10 @@ public class VentanaGestionDepartamento extends JDialog{
 
 					if (seleccionado != -1) {
 						Maestria maestria = maestriasEnTabla.get(seleccionado);
+						MatricularDocenteDialog matricula = new MatricularDocenteDialog(parent, maestria, dptoActual);
+						
+						if(matricula.isConfirmado())
+							actualizarTodasLasTablas();
 
 					}else {
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para matricular",Tipo.RETROALIMENTACION);
@@ -1125,6 +1129,12 @@ public class VentanaGestionDepartamento extends JDialog{
 
 					if (seleccionado != -1) {
 						Maestria maestria = maestriasEnTabla.get(seleccionado);
+						BajaMaestriaDialog dialog = new BajaMaestriaDialog(parent, maestria, dptoActual);
+						
+						if(dialog.isConfirmado()){
+							actualizarTodasLasTablas();
+						}
+						
 
 					} else {
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para dar una baja",Tipo.RETROALIMENTACION);
