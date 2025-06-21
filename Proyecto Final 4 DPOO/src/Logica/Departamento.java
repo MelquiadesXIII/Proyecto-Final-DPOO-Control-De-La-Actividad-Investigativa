@@ -182,22 +182,6 @@ public class Departamento {
 		maestrias.remove(m);
 	}
 
-	public boolean solicitudValidaIngresoDocenteAMaestria(Docente d){
-
-		boolean noContenido = true;
-
-		int i = 0;
-		while(i < maestrias.size() && noContenido){
-
-			if(maestrias.get(i).contieneMatriculado(d))
-				noContenido = false;
-
-			i++;
-		}
-
-		return noContenido;
-	}
-
 	public boolean contieneDocente(Docente d){
 
 		return docentes.contains(d);
@@ -278,6 +262,20 @@ public class Departamento {
 		}
 
 		return noContenido;
+	}
+	
+	public ArrayList<Docente> obtenerListaDocentesValidosParaMatriculaMaestria(){
+		
+		ArrayList<Docente> lista = new ArrayList<Docente>();
+		
+		for(Docente d: docentes){
+			
+			if(solicitudValidaMatriculaMaestria(d) && d.getCatCientifica() == CategoriaCientifica.NINGUNA)
+				lista.add(d);
+			
+		}
+		
+		return lista;
 	}
 	
 	public Investigador buscarInvestigadorDelResultado(ResultadoInvestigativo r){

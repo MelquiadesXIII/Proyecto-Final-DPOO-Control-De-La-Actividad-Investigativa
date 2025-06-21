@@ -50,8 +50,6 @@ public class VentanaGestionDepartamento extends JDialog{
 	private JPanel panelMaestrias;
 	private JPanel panelEstudiantes;
 	private JPanel panelDocentes;
-	private DefaultListModel<Object> modeloMaestrias;
-	private JList<Object> listaMaestrias;
 	private JPanel panelBotonesCRUDEstudiantes;
 	private JPanel panelBotonesCRUDDocentes;
 	private JPanel panelBotonesCRUDMaestria;
@@ -108,7 +106,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		configurarPanelesCRUD();
 		actualizarTodasLasTablas();
 
-		//this.parent.setVisible(false);
+		this.parent.setVisible(false);
 		setVisible(true);
 	}
 
