@@ -30,7 +30,6 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.Departamento;
@@ -153,56 +152,36 @@ public class EditarEstDialog extends JDialog {
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento nuevoDepartamento = (Departamento) comboDepartamento.getSelectedItem();
+				try{
+					Departamento nuevoDepartamento = (Departamento) comboDepartamento.getSelectedItem();
 
-				if(!campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
+					String nuevoNombre = getNombre();
+					String nuevosApellidos = getApellidos();
+					String nuevoGrupo = getGrupo();
 
-					try{
+					estudiante.setNombre(nuevoNombre);
+					estudiante.setApellidos(nuevosApellidos);
+					estudiante.setGrupo(nuevoGrupo);
 
-						String nuevoNombre = getNombre();
-						String nuevosApellidos = getApellidos();
-						String nuevoGrupo = getGrupo();
-
-						estudiante.setNombre(nuevoNombre);
-						estudiante.setApellidos(nuevosApellidos);
-						estudiante.setGrupo(nuevoGrupo);
-
-						if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
-							antiguoDepartamento.removerEstudiante(estudiante);  
-							nuevoDepartamento.agregarEstudiante(estudiante);   
-						} else if (antiguoDepartamento == null) {
-							nuevoDepartamento.agregarEstudiante(estudiante);;    
-						}
-						MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = true;
-						dispose();
-
-					}catch(RuntimeException r){
-
-						MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = false;
+					if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
+						antiguoDepartamento.removerEstudiante(estudiante);  
+						nuevoDepartamento.agregarEstudiante(estudiante);   
+					} else if (antiguoDepartamento == null) {
+						nuevoDepartamento.agregarEstudiante(estudiante);;    
 					}
-
-				}else{
-
-					MensajeDialog d;
-
-					if(campoNombre.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-
-					else if(campoApellidos.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-
-					else if(campoGrupo.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del grupo", Tipo.RETROALIMENTACION);
-
-					else
-						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-
+					MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
+					confirmado = true;
+					dispose();
+
+				}catch(RuntimeException r){
+
+					MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = false;
 				}
+
+
 			}
 		});
 

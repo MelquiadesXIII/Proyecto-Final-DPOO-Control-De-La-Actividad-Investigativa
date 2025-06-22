@@ -161,55 +161,35 @@ public class EditarDocDialog extends JDialog{
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento nuevoDepartamento = (Departamento) comboDepartamento.getSelectedItem();
+				try{
+					Departamento nuevoDepartamento = (Departamento) comboDepartamento.getSelectedItem();
+					String nuevoNombre = getNombre();
+					String nuevosApellidos = getApellidos();
+					CategoriaCientifica nuevaCatCientifica = getCatCientifica();
+					CategoriaDocente nuevaCatDocente = getCatDocente();
 
-				if(!nuevoDepartamento.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty()){
+					docente.setNombre(nuevoNombre);
+					docente.setApellidos(nuevosApellidos);
+					docente.setCatCientifica(nuevaCatCientifica);
+					docente.setCatDocente(nuevaCatDocente);
 
-					try{
-						String nuevoNombre = getNombre();
-						String nuevosApellidos = getApellidos();
-						CategoriaCientifica nuevaCatCientifica = getCatCientifica();
-						CategoriaDocente nuevaCatDocente = getCatDocente();
-
-						docente.setNombre(nuevoNombre);
-						docente.setApellidos(nuevosApellidos);
-						docente.setCatCientifica(nuevaCatCientifica);
-						docente.setCatDocente(nuevaCatDocente);
-
-						if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
-							antiguoDepartamento.removerDocente(docente);  
-							nuevoDepartamento.agregarDocente(docente);   
-						} else if (antiguoDepartamento == null) {
-							nuevoDepartamento.agregarDocente(docente);    
-						}
-
-						MensajeDialog d = new MensajeDialog(parent, "El docente ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = true;
-						dispose();
-
-					}catch(RuntimeException r){
-
-						MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = false;
+					if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
+						antiguoDepartamento.removerDocente(docente);  
+						nuevoDepartamento.agregarDocente(docente);   
+					} else if (antiguoDepartamento == null) {
+						nuevoDepartamento.agregarDocente(docente);    
 					}
 
-				}else{
-
-					MensajeDialog d;
-
-					if(campoNombre.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-
-					else if(campoApellidos.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-
-					else
-						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-
+					MensajeDialog d = new MensajeDialog(parent, "El docente ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
+					confirmado = true;
+					dispose();
 
+				}catch(RuntimeException r){
+
+					MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = false;
 				}
 			}
 		});

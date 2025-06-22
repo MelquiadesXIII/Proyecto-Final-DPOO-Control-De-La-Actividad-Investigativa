@@ -38,298 +38,289 @@ import Logica.Departamento;
 import Logica.Vicedecanato;
 
 public class CrearDocDialog extends JDialog {
-    private static final long serialVersionUID = 1L;
-    private JTextField campoNombre;
-    private JTextField campoApellidos;
-    private boolean confirmado = false;
-    private Point point = new Point();
-    private JComboBox<Departamento> comboDepartamento;
-    private JComboBox<CategoriaCientifica> comboCatCientifica;
-    private JComboBox<CategoriaDocente> comboCatDocente;
+	private static final long serialVersionUID = 1L;
+	private JTextField campoNombre;
+	private JTextField campoApellidos;
+	private boolean confirmado = false;
+	private Point point = new Point();
+	private JComboBox<Departamento> comboDepartamento;
+	private JComboBox<CategoriaCientifica> comboCatCientifica;
+	private JComboBox<CategoriaDocente> comboCatDocente;
 
-    public CrearDocDialog(final JFrame parent, final Vicedecanato vicedecanato) {
-        super(parent, "Crear Docente", true);
-        setUndecorated(true);
-        setBackground(new Color(30, 40, 50));
-        getContentPane().setLayout(new BorderLayout());
+	public CrearDocDialog(final JFrame parent, final Vicedecanato vicedecanato) {
+		super(parent, "Crear Docente", true);
+		setUndecorated(true);
+		setBackground(new Color(30, 40, 50));
+		getContentPane().setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 40, 50));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setPreferredSize(new Dimension(500, 500));
-        panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setLayout(null);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(30, 40, 50));
+		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panel.setPreferredSize(new Dimension(500, 500));
+		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
+		panel.setLayout(null);
 
-        JPanel panelCampos = new JPanel();
-        panelCampos.setBounds(20, 80, 460, 310);
-        panelCampos.setBackground(new Color(30, 40, 50));
-        panelCampos.setLayout(null);
-        panel.add(panelCampos);
+		JPanel panelCampos = new JPanel();
+		panelCampos.setBounds(20, 80, 460, 310);
+		panelCampos.setBackground(new Color(30, 40, 50));
+		panelCampos.setLayout(null);
+		panel.add(panelCampos);
 
 
-        int labelWidth = 120;
-        int fieldWidth = 300;
-        int fieldHeight = 40;
-        int fieldX = 150;
-        int startY = 20;
-        int verticalSpacing = 60;
+		int labelWidth = 120;
+		int fieldWidth = 300;
+		int fieldHeight = 40;
+		int fieldX = 150;
+		int startY = 20;
+		int verticalSpacing = 60;
 
-        JLabel labelNombre = new JLabel("Nombre:");
-        labelNombre.setBounds(20, startY, labelWidth, fieldHeight);
-        panelCampos.add(labelNombre);
-        estiloLabel(labelNombre);
+		JLabel labelNombre = new JLabel("Nombre:");
+		labelNombre.setBounds(20, startY, labelWidth, fieldHeight);
+		panelCampos.add(labelNombre);
+		estiloLabel(labelNombre);
 
-        campoNombre = new JTextField();
-        campoNombre.setBounds(fieldX, startY, fieldWidth, fieldHeight);
-        panelCampos.add(campoNombre);
-        estiloCampo(campoNombre);
+		campoNombre = new JTextField();
+		campoNombre.setBounds(fieldX, startY, fieldWidth, fieldHeight);
+		panelCampos.add(campoNombre);
+		estiloCampo(campoNombre);
 
-        JLabel labelApellidos = new JLabel("Apellidos:");
-        labelApellidos.setBounds(20, startY + verticalSpacing, labelWidth, fieldHeight);
-        panelCampos.add(labelApellidos);
-        estiloLabel(labelApellidos);
+		JLabel labelApellidos = new JLabel("Apellidos:");
+		labelApellidos.setBounds(20, startY + verticalSpacing, labelWidth, fieldHeight);
+		panelCampos.add(labelApellidos);
+		estiloLabel(labelApellidos);
 
-        campoApellidos = new JTextField();
-        campoApellidos.setBounds(fieldX, startY + verticalSpacing, fieldWidth, fieldHeight);
-        panelCampos.add(campoApellidos);
-        estiloCampo(campoApellidos);
+		campoApellidos = new JTextField();
+		campoApellidos.setBounds(fieldX, startY + verticalSpacing, fieldWidth, fieldHeight);
+		panelCampos.add(campoApellidos);
+		estiloCampo(campoApellidos);
 
-        JLabel labelCatCientifica = new JLabel("Cat. Científica:");
-        labelCatCientifica.setBounds(20, startY + verticalSpacing * 2, labelWidth, fieldHeight);
-        panelCampos.add(labelCatCientifica);
-        estiloLabel(labelCatCientifica);
+		JLabel labelCatCientifica = new JLabel("Cat. Científica:");
+		labelCatCientifica.setBounds(20, startY + verticalSpacing * 2, labelWidth, fieldHeight);
+		panelCampos.add(labelCatCientifica);
+		estiloLabel(labelCatCientifica);
 
-        comboCatCientifica = new JComboBox<>(CategoriaCientifica.values());
-        comboCatCientifica.setBounds(fieldX, startY + verticalSpacing * 2, fieldWidth, fieldHeight);
-        panelCampos.add(comboCatCientifica);
-        estiloComboBoxEnum(comboCatCientifica);
+		comboCatCientifica = new JComboBox<>(CategoriaCientifica.values());
+		comboCatCientifica.setBounds(fieldX, startY + verticalSpacing * 2, fieldWidth, fieldHeight);
+		panelCampos.add(comboCatCientifica);
+		estiloComboBoxEnum(comboCatCientifica);
 
-        JLabel labelCatDocente = new JLabel("Cat. Docente:");
-        labelCatDocente.setBounds(20, startY + verticalSpacing * 3, labelWidth, fieldHeight);
-        panelCampos.add(labelCatDocente);
-        estiloLabel(labelCatDocente);
+		JLabel labelCatDocente = new JLabel("Cat. Docente:");
+		labelCatDocente.setBounds(20, startY + verticalSpacing * 3, labelWidth, fieldHeight);
+		panelCampos.add(labelCatDocente);
+		estiloLabel(labelCatDocente);
 
-        comboCatDocente = new JComboBox<>(CategoriaDocente.values());
-        comboCatDocente.setBounds(fieldX, startY + verticalSpacing * 3, fieldWidth, fieldHeight);
-        panelCampos.add(comboCatDocente);
-        estiloComboBoxEnum(comboCatDocente);
+		comboCatDocente = new JComboBox<>(CategoriaDocente.values());
+		comboCatDocente.setBounds(fieldX, startY + verticalSpacing * 3, fieldWidth, fieldHeight);
+		panelCampos.add(comboCatDocente);
+		estiloComboBoxEnum(comboCatDocente);
 
-        JLabel labelDepartamento = new JLabel("Departamento:");
-        labelDepartamento.setBounds(20, startY + verticalSpacing * 4, labelWidth, fieldHeight);
-        panelCampos.add(labelDepartamento);
-        estiloLabel(labelDepartamento);
+		JLabel labelDepartamento = new JLabel("Departamento:");
+		labelDepartamento.setBounds(20, startY + verticalSpacing * 4, labelWidth, fieldHeight);
+		panelCampos.add(labelDepartamento);
+		estiloLabel(labelDepartamento);
 
-        comboDepartamento = new JComboBox<>();
-        final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
-        comboDepartamento.addItem(verSeleccionarDepto);
-        for (Departamento d : vicedecanato.getDepartamentos()) {
-            comboDepartamento.addItem(d);
-        }
-        comboDepartamento.setBounds(fieldX, startY + verticalSpacing * 4, fieldWidth, fieldHeight);
-        panelCampos.add(comboDepartamento);
-        estiloComboBox(comboDepartamento);
+		comboDepartamento = new JComboBox<>();
+		final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
+		comboDepartamento.addItem(verSeleccionarDepto);
+		for (Departamento d : vicedecanato.getDepartamentos()) {
+			comboDepartamento.addItem(d);
+		}
+		comboDepartamento.setBounds(fieldX, startY + verticalSpacing * 4, fieldWidth, fieldHeight);
+		panelCampos.add(comboDepartamento);
+		estiloComboBox(comboDepartamento);
 
-        aplicarFiltroTexto(campoNombre, 25);
-        aplicarFiltroTexto(campoApellidos, 100);
+		aplicarFiltroTexto(campoNombre, 25);
+		aplicarFiltroTexto(campoApellidos, 100);
 
-        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        panelBotones.setBounds(20, 400, 460, 60);
-        panelBotones.setBackground(new Color(30, 40, 50));
+		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+		panelBotones.setBounds(20, 400, 460, 60);
+		panelBotones.setBackground(new Color(30, 40, 50));
 
-        JButton botonCrear = new JButton("Crear");
-        JButton botonCancelar = new JButton("Cancelar");
+		JButton botonCrear = new JButton("Crear");
+		JButton botonCancelar = new JButton("Cancelar");
 
-        estiloBoton(botonCrear);
-        estiloBoton(botonCancelar);
+		estiloBoton(botonCrear);
+		estiloBoton(botonCancelar);
 
-        botonCrear.setPreferredSize(new Dimension(120, 40));
-        botonCancelar.setPreferredSize(new Dimension(120, 40));
+		botonCrear.setPreferredSize(new Dimension(120, 40));
+		botonCancelar.setPreferredSize(new Dimension(120, 40));
 
-        botonCrear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
-                CategoriaCientifica catCientifica = (CategoriaCientifica) comboCatCientifica.getSelectedItem();
-                CategoriaDocente catDocente = (CategoriaDocente) comboCatDocente.getSelectedItem();
+		botonCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-                if (!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty()) {
-                    String nombre = getNombre();
-                    String apellidos = getApellidos();
-                    try {
-                        vicedecanato.crearDocente(nombre, apellidos, catCientifica, catDocente, depto);
-                        MensajeDialog d = new MensajeDialog(parent, "El docente ha sido creado satisfactoriamente", Tipo.RETROALIMENTACION);
-                        d.setVisible(true);
-                        confirmado = true;
-                        dispose();
-                    } catch (RuntimeException r) {
-                        MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-                        d.setVisible(true);
-                        confirmado = false;
-                    }
-                } else {
-                    MensajeDialog d;
-                    if (campoNombre.getText().trim().isEmpty())
-                        d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-                    else if (campoApellidos.getText().trim().isEmpty())
-                        d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-                    else
-                        d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-                    d.setVisible(true);
-                }
-            }
-        });
+				try {
+					String nombre = getNombre();
+					String apellidos = getApellidos();
+					Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
+					CategoriaCientifica catCientifica = (CategoriaCientifica) comboCatCientifica.getSelectedItem();
+					CategoriaDocente catDocente = (CategoriaDocente) comboCatDocente.getSelectedItem();
 
-        botonCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+					vicedecanato.crearDocente(nombre, apellidos, catCientifica, catDocente, depto);
+					MensajeDialog d = new MensajeDialog(parent, "El docente ha sido creado satisfactoriamente", Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = true;
+					dispose();
+				} catch (RuntimeException r) {
+					MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = false;
+				}
 
-        panelBotones.add(botonCrear);
-        panelBotones.add(botonCancelar);
-        panel.add(panelBotones);
+			}
+		});
 
-        MouseAdapter mouseAdapter = new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                point.x = e.getX();
-                point.y = e.getY();
-            }
-        };
+		botonCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
-        MouseMotionListener motionListener = new MouseMotionListener() {
-            public void mouseDragged(MouseEvent e) {
-                Point p = getLocation();
-                setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
-            }
+		panelBotones.add(botonCrear);
+		panelBotones.add(botonCancelar);
+		panel.add(panelBotones);
 
-            public void mouseMoved(MouseEvent e) {}
-        };
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				point.x = e.getX();
+				point.y = e.getY();
+			}
+		};
 
-        panel.addMouseListener(mouseAdapter);
-        panel.addMouseMotionListener(motionListener);
+		MouseMotionListener motionListener = new MouseMotionListener() {
+			public void mouseDragged(MouseEvent e) {
+				Point p = getLocation();
+				setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+			}
 
-        getContentPane().add(panel);
+			public void mouseMoved(MouseEvent e) {}
+		};
 
-        JLabel lblCrearDocente = new JLabel("Crear Docente");
-        lblCrearDocente.setForeground(Color.WHITE);
-        lblCrearDocente.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblCrearDocente.setBounds((500 - 164) / 2, 28, 164, 50);
-        panel.add(lblCrearDocente);
-        pack();
-        setLocationRelativeTo(parent);
-    }
+		panel.addMouseListener(mouseAdapter);
+		panel.addMouseMotionListener(motionListener);
 
-    private void estiloBoton(JButton boton) {
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        boton.setBackground(new Color(50, 60, 70));
-        boton.setForeground(Color.WHITE);
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setOpaque(true);
-    }
+		getContentPane().add(panel);
 
-    private void estiloLabel(JLabel label) {
-        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        label.setForeground(Color.WHITE);
-    }
+		JLabel lblCrearDocente = new JLabel("Crear Docente");
+		lblCrearDocente.setForeground(Color.WHITE);
+		lblCrearDocente.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblCrearDocente.setBounds((500 - 164) / 2, 28, 164, 50);
+		panel.add(lblCrearDocente);
+		pack();
+		setLocationRelativeTo(parent);
+	}
 
-    private void estiloCampo(JTextField campo) {
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        campo.setBackground(new Color(60, 70, 80));
-        campo.setForeground(Color.WHITE);
-        campo.setCaretColor(Color.WHITE);
-        campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    }
+	private void estiloBoton(JButton boton) {
+		boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		boton.setBackground(new Color(50, 60, 70));
+		boton.setForeground(Color.WHITE);
+		boton.setFocusPainted(false);
+		boton.setBorderPainted(false);
+		boton.setOpaque(true);
+	}
 
-    private void estiloComboBox(JComboBox<Departamento> comboBox) {
-        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        comboBox.setBackground(new Color(60, 70, 80));
-        comboBox.setForeground(Color.WHITE);
-        comboBox.setOpaque(false);
-        comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	private void estiloLabel(JLabel label) {
+		label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		label.setForeground(Color.WHITE);
+	}
 
-        comboBox.setUI(new BasicComboBoxUI() {
-            @Override
-            protected JButton createArrowButton() {
-                JButton button = new JButton();
-                button.setBackground(new Color(50, 60, 70));
-                button.setForeground(Color.WHITE);
-                button.setBorder(BorderFactory.createEmptyBorder());
-                return button;
-            }
+	private void estiloCampo(JTextField campo) {
+		campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		campo.setBackground(new Color(60, 70, 80));
+		campo.setForeground(Color.WHITE);
+		campo.setCaretColor(Color.WHITE);
+		campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	}
 
-            @SuppressWarnings("unchecked")
-            @Override
-            public void installUI(JComponent c) {
-                super.installUI(c);
-                comboBox.setRenderer(new DefaultListCellRenderer() {
-                    private static final long serialVersionUID = 1L;
+	private void estiloComboBox(JComboBox<Departamento> comboBox) {
+		comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		comboBox.setBackground(new Color(60, 70, 80));
+		comboBox.setForeground(Color.WHITE);
+		comboBox.setOpaque(false);
+		comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-                    @Override
-                    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                        if (value instanceof Departamento) {
-                            label.setText(((Departamento) value).getNombre());
-                        } else if (value != null) {
-                            label.setText(value.toString());
-                        }
-                        label.setForeground(Color.WHITE);
-                        label.setBackground(isSelected ? new Color(30, 40, 50) : new Color(60, 70, 80));
-                        label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-                        return label;
-                    }
-                });
-            }
-        });
+		comboBox.setUI(new BasicComboBoxUI() {
+			@Override
+			protected JButton createArrowButton() {
+				JButton button = new JButton();
+				button.setBackground(new Color(50, 60, 70));
+				button.setForeground(Color.WHITE);
+				button.setBorder(BorderFactory.createEmptyBorder());
+				return button;
+			}
 
-        comboBox.setSelectedIndex(0);
-    }
+			@SuppressWarnings("unchecked")
+			@Override
+			public void installUI(JComponent c) {
+				super.installUI(c);
+				comboBox.setRenderer(new DefaultListCellRenderer() {
+					private static final long serialVersionUID = 1L;
 
-    private void estiloComboBoxEnum(JComboBox<?> comboBox) {
-        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        comboBox.setBackground(new Color(60, 70, 80));
-        comboBox.setForeground(Color.WHITE);
-        comboBox.setOpaque(false);
-        comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    }
+					@Override
+					public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+						JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+						if (value instanceof Departamento) {
+							label.setText(((Departamento) value).getNombre());
+						} else if (value != null) {
+							label.setText(value.toString());
+						}
+						label.setForeground(Color.WHITE);
+						label.setBackground(isSelected ? new Color(30, 40, 50) : new Color(60, 70, 80));
+						label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+						return label;
+					}
+				});
+			}
+		});
 
-    public String getNombre() {
-        return campoNombre.getText();
-    }
+		comboBox.setSelectedIndex(0);
+	}
 
-    public String getApellidos() {
-        return campoApellidos.getText();
-    }
+	private void estiloComboBoxEnum(JComboBox<?> comboBox) {
+		comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		comboBox.setBackground(new Color(60, 70, 80));
+		comboBox.setForeground(Color.WHITE);
+		comboBox.setOpaque(false);
+		comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	}
 
-    public boolean isConfirmado() {
-        return confirmado;
-    }
+	public String getNombre() {
+		return campoNombre.getText();
+	}
 
-    public void aplicarFiltroTexto(JTextField campo, final int maxChars) {
-        AbstractDocument doc = (AbstractDocument) campo.getDocument();
-        doc.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string != null) {
-                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-                    String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-                    if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
-                        super.insertString(fb, offset, string, attr);
-                    }
-                }
-            }
+	public String getApellidos() {
+		return campoApellidos.getText();
+	}
 
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text != null) {
-                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-                    String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-                    if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
-                        super.replace(fb, offset, length, text, attrs);
-                    }
-                } else {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
-    }
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars) {
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.insertString(fb, offset, string, attr);
+					}
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				if (text != null) {
+					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+						super.replace(fb, offset, length, text, attrs);
+					}
+				} else {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
+	}
 }

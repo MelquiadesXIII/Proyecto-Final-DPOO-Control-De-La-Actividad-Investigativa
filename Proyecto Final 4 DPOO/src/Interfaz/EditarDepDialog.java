@@ -1,7 +1,6 @@
 package Interfaz;
 
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.text.AttributeSet;
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -106,35 +105,22 @@ public class EditarDepDialog extends JDialog {
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if(!campoNombre.getText().isEmpty()){
+				try{
 
-					try{
+					String nuevoNombre = getNombre();
 
-						String nuevoNombre = getNombre();
+					departamento.setNombre(nuevoNombre);
 
-						departamento.setNombre(nuevoNombre);
+					MensajeDialog d = new MensajeDialog(parent, "El departamento ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = true;
+					dispose();
 
-						MensajeDialog d = new MensajeDialog(parent, "El departamento ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = true;
-						dispose();
+				}catch(RuntimeException r){
 
-					}catch(RuntimeException r){
-
-						MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = false;
-					}
-
-				}else{
-
-					MensajeDialog d;
-
-					if(campoNombre.getText().trim().isEmpty()){
-						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-					}
-
+					MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = false;
 				}
 			}
 		});

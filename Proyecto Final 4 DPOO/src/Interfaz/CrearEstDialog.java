@@ -123,45 +123,24 @@ public class CrearEstDialog extends JDialog {
 		botonCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
+				try{
+					Departamento depto = (Departamento) comboDepartamento.getSelectedItem();
 
-				if(!depto.equals(verSeleccionarDepto) && !campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
 					String nombre = getNombre();
 					String apellidos = getApellidos();
 					String grupo = getGrupo();
 
-					try{
-
-						vicedecanato.crearEstudiante(nombre, apellidos, grupo, depto);
-						MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido creado satisfactoriamente", Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = true;
-						dispose();
-
-					}catch(RuntimeException r){
-
-						MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = false;
-					}
-
-				}else{
-
-					MensajeDialog d;
-
-					if(campoNombre.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-
-					else if(campoApellidos.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-
-					else if(campoGrupo.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del grupo", Tipo.RETROALIMENTACION);
-
-					else
-						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-
+					vicedecanato.crearEstudiante(nombre, apellidos, grupo, depto);
+					MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido creado satisfactoriamente", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
+					confirmado = true;
+					dispose();
+
+				}catch(RuntimeException r){
+
+					MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = false;
 				}
 			}
 		});

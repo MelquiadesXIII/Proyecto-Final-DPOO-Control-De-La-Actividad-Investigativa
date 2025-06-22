@@ -118,12 +118,6 @@ public class CrearDepDialog extends JDialog{
 
 				String nombre = getNombre().trim();
 
-		        if (nombre.isEmpty()) {
-		            MensajeDialog d = new MensajeDialog(parent, "El nombre no puede estar vacío.", Tipo.RETROALIMENTACION);
-		            d.setVisible(true);
-		            return;
-		        }
-
 		        try {
 		            vicedecanato.crearDepartamento(nombre);
 		            MensajeDialog d = new MensajeDialog(parent, "El departamento ha sido creado satisfactoriamente.", Tipo.RETROALIMENTACION);
