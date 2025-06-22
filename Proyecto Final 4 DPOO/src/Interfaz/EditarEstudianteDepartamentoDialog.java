@@ -2,7 +2,6 @@ package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,29 +13,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 import Interfaz.MensajeDialog.Tipo;
-import Logica.Departamento;
 import Logica.Estudiante;
 import Logica.Vicedecanato;
 
-public class EditarEstDialog extends JDialog {
+public class EditarEstudianteDepartamentoDialog extends JDialog{
+
 	private static final long serialVersionUID = 1L;
 
 	private JTextField campoNombre;
@@ -44,11 +38,9 @@ public class EditarEstDialog extends JDialog {
 	private boolean confirmado = false;
 	private Point point = new Point();
 	private JTextField campoGrupo;
-	private JComboBox<Departamento> comboDepartamento;
-	private Departamento antiguoDepartamento;
 
 
-	public EditarEstDialog(final JFrame parent, final Vicedecanato vicedecanato, final Estudiante estudiante) {
+	public EditarEstudianteDepartamentoDialog(final JFrame parent, final Vicedecanato vicedecanato, final Estudiante estudiante) {
 
 		super(parent, "Editar Estudiante", true);
 		setUndecorated(true);
@@ -100,41 +92,9 @@ public class EditarEstDialog extends JDialog {
 		panelCampos.add(campoGrupo);
 		estiloCampo(campoGrupo);
 
-
-		JLabel labelDepartamento = new JLabel("Departamento:");
-		labelDepartamento.setBounds(24, 240, 100, 50);
-		panelCampos.add(labelDepartamento);
-		estiloLabel(labelDepartamento);
-
-		comboDepartamento = new JComboBox<>();
-
-		for (Departamento d : vicedecanato.getDepartamentos()) {
-			comboDepartamento.addItem(d);
-		}
-
-		comboDepartamento.setBounds(118, 246, 230, 39);
-		panelCampos.add(comboDepartamento);
-		estiloComboBox(comboDepartamento);
-		
 		campoNombre.setText(estudiante.getNombre());
 		campoApellidos.setText(estudiante.getApellidos());
 		campoGrupo.setText(estudiante.getGrupo());
-		comboDepartamento.setSelectedItem(antiguoDepartamento);
-		
-		int i = 0;
-		boolean encontrado = false;
-		while(i < vicedecanato.getDepartamentos().size() && !encontrado){
-
-			Departamento d = vicedecanato.getDepartamentos().get(i);
-
-			if(d.contieneEstudiante(estudiante)){
-				comboDepartamento.setSelectedItem(d);
-				encontrado = true;
-				antiguoDepartamento = d;
-			}
-			
-			i++;
-		}
 
 		aplicarFiltroTexto(campoNombre, 25);
 		aplicarFiltroTexto(campoApellidos, 100);
@@ -155,55 +115,27 @@ public class EditarEstDialog extends JDialog {
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Departamento nuevoDepartamento = (Departamento) comboDepartamento.getSelectedItem();
 
-				if(!campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
+				try{
 
-					try{
-						
-						String nuevoNombre = getNombre();
-					    String nuevosApellidos = getApellidos();
-					    String nuevoGrupo = getGrupo();
-					    
-						estudiante.setNombre(nuevoNombre);
-						estudiante.setApellidos(nuevosApellidos);
-						estudiante.setGrupo(nuevoGrupo);
-						
-						if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
-						    antiguoDepartamento.removerEstudiante(estudiante);  
-						    nuevoDepartamento.agregarEstudiante(estudiante);   
-						} else if (antiguoDepartamento == null) {
-						    nuevoDepartamento.agregarEstudiante(estudiante);;    
-						}
-						MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = true;
-						dispose();
+					String nuevoNombre = getNombre();
+					String nuevosApellidos = getApellidos();
+					String nuevoGrupo = getGrupo();
 
-					}catch(RuntimeException r){
-
-						MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = false;
-					}
-				
-				}else{
+					estudiante.setNombre(nuevoNombre);
+					estudiante.setApellidos(nuevosApellidos);
+					estudiante.setGrupo(nuevoGrupo);
 					
-					MensajeDialog d;
-					
-					if(campoNombre.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-					
-					else if(campoApellidos.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-					
-					else if(campoGrupo.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del grupo", Tipo.RETROALIMENTACION);
-					
-					else
-						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-					
+					MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
+					confirmado = true;
+					dispose();
+
+				}catch(RuntimeException r){
+
+					MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = false;
 				}
 			}
 		});
@@ -273,50 +205,6 @@ public class EditarEstDialog extends JDialog {
 		campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 	}
 
-	private void estiloComboBox(JComboBox<Departamento> comboBox) {
-		comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		comboBox.setBackground(new Color(60, 70, 80));
-		comboBox.setForeground(Color.WHITE);
-		comboBox.setOpaque(false);
-		comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-		comboBox.setUI(new BasicComboBoxUI() {
-			@Override
-			protected JButton createArrowButton() {
-				JButton button = new JButton();
-				button.setBackground(new Color(50, 60, 70));
-				button.setForeground(Color.WHITE);
-				button.setBorder(BorderFactory.createEmptyBorder());
-				return button;
-			}
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public void installUI(JComponent c) {
-				super.installUI(c);
-				comboBox.setRenderer(new DefaultListCellRenderer() {
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-						JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-						if (value instanceof Departamento) {
-							label.setText(((Departamento) value).getNombre());
-						} else if (value != null) {
-							label.setText(value.toString());
-						}
-						label.setForeground(Color.WHITE);
-						label.setBackground(isSelected ? new Color(30, 40, 50) : new Color(60, 70, 80));
-						label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-						return label;
-					}
-				});
-			}
-		});
-
-		comboBox.setSelectedIndex(0);
-	}
-
 	public String getNombre() {
 		return campoNombre.getText();
 	}
@@ -333,14 +221,6 @@ public class EditarEstDialog extends JDialog {
 		return confirmado;
 	}
 
-	public JComboBox<Departamento> getComboDepartamento() {
-		return comboDepartamento;
-	}
-
-	public void setComboDepartamento(JComboBox<Departamento> comboDepartamento) {
-		this.comboDepartamento = comboDepartamento;
-	}
-	
 	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
 
 		AbstractDocument doc = (AbstractDocument) campo.getDocument();
@@ -371,4 +251,5 @@ public class EditarEstDialog extends JDialog {
 			}
 		});
 	}
+
 }

@@ -107,7 +107,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		configurarPanelesCRUD();
 		actualizarTodasLasTablas();
 
-		this.parent.setVisible(false);
+		//this.parent.setVisible(false);
 		setVisible(true);
 	}
 
@@ -150,7 +150,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		panelBotones = new JPanel();
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
-		panelBotones.setBackground(new Color(30, 40, 50)); //new Color(30, 40, 50)
+		panelBotones.setBackground(new Color(30, 40, 50)); 
 		panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 		panelNavegacion.add(panelBotones);
 
@@ -327,7 +327,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelPrincipal.add(panelCursos, "panelCursos");
 		panelCursos.setBackground(Color.DARK_GRAY);
 
-		panelLineas = crearPanelesConEncabezado("Líneas de investigación registradas en el departamento:");
+		panelLineas = crearPanelesConEncabezado("Líneas de investigación registradas en el departamento");
 		panelPrincipal.add(panelLineas, "panelLineas");
 		panelLineas.setBackground(Color.DARK_GRAY);
 
@@ -345,7 +345,6 @@ public class VentanaGestionDepartamento extends JDialog{
 				"• Registrar y monitorear <b>líneas de investigación</b>.<br>" +
 				"• Gestionar <b>resultados científicos</b> (artículos, capítulos, ponencias).<br>" +
 				"• Administrar <b>cursos de posgrado</b> (impartidos, recibidos, créditos).<br>" +
-				"• Acompañar el progreso en <b>maestrías</b> (matrículas, defensas).<br><br>" +
 				"</p>" +
 				"</div>" +
 				"</html>");
@@ -383,7 +382,7 @@ public class VentanaGestionDepartamento extends JDialog{
 					docente.getResultados().size()
 			};
 
-			docentesEnTabla.add(docente); //Se agregan los docentes al array list coincidiendo con el indice del docente en la tabla
+			docentesEnTabla.add(docente); 
 			modeloTablaDocentes.addRow(fila);
 		}
 
@@ -862,7 +861,7 @@ public class VentanaGestionDepartamento extends JDialog{
 					if(seleccionado != -1){
 
 						Estudiante estudiante = estudiantesEnTabla.get(seleccionado);
-						EditarEstDialog dialog = new EditarEstDialog(parent,vicedecanato,estudiante);
+						EditarEstudianteDepartamentoDialog dialog = new EditarEstudianteDepartamentoDialog(parent,vicedecanato,estudiante);
 						dialog.setVisible(true);
 
 						if (dialog.isConfirmado()){
@@ -904,12 +903,12 @@ public class VentanaGestionDepartamento extends JDialog{
 							mensaje.setVisible(true);
 						}
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un solo estudiante para eliminar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un solo estudiante para eliminar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
@@ -948,7 +947,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 					if(seleccionado != -1){
 						Docente docente = docentesEnTabla.get(seleccionado);
-						EditarDocDialog dialog = new EditarDocDialog(parent, vicedecanato, docente);
+						EditarDocenteDepartamentoDialog dialog = new EditarDocenteDepartamentoDialog(parent, vicedecanato, docente);
 						dialog.setVisible(true);
 
 						if (dialog.isConfirmado()){
@@ -957,11 +956,11 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un docente para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un solo docente para editar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un solo docente para editar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
@@ -978,7 +977,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						Docente docente = docentesEnTabla.get(seleccionado);
 
-						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a"+ " " + docente.getNombre() + "?",Tipo.CONFIRMACION);
+						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Está seguro que desea eliminar al docente seleccionado?",Tipo.CONFIRMACION);
 
 						confirmacion.setVisible(true);
 
@@ -991,11 +990,11 @@ public class VentanaGestionDepartamento extends JDialog{
 							mensaje.setVisible(true);
 						}
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un solo docente para eliminar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un solo docente para eliminar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
@@ -1044,12 +1043,12 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestria para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una maestría para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una sola maestria para editar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una sola maestría para editar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
@@ -1065,7 +1064,7 @@ public class VentanaGestionDepartamento extends JDialog{
 					if (seleccionado != -1) {
 						Maestria maestria = maestriasEnTabla.get(seleccionado);
 
-						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar a:"+ " " + maestria.getNombre() + "?",Tipo.CONFIRMACION);
+						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Está seguro que desea eliminar a la maestría seleccionada?",Tipo.CONFIRMACION);
 
 						confirmacion.setVisible(true);
 
@@ -1080,11 +1079,11 @@ public class VentanaGestionDepartamento extends JDialog{
 							mensaje.setVisible(true);
 						}
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una maestría para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una sola maestría para eliminar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una sola maestría para eliminar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
@@ -1107,11 +1106,11 @@ public class VentanaGestionDepartamento extends JDialog{
 							actualizarTodasLasTablas();
 
 					}else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para matricular",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una maestría para matricular",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una sola maestría para matricular",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una sola maestría para matricular",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 
 				}
@@ -1138,11 +1137,11 @@ public class VentanaGestionDepartamento extends JDialog{
 						
 
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una maestría para dar una baja",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una maestría para dar una baja",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una sola maestría para dar una baja",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una sola maestría para dar una baja",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 
 			
@@ -1192,11 +1191,11 @@ public class VentanaGestionDepartamento extends JDialog{
 						}
 
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un curso para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un curso para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un solo curso para editar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un solo curso para editar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 
 			
@@ -1213,13 +1212,27 @@ public class VentanaGestionDepartamento extends JDialog{
 
 					if (seleccionado != -1) {
 						CursoPosgrado cursoSeleccionado = cursosEnTabla.get(seleccionado);
+						
+						MensajeDialog m = new MensajeDialog(parent, "¿Está seguro que desea eliminar el curso seleccionado?", Tipo.CONFIRMACION);
+						m.setVisible(true);
+						
+						if(m.isConfirmado()){
+							
+							Maestria maestria = dptoActual.obtenerMaestriaDeUnCurso(cursoSeleccionado);
+							maestria.removerCurso(cursoSeleccionado);
+							actualizarTodasLasTablas();
+							
+							MensajeDialog mensaje = new MensajeDialog(parent,"Curso eliminado correctamente",Tipo.RETROALIMENTACION);
+							mensaje.setVisible(true);
+						}
+							
 
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un curso para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un curso para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un solo curso para eliminar",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un solo curso para eliminar",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 
 			
@@ -1247,11 +1260,11 @@ public class VentanaGestionDepartamento extends JDialog{
 							actualizarTodasLasTablas();
 
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un curso para dar una nota",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un curso para dar una nota",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}else{
-					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un solo curso para dar una nota",Tipo.RETROALIMENTACION);
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un solo curso para dar una nota",Tipo.RETROALIMENTACION);
 					mensajeRetroalimentacion.setVisible(true);
 
 			
@@ -1300,7 +1313,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						}
 					}else{
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar un docente para editar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un docente para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
@@ -1317,7 +1330,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
 
-						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Estás seguro que deseas eliminar "+ " " + linea.getNombre() + "?",Tipo.CONFIRMACION);
+						MensajeDialog confirmacion = new MensajeDialog(parent,"¿Está seguro que desea eliminar a la línea seleccionada?",Tipo.CONFIRMACION);
 
 						confirmacion.setVisible(true);
 
@@ -1330,7 +1343,7 @@ public class VentanaGestionDepartamento extends JDialog{
 							mensaje.setVisible(true);
 						}
 					} else {
-						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debes seleccionar una línea de investigación para eliminar",Tipo.RETROALIMENTACION);
+						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una línea de investigación para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
 				}
@@ -1452,7 +1465,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						MensajeDialog confirmacion = new MensajeDialog(
 								parent,
-								"¿Estás seguro que deseas eliminar \"" + resultado.getNombrePublicacion() + "\"?",
+								"¿Está seguro que desea eliminar al resultado seleccionado?",
 								Tipo.CONFIRMACION
 								);
 						confirmacion.setVisible(true);
@@ -1485,7 +1498,7 @@ public class VentanaGestionDepartamento extends JDialog{
 					} else {
 						MensajeDialog mensaje = new MensajeDialog(
 								parent,
-								"Debes seleccionar un resultado investigativo para eliminar.",
+								"Debe seleccionar un resultado investigativo para eliminar.",
 								Tipo.RETROALIMENTACION
 								);
 						mensaje.setVisible(true);

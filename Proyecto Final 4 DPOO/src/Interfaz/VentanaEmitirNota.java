@@ -6,10 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
-
-import Excepciones.InstanciaNoValidaException;
-import Excepciones.NoExistenciaException;
-import Excepciones.RangoNoValidoException;
 import Interfaz.MensajeDialog.Tipo;
 import Logica.CursoPosgrado;
 import Logica.Docente;
@@ -159,12 +155,13 @@ public class VentanaEmitirNota extends JDialog {
 	}
 
 	private void emitirNota() {
+		
 		Docente participanteSeleccionado = (Docente) cmbParticipantes.getSelectedItem();
 		int notaSeleccionada = getNotaSeleccionada();
 
 		if(participanteSeleccionado != null){
 
-			if(notaSeleccionada == -1){
+			if(notaSeleccionada != -1){
 				try {
 					
 					cursoActual.emitirNota(evaluador, participanteSeleccionado, notaSeleccionada);

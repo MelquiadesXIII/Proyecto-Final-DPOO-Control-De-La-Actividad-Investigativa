@@ -1865,7 +1865,7 @@ public class Inicializadora{
 				/*VentanaLogin v = new VentanaLogin(vicedecanato);	
 				v.setVisible(true);*/
 				VentanaPrincipal p = new VentanaPrincipal(vicedecanato);
-				new VentanaGestionDepartamento(p, depto1, vicedecanato);
+				//new VentanaGestionDepartamento(p, depto1, vicedecanato);
 			}
 		});
 	}
