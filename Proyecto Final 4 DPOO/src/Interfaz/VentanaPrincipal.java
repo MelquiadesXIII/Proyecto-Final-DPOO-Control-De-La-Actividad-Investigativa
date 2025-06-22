@@ -994,6 +994,7 @@ public class VentanaPrincipal extends JFrame{
 		tablaMatriculados = new JTable(modeloTablaMatriculados);
 		tablaMatriculados.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		tablaMatriculados.setRowHeight(25);
+		tablaMatriculados.getTableHeader().setReorderingAllowed(false);
 		JTableHeader header = tablaMatriculados.getTableHeader();
 		header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
 		header.setBackground(new Color(230, 230, 230));      
@@ -1113,6 +1114,7 @@ public class VentanaPrincipal extends JFrame{
 		tablaRanking = new JTable(modeloTablaRanking);
 		tablaRanking.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		tablaRanking.setRowHeight(25);
+		tablaRanking.getTableHeader().setReorderingAllowed(false);
 		JTableHeader header = tablaRanking.getTableHeader();
 		header.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
 		header.setBackground(new Color(230, 230, 230));      
@@ -1198,6 +1200,7 @@ public class VentanaPrincipal extends JFrame{
 
 		tablaCursos.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
 		tablaCursos.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox(), this));
+		tablaCursos.getTableHeader().setReorderingAllowed(false);
 
 		tablaCursos.getColumnModel().getColumn(1).setWidth(80);
 		tablaCursos.getColumnModel().getColumn(0).setPreferredWidth(300); 
@@ -1323,6 +1326,12 @@ public class VentanaPrincipal extends JFrame{
 	    tablaLineas = new JTable(modeloTablaLineas);
 	    tablaLineas.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 	    tablaLineas.setRowHeight(25);
+	    tablaLineas.getTableHeader().setReorderingAllowed(false);
+	    
+	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(200);
+		tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(120);
+		tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(100);
+		tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(100);
 
 	    JTableHeader header = tablaLineas.getTableHeader();
 	    header.setFont(new Font("Segoe UI", Font.BOLD, 16));
