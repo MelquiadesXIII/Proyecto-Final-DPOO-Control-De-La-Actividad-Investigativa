@@ -135,20 +135,9 @@ public class EditarDocDialog extends JDialog{
 		comboCatDocente.setSelectedItem(docente.getCatDocente());
 		comboDepartamento.setSelectedItem(antiguoDepartamento);
 		
-		int i = 0;
-		boolean encontrado = false;
-		while(i < vicedecanato.getDepartamentos().size() && !encontrado){
-
-			Departamento d = vicedecanato.getDepartamentos().get(i);
-
-			if(d.contieneDocente(docente)){
-				comboDepartamento.setSelectedItem(d);
-				encontrado = true;
-				antiguoDepartamento = d;
-			}
-			
-			i++;
-		}
+		antiguoDepartamento = vicedecanato.obtenerDepartamentoDeUnDocente(docente);
+		
+		comboDepartamento.setSelectedItem(antiguoDepartamento);
 
 		aplicarFiltroTexto(campoNombre, 25);
 		aplicarFiltroTexto(campoApellidos, 30);

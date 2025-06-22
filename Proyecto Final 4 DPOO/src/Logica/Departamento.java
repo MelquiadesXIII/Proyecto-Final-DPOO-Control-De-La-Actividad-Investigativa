@@ -300,4 +300,25 @@ public class Departamento {
 		return autor;
 		
 	}
+	
+	public Maestria obtenerMaestriaDeUnCurso(CursoPosgrado c){
+		
+		int i = 0;
+		boolean encontrado = false;
+		Maestria maestria = null;
+		
+		while(i < maestrias.size() && !encontrado){
+			
+			Maestria temp = maestrias.get(i);
+			
+			if(temp.contieneCurso(c)){
+				maestria = temp;
+				encontrado = true;
+			}
+			
+			i++;
+		}
+		
+		return maestria;
+	}
 }

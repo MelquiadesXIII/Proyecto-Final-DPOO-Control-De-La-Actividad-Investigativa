@@ -156,6 +156,17 @@ public class Maestria {
 		cursos.add(c);
 	}
 	
+	public void removerCurso(CursoPosgrado c){
+		
+		if(c == null)
+			throw new NullPointerException("El curso no puede tener valor null");
+
+		if(!cursos.contains(c))
+			throw new NoExistenciaException("La lista de cursos no contiene al curso seleccionado");
+		
+		cursos.remove(c);
+	}
+	
 	public void crearCursoPosgrado(String tema, ArrayList<String> objetivos, int cantCreditos, Docente profesor){
 		
 		CursoPosgrado c = new CursoPosgrado(tema, objetivos, cantCreditos, profesor);
@@ -176,5 +187,10 @@ public class Maestria {
 	@Override
 	public String toString() {
 		return this.nombre; 
+	}
+	
+	public boolean contieneCurso(CursoPosgrado c){
+		
+		return cursos.contains(c);
 	}
 }

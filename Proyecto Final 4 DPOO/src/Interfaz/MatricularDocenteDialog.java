@@ -60,7 +60,7 @@ public class MatricularDocenteDialog extends JDialog{
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
 		panel.setLayout(null);
 
-		ArrayList<Docente> elementosDisponibles = departamentoActual.obtenerListaDocentesValidosParaMatriculaMaestria();
+		final ArrayList<Docente> elementosDisponibles = departamentoActual.obtenerListaDocentesValidosParaMatriculaMaestria();
 
 		listaElementos = new JList<>(elementosDisponibles.toArray());
 		listaElementos.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -73,10 +73,16 @@ public class MatricularDocenteDialog extends JDialog{
 		listaElementos.setCellRenderer(new DefaultListCellRenderer() {
 			@Override
 			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-				
+
 				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-				Docente d = (Docente) value;
-				setText(d.getNombre() + " " + d.getApellidos());
+
+				if(list.getModel().getSize() == 0){
+					setText("No hay docentes disponibles para matricular");
+					
+				}else{
+					Docente d = (Docente) value;
+					setText(d.getNombre() + " " + d.getApellidos());
+				}
 				return this;
 			}
 		});
@@ -90,7 +96,6 @@ public class MatricularDocenteDialog extends JDialog{
 		panelBotones.setBounds(20, 340, 460, 50); 
 		panelBotones.setBackground(new Color(30, 40, 50));
 		panelBotones.setBorder(BorderFactory.createEmptyBorder(5, 40, 5, 40)); 
-
 
 		btnAgregar = new JButton("Matricular");
 		btnCancelar = new JButton("Cancelar");
@@ -118,7 +123,7 @@ public class MatricularDocenteDialog extends JDialog{
 			}
 		});
 
-		JLabel lblTitulo = new JLabel("Agregar Docente");
+		JLabel lblTitulo = new JLabel("Matricular Docente");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		lblTitulo.setBounds(20, 20, 300, 30);
