@@ -112,7 +112,7 @@ public class VentanaPrincipal extends JFrame{
 		try{
 			setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Iconos\\IconoSIGIP.png"));
 		}catch(Exception e){
-			System.out.println("aguacate");
+			System.out.println("No se cargo el icono");
 		}
 
 	}

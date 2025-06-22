@@ -151,20 +151,18 @@ public class Vicedecanato {
 		});
 	}
 
-	public void crearDocente(String nombre, String apellidos, CategoriaCientifica catCientifica, CategoriaDocente catDocente, Departamento depto){
+	public void crearDocente(String nombre, String apellidos, CategoriaCientifica catCientifica, CategoriaDocente catDocente){
 
 		Docente d = new Docente(nombre, apellidos, catCientifica, catDocente);
 
 		agregarDocente(d);
-		depto.agregarDocente(d);
 	}
 
-	public void crearEstudiante(String nombre, String apellidos, String grupo, Departamento depto){
+	public void crearEstudiante(String nombre, String apellidos, String grupo){
 
 		Estudiante e = new Estudiante(nombre, apellidos, grupo);
 
 		agregarEstudiante(e);
-		depto.agregarEstudiante(e);
 	}
 
 	public void crearDepartamento(String nombre){
