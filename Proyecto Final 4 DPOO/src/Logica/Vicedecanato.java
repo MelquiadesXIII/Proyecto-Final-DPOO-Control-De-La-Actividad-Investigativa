@@ -218,11 +218,6 @@ public class Vicedecanato {
 		return noRegistrados;
 	}
 
-	public int getCantDocentesNoRegistradosDepartamento(){
-
-		return obtenerDocentesNoRegistradosEnDepartamentos().size();
-	}
-
 	public ArrayList<Estudiante> obtenerEstudiantesNoRegistradosEnDepartamentos(){
 
 		ArrayList<Estudiante> noRegistrados = new ArrayList<>();
@@ -235,11 +230,6 @@ public class Vicedecanato {
 		}
 
 		return noRegistrados;
-	}
-
-	public int getCantEstudiantessNoRegistradosDepartamento(){
-
-		return obtenerEstudiantesNoRegistradosEnDepartamentos().size();
 	}
 	
 	public Departamento obtenerDepartamentoDeUnDocente(Docente d){

@@ -55,12 +55,6 @@ public abstract class Investigador {
 		if(apellidos.trim().isEmpty())
 			throw new CadenaNoValidaException("Los apellidos no pueden estar vacíos");
 
-		/*if(!apellidos.matches("^[^0-9]*$"))
-			throw new CadenaNoValidaException("El nombre del docente no puede tener numeros");
-
-		if(!apellidos.matches("^[\\p{L}\\s]+$"))
-			throw new CadenaNoValidaException("El nombre del docente no puede tener caracteres especiales o símbolos");	*/
-
 		this.apellidos = apellidos;
 	}
 	
