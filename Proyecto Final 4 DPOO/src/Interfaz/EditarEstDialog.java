@@ -30,6 +30,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.Departamento;
@@ -58,89 +59,86 @@ public class EditarEstDialog extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		panel.setPreferredSize(new Dimension(400, 450));
+		panel.setPreferredSize(new Dimension(500, 450));
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
+		panel.setLayout(null);
 
 		JPanel panelCampos = new JPanel();
-		panelCampos.setBounds(20, 65, 360, 300);
+		panelCampos.setBounds(20, 80, 460, 260);
 		panelCampos.setBackground(new Color(30, 40, 50));
-
-		panel.setLayout(null);
 		panelCampos.setLayout(null);
-
 		panel.add(panelCampos);
 
+		int labelWidth = 120;
+		int fieldWidth = 300;
+		int fieldHeight = 40;
+		int fieldX = 150;
+		int startY = 20;
+		int verticalSpacing = 60;
+
 		JLabel labelNombre = new JLabel("Nombre:");
-		labelNombre.setBounds(24, 46, 82, 50);
+		labelNombre.setBounds(20, startY, labelWidth, fieldHeight);
 		panelCampos.add(labelNombre);
 		estiloLabel(labelNombre);
 
-		JLabel labelApellidos = new JLabel("Apellidos:");
-		labelApellidos.setBounds(24, 112, 82, 50);
-		panelCampos.add(labelApellidos);
-		estiloLabel(labelApellidos);
-
-		JLabel labelGrupo = new JLabel("Grupo:");
-		labelGrupo.setBounds(24, 175, 82, 50);
-		panelCampos.add(labelGrupo);
-		estiloLabel(labelGrupo);
-
 		campoNombre = new JTextField();
-		campoNombre.setBounds(118, 52, 230, 39);
+		campoNombre.setBounds(fieldX, startY, fieldWidth, fieldHeight);
 		panelCampos.add(campoNombre);
 		estiloCampo(campoNombre);
 
+		JLabel labelApellidos = new JLabel("Apellidos:");
+		labelApellidos.setBounds(20, startY + verticalSpacing, labelWidth, fieldHeight);
+		panelCampos.add(labelApellidos);
+		estiloLabel(labelApellidos);
+
 		campoApellidos = new JTextField();
-		campoApellidos.setBounds(118, 118, 230, 39);
+		campoApellidos.setBounds(fieldX, startY + verticalSpacing, fieldWidth, fieldHeight);
 		panelCampos.add(campoApellidos);
 		estiloCampo(campoApellidos);
 
+		JLabel labelGrupo = new JLabel("Grupo:");
+		labelGrupo.setBounds(20, startY + verticalSpacing * 2, labelWidth, fieldHeight);
+		panelCampos.add(labelGrupo);
+		estiloLabel(labelGrupo);
+
 		campoGrupo = new JTextField();
-		campoGrupo.setBounds(118, 181, 230, 39);
+		campoGrupo.setBounds(fieldX, startY + verticalSpacing * 2, fieldWidth, fieldHeight);
 		panelCampos.add(campoGrupo);
 		estiloCampo(campoGrupo);
 
 
 		JLabel labelDepartamento = new JLabel("Departamento:");
-		labelDepartamento.setBounds(24, 240, 100, 50);
+		labelDepartamento.setBounds(20, startY + verticalSpacing * 3, labelWidth, fieldHeight);
 		panelCampos.add(labelDepartamento);
 		estiloLabel(labelDepartamento);
 
 		comboDepartamento = new JComboBox<>();
 
-		for (Departamento d : vicedecanato.getDepartamentos()) {
-			comboDepartamento.addItem(d);
-		}
 
-		comboDepartamento.setBounds(118, 246, 230, 39);
+		final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
+		comboDepartamento.addItem(verSeleccionarDepto);
+
+		for (Departamento d : vicedecanato.getDepartamentos())
+			comboDepartamento.addItem(d);
+
+		comboDepartamento.setBounds(fieldX, startY + verticalSpacing * 3, fieldWidth, fieldHeight);
+
+
 		panelCampos.add(comboDepartamento);
 		estiloComboBox(comboDepartamento);
-		
+
+		antiguoDepartamento = vicedecanato.obtenerDepartamentoDeUnEstudiante(estudiante);
+
 		campoNombre.setText(estudiante.getNombre());
 		campoApellidos.setText(estudiante.getApellidos());
 		campoGrupo.setText(estudiante.getGrupo());
 		comboDepartamento.setSelectedItem(antiguoDepartamento);
-		
-		int i = 0;
-		boolean encontrado = false;
-		while(i < vicedecanato.getDepartamentos().size() && !encontrado){
-
-			Departamento d = vicedecanato.getDepartamentos().get(i);
-
-			if(d.contieneEstudiante(estudiante)){
-				comboDepartamento.setSelectedItem(d);
-				encontrado = true;
-				antiguoDepartamento = d;
-			}
-			
-			i++;
-		}
 
 		aplicarFiltroTexto(campoNombre, 25);
 		aplicarFiltroTexto(campoApellidos, 100);
 
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-		panelBotones.setBounds(20, 380, 360, 60);
+		panelBotones.setBounds(20, 370, 460, 60);
 		panelBotones.setBackground(new Color(30, 40, 50));
 
 		JButton botonAceptar = new JButton("Aceptar");
@@ -160,20 +158,20 @@ public class EditarEstDialog extends JDialog {
 				if(!campoNombre.getText().isEmpty() && !campoApellidos.getText().isEmpty() && !campoGrupo.getText().trim().isEmpty()){
 
 					try{
-						
+
 						String nuevoNombre = getNombre();
-					    String nuevosApellidos = getApellidos();
-					    String nuevoGrupo = getGrupo();
-					    
+						String nuevosApellidos = getApellidos();
+						String nuevoGrupo = getGrupo();
+
 						estudiante.setNombre(nuevoNombre);
 						estudiante.setApellidos(nuevosApellidos);
 						estudiante.setGrupo(nuevoGrupo);
-						
+
 						if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
-						    antiguoDepartamento.removerEstudiante(estudiante);  
-						    nuevoDepartamento.agregarEstudiante(estudiante);   
+							antiguoDepartamento.removerEstudiante(estudiante);  
+							nuevoDepartamento.agregarEstudiante(estudiante);   
 						} else if (antiguoDepartamento == null) {
-						    nuevoDepartamento.agregarEstudiante(estudiante);;    
+							nuevoDepartamento.agregarEstudiante(estudiante);;    
 						}
 						MensajeDialog d = new MensajeDialog(parent, "El estudiante ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 						d.setVisible(true);
@@ -186,27 +184,28 @@ public class EditarEstDialog extends JDialog {
 						d.setVisible(true);
 						confirmado = false;
 					}
-				
+
 				}else{
-					
+
 					MensajeDialog d;
-					
+
 					if(campoNombre.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-					
+
 					else if(campoApellidos.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo de los apellidos", Tipo.RETROALIMENTACION);
-					
+
 					else if(campoGrupo.getText().trim().isEmpty())
 						d = new MensajeDialog(parent, "Rellene el campo del grupo", Tipo.RETROALIMENTACION);
-					
+
 					else
 						d = new MensajeDialog(parent, "Seleccione un departamento", Tipo.RETROALIMENTACION);
-					
+
 					d.setVisible(true);
 				}
 			}
 		});
+
 
 		botonCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -243,9 +242,8 @@ public class EditarEstDialog extends JDialog {
 		JLabel lblCrearEstudiante = new JLabel("Editar Estudiante");
 		lblCrearEstudiante.setForeground(Color.WHITE);
 		lblCrearEstudiante.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		int labelWidth = 200;
-		int xPosition = (475 - labelWidth) / 2;;
-		lblCrearEstudiante.setBounds(xPosition, 28, labelWidth, 50);
+		lblCrearEstudiante.setHorizontalAlignment(JLabel.CENTER);
+		lblCrearEstudiante.setBounds(0, 28, 500, 50);
 		panel.add(lblCrearEstudiante);
 		pack();
 		setLocationRelativeTo(parent);
@@ -337,10 +335,6 @@ public class EditarEstDialog extends JDialog {
 		return comboDepartamento;
 	}
 
-	public void setComboDepartamento(JComboBox<Departamento> comboDepartamento) {
-		this.comboDepartamento = comboDepartamento;
-	}
-	
 	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
 
 		AbstractDocument doc = (AbstractDocument) campo.getDocument();

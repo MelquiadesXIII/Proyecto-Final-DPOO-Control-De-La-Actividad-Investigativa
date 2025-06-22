@@ -2,7 +2,6 @@ package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,28 +13,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.DocumentFilter.FilterBypass;
-
 import Interfaz.MensajeDialog.Tipo;
-import Logica.CategoriaCientifica;
-import Logica.CategoriaDocente;
-import Logica.Departamento;
 import Logica.Vicedecanato;
 
 public class CrearDepDialog extends JDialog{
@@ -43,14 +32,14 @@ public class CrearDepDialog extends JDialog{
 	private JTextField campoNombre;
 	private boolean confirmado = false;
 	private Point point = new Point();
-	
+
 	public CrearDepDialog(final JFrame parent, final Vicedecanato vicedecanato){
-		
+
 		super(parent, "Crear Departamento", true);
 		setUndecorated(true);
 		setBackground(new Color(30, 40, 50));
 		getContentPane().setLayout(new BorderLayout());
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -182,14 +171,15 @@ public class CrearDepDialog extends JDialog{
 		getContentPane().add(panel);
 
 		JLabel lblCrearDepartamento = new JLabel("Crear Departamento");
+		lblCrearDepartamento.setHorizontalAlignment(JLabel.CENTER); 
 		lblCrearDepartamento.setForeground(Color.WHITE);
 		lblCrearDepartamento.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblCrearDepartamento.setBounds(119, 13, 164, 50);
+		lblCrearDepartamento.setBounds(0, 13, 400, 50);
 		panel.add(lblCrearDepartamento);
 		pack();
 		setLocationRelativeTo(parent);
 	}
-	
+
 	private void estiloBoton(JButton boton) {
 		boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		boton.setBackground(new Color(50, 60, 70));

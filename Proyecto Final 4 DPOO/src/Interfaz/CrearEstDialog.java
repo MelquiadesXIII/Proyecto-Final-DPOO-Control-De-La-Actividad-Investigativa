@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.DocumentFilter.FilterBypass;
 
 import Interfaz.MensajeDialog.Tipo;
 import Logica.Departamento;
@@ -37,51 +36,56 @@ public class CrearEstDialog extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		panel.setPreferredSize(new Dimension(400, 450));
+		panel.setPreferredSize(new Dimension(500, 450));
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
+		panel.setLayout(null);
 
 		JPanel panelCampos = new JPanel();
-		panelCampos.setBounds(20, 65, 360, 300);
+		panelCampos.setBounds(20, 80, 460, 260);
 		panelCampos.setBackground(new Color(30, 40, 50));
-
-		panel.setLayout(null);
 		panelCampos.setLayout(null);
-
 		panel.add(panelCampos);
 
+		int labelWidth = 120;
+		int fieldWidth = 300;
+		int fieldHeight = 40;
+		int fieldX = 150;
+		int startY = 20;
+		int verticalSpacing = 60;
+
 		JLabel labelNombre = new JLabel("Nombre:");
-		labelNombre.setBounds(24, 46, 82, 50);
+		labelNombre.setBounds(20, startY, labelWidth, fieldHeight);
 		panelCampos.add(labelNombre);
 		estiloLabel(labelNombre);
 
-		JLabel labelApellidos = new JLabel("Apellidos:");
-		labelApellidos.setBounds(24, 112, 82, 50);
-		panelCampos.add(labelApellidos);
-		estiloLabel(labelApellidos);
-
-		JLabel labelGrupo = new JLabel("Grupo:");
-		labelGrupo.setBounds(24, 175, 82, 50);
-		panelCampos.add(labelGrupo);
-		estiloLabel(labelGrupo);
-
 		campoNombre = new JTextField();
-		campoNombre.setBounds(118, 52, 230, 39);
+		campoNombre.setBounds(fieldX, startY, fieldWidth, fieldHeight);
 		panelCampos.add(campoNombre);
 		estiloCampo(campoNombre);
 
+		JLabel labelApellidos = new JLabel("Apellidos:");
+		labelApellidos.setBounds(20, startY + verticalSpacing, labelWidth, fieldHeight);
+		panelCampos.add(labelApellidos);
+		estiloLabel(labelApellidos);
+
 		campoApellidos = new JTextField();
-		campoApellidos.setBounds(118, 118, 230, 39);
+		campoApellidos.setBounds(fieldX, startY + verticalSpacing, fieldWidth, fieldHeight);
 		panelCampos.add(campoApellidos);
 		estiloCampo(campoApellidos);
 
+		JLabel labelGrupo = new JLabel("Grupo:");
+		labelGrupo.setBounds(20, startY + verticalSpacing * 2, labelWidth, fieldHeight);
+		panelCampos.add(labelGrupo);
+		estiloLabel(labelGrupo);
+
 		campoGrupo = new JTextField();
-		campoGrupo.setBounds(118, 181, 230, 39);
+		campoGrupo.setBounds(fieldX, startY + verticalSpacing * 2, fieldWidth, fieldHeight);
 		panelCampos.add(campoGrupo);
 		estiloCampo(campoGrupo);
 
 
 		JLabel labelDepartamento = new JLabel("Departamento:");
-		labelDepartamento.setBounds(24, 240, 100, 50);
+		labelDepartamento.setBounds(20, startY + verticalSpacing * 3, labelWidth, fieldHeight);
 		panelCampos.add(labelDepartamento);
 		estiloLabel(labelDepartamento);
 
@@ -91,10 +95,10 @@ public class CrearEstDialog extends JDialog {
 		final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
 		comboDepartamento.addItem(verSeleccionarDepto);
 
-		for (Departamento d : vicedecanato.getDepartamentos()) 
+		for (Departamento d : vicedecanato.getDepartamentos())
 			comboDepartamento.addItem(d);
 
-		comboDepartamento.setBounds(118, 246, 230, 39);
+		comboDepartamento.setBounds(fieldX, startY + verticalSpacing * 3, fieldWidth, fieldHeight);
 
 
 		panelCampos.add(comboDepartamento);
@@ -102,9 +106,9 @@ public class CrearEstDialog extends JDialog {
 
 		aplicarFiltroTexto(campoNombre, 25);
 		aplicarFiltroTexto(campoApellidos, 100);
-		
+
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-		panelBotones.setBounds(20, 380, 360, 60);
+		panelBotones.setBounds(20, 370, 460, 60);
 		panelBotones.setBackground(new Color(30, 40, 50));
 
 		JButton botonCrear = new JButton("Crear");
@@ -197,7 +201,8 @@ public class CrearEstDialog extends JDialog {
 		JLabel lblCrearEstudiante = new JLabel("Crear Estudiante");
 		lblCrearEstudiante.setForeground(Color.WHITE);
 		lblCrearEstudiante.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblCrearEstudiante.setBounds(127, 28, 164, 50);
+		lblCrearEstudiante.setHorizontalAlignment(JLabel.CENTER);
+		lblCrearEstudiante.setBounds(0, 28, 500, 50);
 		panel.add(lblCrearEstudiante);
 		pack();
 		setLocationRelativeTo(parent);
@@ -284,7 +289,7 @@ public class CrearEstDialog extends JDialog {
 	public boolean isConfirmado() {
 		return confirmado;
 	}
-	
+
 	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
 
 		AbstractDocument doc = (AbstractDocument) campo.getDocument();
