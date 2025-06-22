@@ -75,6 +75,9 @@ public class VentanaPrincipal extends JFrame{
 	private JTable tablaDepartamentos;
 	private JScrollPane scrollTablaDepartamentos;
 	private DefaultTableModel modeloTablaDepartamentos;
+	private JComboBox<Departamento> seleccionarDeptoReporte4 = new JComboBox<>();
+	private JTable tablaLineas;
+	private DefaultTableModel modeloTablaLineas;
 
 	public VentanaPrincipal(Vicedecanato vicedecanato){
 
@@ -927,7 +930,8 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte4 = new JPanel();
 		panelReporte4.setBackground(Color.LIGHT_GRAY);
 		panelReporte4.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Producción científica", panelReporte4);
+		pestañasReportes.addTab("Resultados investigativos", panelReporte4);
+		mostrarReporte4();
 
 		for (int i = 0; i < 4; i++) {
 			JLabel label = new JLabel(pestañasReportes.getTitleAt(i), SwingConstants.CENTER);
@@ -1251,6 +1255,103 @@ public class VentanaPrincipal extends JFrame{
 			}
 		}
 	}
+	
+	private void mostrarReporte4() {
+	    JPanel panelFiltros = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	    panelFiltros.setBackground(Color.LIGHT_GRAY);
+
+	    seleccionarDeptoReporte4.removeAllItems();
+	    seleccionarDeptoReporte4.addItem(new Departamento("Seleccionar"));
+	    for (Departamento d : vicedecanato.getDepartamentos()) {
+	        seleccionarDeptoReporte4.addItem(d);
+	    }
+
+	    seleccionarDeptoReporte4.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            actualizarTablaLineas();
+	        }
+	    });
+
+	    panelFiltros.add(new JLabel("Departamento:"));
+	    panelFiltros.add(seleccionarDeptoReporte4);
+	    panelReporte4.add(panelFiltros, BorderLayout.NORTH);
+
+	    String[] columnas = {"Línea de investigación", "Responsable", "Artículos", "Ponencias", "Capítulos", "Total"};
+	    modeloTablaLineas = new DefaultTableModel(columnas, 0) {
+	        private static final long serialVersionUID = 1L;
+
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+
+	    tablaLineas = new JTable(modeloTablaLineas);
+	    tablaLineas.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+	    tablaLineas.setRowHeight(25);
+
+	    JTableHeader header = tablaLineas.getTableHeader();
+	    header.setFont(new Font("Segoe UI", Font.BOLD, 16));
+	    header.setBackground(new Color(230, 230, 230));
+	    header.setForeground(Color.BLACK);
+
+	    DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+	    centrar.setHorizontalAlignment(SwingConstants.CENTER);
+	    for (int i = 0; i < tablaLineas.getColumnCount(); i++) {
+	        tablaLineas.getColumnModel().getColumn(i).setCellRenderer(centrar);
+	    }
+
+	    JScrollPane scrollTabla = new JScrollPane(tablaLineas);
+	    scrollTabla.setPreferredSize(new Dimension(800, 400));
+	    panelReporte4.add(scrollTabla, BorderLayout.CENTER);
+
+	    if (!vicedecanato.getDepartamentos().isEmpty()) {
+	        seleccionarDeptoReporte4.setSelectedIndex(0);
+	        actualizarTablaLineas();
+	    }
+	}
+	
+	private void actualizarTablaLineas() {
+	    modeloTablaLineas.setRowCount(0);
+
+	    Departamento depto = (Departamento) seleccionarDeptoReporte4.getSelectedItem();
+	    if (depto != null && !depto.getNombre().equals("Seleccionar")) {
+
+	        for (LineaInvestigacion linea : depto.getLineasInvestigacion()) {
+
+	            int articulos = 0;
+	            int ponencias = 0;
+	            int capitulos = 0;
+
+	            for (Investigador inv : linea.getInvestigadores()) {
+	                for (ResultadoInvestigativo r : inv.getResultados()) {
+	                    if (r instanceof Articulo) articulos++;
+	                    else if (r instanceof PonenciaEvento) ponencias++;
+	                    else if (r instanceof CapituloLibro) capitulos++;
+	                }
+	            }
+
+	            int total = articulos + ponencias + capitulos;
+
+	            Object[] fila = {
+	                linea.getNombre(),
+	                linea.getResponsable() != null
+	                    ? linea.getResponsable().getNombre() + " " + linea.getResponsable().getApellidos()
+	                    : "Sin asignar",
+	                articulos,
+	                ponencias,
+	                capitulos,
+	                total
+	            };
+
+	            modeloTablaLineas.addRow(fila);
+	        }
+	    }
+	}
+
+
+
 
 	public void actualizarTodasLasTablas(){
 
