@@ -59,91 +59,84 @@ public class EditarDocDialog extends JDialog{
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		panel.setPreferredSize(new Dimension(400, 490));
+		panel.setPreferredSize(new Dimension(500, 500));
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
+		panel.setLayout(null);
 
 		JPanel panelCampos = new JPanel();
-		panelCampos.setBounds(20, 65, 360, 340);
+		panelCampos.setBounds(20, 80, 460, 310);
 		panelCampos.setBackground(new Color(30, 40, 50));
-
-		panel.setLayout(null);
 		panelCampos.setLayout(null);
-
 		panel.add(panelCampos);
 
+
+		int labelWidth = 120;
+		int fieldWidth = 300;
+		int fieldHeight = 40;
+		int fieldX = 150;
+		int startY = 20;
+		int verticalSpacing = 60;
+
 		JLabel labelNombre = new JLabel("Nombre:");
-		labelNombre.setBounds(20, 46, 82, 50);
+		labelNombre.setBounds(20, startY, labelWidth, fieldHeight);
 		panelCampos.add(labelNombre);
 		estiloLabel(labelNombre);
 
-		JLabel labelApellidos = new JLabel("Apellidos:");
-		labelApellidos.setBounds(20, 112, 82, 50);
-		panelCampos.add(labelApellidos);
-		estiloLabel(labelApellidos);
-
 		campoNombre = new JTextField();
-		campoNombre.setBounds(118, 52, 230, 39);
+		campoNombre.setBounds(fieldX, startY, fieldWidth, fieldHeight);
 		panelCampos.add(campoNombre);
 		estiloCampo(campoNombre);
 
+		JLabel labelApellidos = new JLabel("Apellidos:");
+		labelApellidos.setBounds(20, startY + verticalSpacing, labelWidth, fieldHeight);
+		panelCampos.add(labelApellidos);
+		estiloLabel(labelApellidos);
+
 		campoApellidos = new JTextField();
-		campoApellidos.setBounds(118, 118, 230, 39);
+		campoApellidos.setBounds(fieldX, startY + verticalSpacing, fieldWidth, fieldHeight);
 		panelCampos.add(campoApellidos);
 		estiloCampo(campoApellidos);
 
-		JLabel labelDepartamento = new JLabel("Departamento:");
-		labelDepartamento.setBounds(20, 280, 120, 50);
-		panelCampos.add(labelDepartamento);
-		estiloLabel(labelDepartamento);
-
-		comboDepartamento = new JComboBox<>();
-
-		final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
-		comboDepartamento.addItem(verSeleccionarDepto);
-
-		for (Departamento d : vicedecanato.getDepartamentos()) {
-			comboDepartamento.addItem(d);
-		}
-
-		comboDepartamento.setBounds(140, 286, 210, 39);
-		panelCampos.add(comboDepartamento);
-		estiloComboBox(comboDepartamento);
-
 		JLabel labelCatCientifica = new JLabel("Cat. Científica:");
-		labelCatCientifica.setBounds(20, 168, 100, 50);
+		labelCatCientifica.setBounds(20, startY + verticalSpacing * 2, labelWidth, fieldHeight);
 		panelCampos.add(labelCatCientifica);
 		estiloLabel(labelCatCientifica);
 
 		comboCatCientifica = new JComboBox<>(CategoriaCientifica.values());
-		comboCatCientifica.setBounds(118, 174, 230, 39);
+		comboCatCientifica.setBounds(fieldX, startY + verticalSpacing * 2, fieldWidth, fieldHeight);
 		panelCampos.add(comboCatCientifica);
 		estiloComboBoxEnum(comboCatCientifica);
 
 		JLabel labelCatDocente = new JLabel("Cat. Docente:");
-		labelCatDocente.setBounds(20, 224, 100, 50);
+		labelCatDocente.setBounds(20, startY + verticalSpacing * 3, labelWidth, fieldHeight);
 		panelCampos.add(labelCatDocente);
 		estiloLabel(labelCatDocente);
 
 		comboCatDocente = new JComboBox<>(CategoriaDocente.values());
-		comboCatDocente.setBounds(118, 230, 230, 39);
+		comboCatDocente.setBounds(fieldX, startY + verticalSpacing * 3, fieldWidth, fieldHeight);
 		panelCampos.add(comboCatDocente);
 		estiloComboBoxEnum(comboCatDocente);
-		
-		campoNombre.setText(docente.getNombre());
-		campoApellidos.setText(docente.getApellidos());
-		comboCatCientifica.setSelectedItem(docente.getCatCientifica());
-		comboCatDocente.setSelectedItem(docente.getCatDocente());
-		comboDepartamento.setSelectedItem(antiguoDepartamento);
-		
-		antiguoDepartamento = vicedecanato.obtenerDepartamentoDeUnDocente(docente);
-		
-		comboDepartamento.setSelectedItem(antiguoDepartamento);
+
+		JLabel labelDepartamento = new JLabel("Departamento:");
+		labelDepartamento.setBounds(20, startY + verticalSpacing * 4, labelWidth, fieldHeight);
+		panelCampos.add(labelDepartamento);
+		estiloLabel(labelDepartamento);
+
+		comboDepartamento = new JComboBox<>();
+		final Departamento verSeleccionarDepto = new Departamento("Seleccionar");
+		comboDepartamento.addItem(verSeleccionarDepto);
+		for (Departamento d : vicedecanato.getDepartamentos()) {
+			comboDepartamento.addItem(d);
+		}
+		comboDepartamento.setBounds(fieldX, startY + verticalSpacing * 4, fieldWidth, fieldHeight);
+		panelCampos.add(comboDepartamento);
+		estiloComboBox(comboDepartamento);
 
 		aplicarFiltroTexto(campoNombre, 25);
-		aplicarFiltroTexto(campoApellidos, 30);
+		aplicarFiltroTexto(campoApellidos, 100);
 
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-		panelBotones.setBounds(20, 400, 360, 60);
+		panelBotones.setBounds(20, 400, 460, 60);
 		panelBotones.setBackground(new Color(30, 40, 50));
 
 		JButton botonAceptar = new JButton("Aceptar");
@@ -155,6 +148,16 @@ public class EditarDocDialog extends JDialog{
 		botonAceptar.setPreferredSize(new Dimension(120, 40));
 		botonCancelar.setPreferredSize(new Dimension(120, 40));
 
+		campoNombre.setText(docente.getNombre());
+		campoApellidos.setText(docente.getApellidos());
+		comboCatCientifica.setSelectedItem(docente.getCatCientifica());
+		comboCatDocente.setSelectedItem(docente.getCatDocente());
+		comboDepartamento.setSelectedItem(antiguoDepartamento);
+
+		antiguoDepartamento = vicedecanato.obtenerDepartamentoDeUnDocente(docente);
+
+		comboDepartamento.setSelectedItem(antiguoDepartamento);
+
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -164,22 +167,22 @@ public class EditarDocDialog extends JDialog{
 
 					try{
 						String nuevoNombre = getNombre();
-					    String nuevosApellidos = getApellidos();
-					    CategoriaCientifica nuevaCatCientifica = getCatCientifica();
-					    CategoriaDocente nuevaCatDocente = getCatDocente();
-					    
+						String nuevosApellidos = getApellidos();
+						CategoriaCientifica nuevaCatCientifica = getCatCientifica();
+						CategoriaDocente nuevaCatDocente = getCatDocente();
+
 						docente.setNombre(nuevoNombre);
 						docente.setApellidos(nuevosApellidos);
 						docente.setCatCientifica(nuevaCatCientifica);
 						docente.setCatDocente(nuevaCatDocente);
-						
+
 						if (antiguoDepartamento != null && !antiguoDepartamento.equals(nuevoDepartamento)) {
-						    antiguoDepartamento.removerDocente(docente);  
-						    nuevoDepartamento.agregarDocente(docente);   
+							antiguoDepartamento.removerDocente(docente);  
+							nuevoDepartamento.agregarDocente(docente);   
 						} else if (antiguoDepartamento == null) {
-						    nuevoDepartamento.agregarDocente(docente);    
+							nuevoDepartamento.agregarDocente(docente);    
 						}
-						
+
 						MensajeDialog d = new MensajeDialog(parent, "El docente ha sido editado satisfactoriamente", Tipo.RETROALIMENTACION);
 						d.setVisible(true);
 						confirmado = true;
@@ -221,7 +224,6 @@ public class EditarDocDialog extends JDialog{
 		panelBotones.add(botonCancelar);
 		panel.add(panelBotones);
 
-
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				point.x = e.getX();
@@ -243,13 +245,11 @@ public class EditarDocDialog extends JDialog{
 
 		getContentPane().add(panel);
 
-		JLabel lblEditarDocente = new JLabel("Editar Docente");
-		lblEditarDocente.setForeground(Color.WHITE);
-		lblEditarDocente.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		int labelWidth = 200;
-		int xPosition = (475 - labelWidth) / 2;
-		lblEditarDocente.setBounds(xPosition, 28, labelWidth, 50);
-		panel.add(lblEditarDocente);
+		JLabel lblCrearDocente = new JLabel("Editar Docente");
+		lblCrearDocente.setForeground(Color.WHITE);
+		lblCrearDocente.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblCrearDocente.setBounds((500 - 164) / 2, 28, 164, 50);
+		panel.add(lblCrearDocente);
 		pack();
 		setLocationRelativeTo(parent);
 	}
@@ -355,12 +355,10 @@ public class EditarDocDialog extends JDialog{
 	public CategoriaDocente getCatDocente(){
 		return (CategoriaDocente) comboCatDocente.getSelectedItem();
 	}
-	
-	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
 
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars) {
 		AbstractDocument doc = (AbstractDocument) campo.getDocument();
 		doc.setDocumentFilter(new DocumentFilter() {
-
 			@Override
 			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
 				if (string != null) {

@@ -24,6 +24,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.OverlayLayout;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import Interfaz.MensajeDialog.Tipo;
@@ -75,14 +77,9 @@ public class MatricularDocenteDialog extends JDialog{
 			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 
 				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-
-				if(list.getModel().getSize() == 0){
-					setText("No hay docentes disponibles para matricular");
-					
-				}else{
 					Docente d = (Docente) value;
 					setText(d.getNombre() + " " + d.getApellidos());
-				}
+				
 				return this;
 			}
 		});
