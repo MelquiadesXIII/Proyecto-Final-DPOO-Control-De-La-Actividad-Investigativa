@@ -1349,10 +1349,79 @@ public class VentanaGestionDepartamento extends JDialog{
 				}
 			}
 		});
+		
+		JButton btnAgregarInvestigador = crearBotonCRUD("Agregar Investigador");
+		btnAgregarInvestigador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tablaLineas.getSelectedRows().length == 1){
+					int seleccionado = tablaLineas.getSelectedRow();
+					if(seleccionado != -1){
+						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+						SeleccionTipoInvestigadorDialog seleccionDialog = new SeleccionTipoInvestigadorDialog(parent);
+						seleccionDialog.setVisible(true);
+
+						if (seleccionDialog.isConfirmado()) {
+							String tipoSeleccionado = seleccionDialog.getTipoSeleccionado();
+
+							if ("Estudiante".equals(tipoSeleccionado)) {
+								AgregarInvestigadorALineaDialog dialogEst = new AgregarInvestigadorALineaDialog(parent, dptoActual, linea, true);
+								dialogEst.setVisible(true);
+							} else if ("Docente".equals(tipoSeleccionado)) {
+								AgregarInvestigadorALineaDialog dialogDoc = new AgregarInvestigadorALineaDialog(parent, dptoActual, linea, false);
+								dialogDoc.setVisible(true);
+							}
+						}
+					}
+				}
+			}
+		});
+		
+		/*JButton btnVerInvestigadores = crearBotonCRUD("Ver Investigadores");
+		btnVerInvestigadores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tablaLineas.getSelectedRows().length == 1) {
+					int seleccionado = tablaLineas.getSelectedRow();
+
+					if (seleccionado != -1) {
+						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+						VerInvestigadoresLineaDialog dialog = new VerInvestigadoresLineaDialog(parent, linea);
+						dialog.setVisible(true);
+					}
+				} else {
+					MensajeDialog mensaje = new MensajeDialog(parent, "Seleccione una línea de investigación", Tipo.RETROALIMENTACION);
+					mensaje.setVisible(true);
+				}
+			}
+		});*/
+		
+		JButton btnEliminarInvestigador = crearBotonCRUD("Eliminar Investigador");
+		btnEliminarInvestigador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tablaLineas.getSelectedRows().length == 1) {
+					int seleccionado = tablaLineas.getSelectedRow();
+
+					if (seleccionado != -1) {
+						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+						EliminarInvestigadorLineaDialog dialog = new EliminarInvestigadorLineaDialog(parent, linea);
+						dialog.setVisible(true);
+
+						if (dialog.isConfirmado()) {
+							actualizarTodasLasTablas();
+						}
+					}
+				} else {
+					MensajeDialog mensaje = new MensajeDialog(parent, "Seleccione una línea de investigación", Tipo.RETROALIMENTACION);
+					mensaje.setVisible(true);
+				}
+			}
+		});
 
 		panelBotonesCRUDLineas.add(btnCrearLinea);
 		panelBotonesCRUDLineas.add(btnEditarLinea);
 		panelBotonesCRUDLineas.add(btnEliminarLinea);
+		panelBotonesCRUDLineas.add(btnAgregarInvestigador);
+		//panelBotonesCRUDLineas.add(btnVerInvestigadores);
+		panelBotonesCRUDLineas.add(btnEliminarInvestigador);
 
 		panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
 	}
