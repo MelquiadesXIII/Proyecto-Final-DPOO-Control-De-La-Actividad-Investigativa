@@ -1344,6 +1344,14 @@ public class VentanaPrincipal extends JFrame{
 	        tablaLineas.getColumnModel().getColumn(i).setCellRenderer(centrar);
 	    }
 
+	    
+	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(250); 
+	    tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(180); 
+	    tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(90);
+	    tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(90);  
+	    tablaLineas.getColumnModel().getColumn(4).setPreferredWidth(90);  
+	    tablaLineas.getColumnModel().getColumn(5).setPreferredWidth(90); 
+
 	    JScrollPane scrollTabla = new JScrollPane(tablaLineas);
 	    scrollTabla.setPreferredSize(new Dimension(800, 400));
 	    panelReporte4.add(scrollTabla, BorderLayout.CENTER);
