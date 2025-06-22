@@ -275,21 +275,36 @@ public class VentanaPrincipal extends JFrame{
 		panelPrincipal.add(panelAyuda, "panelAyuda");
 		panelAyuda.setBackground(Color.DARK_GRAY);
 
-		JLabel lblBienvenida = new JLabel("<html>" +
-				"<div style='text-align: center; font-family: Segoe UI;'>" +
-				"<h1>Sistema Integral de Gestión Investigativa y de Posgrado</h1>" +
-				"<p><b>Facultad de Ingeniería Informática" +
-				"<hr>" +
-				"<p style='text-align: left;'>" +
-				"Plataforma oficial del <b>Vicedecanato de Investigaciones y Posgrado</b> para:<br><br>" +
-				"• Registrar y monitorear <b>líneas de investigación</b>.<br>" +
-				"• Gestionar <b>resultados científicos</b> (artículos, capítulos, ponencias).<br>" +
-				"• Administrar <b>cursos de posgrado</b> (impartidos, recibidos, créditos).<br>" +
-				"• Acompañar el progreso en <b>maestrías</b> (matrículas, defensas).<br><br>" +
-				"<i>Optimice la toma de decisiones con reportes automatizados.</i>" +
-				"</p>" +
-				"</div>" +
-				"</html>");
+		JLabel lblBienvenida = new JLabel(
+			    "<html>" +
+			    "<div style='text-align: center; font-family: Segoe UI; color: #FFFFFF; padding: 20px;'>" +
+			    "<h1 style='font-size: 26px; margin-bottom: 25px; color: #FFFFFF; font-weight: bold;'>SIGIP - Sistema Integral</h1>" +
+			    "<div style='display: flex; justify-content: center; gap: 40px; margin-bottom: 20px;'>" +
+			    "<div style='text-align: left;'>" +
+			    "<h2 style='color: #5DADE2; margin-top: 0; margin-bottom: 15px; font-size: 20px;'>Gestión Académica</h2>" +
+			    "<ul style='margin: 0; padding-left: 20px; color: #FFFFFF; list-style-type: square;'>" +
+			    "  <li style='margin-bottom: 8px;'>Departamentos</li>" +
+			    "  <li style='margin-bottom: 8px;'>Docentes</li>" +
+			    "  <li style='margin-bottom: 8px;'>Estudiantes</li>" +
+			    "  <li style='margin-bottom: 8px;'>Maestrías</li>" +
+			    "</ul>" +
+			    "</div>" +
+			    "<div style='text-align: left;'>" +
+			    "<h2 style='color: #5DADE2; margin-top: 0; margin-bottom: 15px; font-size: 20px;'>Gestión Investigativa</h2>" +
+			    "<ul style='margin: 0; padding-left: 20px; color: #FFFFFF; list-style-type: square;'>" +
+			    "  <li style='margin-bottom: 8px;'>Líneas de investigación</li>" +
+			    "  <li style='margin-bottom: 8px;'>Resultados científicos</li>" +
+			    "  <li style='margin-bottom: 8px;'>Artículos y ponencias</li>" +
+			    "  <li style='margin-bottom: 8px;'>Reportes estratégicos</li>" +
+			    "</ul>" +
+			    "</div>" +
+			    "</div>" +
+			    "<p style='font-size: 18px; margin-top: 25px; color: #BDC3C7; font-style: italic; padding-top: 15px; border-top: 1px solid #5DADE2;'>" +
+			    "Plataforma para la toma de decisiones académicas e investigativas" +
+			    "</p>" +
+			    "</div>" +
+			    "</html>"
+			);
 		lblBienvenida.setBounds(0, 0, 794, 465);
 		lblBienvenida.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		lblBienvenida.setForeground(Color.WHITE);
@@ -625,7 +640,7 @@ public class VentanaPrincipal extends JFrame{
 		btnEditarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 
-				if(tablaEstudiantes.getSelectedRows().length == 1){
+				if(tablaEstudiantes.getSelectedRows().length <= 1){
 
 					int seleccionado = tablaEstudiantes.getSelectedRow();
 
@@ -643,6 +658,9 @@ public class VentanaPrincipal extends JFrame{
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un estudiante para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
+				}else{
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un solo estudiante para editar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
@@ -651,7 +669,7 @@ public class VentanaPrincipal extends JFrame{
 		btnEliminarEst.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 
-				if(tablaEstudiantes.getSelectedRows().length == 1){
+				if(tablaEstudiantes.getSelectedRows().length <= 1){
 
 					int seleccionado = tablaEstudiantes.getSelectedRow();
 
@@ -675,6 +693,9 @@ public class VentanaPrincipal extends JFrame{
 						mensajeRetroalimentacion.setVisible(true);
 					}
 
+				}else {
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un estudiante para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
@@ -708,7 +729,7 @@ public class VentanaPrincipal extends JFrame{
 		btnEditarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 
-				if(tablaDocentes.getSelectedRows().length == 1){
+				if(tablaDocentes.getSelectedRows().length <= 1){
 					int seleccionado = tablaDocentes.getSelectedRow();
 
 					if(seleccionado != -1){
@@ -725,6 +746,9 @@ public class VentanaPrincipal extends JFrame{
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un docente para editar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
+				}else{
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un solo docente para editar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
@@ -733,7 +757,7 @@ public class VentanaPrincipal extends JFrame{
 		btnEliminarDoc.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 
-				if(tablaDocentes.getSelectedRows().length == 1){
+				if(tablaDocentes.getSelectedRows().length <= 1){
 					int seleccionado = tablaDocentes.getSelectedRow();
 
 					if (seleccionado != -1) {
@@ -756,6 +780,9 @@ public class VentanaPrincipal extends JFrame{
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un docente para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
+				}else{
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un solo docente para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
@@ -778,7 +805,7 @@ public class VentanaPrincipal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				if(tablaDepartamentos.getSelectedRows().length == 1){
+				if(tablaDepartamentos.getSelectedRows().length <= 1){
 					int seleccionado = tablaDepartamentos.getSelectedRow();
 
 					if(seleccionado != -1){
@@ -814,7 +841,7 @@ public class VentanaPrincipal extends JFrame{
 		btnEditarDep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 
-				if(tablaDepartamentos.getSelectedRows().length == 1){
+				if(tablaDepartamentos.getSelectedRows().length <= 1){
 
 					int seleccionado = tablaDepartamentos.getSelectedRow();
 
@@ -833,6 +860,9 @@ public class VentanaPrincipal extends JFrame{
 						mensajeRetroalimentacion.setVisible(true);
 					}
 
+				}else{
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un solo departamento para editar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
@@ -840,7 +870,7 @@ public class VentanaPrincipal extends JFrame{
 		btnEliminarDep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 
-				if(tablaDepartamentos.getSelectedRows().length == 1){
+				if(tablaDepartamentos.getSelectedRows().length <= 1){
 					int seleccionado = tablaDepartamentos.getSelectedRow();
 
 					if (seleccionado != -1) {
@@ -862,6 +892,9 @@ public class VentanaPrincipal extends JFrame{
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un departamento para eliminar",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
 					}
+				}else{
+					MensajeDialog mensajeRetroalimentacion = new MensajeDialog(VentanaPrincipal.this,"Debe seleccionar un solo departamento para eliminar",Tipo.RETROALIMENTACION);
+					mensajeRetroalimentacion.setVisible(true);
 				}
 			}
 		});
