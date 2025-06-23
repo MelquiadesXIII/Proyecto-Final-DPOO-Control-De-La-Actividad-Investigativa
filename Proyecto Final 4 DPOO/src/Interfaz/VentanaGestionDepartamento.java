@@ -359,7 +359,7 @@ public class VentanaGestionDepartamento extends JDialog{
 
 		docentesEnTabla.clear();
 
-		String[] columnas = {"Nombre y apellidos", "Cat. Científica", "Cat. Docente", "Cursos Impartidos", "Cursos Recibidos", "Investigaciones"};
+		String[] columnas = {"Nombre y apellidos", "Cat. Científica", "Cat. Docente", "Cursos Impartidos", "Cursos Recibidos", "Resultados"};
 
 		modeloTablaDocentes = new DefaultTableModel(columnas, 0) {
 			private static final long serialVersionUID = 1L;
