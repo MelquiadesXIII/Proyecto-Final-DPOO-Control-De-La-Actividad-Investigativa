@@ -32,12 +32,51 @@ public class LineaInvestigacion {
 	public ArrayList<Investigador> getInvestigadores() {
 		return investigadores;
 	}
-	
+
 	public Docente getResponsable() {
 		return responsable;
 	}
 
+	public int getTotalResultadosPublicadosPorInvestigadores(){
 
+		return  getTotalArticulosPublicadosPorInvestigadores() + getTotalCapitulosLibrosPublicadosPorInvestigadores() + getTotalPonenciasPublicadasPorInvestigadores();
+	}
+
+	public int getTotalArticulosPublicadosPorInvestigadores(){
+
+		int suma = 0;
+
+		for(Investigador i: investigadores){
+
+			suma += i.getTotalArticulos();
+		}
+
+		return suma;
+	}
+
+	public int getTotalPonenciasPublicadasPorInvestigadores(){
+
+		int suma = 0;
+
+		for(Investigador i: investigadores){
+
+			suma += i.getTotalPonencias();
+		}
+
+		return suma;
+	}
+
+	public int getTotalCapitulosLibrosPublicadosPorInvestigadores(){
+
+		int suma = 0;
+
+		for(Investigador i: investigadores){
+
+			suma += i.getTotalCapitulosLibros();
+		}
+
+		return suma;
+	}
 
 	//Setters
 	public void setNombre(String nombre) {
@@ -50,15 +89,15 @@ public class LineaInvestigacion {
 
 		this.nombre = nombre;
 	}
-	
+
 	public void setResponsable(Docente responsable){
-		
+
 		this.responsable = responsable;
 	}
-	
+
 	//Metodos
 	public void removerInvestigador(Investigador i){
-		
+
 		if(i == null)
 			throw new NullPointerException("El investigador no puede tener valor null");
 
@@ -78,7 +117,7 @@ public class LineaInvestigacion {
 
 		investigadores.add(i);
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		return o != null &&
@@ -90,28 +129,28 @@ public class LineaInvestigacion {
 
 
 	public boolean contieneInvestigador(Investigador inv) {
-		
+
 		return investigadores.contains(inv);
 	}
-	
+
 	public Investigador buscarInvestigadorDelResultado(ResultadoInvestigativo r){
-		
+
 		boolean encontrado = false;
 		Investigador autor = null;
 		int i = 0;
-		
+
 		while(i < investigadores.size() && !encontrado){
-			
+
 			Investigador inv = investigadores.get(i);
-			
+
 			if(inv.contieneResultado(r)){
 				autor = inv;
 				encontrado = true;
 			}
-			
+
 			i++;
 		}
-		
+
 		return autor;
 	}
 
