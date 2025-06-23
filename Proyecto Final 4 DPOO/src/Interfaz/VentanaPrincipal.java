@@ -1339,7 +1339,6 @@ public class VentanaPrincipal extends JFrame{
 	        tablaLineas.getColumnModel().getColumn(i).setCellRenderer(centrar);
 	    }
 
-	    
 	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(300); 
 	    tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(50); 
 	    tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(50);
@@ -1364,26 +1363,12 @@ public class VentanaPrincipal extends JFrame{
 
 	        for (LineaInvestigacion linea : depto.getLineasInvestigacion()) {
 
-	            int articulos = 0;
-	            int ponencias = 0;
-	            int capitulos = 0;
-
-	            for (Investigador inv : linea.getInvestigadores()) {
-	                for (ResultadoInvestigativo r : inv.getResultados()) {
-	                    if (r instanceof Articulo) articulos++;
-	                    else if (r instanceof PonenciaEvento) ponencias++;
-	                    else if (r instanceof CapituloLibro) capitulos++;
-	                }
-	            }
-
-	            int total = articulos + ponencias + capitulos;
-
 	            Object[] fila = {
 	                linea.getNombre(),
-	                articulos,
-	                ponencias,
-	                capitulos,
-	                total
+	                linea.getTotalArticulosPublicadosPorInvestigadores(),
+	                linea.getTotalPonenciasPublicadasPorInvestigadores(),
+	                linea.getTotalCapitulosLibrosPublicadosPorInvestigadores(),
+	                linea.getTotalResultadosPublicadosPorInvestigadores()
 	            };
 
 	            modeloTablaLineas.addRow(fila);
