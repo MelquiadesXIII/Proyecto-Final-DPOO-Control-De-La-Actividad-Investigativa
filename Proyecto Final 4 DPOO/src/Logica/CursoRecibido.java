@@ -34,15 +34,9 @@ public class CursoRecibido {
 		return temaCurso;
 	}
 
-
-
 	//Metodos
 	public boolean equals(Object c) {
 		return c != null &&
-				(this == c ||
-						(c instanceof CursoRecibido &&
-								nota == ((CursoRecibido)c).getNota() &&
-								creditosRecibidos == ((CursoRecibido)c).getCreditosRecibidos() &&
-								temaCurso.equals(((CursoRecibido)c).getTemaCurso())));
+				(this == c || (c instanceof CursoRecibido && temaCurso.equals(((CursoRecibido)c).getTemaCurso())));
 	}
 }
