@@ -1313,7 +1313,7 @@ public class VentanaPrincipal extends JFrame{
 	    panelFiltros.add(seleccionarDeptoReporte4);
 	    panelReporte4.add(panelFiltros, BorderLayout.NORTH);
 
-	    String[] columnas = {"Línea de investigación", "Responsable", "Artículos", "Ponencias", "Capítulos", "Total"};
+	    String[] columnas = {"Línea de investigación", "Artículos", "Ponencias", "Capítulos", "Total"};
 	    modeloTablaLineas = new DefaultTableModel(columnas, 0) {
 	        private static final long serialVersionUID = 1L;
 
@@ -1327,11 +1327,6 @@ public class VentanaPrincipal extends JFrame{
 	    tablaLineas.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 	    tablaLineas.setRowHeight(25);
 	    tablaLineas.getTableHeader().setReorderingAllowed(false);
-	    
-	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(200);
-		tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(120);
-		tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(100);
-		tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(100);
 
 	    JTableHeader header = tablaLineas.getTableHeader();
 	    header.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -1345,12 +1340,11 @@ public class VentanaPrincipal extends JFrame{
 	    }
 
 	    
-	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(250); 
-	    tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(180); 
-	    tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(90);
-	    tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(90);  
-	    tablaLineas.getColumnModel().getColumn(4).setPreferredWidth(90);  
-	    tablaLineas.getColumnModel().getColumn(5).setPreferredWidth(90); 
+	    tablaLineas.getColumnModel().getColumn(0).setPreferredWidth(300); 
+	    tablaLineas.getColumnModel().getColumn(1).setPreferredWidth(50); 
+	    tablaLineas.getColumnModel().getColumn(2).setPreferredWidth(50);
+	    tablaLineas.getColumnModel().getColumn(3).setPreferredWidth(50);  
+	    tablaLineas.getColumnModel().getColumn(4).setPreferredWidth(50);  
 
 	    JScrollPane scrollTabla = new JScrollPane(tablaLineas);
 	    scrollTabla.setPreferredSize(new Dimension(800, 400));
@@ -1386,9 +1380,6 @@ public class VentanaPrincipal extends JFrame{
 
 	            Object[] fila = {
 	                linea.getNombre(),
-	                linea.getResponsable() != null
-	                    ? linea.getResponsable().getNombre() + " " + linea.getResponsable().getApellidos()
-	                    : "Sin asignar",
 	                articulos,
 	                ponencias,
 	                capitulos,
