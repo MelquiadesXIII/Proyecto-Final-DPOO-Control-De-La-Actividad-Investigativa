@@ -963,7 +963,7 @@ public class VentanaPrincipal extends JFrame{
 		panelReporte4 = new JPanel();
 		panelReporte4.setBackground(Color.LIGHT_GRAY);
 		panelReporte4.setLayout(new BorderLayout());
-		pestañasReportes.addTab("Resultados investigativos", panelReporte4);
+		pestañasReportes.addTab("Producción científica", panelReporte4);
 		mostrarReporte4();
 
 		for (int i = 0; i < 4; i++) {

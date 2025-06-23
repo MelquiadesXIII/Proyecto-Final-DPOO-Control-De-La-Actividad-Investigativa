@@ -80,18 +80,18 @@ public class EditarPonenciaDialog extends JDialog {
         panel.add(lblFecha);
 
         fecha = new JDateChooser();
-        fecha.setBounds(130, 180, 250, 30);
+        fecha.setBounds(130, 180, 250, 40);
         fecha.setDateFormatString("dd/MM/yyyy");
         estiloDateChooser(fecha);
         panel.add(fecha);
 
         JButton btnAceptar = new JButton("Aceptar");
-        btnAceptar.setBounds(80, 230, 110, 40);
+        btnAceptar.setBounds(80, 240, 110, 40);
         estiloBoton(btnAceptar);
         panel.add(btnAceptar);
 
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(230, 230, 110, 40);
+        btnCancelar.setBounds(230, 240, 110, 40);
         estiloBoton(btnCancelar);
         panel.add(btnCancelar);
 

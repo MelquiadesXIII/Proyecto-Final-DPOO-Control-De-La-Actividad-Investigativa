@@ -20,201 +20,213 @@ import Logica.PonenciaEvento;
 import com.toedter.calendar.JDateChooser;
 
 public class CrearPonenciaDialog extends JDialog {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private JTextField txtNombre, txtLugar, txtISBN;
-    private JDateChooser fecha;
+	private JTextField txtNombre, txtLugar, txtISBN;
+	private JDateChooser fecha;
 
-    private boolean confirmado = false;
-    private PonenciaEvento ponencia;
-    private Point point = new Point();
+	private boolean confirmado = false;
+	private PonenciaEvento ponencia;
+	private Point point = new Point();
 
-    public CrearPonenciaDialog(final JFrame parent, final Investigador autor) {
-        super(parent, "Crear Ponencia", true);
-        setUndecorated(true);
-        setBackground(new Color(30, 40, 50));
-        setSize(420, 300);
-        setLocationRelativeTo(parent);
-        setLayout(null);
+	public CrearPonenciaDialog(final JFrame parent, final Investigador autor) {
+		super(parent, "Crear Ponencia", true);
+		setUndecorated(true);
+		setBackground(new Color(30, 40, 50));
+		setSize(420, 330);
+		setLocationRelativeTo(parent);
+		setLayout(null);
 
-        JPanel panel = new JPanel(null);
-        panel.setBackground(new Color(30, 40, 50));
-        panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setBounds(0, 0, 420, 300);
-        setContentPane(panel);
+		JPanel panel = new JPanel(null);
+		panel.setBackground(new Color(30, 40, 50));
+		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
+		panel.setBounds(0, 0, 420, 300);
+		setContentPane(panel);
 
-        JLabel lblTitulo = new JLabel("Crear Ponencia");
-        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblTitulo.setForeground(Color.WHITE);
-        lblTitulo.setBounds(140, 10, 200, 30);
-        panel.add(lblTitulo);
+		JLabel lblTitulo = new JLabel("Crear Ponencia");
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setBounds(140, 10, 200, 30);
+		panel.add(lblTitulo);
 
-        JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setBounds(30, 60, 100, 25);
-        estiloLabel(lblNombre);
-        panel.add(lblNombre);
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(30, 60, 100, 25);
+		estiloLabel(lblNombre);
+		panel.add(lblNombre);
 
-        txtNombre = new JTextField();
-        txtNombre.setBounds(130, 60, 250, 30);
-        estiloCampo(txtNombre);
-        panel.add(txtNombre);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(130, 60, 250, 30);
+		estiloCampo(txtNombre);
+		panel.add(txtNombre);
 
-        JLabel lblLugar = new JLabel("Lugar:");
-        lblLugar.setBounds(30, 100, 100, 25);
-        estiloLabel(lblLugar);
-        panel.add(lblLugar);
+		JLabel lblLugar = new JLabel("Lugar:");
+		lblLugar.setBounds(30, 100, 100, 25);
+		estiloLabel(lblLugar);
+		panel.add(lblLugar);
 
-        txtLugar = new JTextField();
-        txtLugar.setBounds(130, 100, 250, 30);
-        estiloCampo(txtLugar);
-        panel.add(txtLugar);
+		txtLugar = new JTextField();
+		txtLugar.setBounds(130, 100, 250, 30);
+		estiloCampo(txtLugar);
+		panel.add(txtLugar);
 
-        JLabel lblISBN = new JLabel("ISBN:");
-        lblISBN.setBounds(30, 140, 100, 25);
-        estiloLabel(lblISBN);
-        panel.add(lblISBN);
+		JLabel lblISBN = new JLabel("ISBN:");
+		lblISBN.setBounds(30, 140, 100, 25);
+		estiloLabel(lblISBN);
+		panel.add(lblISBN);
 
-        txtISBN = new JTextField();
-        txtISBN.setBounds(130, 140, 250, 30);
-        estiloCampo(txtISBN);
-        panel.add(txtISBN);
+		txtISBN = new JTextField();
+		txtISBN.setBounds(130, 140, 250, 30);
+		estiloCampo(txtISBN);
+		panel.add(txtISBN);
 
-        JLabel lblFecha = new JLabel("Fecha:");
-        lblFecha.setBounds(30, 180, 100, 25);
-        estiloLabel(lblFecha);
-        panel.add(lblFecha);
+		JLabel lblFecha = new JLabel("Fecha:");
+		lblFecha.setBounds(30, 180, 100, 25);
+		estiloLabel(lblFecha);
+		panel.add(lblFecha);
 
-        fecha = new JDateChooser();
-        fecha.setBounds(130, 180, 250, 30);
-        fecha.setDateFormatString("dd/MM/yyyy");
-        estiloDateChooser(fecha);
-        panel.add(fecha);
+		fecha = new JDateChooser();
+		fecha.setBounds(130, 180, 250, 40);
+		fecha.setDateFormatString("dd/MM/yyyy");
+		estiloDateChooser(fecha);
+		panel.add(fecha);
 
-        JButton btnCrear = new JButton("Crear");
-        btnCrear.setBounds(80, 230, 110, 40);
-        estiloBoton(btnCrear);
-        panel.add(btnCrear);
+		JButton btnCrear = new JButton("Crear");
+		btnCrear.setBounds(80, 240, 110, 40);
+		estiloBoton(btnCrear);
+		panel.add(btnCrear);
 
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(230, 230, 110, 40);
-        estiloBoton(btnCancelar);
-        panel.add(btnCancelar);
-        
-        aplicarFiltroTexto(txtNombre, 40);
-        aplicarFiltroTexto(txtLugar, 40);
-        aplicarFiltroNumerico(txtISBN, 13);
-        
-        btnCrear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    String nombre = txtNombre.getText();
-                    String lugar = txtLugar.getText();
-                    String isbn = txtISBN.getText();
-                    Date fechaSeleccionada = fecha.getDate();
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(230, 240, 110, 40);
+		estiloBoton(btnCancelar);
+		panel.add(btnCancelar);
 
-                    if (fechaSeleccionada == null) {
-                        JOptionPane.showMessageDialog(parent, "Debe seleccionar una fecha válida.", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
+		aplicarFiltroTexto(txtNombre, 40);
+		aplicarFiltroTexto(txtLugar, 40);
+		aplicarFiltroNumerico(txtISBN, 13);
 
-                    LocalDate fecha = convertirDateALocalDate(fechaSeleccionada);
-                    autor.crearPonenciaEvento(nombre, fecha, lugar, isbn);
-                    confirmado = true;
-                    dispose();
-                } catch (RuntimeException r) {
-                	MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-                	m.setVisible(true);
-                }
-            }
-        });
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String nombre = txtNombre.getText();
+					String lugar = txtLugar.getText();
+					String isbn = txtISBN.getText();
+					Date fechaSeleccionada = fecha.getDate();
+					
+					if (fechaSeleccionada == null) {
+		                throw new RuntimeException("Debe seleccionar una fecha");
+		            }
 
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+					LocalDate fecha = convertirDateALocalDate(fechaSeleccionada);
+					autor.crearPonenciaEvento(nombre, fecha, lugar, isbn);
+					confirmado = true;
+					
+					dispose();
 
-        panel.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                point.x = e.getX();
-                point.y = e.getY();
-            }
-        });
+				} catch (RuntimeException r) {
+					MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					m.setVisible(true);
+				}
+			}
+		});
 
-        panel.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent e) {
-                Point p = getLocation();
-                setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
-            }
-        });
-    }
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
-    
+		panel.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				point.x = e.getX();
+				point.y = e.getY();
+			}
+		});
 
-    private void estiloCampo(JTextField campo) {
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        campo.setBackground(new Color(60, 70, 80));
-        campo.setForeground(Color.WHITE);
-        campo.setCaretColor(Color.WHITE);
-        campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    }
+		panel.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent e) {
+				Point p = getLocation();
+				setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+			}
+		});
+	}
 
-    private void estiloLabel(JLabel label) {
-        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        label.setForeground(Color.WHITE);
-    }
 
-    private void estiloBoton(JButton boton) {
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        boton.setBackground(new Color(50, 60, 70));
-        boton.setForeground(Color.WHITE);
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setOpaque(true);
-    }
 
-    private void estiloDateChooser(JDateChooser fecha) {
-    	fecha.setBackground(new Color(60, 70, 80));
-    	fecha.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-    	fecha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	private void estiloCampo(JTextField campo) {
+		campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		campo.setBackground(new Color(60, 70, 80));
+		campo.setForeground(Color.WHITE);
+		campo.setCaretColor(Color.WHITE);
+		campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	}
 
-        JTextField editor = (JTextField) fecha.getDateEditor().getUiComponent();
-        editor.setBackground(new Color(60, 70, 80));
-        editor.setForeground(Color.WHITE);
-        editor.setCaretColor(Color.WHITE);
-        editor.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        editor.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	private void estiloLabel(JLabel label) {
+		label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		label.setForeground(Color.WHITE);
+	}
 
-        Component[] comps = fecha.getComponents();
-        for (Component c : comps) {
-            if (c instanceof JButton) {
-                JButton boton = (JButton) c;
-                boton.setBackground(new Color(50, 60, 70));
-                boton.setForeground(Color.WHITE);
-                boton.setFocusPainted(false);
-                boton.setBorderPainted(false);
-                boton.setOpaque(true);
-            }
-        }
-    }
+	private void estiloBoton(JButton boton) {
+		boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		boton.setBackground(new Color(50, 60, 70));
+		boton.setForeground(Color.WHITE);
+		boton.setFocusPainted(false);
+		boton.setBorderPainted(false);
+		boton.setOpaque(true);
+	}
 
-    
+	private void estiloDateChooser(JDateChooser fecha) {
+		
+		fecha.setBackground(new Color(60, 70, 80));
+		fecha.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		fecha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-    public boolean isConfirmado() {
-        return confirmado;
-    }
+		JTextField editor = (JTextField) fecha.getDateEditor().getUiComponent();
+		editor.setEditable(false);
+		editor.setBackground(new Color(60, 70, 80));
+		editor.setForeground(Color.WHITE);
+		editor.setCaretColor(Color.WHITE);
+		editor.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		editor.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-    public PonenciaEvento getPonencia() {
-        return ponencia;
-    }
+		editor.setPreferredSize(new Dimension(editor.getPreferredSize().width, 30));
+		editor.setMinimumSize(new Dimension(editor.getMinimumSize().width, 30));
 
-    
+		for (Component c : fecha.getComponents()) {
+			if (c instanceof JButton) {
+				JButton boton = (JButton) c;
+				boton.setBackground(new Color(50, 60, 70));
+				boton.setForeground(Color.WHITE);
+				boton.setFocusPainted(false);
+				boton.setBorderPainted(false);
+				boton.setOpaque(true);
 
-    private LocalDate convertirDateALocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-    
-    public void aplicarFiltroTexto(JTextField campo, final int maxChars){
+				boton.setPreferredSize(new Dimension(30, 30));
+				boton.setMinimumSize(new Dimension(30, 30));
+				boton.setMaximumSize(new Dimension(30, 30));
+			}
+		}
+
+		fecha.setPreferredSize(new Dimension(250, 35));
+		fecha.setMinimumSize(new Dimension(250, 35));
+	}
+
+
+
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+
+	public PonenciaEvento getPonencia() {
+		return ponencia;
+	}
+
+
+
+	private LocalDate convertirDateALocalDate(Date date) {
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+
+	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
 
 		AbstractDocument doc = (AbstractDocument) campo.getDocument();
 		doc.setDocumentFilter(new DocumentFilter() {
@@ -244,9 +256,9 @@ public class CrearPonenciaDialog extends JDialog {
 			}
 		});
 	}
-	
+
 	public void aplicarFiltroNumerico(JTextField campo, final int maxChars){
-		
+
 		AbstractDocument doc = (AbstractDocument) campo.getDocument();
 		doc.setDocumentFilter(new DocumentFilter() {
 

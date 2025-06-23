@@ -66,6 +66,9 @@ public class PonenciaEvento extends ResultadoInvestigativo{
 		int anyoMaximo = Year.now().getValue() - 1;
 		int anyoMinimo = 1900;
 
+		if(fecha == null)
+			throw new NullPointerException("Debe seleccionar una fecha válida");
+		
 		if(fecha.getYear() < anyoMinimo)
 			throw new ValorNoValidoException("La fecha seleccionada no puede ser anterior a 1900");
 

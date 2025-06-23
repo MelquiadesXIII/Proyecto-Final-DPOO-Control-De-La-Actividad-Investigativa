@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import Interfaz.MensajeDialog.Tipo;
 import Logica.*;
 
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -847,12 +846,12 @@ public class VentanaGestionDepartamento extends JDialog{
 
 					if(dialog.isConfirmado())
 						actualizarTodasLasTablas();
-					
+
 				}else{
 					MensajeDialog m = new MensajeDialog(parent, "<html> No hay estudiantes disponibles para agregar <br> Cree uno nuevo o elimine alguno de un departamento <html>", Tipo.RETROALIMENTACION);
 					m.setVisible(true);
 				}
-				
+
 			}
 
 		});
@@ -938,17 +937,17 @@ public class VentanaGestionDepartamento extends JDialog{
 			public void actionPerformed(ActionEvent e){
 
 				if(vicedecanato.obtenerEstudiantesNoRegistradosEnDepartamentos().size() > 0){
-					
+
 					AgregarDocenteDialog dialog = new AgregarDocenteDialog(parent, vicedecanato, dptoActual);
 
 					if(dialog.isConfirmado())
 						actualizarTablaDoc();
-				
+
 				}else{
 					MensajeDialog m = new MensajeDialog(parent, "<html> No hay docentes disponibles para agregar <br> Cree uno nuevo o elimine alguno de un departamento <html>", Tipo.RETROALIMENTACION);
 					m.setVisible(true);
 				}
-				
+
 			}
 
 		});
@@ -1114,20 +1113,20 @@ public class VentanaGestionDepartamento extends JDialog{
 					int seleccionado = tablaMaestrias.getSelectedRow();
 
 					if (seleccionado != -1) {
-						
+
 						if(dptoActual.obtenerListaDocentesValidosParaMatriculaMaestria().size() > 0){
-							
+
 							Maestria maestria = maestriasEnTabla.get(seleccionado);
 							MatricularDocenteDialog matricula = new MatricularDocenteDialog(parent, maestria, dptoActual);
 
 							if(matricula.isConfirmado())
 								actualizarTodasLasTablas();
-							
+
 						}else{
 							MensajeDialog m = new MensajeDialog(parent, "<html>No hay existencia de docentes sin categoria cientifica<br> disponibles para matricular <html>", Tipo.RETROALIMENTACION);
 							m.setVisible(true);
 						}
-						
+
 
 					}else {
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una maestría para matricular",Tipo.RETROALIMENTACION);
@@ -1274,7 +1273,7 @@ public class VentanaGestionDepartamento extends JDialog{
 					int seleccionado = tablaCursos.getSelectedRow();
 
 					if (seleccionado != -1) {
-						
+
 						CursoPosgrado cursoSeleccionado = cursosEnTabla.get(seleccionado);
 						Docente evaluador = cursoSeleccionado.getProfesor();
 
@@ -1378,20 +1377,20 @@ public class VentanaGestionDepartamento extends JDialog{
 		JButton btnAgregarInvestigador = crearBotonCRUD("Agregar Inv");
 		btnAgregarInvestigador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if(tablaLineas.getSelectedRows().length <= 1){
 					int seleccionado = tablaLineas.getSelectedRow();
 					if(seleccionado != -1){
-						
+
 						if(dptoActual.obtenerInvestigadoresNoRegistradosLineasDeInvestigacion().size() > 0){
-							
+
 							LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
 
 							AgregarInvestigadorALineaDialog dialog = new AgregarInvestigadorALineaDialog(parent, dptoActual, linea);
-							
+
 							if(dialog.isConfirmado())
 								actualizarTodasLasTablas();
-							
+
 						}else{
 							MensajeDialog m = new MensajeDialog(parent, "<html> No hay investigadores disponibles para agregar <br> Cree uno nuevo o elimine alguno de una línea de investigación<html>", Tipo.RETROALIMENTACION);
 							m.setVisible(true);
@@ -1401,7 +1400,7 @@ public class VentanaGestionDepartamento extends JDialog{
 						MensajeDialog m = new MensajeDialog(parent, "Debe seleccionar una linea para la operación", Tipo.RETROALIMENTACION);
 						m.setVisible(true);
 					}
-					
+
 				}else{
 					MensajeDialog m = new MensajeDialog(parent, "Solo debe seleccionar una linea para la operación", Tipo.RETROALIMENTACION);
 					m.setVisible(true);
@@ -1409,25 +1408,7 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 		});
 
-		/*JButton btnVerInvestigadores = crearBotonCRUD("Ver Investigadores");
-		btnVerInvestigadores.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (tablaLineas.getSelectedRows().length == 1) {
-					int seleccionado = tablaLineas.getSelectedRow();
-
-					if (seleccionado != -1) {
-						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
-						VerInvestigadoresLineaDialog dialog = new VerInvestigadoresLineaDialog(parent, linea);
-						dialog.setVisible(true);
-					}
-				} else {
-					MensajeDialog mensaje = new MensajeDialog(parent, "Seleccione una línea de investigación", Tipo.RETROALIMENTACION);
-					mensaje.setVisible(true);
-				}
-			}
-		});*/
-
-		JButton btnEliminarInvestigador = crearBotonCRUD("Eliminar Investigador");
+		JButton btnEliminarInvestigador = crearBotonCRUD("Eliminar Inv");
 		btnEliminarInvestigador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (tablaLineas.getSelectedRows().length == 1) {
@@ -1441,12 +1422,12 @@ public class VentanaGestionDepartamento extends JDialog{
 						if (dialog.isConfirmado()) {
 							actualizarTodasLasTablas();
 						}
-						
+
 					}else{
 						MensajeDialog m = new MensajeDialog(parent, "Debe seleccionar una linea para la operación", Tipo.RETROALIMENTACION);
 						m.setVisible(true);
 					}
-					
+
 				}else{
 					MensajeDialog m = new MensajeDialog(parent, "Solo debe seleccionar una linea para la operación", Tipo.RETROALIMENTACION);
 					m.setVisible(true);
@@ -1458,7 +1439,6 @@ public class VentanaGestionDepartamento extends JDialog{
 		panelBotonesCRUDLineas.add(btnEditarLinea);
 		panelBotonesCRUDLineas.add(btnEliminarLinea);
 		panelBotonesCRUDLineas.add(btnAgregarInvestigador);
-		//panelBotonesCRUDLineas.add(btnVerInvestigadores);
 		panelBotonesCRUDLineas.add(btnEliminarInvestigador);
 
 		panelLineas.add(panelBotonesCRUDLineas, BorderLayout.SOUTH);
@@ -1485,6 +1465,8 @@ public class VentanaGestionDepartamento extends JDialog{
 						ponenciaDialog.setVisible(true);
 						if (ponenciaDialog.isConfirmado()) {
 							actualizarTodasLasTablas();
+							MensajeDialog m = new MensajeDialog(parent, "Resultado investigativo creado correctamente", Tipo.RETROALIMENTACION);
+							m.setVisible(true);
 						}
 
 					} else if (tipo.equals("Artículo")) {
@@ -1492,6 +1474,8 @@ public class VentanaGestionDepartamento extends JDialog{
 						articuloDialog.setVisible(true);
 						if (articuloDialog.isConfirmado()) {
 							actualizarTodasLasTablas();
+							MensajeDialog m = new MensajeDialog(parent, "Resultado investigativo creado correctamente", Tipo.RETROALIMENTACION);
+							m.setVisible(true);
 						}
 
 					} else if (tipo.equals("Capítulo de Libro")) {
@@ -1499,9 +1483,10 @@ public class VentanaGestionDepartamento extends JDialog{
 						capituloDialog.setVisible(true);
 						if (capituloDialog.isConfirmado()) {
 							actualizarTodasLasTablas();
+							MensajeDialog m = new MensajeDialog(parent, "Resultado investigativo creado correctamente", Tipo.RETROALIMENTACION);
+							m.setVisible(true);
 						}
 					}
-
 
 				}
 			}
@@ -1554,10 +1539,6 @@ public class VentanaGestionDepartamento extends JDialog{
 		});
 
 
-
-
-
-
 		JButton btnEliminarResultado = crearBotonCRUD("Eliminar");
 		btnEliminarResultado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1596,9 +1577,6 @@ public class VentanaGestionDepartamento extends JDialog{
 									Tipo.RETROALIMENTACION
 									);
 							mensaje.setVisible(true);
-
-
-
 
 						}
 
