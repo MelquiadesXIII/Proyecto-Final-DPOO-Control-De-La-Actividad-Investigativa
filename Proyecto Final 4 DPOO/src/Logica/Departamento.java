@@ -217,8 +217,11 @@ public class Departamento {
 
 		int i = 0;
 		while(i < lineasInvestigacion.size() && noContenido){
+			
+			LineaInvestigacion l = lineasInvestigacion.get(i);
+			Docente responsable = l.getResponsable();
 
-			if(lineasInvestigacion.get(i).contieneInvestigador(inv))
+			if(l.contieneInvestigador(inv) || inv.equals(responsable))
 				noContenido = false;
 
 			i++;
