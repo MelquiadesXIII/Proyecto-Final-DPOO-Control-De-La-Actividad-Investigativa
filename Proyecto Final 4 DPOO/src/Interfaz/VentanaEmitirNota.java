@@ -165,7 +165,7 @@ public class VentanaEmitirNota extends JDialog {
 				try {
 					
 					cursoActual.emitirNota(evaluador, participanteSeleccionado, notaSeleccionada);
-					MensajeDialog m = new MensajeDialog(this.parent, "Nota emitida correctamente", Tipo.RETROALIMENTACION);
+					MensajeDialog m = new MensajeDialog(this.parent, "<html>El docente " + participanteSeleccionado.getNombre() + " " + participanteSeleccionado.getApellidos() + "<br> ha recibido la nota " + notaSeleccionada + "<html>", Tipo.RETROALIMENTACION);
 					m.setVisible(true);
 					confirmado = true;
 					dispose();
