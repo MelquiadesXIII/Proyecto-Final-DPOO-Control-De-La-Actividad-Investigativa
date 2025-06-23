@@ -15,7 +15,7 @@ public abstract class Investigador {
 	protected ArrayList<ResultadoInvestigativo> resultados;
 
 
-	
+
 	//Constructor
 	public Investigador(String nombre, String apellidos) {
 
@@ -38,12 +38,51 @@ public abstract class Investigador {
 		return apellidos;
 	}
 
+	public int getTotalArticulos(){
+
+		int suma = 0;
+
+		for(ResultadoInvestigativo r: resultados){
+
+			if(r instanceof Articulo)
+				suma++;
+		}
+
+		return suma;
+	}
+
+	public int getTotalCapitulosLibros(){
+
+		int suma = 0;
+
+		for(ResultadoInvestigativo r: resultados){
+
+			if(r instanceof CapituloLibro)
+				suma++;
+		}
+
+		return suma;
+	}
+
+	public int getTotalPonencias(){
+
+		int suma = 0;
+
+		for(ResultadoInvestigativo r: resultados){
+
+			if(r instanceof PonenciaEvento)
+				suma++;
+		}
+
+		return suma;
+	}
+
 	//Setters
 	public void setNombre(String nombre) 
 	{
 		if(nombre.trim().isEmpty())
 			throw new CadenaNoValidaException("El nombre no puede estar vacío");
-		
+
 		if(!nombre.matches("^[\\p{L}\\s]+$"))
 			throw new CadenaNoValidaException("El nombre solo puede tener letras y espacios");	
 
@@ -57,7 +96,7 @@ public abstract class Investigador {
 
 		this.apellidos = apellidos;
 	}
-	
+
 	//Metodos
 	public void agregarResultado(ResultadoInvestigativo r){
 
@@ -77,7 +116,7 @@ public abstract class Investigador {
 
 		resultados.remove(r);
 	}
-	
+
 	public int calcularPuntajeInvestigativo(){
 
 		int puntaje = 0;
@@ -89,31 +128,31 @@ public abstract class Investigador {
 
 		return puntaje;
 	}
-	
+
 	public void crearArticulo(String titulo, int numero, int volumen, String anioPublicacion, int paginas, GrupoImpacto grupo){
-		
+
 		Articulo a = new Articulo(titulo, numero, volumen, anioPublicacion, paginas, grupo);
-		
+
 		agregarResultado(a);
 	}
-	
+
 	public void crearPonenciaEvento(String nombre, LocalDate fecha, String lugar, String ISBN){
-		
+
 		PonenciaEvento p = new PonenciaEvento(nombre, fecha, lugar, ISBN);
-		
+
 		agregarResultado(p);
 	}
-	
+
 	public void crearCapituloLibro(String titulo, ArrayList<String> autores, ArrayList<String> nombresEditores, String editorial, String iSSN, String volumen){
-		
+
 		CapituloLibro c = new CapituloLibro(titulo, autores, nombresEditores, editorial, iSSN, volumen);
-		
+
 		agregarResultado(c);
 	}
-	
+
 	public boolean contieneResultado(ResultadoInvestigativo r){
-		
+
 		return resultados.contains(r);
 	}
-	
+
 }
