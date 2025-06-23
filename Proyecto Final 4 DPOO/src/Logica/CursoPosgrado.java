@@ -162,9 +162,14 @@ public class CursoPosgrado {
 		if(nota < 2 || nota > 5)
 			throw new RangoNoValidoException("La nota no esta entre el rango requerido de 2 a 5, su valor es " +nota);
 
-		int creditos = nota >= 3 ? cantCreditos : 0; 
+		int creditos = nota >= 3 ? cantCreditos : 0;
+		
+		CursoRecibido cursoRecibido = new CursoRecibido(nota, creditos, tema);
+		
+		if(participante.contieneRegistroCursoRecibido(cursoRecibido))
+			participante.removerCursoRecibido(cursoRecibido);
 
-		participante.agregarCursoRecibido(new CursoRecibido(nota, creditos, tema));
+		participante.agregarCursoRecibido(cursoRecibido);
 
 	}
 
