@@ -19,7 +19,7 @@ public class Docente extends Investigador{
 	public Docente(String nombre, String apellidos, CategoriaCientifica catCientifica, CategoriaDocente catDocente) {
 
 		super(nombre, apellidos);
-		
+
 		setCatCientifica(catCientifica);
 		setCatDocente(catDocente);
 
@@ -65,7 +65,7 @@ public class Docente extends Investigador{
 	{
 		if(catCientifica == null)
 			throw new NullPointerException("La categoria científica no puede ser null");
-			
+
 		this.catCientifica = catCientifica;
 	}
 
@@ -88,10 +88,10 @@ public class Docente extends Investigador{
 		if(cursosImpartidos.contains(c)){
 			throw new DuplicacionException("El curso que esta intentando agregar ya está registrado en el docente");
 		}
-		
+
 		cursosImpartidos.add(c);
 	}
-	
+
 	public void removerCursoImpartido(CursoPosgrado c)
 	{
 		if(c == null)
@@ -102,36 +102,69 @@ public class Docente extends Investigador{
 
 		if(!cursosImpartidos.contains(c))
 			throw new NoExistenciaException("El curso que desea remover no se encuentra entre los registros de cursos");
-		
+
 		cursosImpartidos.remove(c);
 	}
-	
+
 	public void agregarCursoRecibido(CursoRecibido c)
 	{
 		if(c == null)
 			throw new NullPointerException("No puede agregar un null a la lista de cursos recibidos");
-		
-		if(cursosRecibidos.contains(c))
-			throw new DuplicacionException("El curso que intenta agregar ya se encuentra presente en el registro");
-			
+
+		if(cursosRecibidos.contains(c)){
+			throw new DuplicacionException("El curso que intenta agregar ya se encuentra registrado");
+		}
+
 		cursosRecibidos.add(c);
 	}
-	
+
+	public void removerCursoRecibido(CursoRecibido c){
+
+		if(c == null)
+			throw new NullPointerException("No puede remover un null de la lista de cursos impartidos");
+
+		if(cursosRecibidos.isEmpty())
+			throw new ListaVaciaException("La lista de la que desea remover al curso esta vacía");
+
+		if(!cursosRecibidos.contains(c))
+			throw new NoExistenciaException("El curso que desea remover no se encuentra entre los registros de cursos");
+
+		cursosRecibidos.remove(c);
+	}
+
+	public boolean contieneRegistroCursoRecibido(CursoRecibido cursoRecibido){
+
+		boolean registrado = false;
+
+		int i = 0;
+		while(i < cursosRecibidos.size() && !registrado){
+
+			CursoRecibido temp = cursosRecibidos.get(i);
+			if(temp.equals(cursoRecibido)){
+				registrado = true;
+			}
+
+			i++;
+		}
+
+		return registrado;
+	}
+
 	@Override
 	public boolean equals(Object d){
 
 		return d != null &&
 				(this == d ||
-						(d instanceof Docente &&
-								nombre.equals(((Docente)d).getNombre()) &&
-								apellidos.equals(((Docente)d).getApellidos()) &&
-								catCientifica == ((Docente)d).getCatCientifica() &&
-								catDocente == ((Docente)d).getCatDocente()));
+				(d instanceof Docente &&
+						nombre.equals(((Docente)d).getNombre()) &&
+						apellidos.equals(((Docente)d).getApellidos()) &&
+						catCientifica == ((Docente)d).getCatCientifica() &&
+						catDocente == ((Docente)d).getCatDocente()));
 	}
-	
+
 	@Override
 	public String toString() {
-	    return nombre + " " + apellidos;
+		return nombre + " " + apellidos;
 	}
 
 }
