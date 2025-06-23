@@ -123,11 +123,22 @@ public class Maestria {
 			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestría");
 
 		matriculados.add(d);
-		
+
 		for(CursoPosgrado c: cursos){
-			
+
+			eliminarRegistrosAntiguosCursos(d, c);
 			c.agregarParticipante(d);
 		}
+	}
+
+	private void eliminarRegistrosAntiguosCursos(Docente d, CursoPosgrado cursoPosgrado) {
+
+		for(CursoRecibido cursoRecibido: d.getCursosRecibidos()){
+
+			if(cursoPosgrado.getTema().equals(cursoRecibido.getTemaCurso()))
+				d.removerCursoRecibido(cursoRecibido);
+		}
+
 	}
 
 	public void removerMatriculado(Docente d)
@@ -155,22 +166,22 @@ public class Maestria {
 
 		cursos.add(c);
 	}
-	
+
 	public void removerCurso(CursoPosgrado c){
-		
+
 		if(c == null)
 			throw new NullPointerException("El curso no puede tener valor null");
 
 		if(!cursos.contains(c))
 			throw new NoExistenciaException("La lista de cursos no contiene al curso seleccionado");
-		
+
 		cursos.remove(c);
 	}
-	
+
 	public void crearCursoPosgrado(String tema, ArrayList<String> objetivos, int cantCreditos, Docente profesor){
-		
+
 		CursoPosgrado c = new CursoPosgrado(tema, objetivos, cantCreditos, profesor);
-		
+
 		agregarCursoPosgrado(c);
 	}
 
@@ -188,9 +199,9 @@ public class Maestria {
 	public String toString() {
 		return this.nombre; 
 	}
-	
+
 	public boolean contieneCurso(CursoPosgrado c){
-		
+
 		return cursos.contains(c);
 	}
 }
