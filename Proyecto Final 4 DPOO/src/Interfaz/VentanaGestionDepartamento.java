@@ -842,10 +842,17 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnAgregarEst.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 
-				AgregarEstudianteDialog dialog = new AgregarEstudianteDialog(parent, vicedecanato, dptoActual);
+				if(vicedecanato.obtenerEstudiantesNoRegistradosEnDepartamentos().size() > 0){
+					AgregarEstudianteDialog dialog = new AgregarEstudianteDialog(parent, vicedecanato, dptoActual);
 
-				if(dialog.isConfirmado())
-					actualizarTodasLasTablas();
+					if(dialog.isConfirmado())
+						actualizarTodasLasTablas();
+					
+				}else{
+					MensajeDialog m = new MensajeDialog(parent, "<html> No hay estudiantes disponibles para agregar <br> Cree uno nuevo o elimine alguno de un departamento <html>", Tipo.RETROALIMENTACION);
+					m.setVisible(true);
+				}
+				
 			}
 
 		});
@@ -930,10 +937,18 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnaAgregarDoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 
-				AgregarDocenteDialog dialog = new AgregarDocenteDialog(parent, vicedecanato, dptoActual);
+				if(vicedecanato.obtenerEstudiantesNoRegistradosEnDepartamentos().size() > 0){
+					
+					AgregarDocenteDialog dialog = new AgregarDocenteDialog(parent, vicedecanato, dptoActual);
 
-				if(dialog.isConfirmado())
-					actualizarTablaDoc();
+					if(dialog.isConfirmado())
+						actualizarTablaDoc();
+				
+				}else{
+					MensajeDialog m = new MensajeDialog(parent, "<html> No hay docentes disponibles para agregar <br> Cree uno nuevo o elimine alguno de un departamento <html>", Tipo.RETROALIMENTACION);
+					m.setVisible(true);
+				}
+				
 			}
 
 		});
@@ -1099,11 +1114,20 @@ public class VentanaGestionDepartamento extends JDialog{
 					int seleccionado = tablaMaestrias.getSelectedRow();
 
 					if (seleccionado != -1) {
-						Maestria maestria = maestriasEnTabla.get(seleccionado);
-						MatricularDocenteDialog matricula = new MatricularDocenteDialog(parent, maestria, dptoActual);
+						
+						if(dptoActual.obtenerListaDocentesValidosParaMatriculaMaestria().size() > 0){
+							
+							Maestria maestria = maestriasEnTabla.get(seleccionado);
+							MatricularDocenteDialog matricula = new MatricularDocenteDialog(parent, maestria, dptoActual);
 
-						if(matricula.isConfirmado())
-							actualizarTodasLasTablas();
+							if(matricula.isConfirmado())
+								actualizarTodasLasTablas();
+							
+						}else{
+							MensajeDialog m = new MensajeDialog(parent, "<html>No hay existencia de docentes sin categoria cientifica<br> disponibles para matricular <html>", Tipo.RETROALIMENTACION);
+							m.setVisible(true);
+						}
+						
 
 					}else {
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar una maestría para matricular",Tipo.RETROALIMENTACION);
@@ -1250,6 +1274,7 @@ public class VentanaGestionDepartamento extends JDialog{
 					int seleccionado = tablaCursos.getSelectedRow();
 
 					if (seleccionado != -1) {
+						
 						CursoPosgrado cursoSeleccionado = cursosEnTabla.get(seleccionado);
 						Docente evaluador = cursoSeleccionado.getProfesor();
 
@@ -1350,19 +1375,27 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 		});
 
-		JButton btnAgregarInvestigador = crearBotonCRUD("Agregar Investigador");
+		JButton btnAgregarInvestigador = crearBotonCRUD("Agregar Inv");
 		btnAgregarInvestigador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(tablaLineas.getSelectedRows().length <= 1){
 					int seleccionado = tablaLineas.getSelectedRow();
 					if(seleccionado != -1){
-						LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
-
-						AgregarInvestigadorALineaDialog dialog = new AgregarInvestigadorALineaDialog(parent, dptoActual, linea);
 						
-						if(dialog.isConfirmado())
-							actualizarTodasLasTablas();
+						if(dptoActual.obtenerInvestigadoresNoRegistradosLineasDeInvestigacion().size() > 0){
+							
+							LineaInvestigacion linea = lineasEnTabla.get(seleccionado);
+
+							AgregarInvestigadorALineaDialog dialog = new AgregarInvestigadorALineaDialog(parent, dptoActual, linea);
+							
+							if(dialog.isConfirmado())
+								actualizarTodasLasTablas();
+							
+						}else{
+							MensajeDialog m = new MensajeDialog(parent, "<html> No hay investigadores disponibles para agregar <br> Cree uno nuevo o elimine alguno de una línea de investigación<html>", Tipo.RETROALIMENTACION);
+							m.setVisible(true);
+						}
 
 					}else{
 						MensajeDialog m = new MensajeDialog(parent, "Debe seleccionar una linea para la operación", Tipo.RETROALIMENTACION);
