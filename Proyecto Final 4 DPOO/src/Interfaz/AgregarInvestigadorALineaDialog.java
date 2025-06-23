@@ -13,7 +13,7 @@ public class AgregarInvestigadorALineaDialog extends JDialog {
 	private JList<Object> listaElementos;
 	private JButton btnAgregar, btnCancelar;
 
-	public AgregarInvestigadorALineaDialog(final JFrame parent, final Departamento departamento, final LineaInvestigacion linea, final boolean esEstudiante) {
+	public AgregarInvestigadorALineaDialog(final JFrame parent, final Departamento departamento, final LineaInvestigacion linea) {
 		super(parent, "Agregar Investigador", true);
 
 		setUndecorated(true);
@@ -28,13 +28,7 @@ public class AgregarInvestigadorALineaDialog extends JDialog {
 		panel.setLayout(null);
 
 		
-		ArrayList<Investigador> disponibles = new ArrayList<>();
-
-		if (esEstudiante) {
-		    disponibles.addAll(departamento.obtenerInvestigadoresNoRegistradosLineasDeInvestigacion());
-		} else {
-		    disponibles.addAll(departamento.obtenerInvestigadoresNoRegistradosLineasDeInvestigacion());
-		};
+		ArrayList<Investigador> disponibles = departamento.obtenerInvestigadoresNoRegistradosLineasDeInvestigacion();
 
 		listaElementos = new JList<>(disponibles.toArray());
 		listaElementos.setFont(new Font("Segoe UI", Font.PLAIN, 14));

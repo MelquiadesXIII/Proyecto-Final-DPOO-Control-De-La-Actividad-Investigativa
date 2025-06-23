@@ -24,8 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.OverlayLayout;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import Interfaz.MensajeDialog.Tipo;

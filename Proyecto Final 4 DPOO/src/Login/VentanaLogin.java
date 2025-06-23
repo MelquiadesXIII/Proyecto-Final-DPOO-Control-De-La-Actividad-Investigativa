@@ -31,6 +31,7 @@ public class VentanaLogin extends JFrame {
     	
         inicializarConfiguracionUI();
         crearPanelLogin();
+        setVisible(true);
     }
 
     private void inicializarConfiguracionUI() {

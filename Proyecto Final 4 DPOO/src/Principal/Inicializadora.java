@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.*;
-
-import Interfaz.VentanaGestionDepartamento;
-import Interfaz.VentanaPrincipal;
 import Logica.*;
+import Login.VentanaLogin;
 
 
 public class Inicializadora{
@@ -1862,10 +1860,7 @@ public class Inicializadora{
 				c4m5d3.emitirNota(d252, d295, 5);
 				c4m5d3.emitirNota(d252, d298, 3);
 
-				/*VentanaLogin v = new VentanaLogin(vicedecanato);	
-				v.setVisible(true);*/
-				VentanaPrincipal p = new VentanaPrincipal(vicedecanato);
-				//new VentanaGestionDepartamento(p, depto1, vicedecanato);
+				new VentanaLogin(vicedecanato);	
 			}
 		});
 	}

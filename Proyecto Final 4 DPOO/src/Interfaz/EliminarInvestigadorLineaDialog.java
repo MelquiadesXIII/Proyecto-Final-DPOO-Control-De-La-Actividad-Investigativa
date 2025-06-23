@@ -29,7 +29,7 @@ public class EliminarInvestigadorLineaDialog extends JDialog {
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
 		panel.setLayout(null);
 
-		JLabel lblTitulo = new JLabel("Eliminar Investigador de: " + linea.getNombre());
+		JLabel lblTitulo = new JLabel("Eliminar Investigador");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		lblTitulo.setBounds(20, 20, 460, 30);
