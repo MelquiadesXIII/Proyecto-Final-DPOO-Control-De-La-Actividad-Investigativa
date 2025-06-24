@@ -88,7 +88,7 @@ public class CrearLineaInvestigacionDialog extends JDialog {
 		for (Docente d : vicedecanato.getDocentes()) 
 			comboEncargado.addItem(d);
 
-		comboEncargado.setBounds(fieldX, 80, fieldWidth, 30);
+		comboEncargado.setBounds(165, 80, 180, 40);
 
 
 		panelCampos.add(comboEncargado);
