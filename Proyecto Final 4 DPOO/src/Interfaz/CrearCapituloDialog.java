@@ -20,7 +20,6 @@ public class CrearCapituloDialog extends JDialog {
 
     private JTextField campoTitulo, campoEditorial, campoISSN, campoVolumen;
     private JTextArea campoAutores, campoEditores;
-
     private boolean confirmado = false;
     private CapituloLibro capitulo;
     private Point point = new Point();
@@ -34,12 +33,12 @@ public class CrearCapituloDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(420, 410));
+        panel.setPreferredSize(new Dimension(420, 450));
         panel.setLayout(null);
 
         JPanel panelCampos = new JPanel(null);
         panelCampos.setBackground(new Color(30, 40, 50));
-        panelCampos.setBounds(20, 60, 380, 258);
+        panelCampos.setBounds(20, 60, 380, 290);
         panel.add(panelCampos);
 
         JLabel lblTitulo = new JLabel("Título:");
@@ -58,56 +57,60 @@ public class CrearCapituloDialog extends JDialog {
         panelCampos.add(lblAutores);
 
         campoAutores = new JTextArea();
-        campoAutores.setBounds(150, 50, 200, 30);
         campoAutores.setLineWrap(true);
         campoAutores.setWrapStyleWord(true);
+        JScrollPane scrollAutores = new JScrollPane(campoAutores);
+        scrollAutores.setBounds(150, 50, 200, 50);
+        scrollAutores.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         estiloCampo(campoAutores);
-        panelCampos.add(campoAutores);
+        panelCampos.add(scrollAutores);
 
         JLabel lblEditores = new JLabel("Editores:");
-        lblEditores.setBounds(20, 90, 120, 30);
+        lblEditores.setBounds(20, 110, 120, 30);
         estiloLabel(lblEditores);
         panelCampos.add(lblEditores);
 
         campoEditores = new JTextArea();
-        campoEditores.setBounds(150, 90, 200, 30);
         campoEditores.setLineWrap(true);
         campoEditores.setWrapStyleWord(true);
+        JScrollPane scrollEditores = new JScrollPane(campoEditores);
+        scrollEditores.setBounds(150, 110, 200, 50);
+        scrollEditores.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         estiloCampo(campoEditores);
-        panelCampos.add(campoEditores);
+        panelCampos.add(scrollEditores);
 
         JLabel lblEditorial = new JLabel("Editorial:");
-        lblEditorial.setBounds(20, 130, 120, 30);
+        lblEditorial.setBounds(20, 170, 120, 30);
         estiloLabel(lblEditorial);
         panelCampos.add(lblEditorial);
 
         campoEditorial = new JTextField();
-        campoEditorial.setBounds(150, 130, 200, 30);
+        campoEditorial.setBounds(150, 170, 200, 30);
         estiloCampo(campoEditorial);
         panelCampos.add(campoEditorial);
 
         JLabel lblISSN = new JLabel("ISSN:");
-        lblISSN.setBounds(20, 170, 120, 30);
+        lblISSN.setBounds(20, 210, 120, 30);
         estiloLabel(lblISSN);
         panelCampos.add(lblISSN);
 
         campoISSN = new JTextField();
-        campoISSN.setBounds(150, 170, 200, 30);
+        campoISSN.setBounds(150, 210, 200, 30);
         estiloCampo(campoISSN);
         panelCampos.add(campoISSN);
 
         JLabel lblVolumen = new JLabel("Volumen:");
-        lblVolumen.setBounds(20, 210, 120, 30);
+        lblVolumen.setBounds(20, 250, 120, 30);
         estiloLabel(lblVolumen);
         panelCampos.add(lblVolumen);
 
         campoVolumen = new JTextField();
-        campoVolumen.setBounds(150, 210, 200, 30);
+        campoVolumen.setBounds(150, 250, 200, 30);
         estiloCampo(campoVolumen);
         panelCampos.add(campoVolumen);
 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panelBotones.setBounds(20, 331, 380, 50);
+        panelBotones.setBounds(20, 360, 380, 50);
         panelBotones.setBackground(new Color(30, 40, 50));
 
         JButton btnCrear = new JButton("Crear");
@@ -140,11 +143,15 @@ public class CrearCapituloDialog extends JDialog {
                     String[] autoresArray = campoAutores.getText().trim().split(",");
                     String[] editoresArray = campoEditores.getText().trim().split(",");
 
-                    ArrayList<String> autores = new ArrayList<>();
-                    for (String a : autoresArray) autores.add(a.trim());
+                    ArrayList<String> autores = new ArrayList<String>();
+                    for (int i = 0; i < autoresArray.length; i++) {
+                        autores.add(autoresArray[i].trim());
+                    }
 
-                    ArrayList<String> editores = new ArrayList<>();
-                    for (String e1 : editoresArray) editores.add(e1.trim());
+                    ArrayList<String> editores = new ArrayList<String>();
+                    for (int i = 0; i < editoresArray.length; i++) {
+                        editores.add(editoresArray[i].trim());
+                    }
 
                     autor.crearCapituloLibro(titulo, autores, editores, editorial, issn, volumen);
                     confirmado = true;
@@ -195,12 +202,15 @@ public class CrearCapituloDialog extends JDialog {
         campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 
-    private void estiloCampo(JTextArea campo) {
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        campo.setBackground(new Color(60, 70, 80));
-        campo.setForeground(Color.WHITE);
-        campo.setCaretColor(Color.WHITE);
-        campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    private void estiloCampo(JTextArea area) {
+        area.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        area.setBackground(new Color(60, 70, 80));
+        area.setForeground(Color.WHITE);
+        area.setCaretColor(Color.WHITE);
+        area.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(80, 90, 100)),
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)
+        ));
     }
 
     private void estiloLabel(JLabel label) {
@@ -228,7 +238,6 @@ public class CrearCapituloDialog extends JDialog {
     public void aplicarFiltroTexto(JTextField campo, final int maxChars) {
         AbstractDocument doc = (AbstractDocument) campo.getDocument();
         doc.setDocumentFilter(new DocumentFilter() {
-            @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
                 if (string != null) {
                     String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
@@ -239,7 +248,6 @@ public class CrearCapituloDialog extends JDialog {
                 }
             }
 
-            @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                 if (text != null) {
                     String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
@@ -255,7 +263,6 @@ public class CrearCapituloDialog extends JDialog {
     public void aplicarFiltroTexto(JTextArea campo, final int maxChars) {
         AbstractDocument doc = (AbstractDocument) campo.getDocument();
         doc.setDocumentFilter(new DocumentFilter() {
-            @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
                 if (string != null) {
                     String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
@@ -266,7 +273,6 @@ public class CrearCapituloDialog extends JDialog {
                 }
             }
 
-            @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                 if (text != null) {
                     String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
@@ -282,7 +288,6 @@ public class CrearCapituloDialog extends JDialog {
     public void aplicarFiltroNumerico(JTextField campo, final int maxChars) {
         AbstractDocument doc = (AbstractDocument) campo.getDocument();
         doc.setDocumentFilter(new DocumentFilter() {
-            @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
                 if (string != null) {
                     String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
@@ -292,7 +297,6 @@ public class CrearCapituloDialog extends JDialog {
                 }
             }
 
-            @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                 String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
                 String newText = currentText.substring(0, offset) +
