@@ -324,4 +324,31 @@ public class Departamento {
 		
 		return maestria;
 	}
+	
+	public ArrayList<Docente> obtenerListaDocentesValidosParaSerEncargadosEnNuevaLineaDeInvestigacion(){
+		
+		ArrayList<Docente> lista = new ArrayList<>();
+		boolean responsable;
+		
+		for(Docente d: docentes){
+			
+			responsable = false;
+			
+			int i = 0;
+			while(i < lineasInvestigacion.size() && !responsable){
+				
+				LineaInvestigacion l = lineasInvestigacion.get(i);
+				
+				if(d.equals(l.getResponsable()))
+					responsable = true;
+				
+				i++;
+			}
+			
+			if(!responsable)
+				lista.add(d);
+		}
+		
+		return lista;
+	}
 }
