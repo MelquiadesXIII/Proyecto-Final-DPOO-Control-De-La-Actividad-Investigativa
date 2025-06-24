@@ -53,7 +53,7 @@ public class EditarDocDialog extends JDialog{
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		panel.setPreferredSize(new Dimension(500, 500));
+		panel.setPreferredSize(new Dimension(500, 455));
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
 		panel.setLayout(null);
 

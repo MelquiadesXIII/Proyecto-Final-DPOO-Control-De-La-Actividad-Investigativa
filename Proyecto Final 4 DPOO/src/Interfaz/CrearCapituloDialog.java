@@ -18,7 +18,8 @@ import Logica.Investigador;
 public class CrearCapituloDialog extends JDialog {
     private static final long serialVersionUID = 1L;
 
-    private JTextField campoTitulo, campoAutores, campoEditores, campoEditorial, campoISSN, campoVolumen;
+    private JTextField campoTitulo, campoEditorial, campoISSN, campoVolumen;
+    private JTextArea campoAutores, campoEditores;
 
     private boolean confirmado = false;
     private CapituloLibro capitulo;
@@ -33,12 +34,12 @@ public class CrearCapituloDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(420, 450));
+        panel.setPreferredSize(new Dimension(420, 410));
         panel.setLayout(null);
 
         JPanel panelCampos = new JPanel(null);
         panelCampos.setBackground(new Color(30, 40, 50));
-        panelCampos.setBounds(20, 60, 380, 310);
+        panelCampos.setBounds(20, 60, 380, 258);
         panel.add(panelCampos);
 
         JLabel lblTitulo = new JLabel("Título:");
@@ -56,8 +57,10 @@ public class CrearCapituloDialog extends JDialog {
         estiloLabel(lblAutores);
         panelCampos.add(lblAutores);
 
-        campoAutores = new JTextField();
+        campoAutores = new JTextArea();
         campoAutores.setBounds(150, 50, 200, 30);
+        campoAutores.setLineWrap(true);
+        campoAutores.setWrapStyleWord(true);
         estiloCampo(campoAutores);
         panelCampos.add(campoAutores);
 
@@ -66,8 +69,10 @@ public class CrearCapituloDialog extends JDialog {
         estiloLabel(lblEditores);
         panelCampos.add(lblEditores);
 
-        campoEditores = new JTextField();
+        campoEditores = new JTextArea();
         campoEditores.setBounds(150, 90, 200, 30);
+        campoEditores.setLineWrap(true);
+        campoEditores.setWrapStyleWord(true);
         estiloCampo(campoEditores);
         panelCampos.add(campoEditores);
 
@@ -102,7 +107,7 @@ public class CrearCapituloDialog extends JDialog {
         panelCampos.add(campoVolumen);
 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panelBotones.setBounds(20, 380, 380, 50);
+        panelBotones.setBounds(20, 331, 380, 50);
         panelBotones.setBackground(new Color(30, 40, 50));
 
         JButton btnCrear = new JButton("Crear");
@@ -123,6 +128,7 @@ public class CrearCapituloDialog extends JDialog {
         aplicarFiltroTexto(campoEditores, 3000);
         aplicarFiltroTexto(campoEditorial, 50);
         aplicarFiltroTexto(campoTitulo, 40);
+
         btnCrear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -134,23 +140,22 @@ public class CrearCapituloDialog extends JDialog {
                     String[] autoresArray = campoAutores.getText().trim().split(",");
                     String[] editoresArray = campoEditores.getText().trim().split(",");
 
-                    ArrayList<String> autores = new ArrayList<String>();
+                    ArrayList<String> autores = new ArrayList<>();
                     for (String a : autoresArray) autores.add(a.trim());
 
-                    ArrayList<String> editores = new ArrayList<String>();
+                    ArrayList<String> editores = new ArrayList<>();
                     for (String e1 : editoresArray) editores.add(e1.trim());
 
                     autor.crearCapituloLibro(titulo, autores, editores, editorial, issn, volumen);
                     confirmado = true;
                     dispose();
                 } catch (RuntimeException r) {
-                	MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-                	m.setVisible(true);
+                    MensajeDialog m = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+                    m.setVisible(true);
                 }
             }
         });
 
-        
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -163,7 +168,6 @@ public class CrearCapituloDialog extends JDialog {
         tituloLabel.setBounds(100, 15, 250, 30);
         panel.add(tituloLabel);
 
-        
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 point.x = e.getX();
@@ -184,6 +188,14 @@ public class CrearCapituloDialog extends JDialog {
     }
 
     private void estiloCampo(JTextField campo) {
+        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        campo.setBackground(new Color(60, 70, 80));
+        campo.setForeground(Color.WHITE);
+        campo.setCaretColor(Color.WHITE);
+        campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    }
+
+    private void estiloCampo(JTextArea campo) {
         campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         campo.setBackground(new Color(60, 70, 80));
         campo.setForeground(Color.WHITE);
@@ -213,68 +225,84 @@ public class CrearCapituloDialog extends JDialog {
         return capitulo;
     }
 
-	public void setCapitulo(CapituloLibro resultado) {
-		
-	}
-	
-	public void aplicarFiltroTexto(JTextField campo, final int maxChars){
+    public void aplicarFiltroTexto(JTextField campo, final int maxChars) {
+        AbstractDocument doc = (AbstractDocument) campo.getDocument();
+        doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string != null) {
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+                    if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+                        super.insertString(fb, offset, string, attr);
+                    }
+                }
+            }
 
-		AbstractDocument doc = (AbstractDocument) campo.getDocument();
-		doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text != null) {
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+                    if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                }
+            }
+        });
+    }
 
-			@Override
-			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string != null) {
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
-						super.insertString(fb, offset, string, attr);
-					}
-				}
-			}
+    public void aplicarFiltroTexto(JTextArea campo, final int maxChars) {
+        AbstractDocument doc = (AbstractDocument) campo.getDocument();
+        doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string != null) {
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+                    if (newText.length() <= maxChars) {
+                        super.insertString(fb, offset, string, attr);
+                    }
+                }
+            }
 
-			@Override
-			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				if (text != null) {
-					String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-					String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-					if (newText.length() <= maxChars && newText.matches("^[\\p{L}\\s]*$")) {
-						super.replace(fb, offset, length, text, attrs);
-					}
-				} else {
-					super.replace(fb, offset, length, text, attrs);
-				}
-			}
-		});
-	}
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text != null) {
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+                    if (newText.length() <= maxChars) {
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                }
+            }
+        });
+    }
 
-	public void aplicarFiltroNumerico(JTextField campo, final int maxChars){
+    public void aplicarFiltroNumerico(JTextField campo, final int maxChars) {
+        AbstractDocument doc = (AbstractDocument) campo.getDocument();
+        doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string != null) {
+                    String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+                    if (newText.length() <= maxChars && string.matches("\\d*")) {
+                        super.insertString(fb, offset, string, attr);
+                    }
+                }
+            }
 
-		AbstractDocument doc = (AbstractDocument) campo.getDocument();
-		doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                String newText = currentText.substring(0, offset) +
+                        (text != null ? text : "") +
+                        currentText.substring(offset + length);
 
-			@Override
-			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-				if (string != null) {
-
-					String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
-					if (newText.length() <= maxChars && string.matches("\\d*")) {
-						super.insertString(fb, offset, string, attr);
-					}
-				}
-			}
-
-			@Override
-			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-				String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-				String newText = currentText.substring(0, offset) + 
-						(text != null ? text : "") + 
-						currentText.substring(offset + length);
-
-				if (newText.length() <= maxChars && newText.matches("\\d*")) {
-					super.replace(fb, offset, length, text, attrs);
-				}
-			}
-		});
-	}
+                if (newText.length() <= maxChars && newText.matches("\\d*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+    }
 }

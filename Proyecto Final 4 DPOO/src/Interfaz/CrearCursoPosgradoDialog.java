@@ -57,12 +57,12 @@ public class CrearCursoPosgradoDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setPreferredSize(new Dimension(500, 520)); 
+        panel.setPreferredSize(new Dimension(500, 470)); 
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
         panel.setLayout(null);
 
         JPanel panelCampos = new JPanel();
-        panelCampos.setBounds(20, 80, 460, 350); 
+        panelCampos.setBounds(20, 80, 460, 283); 
         panelCampos.setBackground(new Color(30, 40, 50));
         panelCampos.setLayout(null);
         panel.add(panelCampos);
@@ -131,7 +131,7 @@ public class CrearCursoPosgradoDialog extends JDialog {
         estiloComboBoxDocente(comboProfesores);
 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        panelBotones.setBounds(20, 440, 460, 60); 
+        panelBotones.setBounds(20, 376, 460, 60); 
         panelBotones.setBackground(new Color(30, 40, 50));
 
         JButton botonCrear = new JButton("Crear");

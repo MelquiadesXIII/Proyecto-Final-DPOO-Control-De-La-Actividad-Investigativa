@@ -33,7 +33,7 @@ public class EditarCapituloDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(30, 40, 50));
         panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setPreferredSize(new Dimension(420, 410));
+        panel.setPreferredSize(new Dimension(420, 400));
         panel.setLayout(null);
 
         JPanel panelCampos = new JPanel(null);
@@ -103,7 +103,7 @@ public class EditarCapituloDialog extends JDialog {
 
         
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panelBotones.setBounds(20, 336, 380, 50);
+        panelBotones.setBounds(20, 327, 380, 50);
         panelBotones.setBackground(new Color(30, 40, 50));
 
         JButton btnAceptar = new JButton("Aceptar");

@@ -35,7 +35,7 @@ public class CrearPonenciaDialog extends JDialog {
 		setBackground(new Color(30, 40, 50));
 		setSize(420, 330);
 		setLocationRelativeTo(parent);
-		setLayout(null);
+		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel(null);
 		panel.setBackground(new Color(30, 40, 50));
@@ -91,12 +91,12 @@ public class CrearPonenciaDialog extends JDialog {
 		panel.add(fecha);
 
 		JButton btnCrear = new JButton("Crear");
-		btnCrear.setBounds(80, 240, 110, 40);
+		btnCrear.setBounds(81, 253, 110, 40);
 		estiloBoton(btnCrear);
 		panel.add(btnCrear);
 
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(230, 240, 110, 40);
+		btnCancelar.setBounds(241, 254, 110, 40);
 		estiloBoton(btnCancelar);
 		panel.add(btnCancelar);
 

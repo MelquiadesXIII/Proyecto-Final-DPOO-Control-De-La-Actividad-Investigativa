@@ -2,9 +2,11 @@ package Interfaz;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+
 import Logica.*;
 
 public class AgregarInvestigadorALineaDialog extends JDialog {
@@ -12,6 +14,7 @@ public class AgregarInvestigadorALineaDialog extends JDialog {
 	private boolean confirmado = false;
 	private JList<Object> listaElementos;
 	private JButton btnAgregar, btnCancelar;
+    private Point point = new Point();
 
 	public AgregarInvestigadorALineaDialog(final JFrame parent, final Departamento departamento, final LineaInvestigacion linea) {
 		super(parent, "Agregar Investigador", true);
@@ -54,15 +57,20 @@ public class AgregarInvestigadorALineaDialog extends JDialog {
 		scrollPane.setBorder(BorderFactory.createLineBorder(new Color(60, 70, 80), 2));
 		panel.add(scrollPane);
 
-		JPanel panelBotones = new JPanel(new GridLayout(1, 2, 40, 0)); 
-		panelBotones.setBounds(20, 340, 460, 50); 
+		JPanel panelBotones = new JPanel(); 
+		panelBotones.setBounds(20, 328, 460, 50); 
 		panelBotones.setBackground(new Color(30, 40, 50));
 
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.setBounds(72, 5, 120, 40);
+		btnAgregar.setPreferredSize(new Dimension(120, 40));
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(272, 6, 120, 40);
+		btnCancelar.setPreferredSize(new Dimension(120, 40));
 
 		estiloBoton(btnAgregar);
 		estiloBoton(btnCancelar);
+		panelBotones.setLayout(null);
 
 		panelBotones.add(btnAgregar);
 		panelBotones.add(btnCancelar);
@@ -108,6 +116,24 @@ public class AgregarInvestigadorALineaDialog extends JDialog {
 				dispose();
 			}
 		});
+		
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                point.x = e.getX();
+                point.y = e.getY();
+            }
+        };
+
+        MouseMotionListener motionListener = new MouseMotionListener() {
+            public void mouseDragged(MouseEvent e) {
+                Point p = getLocation();
+                setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+            }
+            public void mouseMoved(MouseEvent e) {}
+        };
+
+        panel.addMouseListener(mouseAdapter);
+        panel.addMouseMotionListener(motionListener);
 
 		getContentPane().add(panel);
 		pack();

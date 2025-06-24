@@ -52,12 +52,12 @@ public class EditarEstDialog extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(30, 40, 50));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		panel.setPreferredSize(new Dimension(500, 450));
+		panel.setPreferredSize(new Dimension(500, 380));
 		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
 		panel.setLayout(null);
 
 		JPanel panelCampos = new JPanel();
-		panelCampos.setBounds(20, 80, 460, 260);
+		panelCampos.setBounds(20, 80, 460, 201);
 		panelCampos.setBackground(new Color(30, 40, 50));
 		panelCampos.setLayout(null);
 		panel.add(panelCampos);
@@ -107,7 +107,7 @@ public class EditarEstDialog extends JDialog {
 		aplicarFiltroTexto(campoApellidos, 100);
 
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-		panelBotones.setBounds(20, 350, 460, 60);
+		panelBotones.setBounds(20, 294, 460, 60);
 		panelBotones.setBackground(new Color(30, 40, 50));
 
 		JButton botonAceptar = new JButton("Aceptar");
