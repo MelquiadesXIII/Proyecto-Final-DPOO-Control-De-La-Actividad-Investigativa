@@ -198,7 +198,7 @@ public class VentanaGestionDepartamento extends JDialog{
 			}
 		});
 
-		botonLineas = crearBotonNavegacion("Líneas de Inv.");
+		botonLineas = crearBotonNavegacion("Líneas");
 		botonLineas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cl = (CardLayout)(panelPrincipal.getLayout());
@@ -1347,6 +1347,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		JButton btnEliminarLinea = crearBotonCRUD("Eliminar");
 		btnEliminarLinea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if(tablaLineas.getSelectedRows().length == 1){
 					int seleccionado = tablaLineas.getSelectedRow();
 

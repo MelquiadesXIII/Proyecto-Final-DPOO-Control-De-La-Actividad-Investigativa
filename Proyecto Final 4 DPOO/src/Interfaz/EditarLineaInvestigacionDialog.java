@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
@@ -38,55 +39,57 @@ import Logica.LineaInvestigacion;
 import Logica.Vicedecanato;
 
 public class EditarLineaInvestigacionDialog extends JDialog {
-    private static final long serialVersionUID = 1L;
-    private JTextField campoNombre;
+	private static final long serialVersionUID = 1L;
+	private JTextField campoNombre;
 	private JComboBox<Docente> comboEncargado;
-    private boolean confirmado = false;
-    private Point point = new Point();
+	private boolean confirmado = false;
+	private Point point = new Point();
 
-    public EditarLineaInvestigacionDialog(final JFrame parent, final Vicedecanato vicedecanato,final Departamento departamento,final LineaInvestigacion linea) {
-        super(parent, "Editar Línea de Investigación", true);
-        setUndecorated(true);
-        setBackground(new Color(30, 40, 50));
-        getContentPane().setLayout(new BorderLayout());
-        
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 40, 50));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setPreferredSize(new Dimension(400, 300));
-        panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
-        panel.setLayout(null);
+	public EditarLineaInvestigacionDialog(final JFrame parent, final Vicedecanato vicedecanato,final Departamento departamento,final LineaInvestigacion linea) {
+		super(parent, "Editar Línea de Investigación", true);
+		setUndecorated(true);
+		setBackground(new Color(30, 40, 50));
+		getContentPane().setLayout(new BorderLayout());
 
-        JPanel panelCampos = new JPanel();
-        panelCampos.setBounds(20, 54, 360, 149);
-        panelCampos.setBackground(new Color(30, 40, 50));
-        panelCampos.setLayout(null);
-        panel.add(panelCampos);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(30, 40, 50));
+		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panel.setPreferredSize(new Dimension(400, 300));
+		panel.setBorder(new LineBorder(new Color(70, 80, 90), 2));
+		panel.setLayout(null);
 
-        int maxLabelWidth = 140;
-        int fieldX = 20 + maxLabelWidth + 10;
-        int fieldWidth = 360 - fieldX - 20;
-      
-        JLabel labelNombre = new JLabel("Nombre:");
-        labelNombre.setBounds(20, 20, maxLabelWidth, 30);
-        panelCampos.add(labelNombre);
-        estiloLabel(labelNombre);
-        
-        campoNombre = new JTextField();
-        campoNombre.setBounds(fieldX, 20, fieldWidth, 30);
-        panelCampos.add(campoNombre);
-        estiloCampo(campoNombre);
-       
-        JLabel labelEncargado = new JLabel("Encargado");
-        labelEncargado.setBounds(20, 80, maxLabelWidth, 30);
-        panelCampos.add(labelEncargado);
-        estiloLabel(labelEncargado);
-        
-        comboEncargado = new JComboBox<>();
-        
-        comboEncargado.addItem(null);
+		JPanel panelCampos = new JPanel();
+		panelCampos.setBounds(20, 54, 360, 149);
+		panelCampos.setBackground(new Color(30, 40, 50));
+		panelCampos.setLayout(null);
+		panel.add(panelCampos);
 
-		for (Docente d : vicedecanato.getDocentes()) 
+		int maxLabelWidth = 140;
+		int fieldX = 20 + maxLabelWidth + 10;
+		int fieldWidth = 360 - fieldX - 20;
+
+		JLabel labelNombre = new JLabel("Nombre:");
+		labelNombre.setBounds(20, 20, maxLabelWidth, 30);
+		panelCampos.add(labelNombre);
+		estiloLabel(labelNombre);
+
+		campoNombre = new JTextField();
+		campoNombre.setBounds(fieldX, 20, fieldWidth, 30);
+		panelCampos.add(campoNombre);
+		estiloCampo(campoNombre);
+
+		JLabel labelEncargado = new JLabel("Encargado");
+		labelEncargado.setBounds(20, 80, maxLabelWidth, 30);
+		panelCampos.add(labelEncargado);
+		estiloLabel(labelEncargado);
+
+		comboEncargado = new JComboBox<>();
+
+		comboEncargado.addItem(linea.getResponsable());
+
+		ArrayList<Docente> docentesValidosParaSerEncargados = departamento.obtenerListaDocentesValidosParaSerEncargadosEnNuevaLineaDeInvestigacion();
+
+		for (Docente d : docentesValidosParaSerEncargados) 
 			comboEncargado.addItem(d);
 
 		comboEncargado.setBounds(165, 80, 180, 40);
@@ -94,144 +97,128 @@ public class EditarLineaInvestigacionDialog extends JDialog {
 
 		panelCampos.add(comboEncargado);
 		estiloComboBox(comboEncargado);
-        
-        aplicarFiltroTexto(campoNombre, 25); 
-        
-        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        panelBotones.setBounds(20, 216, 360, 60);
-        panelBotones.setBackground(new Color(30, 40, 50));
-        
-        JButton botonCrear = new JButton("Aceptar");
-        JButton botonCancelar = new JButton("Cancelar");
-        estiloBoton(botonCrear);
-        estiloBoton(botonCancelar);
-        botonCrear.setPreferredSize(new Dimension(120, 40));
-        botonCancelar.setPreferredSize(new Dimension(120, 40));
-        
-        botonCrear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Docente seleccionado = (Docente) comboEncargado.getSelectedItem();
 
-                if(!campoNombre.getText().isEmpty() && seleccionado!=null){
-                	String nombre = campoNombre.getText().trim();
+		aplicarFiltroTexto(campoNombre, 25); 
 
-					try{
+		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+		panelBotones.setBounds(20, 216, 360, 60);
+		panelBotones.setBackground(new Color(30, 40, 50));
 
-						linea.setNombre(nombre);
-						linea.setResponsable(seleccionado);
-						MensajeDialog d = new MensajeDialog(parent, "La línea ha sido editada satisfactoriamente", Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = true;
-						dispose();
+		JButton botonCrear = new JButton("Aceptar");
+		JButton botonCancelar = new JButton("Cancelar");
+		estiloBoton(botonCrear);
+		estiloBoton(botonCancelar);
+		botonCrear.setPreferredSize(new Dimension(120, 40));
+		botonCancelar.setPreferredSize(new Dimension(120, 40));
 
-					}catch(RuntimeException r){
+		botonCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-						MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
-						d.setVisible(true);
-						confirmado = false;
-					}
-
-				}else{
-
-					MensajeDialog d;
-
-					if(campoNombre.getText().trim().isEmpty())
-						d = new MensajeDialog(parent, "Rellene el campo del nombre", Tipo.RETROALIMENTACION);
-
-					else
-						d = new MensajeDialog(parent, "Seleccione un docente", Tipo.RETROALIMENTACION);
-
+				try{
+					Docente seleccionado = (Docente) comboEncargado.getSelectedItem();
+					String nombre = campoNombre.getText();
+					linea.setNombre(nombre);
+					linea.setResponsable(seleccionado);
+					MensajeDialog d = new MensajeDialog(parent, "La línea ha sido editada satisfactoriamente", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
+					confirmado = true;
+					dispose();
+
+				}catch(RuntimeException r){
+
+					MensajeDialog d = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
+					d.setVisible(true);
+					confirmado = false;
 				}
-            }
-        });
-        
-        botonCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        
-        panelBotones.add(botonCrear);
-        panelBotones.add(botonCancelar);
-        panel.add(panelBotones);
-       
-        MouseAdapter mouseAdapter = new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                point.x = e.getX();
-                point.y = e.getY();
-            }
-        };
+			}
+		});
 
-        MouseMotionListener motionListener = new MouseMotionListener() {
-            public void mouseDragged(MouseEvent e) {
-                Point p = getLocation();
-                setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
-            }
-            public void mouseMoved(MouseEvent e) {}
-        };
+		botonCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
-        panel.addMouseListener(mouseAdapter);
-        panel.addMouseMotionListener(motionListener);
+		panelBotones.add(botonCrear);
+		panelBotones.add(botonCancelar);
+		panel.add(panelBotones);
 
-        JLabel lblTitulo = new JLabel("Editar L\u00EDnea Inves.");
-        lblTitulo.setForeground(Color.WHITE);
-        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblTitulo.setBounds(131, 13, 164, 50);
-        panel.add(lblTitulo);
-        
-        getContentPane().add(panel);
-        pack();
-        setLocationRelativeTo(parent);
-    }
-   
-    private void estiloBoton(JButton boton) {
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        boton.setBackground(new Color(50, 60, 70));
-        boton.setForeground(Color.WHITE);
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setOpaque(true);
-    }
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				point.x = e.getX();
+				point.y = e.getY();
+			}
+		};
 
-    private void estiloLabel(JLabel label) {
-        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        label.setForeground(Color.WHITE);
-    }
+		MouseMotionListener motionListener = new MouseMotionListener() {
+			public void mouseDragged(MouseEvent e) {
+				Point p = getLocation();
+				setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+			}
+			public void mouseMoved(MouseEvent e) {}
+		};
 
-    private void estiloCampo(JTextField campo) {
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        campo.setBackground(new Color(60, 70, 80));
-        campo.setForeground(Color.WHITE);
-        campo.setCaretColor(Color.WHITE);
-        campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    }
-   
-    private void aplicarFiltroTexto(JTextField campo, final int maxChars) {
-        AbstractDocument doc = (AbstractDocument) campo.getDocument();
-        doc.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string == null) return;
-                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
-                if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
+		panel.addMouseListener(mouseAdapter);
+		panel.addMouseMotionListener(motionListener);
 
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text == null) return;
-                String current = fb.getDocument().getText(0, fb.getDocument().getLength());
-                String newText = current.substring(0, offset) + text + current.substring(offset + length);
-                if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
-    }
-    
-    private void estiloComboBox(JComboBox<Docente> comboBox) {
+		JLabel lblTitulo = new JLabel("Editar L\u00EDnea Inves.");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblTitulo.setBounds(131, 13, 164, 50);
+		panel.add(lblTitulo);
+
+		getContentPane().add(panel);
+		pack();
+		setLocationRelativeTo(parent);
+	}
+
+	private void estiloBoton(JButton boton) {
+		boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		boton.setBackground(new Color(50, 60, 70));
+		boton.setForeground(Color.WHITE);
+		boton.setFocusPainted(false);
+		boton.setBorderPainted(false);
+		boton.setOpaque(true);
+	}
+
+	private void estiloLabel(JLabel label) {
+		label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		label.setForeground(Color.WHITE);
+	}
+
+	private void estiloCampo(JTextField campo) {
+		campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		campo.setBackground(new Color(60, 70, 80));
+		campo.setForeground(Color.WHITE);
+		campo.setCaretColor(Color.WHITE);
+		campo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	}
+
+	private void aplicarFiltroTexto(JTextField campo, final int maxChars) {
+		AbstractDocument doc = (AbstractDocument) campo.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+			@Override
+			public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+				if (string == null) return;
+				String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+					super.insertString(fb, offset, string, attr);
+				}
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+				if (text == null) return;
+				String current = fb.getDocument().getText(0, fb.getDocument().getLength());
+				String newText = current.substring(0, offset) + text + current.substring(offset + length);
+				if (newText.length() <= maxChars && newText.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*$")) {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
+		});
+	}
+
+	private void estiloComboBox(JComboBox<Docente> comboBox) {
 		comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		comboBox.setBackground(new Color(60, 70, 80));
 		comboBox.setForeground(Color.WHITE);
@@ -256,17 +243,17 @@ public class EditarLineaInvestigacionDialog extends JDialog {
 					private static final long serialVersionUID = 1L;
 
 					@Override
-				    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-				        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-				        if (value == null) {
-				            label.setText("Seleccione un docente...");
-				        } else if (value instanceof Docente) {
-				            label.setText(value.toString());
-				        }
-				        label.setForeground(Color.WHITE);
-				        label.setBackground(isSelected ? new Color(30, 40, 50) : new Color(60, 70, 80));
-				        return label;
-				    }
+					public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+						JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+						if (value == null) {
+							label.setText("Seleccione un docente...");
+						} else if (value instanceof Docente) {
+							label.setText(value.toString());
+						}
+						label.setForeground(Color.WHITE);
+						label.setBackground(isSelected ? new Color(30, 40, 50) : new Color(60, 70, 80));
+						return label;
+					}
 				});
 			}
 		});
@@ -274,15 +261,15 @@ public class EditarLineaInvestigacionDialog extends JDialog {
 		comboBox.setSelectedIndex(0);
 	}
 
-    public boolean isConfirmado() {
-        return confirmado;
-    }
-    
-    public Docente getDocenteSeleccionado() {
-        return (Docente) comboEncargado.getSelectedItem();
-    }
+	public boolean isConfirmado() {
+		return confirmado;
+	}
 
-    public String getNombreLinea() {
-        return campoNombre.getText().trim();
-    }
+	public Docente getDocenteSeleccionado() {
+		return (Docente) comboEncargado.getSelectedItem();
+	}
+
+	public String getNombreLinea() {
+		return campoNombre.getText();
+	}
 }

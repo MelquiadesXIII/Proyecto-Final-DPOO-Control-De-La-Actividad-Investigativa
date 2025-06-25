@@ -91,6 +91,9 @@ public class LineaInvestigacion {
 	}
 
 	public void setResponsable(Docente responsable){
+		
+		if(responsable == null)
+			throw new NullPointerException("El encargado no puede ser null");
 
 		this.responsable = responsable;
 	}
