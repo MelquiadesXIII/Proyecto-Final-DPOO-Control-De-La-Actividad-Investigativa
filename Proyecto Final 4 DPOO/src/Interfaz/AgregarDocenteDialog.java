@@ -140,7 +140,6 @@ public class AgregarDocenteDialog extends JDialog {
 			if(m1.isConfirmado()){
 				try {
 					departamentoActual.agregarDocente(seleccion);
-
 					MensajeDialog d = new MensajeDialog(parent, "Docente agregado correctamente", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
 					confirmado = true;

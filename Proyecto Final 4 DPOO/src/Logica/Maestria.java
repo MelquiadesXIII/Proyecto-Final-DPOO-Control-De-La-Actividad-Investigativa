@@ -120,7 +120,7 @@ public class Maestria {
 			throw new CategoriaCientificaNoValidaException("Solo un profesor sin categoría científica puede matricularse en la maestría");
 
 		if(matriculados.contains(d))
-			throw new DuplicacionException("El profesor no se puede agregar porque ya se encuentra matriculado en la maestría");
+			throw new DuplicacionException("El profesor ya está registrado en la maestría");
 
 		matriculados.add(d);
 

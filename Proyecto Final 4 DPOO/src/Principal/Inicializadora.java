@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.*;
+
+import Interfaz.VentanaGestionDepartamento;
+import Interfaz.VentanaPrincipal;
 import Logica.*;
 import Login.VentanaLogin;
 
@@ -1861,7 +1864,9 @@ public class Inicializadora{
 				c4m5d3.emitirNota(d252, d298, 3);
 
 				try{
-					new VentanaLogin(vicedecanato);
+					//new VentanaLogin(vicedecanato);
+					VentanaPrincipal v = new VentanaPrincipal(vicedecanato);
+					new VentanaGestionDepartamento(v, depto1, vicedecanato);
 
 				}catch(Exception e){
 					System.out.println("Error crítico: " + e.getMessage());

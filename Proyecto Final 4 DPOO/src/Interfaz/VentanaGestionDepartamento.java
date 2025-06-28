@@ -936,7 +936,7 @@ public class VentanaGestionDepartamento extends JDialog{
 		btnaAgregarDoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 
-				if(vicedecanato.obtenerEstudiantesNoRegistradosEnDepartamentos().size() > 0){
+				if(vicedecanato.obtenerDocentesNoRegistradosEnDepartamentos().size() > 0){
 
 					AgregarDocenteDialog dialog = new AgregarDocenteDialog(parent, vicedecanato, dptoActual);
 
@@ -1116,12 +1116,13 @@ public class VentanaGestionDepartamento extends JDialog{
 
 						if(dptoActual.obtenerListaDocentesValidosParaMatriculaMaestria().size() > 0){
 
-							Maestria maestria = maestriasEnTabla.get(seleccionado);
-							MatricularDocenteDialog matricula = new MatricularDocenteDialog(parent, maestria, dptoActual);
+							Maestria maestriaSeleccionada = maestriasEnTabla.get(seleccionado);
+							MatricularDocenteDialog matricula = new MatricularDocenteDialog(parent, maestriaSeleccionada, dptoActual);
 
-							if(matricula.isConfirmado())
-								actualizarTodasLasTablas();
-
+							if(matricula.isConfirmado()){
+				                actualizarTodasLasTablas();
+							}
+								
 						}else{
 							MensajeDialog m = new MensajeDialog(parent, "<html>No hay existencia de docentes sin categoria cientifica<br> disponibles para matricular <html>", Tipo.RETROALIMENTACION);
 							m.setVisible(true);

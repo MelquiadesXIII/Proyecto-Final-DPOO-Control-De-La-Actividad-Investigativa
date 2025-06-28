@@ -159,12 +159,13 @@ public class MatricularDocenteDialog extends JDialog{
 
 			if(m1.isConfirmado()){
 				try {
+					
 					maestria.agregarMatriculado(seleccion);
-
-					MensajeDialog d = new MensajeDialog(parent, "Docente matriculado correctamente", Tipo.RETROALIMENTACION);
+					MensajeDialog d = new MensajeDialog(parent, "<html>Ha sido matriculado correctamente<html>", Tipo.RETROALIMENTACION);
 					d.setVisible(true);
 					confirmado = true;
 					dispose();
+					
 				} catch(RuntimeException r) {
 					MensajeDialog m2 = new MensajeDialog(parent, r.getMessage(), Tipo.RETROALIMENTACION);
 					m2.setVisible(true);
