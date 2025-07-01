@@ -184,6 +184,30 @@ public class Maestria {
 
 		agregarCursoPosgrado(c);
 	}
+	
+	public ArrayList<Docente> obtenerListaDocentesNoParticipantesEnCurso(CursoPosgrado c){
+		
+		ArrayList<Docente> lista = new ArrayList<>();
+		boolean noParticipante = true;
+		
+		for(Docente d: matriculados){
+			
+			noParticipante = true;
+			int i = 0;
+			while(i < c.getParticipantes().size() && noParticipante){
+				
+				if(c.contieneParticipante(d))
+					noParticipante = false;
+				
+				i++;
+			}
+			
+			if(noParticipante)
+				lista.add(d);
+		}
+		
+		return lista;
+	}
 
 	@Override
 	public boolean equals(Object o) {

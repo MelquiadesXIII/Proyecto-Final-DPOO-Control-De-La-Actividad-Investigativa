@@ -172,6 +172,11 @@ public class CursoPosgrado {
 		participante.agregarCursoRecibido(cursoRecibido);
 
 	}
+	
+	public boolean contieneParticipante(Docente d){
+		
+		return participantes.contains(d);
+	}
 
 	@Override
 	public boolean equals(Object c){
