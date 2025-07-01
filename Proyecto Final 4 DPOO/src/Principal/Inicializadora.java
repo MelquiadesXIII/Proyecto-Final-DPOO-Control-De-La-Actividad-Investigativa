@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.*;
-
-import Interfaz.VentanaGestionDepartamento;
-import Interfaz.VentanaPrincipal;
 import Logica.*;
 import Login.VentanaLogin;
 
