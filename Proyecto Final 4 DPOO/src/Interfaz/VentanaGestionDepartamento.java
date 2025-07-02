@@ -1265,11 +1265,19 @@ public class VentanaGestionDepartamento extends JDialog{
 					int seleccionado = tablaCursos.getSelectedRow();
 					if (seleccionado != -1) {
 						CursoPosgrado cursoSeleccionado = cursosEnTabla.get(seleccionado);
-						Docente evaluador = cursoSeleccionado.getProfesor();
-						VentanaEmitirNota dialog = new VentanaEmitirNota(parent, cursoSeleccionado, evaluador);
-						dialog.setVisible(true);
-						if(dialog.isConfirmado())
-							actualizarTodasLasTablas();
+
+						if(cursoSeleccionado.getParticipantes().size() > 0){
+							Docente evaluador = cursoSeleccionado.getProfesor();
+							VentanaEmitirNota dialog = new VentanaEmitirNota(parent, cursoSeleccionado, evaluador);
+							dialog.setVisible(true);
+							if(dialog.isConfirmado())
+								actualizarTodasLasTablas();
+
+						}else{
+
+							MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"No hay participantes a los cuales dar una nota",Tipo.RETROALIMENTACION);
+							mensajeRetroalimentacion.setVisible(true);
+						}
 					} else {
 						MensajeDialog mensajeRetroalimentacion = new MensajeDialog(parent,"Debe seleccionar un curso para dar una nota",Tipo.RETROALIMENTACION);
 						mensajeRetroalimentacion.setVisible(true);
@@ -1477,7 +1485,7 @@ public class VentanaGestionDepartamento extends JDialog{
 							MensajeDialog m = new MensajeDialog(parent, "La línea no tiene investigadores para eliminar", Tipo.RETROALIMENTACION);
 							m.setVisible(true);
 						}
-						
+
 					}else{
 						MensajeDialog m = new MensajeDialog(parent, "Debe seleccionar una linea para la operación", Tipo.RETROALIMENTACION);
 						m.setVisible(true);
